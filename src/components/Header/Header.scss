@@ -1,0 +1,71 @@
+.Header {
+  //height: inherit;
+  //background-image: url('../../../content/assets/header.jpg');
+  //background-size: cover;
+  //background-position: center;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  //line-height: 32px;
+  position: relative;
+
+  &-Logo {
+    display: none;
+    width: 40px;
+    position: absolute;
+    padding: .3rem;
+    border-radius: 4px;
+    color: darkgreen;
+    text-align: center;
+    margin: auto;
+    left: 0;
+    right: 0;
+    font-family: 'EB Garamond', serif;
+  }
+
+  &-Link-Wrapper {
+    padding: 0 1rem;
+    color: black;
+
+    &_active {
+      background-color: darkgreen;
+      color: white;
+    }
+
+    &:first-child {
+      margin-left: -1rem;
+    }
+  }
+
+  &-Link {
+    color: inherit;
+
+    &:visited {
+      color: inherit;
+    }
+
+    &_active {
+      cursor: default;
+    }
+  }
+
+  &-Border {
+    height: 12px;
+    width: 100%;
+    background-color: lightgreen;
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 1px;
+    border-bottom: 5px solid darkgreen;
+  }
+
+  ul {
+    display: flex;
+    list-style: none;
+  }
+
+  h3 {
+    margin: 0;
+    border: none;
+  }
+}
+

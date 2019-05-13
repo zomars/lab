@@ -1,0 +1,28 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  > div, > div > div {
+    height: 100%;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: darkgreen;
+  //border-bottom: 1px solid yellowgreen;
+  border-bottom: none;
+}
+
+ul, ol {
+  margin: 0;
+}
+
+li {
+  margin: 0;
+}
+
+hr {
+  background-color: darkgreen;
+  margin-bottom: 1rem;
+}

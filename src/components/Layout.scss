@@ -1,0 +1,31 @@
+.Layout {
+  height: 100%;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+
+  &-Header {
+    flex: 0 1 auto;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 -1rem;
+    padding: 0 1rem;
+  }
+
+  &-View {
+    flex: 1 1 auto;
+  }
+
+  &-Footer {
+    flex: 0 0 auto;
+    height: 32px;
+    border-top: 10px solid lightgreen;
+    margin: 1rem -1rem 0;
+  }
+
+  &-Footer-Border {
+    margin-top: 2px;
+    height: 10px;
+    background-color: darkgreen;
+  }
+}
