@@ -6,6 +6,7 @@
   "author": "Alex Malitsky <alex@amalitsky.com>",
   "dependencies": {
     "@bem-react/classname": "^1.5.0",
+    "classnames": "^2.2.6",
     "gatsby": "^2.0.76",
     "gatsby-image": "^2.0.22",
     "gatsby-plugin-feed": "^2.0.8",
@@ -41,6 +42,7 @@
     "@types/react-dom": "^16.8.4",
     "@types/typography": "^0.16.2",
     "eslint": "^4.19.1",
+    "eslint-config-google": "^0.13.0",
     "eslint-plugin-react": "^7.11.1",
     "gatsby-plugin-sass": "^2.0.11",
     "node-sass": "^4.12.0",

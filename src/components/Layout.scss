@@ -12,20 +12,11 @@
     padding: 0 1rem;
   }
 
+  &-Footer {
+    height: 40px;
+  }
+
   &-View {
     flex: 1 1 auto;
-  }
-
-  &-Footer {
-    flex: 0 0 auto;
-    height: 32px;
-    border-top: 10px solid lightgreen;
-    margin: 1rem -1rem 0;
-  }
-
-  &-Footer-Border {
-    margin-top: 2px;
-    height: 10px;
-    background-color: darkgreen;
   }
 }

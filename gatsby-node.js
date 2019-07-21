@@ -21,49 +21,59 @@ const postsQuery = `
   }
 `;
 
-exports.createPages = ({graphql, actions}) => {
-    const { createPage } = actions;
-    const blogPost = path.resolve(`./src/templates/BlogPost/BlogPost.js`);
+const blogPostPath = path.resolve(`./src/templates/BlogPost/BlogPost.js`);
+const blogIndexPath = path.resolve('./src/components/BlogIndexPage.tsx');
 
-    return graphql(postsQuery)
-        .then(result => {
-            if (result.errors) {
-                throw result.errors;
-            }
+const blogIndexPage = {
+  path: '/blog/',
+  component: blogIndexPath
+};
 
-            // Create blog posts pages.
-            const { edges: posts } = result.data.allMarkdownRemark;
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions;
 
-            posts.forEach((post, index) => {
-                const previous = index === posts.length - 1 ? null : posts[index + 1].node;
-                const next = index === 0 ? null : posts[index - 1].node;
+  // index page of /blog
+  createPage(blogIndexPage);
 
-                createPage({
-                    path: post.node.fields.slug,
-                    component: blogPost,
-                    context: {
-                        slug: post.node.fields.slug,
-                        previous,
-                        next
-                    }
-                });
-            });
+  return graphql(postsQuery)
+    .then(result => {
+      if (result.errors) {
+        throw result.errors;
+      }
+
+      // Create blog posts pages.
+      const { edges: posts } = result.data.allMarkdownRemark;
+
+      posts.forEach((post, index) => {
+        const previous = index === posts.length - 1 ? null : posts[index + 1].node;
+        const next = index === 0 ? null : posts[index - 1].node;
+
+        createPage({
+          path: post.node.fields.slug,
+          component: blogPostPath,
+          context: {
+            slug: post.node.fields.slug,
+            previous,
+            next
+          }
         });
+      });
+    });
 };
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
-    const { createNodeField } = actions;
+  const { createNodeField } = actions;
 
-    if (node.internal.type === `MarkdownRemark`) {
-        const value = createFilePath({
-            node,
-            getNode
-        });
+  if (node.internal.type === `MarkdownRemark`) {
+    const value = createFilePath({
+      node,
+      getNode
+    });
 
-        createNodeField({
-            name: `slug`,
-            node,
-            value
-        });
-    }
+    createNodeField({
+      name: `slug`,
+      node,
+      value
+    });
+  }
 };

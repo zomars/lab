@@ -1,8 +1,8 @@
-import React, { ReactElement } from 'react'
 import { graphql } from 'gatsby';
-import { BlogIndex } from '../components/BlogIndex/BlogIndex';
+import React, { ReactElement } from 'react';
+import { BlogIndex } from './BlogIndex/BlogIndex';
 
-class IndexPage extends React.Component {
+class BlogIndexPage extends React.Component {
   public render(): ReactElement {
     const { data, location } = this.props as any;
 
@@ -15,7 +15,7 @@ class IndexPage extends React.Component {
   }
 }
 
-export default IndexPage
+export default BlogIndexPage;
 
 export const pageQuery = graphql`
   query {

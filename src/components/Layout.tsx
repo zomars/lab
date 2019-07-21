@@ -1,39 +1,38 @@
-import React, { ReactElement } from 'react'
-import { Link } from 'gatsby'
-import Image from 'gatsby-image'
-import './Layout.scss'
-import { cn } from '@bem-react/classname'
-import { Header } from './Header/Header'
+import React, { ReactElement } from 'react';
+import { cn } from '@bem-react/classname';
 
-const className = cn('Layout')
+import { Header } from './Header/Header';
+import { Footer } from './Footer/Footer';
+
+import './Layout.scss';
+
+const classnames = require('classnames');
+
+const cnLayout = cn('Layout');
 
 class Layout extends React.Component {
-
   public render(): ReactElement {
-    const { children, location } = this.props as any
+    const {
+      children,
+      location,
+      className,
+    } = this.props as any;
 
     return (
-      <div className={className()}>
+      <div className={ classnames(cnLayout(), className) }>
         <Header
-          className={className('Header')}
-          location={location}
+          className={ cnLayout('Header') }
+          location={ location }
         />
         <div
-          className={className('View')}
+          className={ cnLayout('View') }
         >
-          {children}
+          { children }
         </div>
-        <footer
-          className={className('Footer')}
-        >
-          <div className={className('Footer-Border')}/>
-          {/*© {new Date().getFullYear()}, Built with
-          {` `}
-          <a href = 'https://www.gatsbyjs.org'>Gatsby</a>*/}
-        </footer>
+        <Footer className={ cnLayout('Footer') }/>
       </div>
-    )
+    );
   }
 }
 
-export default Layout
+export { Layout };

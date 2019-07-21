@@ -1,0 +1,15 @@
+.Footer {
+  display: flex;
+  flex: 0 0 auto;
+  border-top: 1px solid darkgreen;
+  margin: 1rem -1rem 0;
+  padding: 0 1rem;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: smaller;
+
+  &-Gatsby {
+    flex: 0 1 auto;
+  }
+}
+

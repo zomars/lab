@@ -1,11 +1,6 @@
 .Header {
-  //height: inherit;
-  //background-image: url('../../../content/assets/header.jpg');
-  //background-size: cover;
-  //background-position: center;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid darkgreen;
   display: flex;
-  //line-height: 32px;
   position: relative;
 
   &-Logo {
@@ -68,4 +63,3 @@
     border: none;
   }
 }
-

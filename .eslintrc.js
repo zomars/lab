@@ -15,5 +15,8 @@ module.exports = {
       "ecmaVersion": 2018,
       "jsx": true,
     },
+  },
+  "rules": {
+    "react/prop-types": 1,
   }
-}
+};
