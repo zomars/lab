@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { Link, graphql } from 'gatsby';
 import { Layout } from '../../components/Layout';
 import { SEO } from '../../components/seo';
@@ -9,18 +9,30 @@ import './BlogPost.scss';
 const cnBlogPost = cn('BlogPost');
 
 class BlogPostTemplate extends React.Component {
-  render() {
-    const post = this.props.data.markdownRemark;
-    const siteTitle = this.props.data.site.siteMetadata.title;
-    const { previous, next } = this.props.pageContext;
+  public render(): ReactElement {
+    const {
+      data,
+      pageContext,
+      location,
+    } = this.props as any;
+
+    const {
+      markdownRemark: post,
+      site
+    } = data;
+
+    const { title: siteTitle } = site.siteMetadata;
+    const { previous, next } = pageContext as any;
 
     return (
       <Layout
-        location={ this.props.location }
-        title={ siteTitle }
-        className={ cnBlogPost() }
+        location = { location }
+        title = { siteTitle }
+        className = { cnBlogPost() }
       >
-        <SEO title={ post.frontmatter.title } description={ post.excerpt }/>
+        <SEO
+          title = { post.frontmatter.title }
+          description = { post.excerpt }/>
         <h1>{ post.frontmatter.title }</h1>
         <p
           style={ {
@@ -29,7 +41,7 @@ class BlogPostTemplate extends React.Component {
         >
           { post.frontmatter.date }
         </p>
-        <div dangerouslySetInnerHTML={ { __html: post.html } }/>
+        <div dangerouslySetInnerHTML = { { __html: post.html } }/>
         <hr/>
         <ul
           style={ {
@@ -42,14 +54,14 @@ class BlogPostTemplate extends React.Component {
         >
           <li>
             { previous && (
-              <Link to={ previous.fields.slug } rel="prev">
+              <Link to = { previous.fields.slug } rel = 'prev'>
                 ← { previous.frontmatter.title }
               </Link>
             ) }
           </li>
           <li>
             { next && (
-              <Link to={ next.fields.slug } rel="next">
+              <Link to = { next.fields.slug } rel = 'next'>
                 { next.frontmatter.title } →
               </Link>
             ) }

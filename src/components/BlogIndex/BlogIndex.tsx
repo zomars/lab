@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 
 import { Layout } from '../../components/Layout';
-import { SEO } from '../../components/seo';
+import { SEO } from '../seo';
 import { cn } from '@bem-react/classname';
 import { PostPreview } from '../PostPreview/PostPreview';
 

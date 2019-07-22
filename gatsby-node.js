@@ -21,7 +21,7 @@ const postsQuery = `
   }
 `;
 
-const blogPostPath = path.resolve(`./src/templates/BlogPost/BlogPost.js`);
+const blogPostPath = path.resolve('./src/templates/BlogPost/BlogPost.tsx');
 const blogIndexPath = path.resolve('./src/components/BlogIndexPage.tsx');
 
 const blogIndexPage = {
