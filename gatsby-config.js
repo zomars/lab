@@ -25,11 +25,18 @@ const plugins = [
       path: `${ __dirname }/content/assets`,
       name: `assets`
     }
-  }, {
-    resolve: `gatsby-transformer-remark`,
+  },{
+    resolve: `gatsby-plugin-theme-ui`,
     options: {
-      excerpt_separator: `<!-- end -->`,
-      plugins: [
+      // prismPreset: `prism-okaidia`,
+      preset: false,
+    },
+  }, {
+    resolve: 'gatsby-plugin-mdx',
+    options: {
+      extensions: ['.md', '.mdx'],
+      excerpt_separator: '<!-- end -->',
+      gatsbyRemarkPlugins: [
         {
           resolve: `gatsby-remark-images`,
           options: {
@@ -52,12 +59,12 @@ const plugins = [
   },
   `gatsby-transformer-sharp`,
   `gatsby-plugin-sharp`,
-  {
+  /*{
     resolve: `gatsby-plugin-google-analytics`,
     options: {
-      //trackingId: `ADD YOUR TRACKING ID HERE`,
+      trackingId: `ADD YOUR TRACKING ID HERE`,
     }
-  },
+  },*/
   /*`gatsby-plugin-feed`, {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -71,15 +78,9 @@ const plugins = [
       }
   },*/
   //`gatsby-plugin-offline`,
-  `gatsby-plugin-react-helmet`,
-  {
-    resolve: `gatsby-plugin-typography`,
-    options: {
-      pathToConfigModule: `src/utils/typography`
-    }
-  },
+  'gatsby-plugin-react-helmet',
+  'gatsby-plugin-mdx',
   'gatsby-plugin-typescript',
-  'gatsby-plugin-tslint',
   'gatsby-plugin-sass',
 ];
 

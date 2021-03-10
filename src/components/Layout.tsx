@@ -1,16 +1,13 @@
 import React, { ReactElement } from 'react';
 import { cn } from '@bem-react/classname';
-
 import { Header } from './Header/Header';
-import { Footer } from './Footer/Footer';
 
 import './Layout.scss';
 
 const classnames = require('classnames');
-
 const cnLayout = cn('Layout');
 
-class Layout extends React.Component {
+export class Layout extends React.Component {
   public render(): ReactElement {
     const {
       children,
@@ -29,10 +26,7 @@ class Layout extends React.Component {
         >
           { children }
         </div>
-        <Footer className={ cnLayout('Footer') }/>
       </div>
     );
   }
 }
-
-export { Layout };

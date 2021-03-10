@@ -1,6 +1,8 @@
-import React, {ReactElement} from 'react'
-import { Layout } from '../components/Layout'
-import Bio from '../components/Bio/Bio'
+import { Styled } from 'theme-ui';
+
+import React, { ReactElement } from 'react';
+import { Layout } from '../components/Layout';
+import Bio from '../components/Bio/Bio';
 
 class AboutPage extends React.Component {
   public render(): ReactElement {
@@ -8,7 +10,7 @@ class AboutPage extends React.Component {
       <Layout
         location={(this.props as any).location}
       >
-        <h1>About this blog and the author</h1>
+        <Styled.h1>About this blog and the author</Styled.h1>
         <Bio/>
       </Layout>
     )

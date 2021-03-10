@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import { Layout } from '../../components/Layout';
+import { Layout } from '../Layout';
 import { SEO } from '../seo';
 import { cn } from '@bem-react/classname';
 import { PostPreview } from '../PostPreview/PostPreview';
@@ -13,7 +13,7 @@ class BlogIndex extends React.Component {
   public render(): ReactElement {
     const { data } = this.props as any;
     const { shortTitle: siteTitle } = data.site.siteMetadata;
-    const { edges: posts } = data.allMarkdownRemark;
+    const { edges: posts } = data.allMdx;
 
     const postElems = posts.map(
       ({ node: post }: any) => (

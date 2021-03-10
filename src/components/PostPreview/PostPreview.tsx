@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Link } from 'gatsby';
+import { Styled } from 'theme-ui';
 import { cn } from '@bem-react/classname';
 
 const classnames = require('classnames');
@@ -8,7 +9,7 @@ import './PostPreview.scss';
 
 const cnPostPreview = cn('PostPreview');
 
-class PostPreview extends React.Component {
+export class PostPreview extends React.Component {
   public render(): ReactElement {
     const {
       post,
@@ -18,28 +19,26 @@ class PostPreview extends React.Component {
     const title = post.frontmatter.title || id;
 
     const dateHtml =
-      `<span class="${ cnPostPreview('Date') }">` +
+      `<Styled.span class="${ cnPostPreview('Date') }">` +
         `${ post.frontmatter.date }` +
-      '</span>';
+      '</Styled.span>';
 
     const excerptHtml = `${ dateHtml } &mdash; ${ post.excerpt }`;
 
     return (
-      <div
+      <Styled.div
         className = { classnames(cnPostPreview(), className) }>
-        <h3 className = { cnPostPreview('Header') }>
-          <Link
+        <Styled.h3 className = { cnPostPreview('Header') }>
+          <Styled.a as={Link}
             to = { id }>
             { title }
-          </Link>
-        </h3>
-        <p dangerouslySetInnerHTML = { { __html: excerptHtml } }/>
-        <div className = { cnPostPreview('ReadMore') }>
-          <Link to = { id }>&rarr;</Link>
-        </div>
-      </div>
+          </Styled.a>
+        </Styled.h3>
+        <Styled.p dangerouslySetInnerHTML = { { __html: excerptHtml } }/>
+        <Styled.div className = { cnPostPreview('ReadMore') }>
+          <Styled.a as={Link} to = { id }>&rarr;</Styled.a>
+        </Styled.div>
+      </Styled.div>
     );
   }
 }
-
-export { PostPreview };

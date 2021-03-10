@@ -1,26 +1,39 @@
+/** @jsx jsx */
+import { jsx, ThemeProvider } from 'theme-ui';
 import React, { ReactElement } from 'react'
-import { cn } from '@bem-react/classname'
+import { Styled } from 'theme-ui';
+import theme from '../../gatsby-plugin-theme-ui';
 
-const cnFooter = cn('Footer');
-const classnames = require('classnames');
+const styles = {
+  display: 'flex',
+  flex: '0 0 auto',
+  borderColor: 'secondary',
+  borderTopWidth: 1,
+  borderTopStyle: 'solid',
+  py: 0,
+  px: 3,
+  justifyContent: 'flex-end',
+  alignItems: 'center',
+  fontSize: 1,
+  height: 10,
+};
 
-import './Footer.scss';
-
-class Footer extends React.Component {
-  public render(): ReactElement {
-    const { className } = this.props as any;
-    return (
-      <footer
-        className={ classnames(cnFooter(), className) }
-      >
-        <div className = { cnFooter('Gatsby') }>
-          { new Date().getFullYear() },
-          built with { ` ` }
-          <a href='https://www.gatsbyjs.org'>Gatsby</a>
-        </div>
-      </footer>
-    );
-  }
+const copyrightStyles = {
+  flex: '0 1 auto',
 }
 
-export { Footer };
+export const Footer = (): ReactElement => {
+  return (
+    <ThemeProvider theme={theme}>
+      <footer
+        sx = { styles }
+      >
+        <Styled.div sx = { copyrightStyles }>
+          { new Date().getFullYear() },
+          built with { ` ` }
+          <Styled.a href='https://www.gatsbyjs.org'>Gatsby</Styled.a>
+        </Styled.div>
+      </footer>
+    </ThemeProvider>
+  );
+}

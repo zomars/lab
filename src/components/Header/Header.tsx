@@ -1,3 +1,5 @@
+/** @jsx jsx */
+import { jsx, ThemeProvider } from 'theme-ui';
 import React, { ReactElement } from 'react';
 import { graphql, Link, StaticQuery } from 'gatsby';
 import { cn } from '@bem-react/classname';
@@ -18,7 +20,7 @@ const topSections = [
   },
 ];
 
-class Header extends React.Component {
+export class Header extends React.Component {
   public render(): ReactElement {
     return (
       <StaticQuery
@@ -80,8 +82,6 @@ class Header extends React.Component {
     })
   }
 }
-
-export { Header };
 
 export const pageQuery = graphql`
   query PageQuery {

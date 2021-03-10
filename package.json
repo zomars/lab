@@ -1,52 +1,58 @@
 {
   "name": "alex-malitsky-blog",
   "private": true,
-  "description": "Gatsby and Markdown Blog",
   "version": "1.0.0",
-  "author": "Alex Malitsky <alex@amalitsky.com>",
+  "author": "Alex Malitsky <mail@amalitsky.com>",
   "dependencies": {
     "@bem-react/classname": "^1.5.0",
+    "@mdx-js/mdx": "^1.6.22",
+    "@theme-ui/presets": "^0.3.5",
+    "@theme-ui/prism": "^0.4.0-rc.14",
+    "@theme-ui/tailwind": "^0.3.5",
+    "@theme-ui/typography": "^0.3.5",
     "classnames": "^2.2.6",
-    "gatsby": "^2.0.76",
-    "gatsby-image": "^2.0.22",
-    "gatsby-plugin-feed": "^2.0.8",
-    "gatsby-plugin-google-analytics": "^2.0.5",
-    "gatsby-plugin-manifest": "^2.0.5",
-    "gatsby-plugin-offline": "^2.0.5",
+    "gatsby": "2.x.x",
+    "gatsby-image": "2.x.x",
+    "gatsby-plugin-feed": "2.x.x",
+    "gatsby-plugin-google-analytics": "2.x.x",
+    "gatsby-plugin-manifest": "2.x.x",
+    "gatsby-plugin-mdx": "^2.0.0",
+    "gatsby-plugin-offline": "2.x.x",
     "gatsby-plugin-react-helmet": "^3.0.0",
-    "gatsby-plugin-sharp": "^2.0.6",
+    "gatsby-plugin-sharp": "2.x.x",
+    "gatsby-plugin-theme-ui": "^0.4.0-rc.7",
     "gatsby-plugin-tslint": "^0.0.2",
-    "gatsby-plugin-typescript": "^2.0.12",
-    "gatsby-plugin-typography": "^2.2.0",
+    "gatsby-plugin-typescript": "2.x.x",
+    "gatsby-plugin-typography": "2.x.x",
+    "gatsby-plugin-sass": "^2.0.11",
     "gatsby-remark-copy-linked-files": "^2.0.5",
-    "gatsby-remark-images": "^2.0.4",
+    "gatsby-remark-images": "2.x.x",
     "gatsby-remark-prismjs": "^3.0.0",
-    "gatsby-remark-responsive-iframe": "^2.0.5",
-    "gatsby-remark-smartypants": "^2.0.5",
-    "gatsby-source-filesystem": "^2.0.2",
-    "gatsby-transformer-remark": "^2.1.6",
-    "gatsby-transformer-sharp": "^2.1.3",
+    "gatsby-remark-responsive-iframe": "2.x.x",
+    "gatsby-remark-smartypants": "2.x.x",
+    "gatsby-source-filesystem": "2.x.x",
+    "gatsby-transformer-remark": "2.x.x",
+    "gatsby-transformer-sharp": "2.x.x",
+    "lodash": "^4.17.21",
     "prismjs": "^1.15.0",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
     "react-helmet": "^5.2.0",
-    "react-typography": "^0.16.13",
+    "theme-ui": "^0.4.0-rc.14",
+    "node-sass": "^4.12.0",
     "typeface-merriweather": "0.0.43",
-    "typeface-montserrat": "0.0.43",
-    "typography": "^0.16.17",
-    "typography-theme-wikipedia": "^0.16.19"
+    "typography-theme-us-web-design-standards": "^0.16.19"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.168",
     "@types/node": "^11.13.8",
     "@types/react": "^16.8.14",
     "@types/react-dom": "^16.8.4",
     "@types/react-helmet": "^5.0.8",
-    "@types/typography": "^0.16.2",
     "eslint": "^4.19.1",
     "eslint-config-google": "^0.13.0",
     "eslint-plugin-react": "^7.11.1",
-    "gatsby-plugin-sass": "^2.0.11",
-    "node-sass": "^4.12.0",
+
     "prettier": "^1.14.2",
     "tslint": "^5.16.0",
     "tslint-config-prettier": "^1.18.0",
@@ -55,15 +61,14 @@
     "tslint-react": "^4.0.0",
     "typescript": "^3.4.4"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
+  "homepage": "https://github.com/amalitsky/blog",
   "keywords": [
     "gatsby"
   ],
   "license": "MIT",
-  "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+    "url": "git+https://github.com/amalitsky/blog.git"
   },
   "scripts": {
     "dev": "gatsby develop",
@@ -76,5 +81,9 @@
     "start": "npm run develop",
     "build": "gatsby build",
     "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js"
-  }
+  },
+  "browserslist": [
+    "last 2 years and > 1%",
+    "not dead"
+  ]
 }

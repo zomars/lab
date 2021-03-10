@@ -3,6 +3,8 @@ import { Link, graphql } from 'gatsby';
 import { Layout } from '../../components/Layout';
 import { SEO } from '../../components/seo';
 import { cn } from '@bem-react/classname';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
+import { Styled } from 'theme-ui';
 
 import './BlogPost.scss';
 
@@ -17,7 +19,7 @@ class BlogPostTemplate extends React.Component {
     } = this.props as any;
 
     const {
-      markdownRemark: post,
+      mdx: post,
       site
     } = data;
 
@@ -33,16 +35,12 @@ class BlogPostTemplate extends React.Component {
         <SEO
           title = { post.frontmatter.title }
           description = { post.excerpt }/>
-        <h1>{ post.frontmatter.title }</h1>
-        <p
-          style={ {
-            display: `block`,
-          } }
-        >
+        <Styled.h1>{ post.frontmatter.title }</Styled.h1>
+        <Styled.p>
           { post.frontmatter.date }
-        </p>
-        <div dangerouslySetInnerHTML = { { __html: post.html } }/>
-        <hr/>
+        </Styled.p>
+        <MDXRenderer>{ post.body }</MDXRenderer>
+        <Styled.hr/>
         <ul
           style={ {
             display: `flex`,
@@ -54,16 +52,16 @@ class BlogPostTemplate extends React.Component {
         >
           <li>
             { previous && (
-              <Link to = { previous.fields.slug } rel = 'prev'>
+              <Styled.a as = {Link} to = { previous.fields.slug } rel = 'prev'>
                 ← { previous.frontmatter.title }
-              </Link>
+              </Styled.a>
             ) }
           </li>
           <li>
             { next && (
-              <Link to = { next.fields.slug } rel = 'next'>
+              <Styled.a as = {Link} to = { next.fields.slug } rel = 'next'>
                 { next.frontmatter.title } →
-              </Link>
+              </Styled.a>
             ) }
           </li>
         </ul>
@@ -82,10 +80,10 @@ export const pageQuery = graphql`
         author
       }
     }
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+    mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
-      html
+      body
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")

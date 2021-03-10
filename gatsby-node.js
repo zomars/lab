@@ -3,7 +3,7 @@ const { createFilePath } = require('gatsby-source-filesystem');
 
 const postsQuery = `
   {
-    allMarkdownRemark(
+    allMdx(
       sort: { fields: [frontmatter___date], order: DESC }
       limit: 1000
     ) {
@@ -42,7 +42,7 @@ exports.createPages = ({ graphql, actions }) => {
       }
 
       // Create blog posts pages.
-      const { edges: posts } = result.data.allMarkdownRemark;
+      const { edges: posts } = result.data.allMdx;
 
       posts.forEach((post, index) => {
         const previous = index === posts.length - 1 ? null : posts[index + 1].node;
@@ -64,7 +64,7 @@ exports.createPages = ({ graphql, actions }) => {
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
 
-  if (node.internal.type === `MarkdownRemark`) {
+  if (node.internal.type === 'Mdx' || node.ext === '.md') {
     const value = createFilePath({
       node,
       getNode
