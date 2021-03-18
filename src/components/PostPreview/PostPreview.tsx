@@ -15,6 +15,7 @@ export class PostPreview extends React.Component {
       post,
       className
     } = this.props as any;
+
     const { slug: id } = post.fields;
     const title = post.frontmatter.title || id;
 

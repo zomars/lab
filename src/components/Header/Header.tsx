@@ -1,55 +1,47 @@
-/** @jsx jsx */
-import { jsx, ThemeProvider } from 'theme-ui';
+import { Styled } from 'theme-ui';
+
 import React, { ReactElement } from 'react';
-import { graphql, Link, StaticQuery } from 'gatsby';
+import { Link } from 'gatsby';
 import { cn } from '@bem-react/classname';
 
 const cnHeader = cn('Header');
 
 import './Header.scss';
 
-const BLOG_INDEX_PATH = '/blog';
+const BLOG_INDEX_PATH = '/';
 
 const topSections = [
   {
-    name: 'Blog',
+    name: 'Posts',
     path: BLOG_INDEX_PATH,
   }, {
-    name: 'About',
-    path: '/about',
+    name: 'Projects',
+    path: '/projects',
+  }, {
+    name: 'Tech Books',
+    path: '/tech-books',
+  }, {
+    name: 'Blogs to Follow',
+    path: '/tech-books',
   },
 ];
 
 export class Header extends React.Component {
   public render(): ReactElement {
-    return (
-      <StaticQuery
-        query = { pageQuery }
-        render = { this.render_ }
-      />
-    );
-  }
-
-  protected render_ = (data: any): ReactElement => {
     const { className } = this.props as any;
-    const fullClassName = `${ cnHeader() } ${ className }`;
-    const { shortTitle } = data.site.siteMetadata;
+    const fullClassName = `${ cnHeader() } ${ className || '' }`;
 
     return (
       <header
         className={ fullClassName }
       >
-        <ul>
-          { this.getTopMenuList_() }
-        </ul>
-        <div
-          className={ cnHeader('Logo') }>
-          <Link
-            className={ cnHeader('Link') }
-            to={ `/` }>
-            { shortTitle }
-          </Link>
-        </div>
+        <nav
+          className={ cnHeader('Nav')}
+        >
+          <ol>
+            { this.getTopMenuList_() }
+          </ol>
+        </nav>
       </header>
     )
   };
@@ -65,30 +57,19 @@ export class Header extends React.Component {
       const linkPath = onRootPage && blogIndexPage ? '/' : path;
 
       return (
-        <li
-          key = { name }
-          className = {
-            cnHeader('Link-Wrapper', { active: activeState })
-          }
-        >
-          <Link
-            className = { cnHeader('Link') }
-            activeClassName = { cnHeader('Link', { active: true }) }
-            to = { linkPath }>
-            { name }
-          </Link>
-        </li>
+          <li
+            key = { name }
+          >
+            <Styled.a
+              as = { Link }
+              className = { cnHeader('Link') }
+              activeClassName = { cnHeader('Link', { active: true }) }
+              partiallyActive = { false }
+              to = { linkPath }>
+              { name }
+            </Styled.a>
+          </li>
       );
-    })
+    });
   }
 }
-
-export const pageQuery = graphql`
-  query PageQuery {
-    site {
-      siteMetadata {
-        shortTitle
-      }
-    }
-  }
-`;

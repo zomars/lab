@@ -43,10 +43,10 @@ class BlogPostTemplate extends React.Component {
         <Styled.hr/>
         <ul
           style={ {
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+            listStyle: 'none',
             padding: 0,
           } }
         >

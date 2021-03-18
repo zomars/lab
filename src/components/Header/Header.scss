@@ -1,65 +1,32 @@
+@import '../../styles/variables';
+
+@use 'sass:map';
+
 .Header {
-  border-bottom: 1px solid darkgreen;
   display: flex;
-  position: relative;
-
-  &-Logo {
-    display: none;
-    width: 40px;
-    position: absolute;
-    padding: .3rem;
-    border-radius: 4px;
-    color: darkgreen;
-    text-align: center;
-    margin: auto;
-    left: 0;
-    right: 0;
-    font-family: 'EB Garamond', serif;
-  }
-
-  &-Link-Wrapper {
-    padding: 0 1rem;
-    color: black;
-
-    &_active {
-      background-color: darkgreen;
-      color: white;
-    }
-
-    &:first-child {
-      margin-left: -1rem;
-    }
-  }
+  border-color: $secondaryColor;
+  border-bottom-width: map-get($borderWidths, '1');
+  border-bottom-style: solid;
+  line-height: map-get($lineHeights, loose);
 
   &-Link {
-    color: inherit;
-
-    &:visited {
-      color: inherit;
-    }
+    display: inline-block;
+    padding: 0 1rem;
 
     &_active {
+      background-color: $mutedColor;
       cursor: default;
     }
   }
 
-  &-Border {
-    height: 12px;
-    width: 100%;
-    background-color: lightgreen;
-    position: absolute;
-    bottom: 0;
-    padding-bottom: 1px;
-    border-bottom: 5px solid darkgreen;
+  &-Nav {
+    padding: 0 1rem;
   }
 
-  ul {
+  ol {
     display: flex;
-    list-style: none;
-  }
-
-  h3 {
     margin: 0;
-    border: none;
+    padding: 0;
+    list-style: none;
   }
 }

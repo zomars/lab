@@ -1,8 +1,8 @@
-import React, {ReactElement} from 'react'
-import { StaticQuery, graphql } from 'gatsby'
-import Image from 'gatsby-image'
-import './Bio.scss'
-import { cn } from '@bem-react/classname'
+import React, { ReactElement } from 'react';
+import { StaticQuery, graphql } from 'gatsby';
+import { GatsbyImage } from 'gatsby-plugin-image';
+import './Bio.scss';
+import { cn } from '@bem-react/classname';
 
 const cnBio = cn('Bio')
 
@@ -21,12 +21,12 @@ class Bio extends React.Component {
 
         return (
             <div className={ `${cnBio()} ${this.props.className}` }>
-                <Image
+                <GatsbyImage
                   className={ cnBio('Avatar') }
-                  fixed={ data.avatar.childImageSharp.fixed }
+                  image={ data.avatar.childImageSharp.gatsbyImageData }
                   alt={ author }
                   imgStyle={{
-                      borderRadius: `50%`,
+                      borderRadius: '50%',
                   }}
                 />
                 <div
@@ -43,9 +43,7 @@ const bioQuery = graphql`
   query BioQuery {
     avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
       childImageSharp {
-        fixed(width: 50, height: 50) {
-          ...GatsbyImageSharpFixed
-        }
+        gatsbyImageData(width: 50)
       }
     }
     site {

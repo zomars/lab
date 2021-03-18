@@ -6,17 +6,18 @@ import { cn } from '@bem-react/classname';
 import { PostPreview } from '../PostPreview/PostPreview';
 
 import './BlogIndex.scss';
+import { INode } from '../../types/gatsby-node'
 
 const cnBlogIndex = cn('BlogIndex');
 
-class BlogIndex extends React.Component {
+export class BlogIndex extends React.Component<{ location: string }> {
   public render(): ReactElement {
     const { data } = this.props as any;
-    const { shortTitle: siteTitle } = data.site.siteMetadata;
-    const { edges: posts } = data.allMdx;
+    const { title: siteTitle } = data.site.siteMetadata;
+    const { nodes: posts } = data.allMdx;
 
     const postElems = posts.map(
-      ({ node: post }: any) => (
+      (post: INode) => (
         <PostPreview
           post = { post }
           key = { post.fields.slug }
@@ -46,5 +47,3 @@ class BlogIndex extends React.Component {
     );
   }
 }
-
-export { BlogIndex };
