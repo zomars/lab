@@ -2,7 +2,6 @@ import React from 'react';
 import { RenderBodyArgs } from 'gatsby';
 
 import { Footer } from './src/components/Footer/Footer'
-export { wrapPageElement } from './src/gatsby-apis/wrap-page-element';
 
 /**
  * Adds footer to all pages rendered.
@@ -12,3 +11,6 @@ export function onRenderBody({ setPostBodyComponents }: RenderBodyArgs) {
     <Footer key='footer'/>,
   ]);
 }
+
+export { wrapPageElement } from './src/gatsby-hooks/wrap-page-element';
+export { wrapRootElement } from './src/gatsby-hooks/wrap-root-element';

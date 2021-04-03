@@ -1,18 +1,11 @@
 .Layout {
   min-height: 100%;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
   display: flex;
   flex-direction: column;
 
-  &-Header {
-    flex: 0 1 auto;
-    height: 40px;
-    line-height: 40px;
-    margin: 0 -1rem;
-    padding: 0 1rem;
-  }
-
   &-View {
     flex: 1 1 auto;
+    margin: auto;
   }
 }

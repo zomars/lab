@@ -9,24 +9,19 @@
   border-bottom-style: solid;
   line-height: map-get($lineHeights, loose);
 
-  &-Link {
-    display: inline-block;
-    padding: 0 1rem;
-
-    &_active {
-      background-color: $mutedColor;
-      cursor: default;
-    }
-  }
-
   &-Nav {
     padding: 0 1rem;
   }
 
-  ol {
+  &-List {
     display: flex;
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
+  &-Link {
+    display: inline-block;
+    padding: 0 1rem;
   }
 }

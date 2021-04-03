@@ -1,6 +1,7 @@
 ---
 title: 'GTI MK6 87 000 km service'
 date: '2019-04-20T23:59:59.000Z'
+tags: ['cars']
 ---
 
 ![Nice one](../../../assets/supra/1.jpg)

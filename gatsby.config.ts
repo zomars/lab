@@ -58,6 +58,7 @@ const plugins = [
   'gatsby-plugin-typescript',
   'gatsby-plugin-sass',
   'gatsby-plugin-sharp',
+  'gatsby-remark-reading-time',
   {
     resolve: 'gatsby-plugin-mdx',
     options: {
@@ -73,6 +74,7 @@ const plugins = [
           }
         },
         'gatsby-remark-prismjs',
+        'gatsby-remark-reading-time',
       ]
     }
   },

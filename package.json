@@ -22,6 +22,7 @@
     "gatsby-remark-copy-linked-files": "3.x.x",
     "gatsby-remark-images": "4.2.0-next.0",
     "gatsby-remark-prismjs": "4.x.x",
+    "gatsby-remark-reading-time": "^1.1.0",
     "gatsby-source-filesystem": "3.x.x",
     "gatsby-transformer-remark": "3.x.x",
     "gatsby-transformer-sharp": "3.x.x",
@@ -34,6 +35,7 @@
     "typography-theme-us-web-design-standards": "^0.16.19"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.11",
     "@types/lodash": "^4.14.168",
     "@types/node": "11.x.x",
     "@types/react": "17.x.x",
