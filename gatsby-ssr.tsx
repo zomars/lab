@@ -1,12 +1,12 @@
 import React from 'react';
 import { RenderBodyArgs } from 'gatsby';
 
-import { Footer } from './src/components/Footer/Footer'
+import { Footer } from './src/components/Footer/Footer';
 
 /**
  * Adds footer to all pages rendered.
  */
-export function onRenderBody({ setPostBodyComponents }: RenderBodyArgs) {
+export function onRenderBody({ setPostBodyComponents }: RenderBodyArgs): void {
   setPostBodyComponents([
     <Footer key='footer'/>,
   ]);

@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { CreatePagesArgs } from 'gatsby';
 
-import { IBlogPost } from '../types/common.types'
+import { IBlogPost } from '../types/common.types';
 
 export const postsQuery = /* GraphQL */ `
   query GatsbyNode {
@@ -25,7 +25,7 @@ const blogPostComponentPath = path.resolve(
 );
 
 export async function createPostPages(
-  { graphql, actions: { createPage }}: CreatePagesArgs,
+  { graphql, actions: { createPage } }: CreatePagesArgs,
 ): Promise<void> {
   const postsReq = await graphql(postsQuery);
 
@@ -33,6 +33,7 @@ export async function createPostPages(
     throw postsReq.errors;
   }
 
+  // eslint-disable-next-line no-extra-parens
   const { nodes: posts }: { nodes: IBlogPost[] } = (postsReq.data as any).allPosts;
 
   posts.forEach((post, index: number) => {
@@ -43,7 +44,7 @@ export async function createPostPages(
       component: blogPostComponentPath,
       context: {
         slug,
-      }
+      },
     });
   });
 }

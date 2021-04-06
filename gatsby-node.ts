@@ -8,6 +8,10 @@ import { createFilePath } from 'gatsby-source-filesystem';
 import { createPostPages } from './src/gatsby-hooks/create-post-pages';
 import { createPostIndexPages } from './src/gatsby-hooks/create-post-list-pages';
 
+/**
+ * Create site level redirects.
+ * More will be added by programmatic page creation later on.
+ */
 function createRedirects(hookArgs: CreatePagesArgs): void {
   const {
     createRedirect,
@@ -19,7 +23,7 @@ function createRedirects(hookArgs: CreatePagesArgs): void {
     '/',
     '/blog',
     '/blog/',
-  ]
+  ];
 
   const rootRedirectToTarget = '/blog/tech/1';
 
@@ -27,10 +31,10 @@ function createRedirects(hookArgs: CreatePagesArgs): void {
     toPath: rootRedirectToTarget,
     redirectInBrowser: true,
     isPermanent: true,
-  }
+  };
 
   rootRedirectFromPaths
-    .forEach(fromPath => {
+    .forEach((fromPath) => {
       createRedirect({
         ...redirectSettings,
         fromPath,
@@ -41,7 +45,7 @@ function createRedirects(hookArgs: CreatePagesArgs): void {
 /**
  * Create post lists and post pages themselves.
  */
-export async function createPages(hookArgs: CreatePagesArgs) {
+export async function createPages(hookArgs: CreatePagesArgs): Promise<void> {
   createRedirects(hookArgs);
 
   await createPostPages(hookArgs);
@@ -54,23 +58,23 @@ export async function createPages(hookArgs: CreatePagesArgs) {
  */
 export function onCreateNode(
   { node, actions, getNode }: CreateNodeArgs
-) {
+): void {
   if (
-    node.internal.type === 'Mdx'
-    || node.ext === '.md'
-    || node.ext === '.mdx'
+    node.internal.type === 'Mdx' ||
+    node.ext === '.md' ||
+    node.ext === '.mdx'
   ) {
     const { createNodeField } = actions;
 
     const value = createFilePath({
       node,
-      getNode
+      getNode,
     });
 
     createNodeField({
       name: 'slug',
       node,
-      value
+      value,
     });
   }
 }

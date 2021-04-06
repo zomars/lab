@@ -59,7 +59,7 @@ function staticQueryRender(
     });
 
     postsPerTag.set(tag, tagPosts);
-  })
+  });
 
   const contextValue = {
     posts: postsMap,

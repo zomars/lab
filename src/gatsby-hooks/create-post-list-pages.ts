@@ -2,7 +2,7 @@ import * as path from 'path';
 import { CreatePagesArgs } from 'gatsby';
 
 import { getPostListUrlByTag } from '../services/urls.service';
-import { IBlogPost, IUniquePostTag } from '../types/common.types'
+import { IBlogPost, IUniquePostTag } from '../types/common.types';
 
 const postListComponentPath = path.resolve(
   './src/page-templates/PostList/PostList.tsx',
@@ -58,17 +58,17 @@ function parseUniqueTagsResponse(
 /**
  * Create multiple (paginated) listing pages per post tag passed.
  */
-async function createPostListPagesPerTag (
+async function createPostListPagesPerTag(
   { graphql, actions: { createPage, createRedirect } }: CreatePagesArgs,
   tag: string,
 ): Promise<void> {
-
   const postsReq = await graphql(postsQuery, { tag });
 
   if (postsReq.errors) {
     throw postsReq.errors;
   }
 
+  // eslint-disable-next-line no-extra-parens
   const { nodes: posts }: { nodes: IBlogPost[] } = (postsReq.data as any).allPostsByTag;
 
   const numPages = Math.ceil(posts.length / postsPerPage);

@@ -12,7 +12,7 @@ export class PostTags extends React.Component<{
   tags: string[],
   activeTag?: string,
 }> {
-  render(): ReactNode {
+  public render(): ReactNode {
     const { tags, activeTag } = this.props;
 
     return tags.sort().map((tag: string) => {
@@ -23,12 +23,12 @@ export class PostTags extends React.Component<{
         <Styled.a
           as = { Link }
           key = { tag }
-          className = {  className }
+          className = { className }
           to = { getPostListUrlByTag(tag) }
         >
           #{ tag }&nbsp;
         </Styled.a>
       );
-    })
+    });
   }
 }

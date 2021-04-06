@@ -3,13 +3,14 @@ import React, { ReactElement } from 'react';
 import { Link } from 'gatsby';
 import { cn } from '@bem-react/classname';
 import classnames from 'classnames';
-import { LinkGetProps } from '@reach/router';
+// eslint-disable-next-line import/no-unresolved
+import { LinkGetProps } from '@reach/router'; // peer dependency through gatsby
 
-const cnHeader = cn('Header');
+import { IPostContext } from '../../react-contexts/posts.context';
 
 import './Header.scss';
-import { IBlogPost } from '../../types/common.types';
-import { IPostContext } from '../../react-contexts/posts.context';
+
+const cnHeader = cn('Header');
 
 const topSections = [
   {
@@ -18,7 +19,7 @@ const topSections = [
   }, {
     name: 'Cars Posts',
     path: '/blog/cars',
-  },{
+  }, {
     name: 'Projects',
     path: '/projects',
   }, {
@@ -50,12 +51,12 @@ export class Header extends React.Component<{
           <ol
             className = { cnHeader('List') }
           >
-            { this.getTopMenuList_() }
+            { this.getTopMenuList() }
           </ol>
         </nav>
       </header>
-    )
-  };
+    );
+  }
 
   /**
    * Returns style object for active (current) links.
@@ -101,32 +102,30 @@ export class Header extends React.Component<{
     // both will get highlighted in the header
     if (postsPerTag.has(tag)) {
       const postSlugs =
-        (postsPerTag.get(tag)!)
-          .map(({ fields: { slug } }) => slug)
+        postsPerTag.get(tag)!
+          .map(({ fields: { slug } }) => slug);
 
       if (postSlugs.includes(postSlug)) {
         return positiveMatchProps;
       }
     }
+  };
 
-    return;
-  }
-
-  protected getTopMenuList_(): ReactElement[] {
+  private getTopMenuList(): ReactElement[] {
     return topSections.map(({ name, path }) => {
       return (
-          <li
-            key = { name }
+        <li
+          key = { name }
+        >
+          <Styled.a
+            as = { Link }
+            className = { cnHeader('Link') }
+            getProps = { this.getActiveLinkProps }
+            to = { path }
           >
-            <Styled.a
-              as = { Link }
-              className = { cnHeader('Link') }
-              getProps = { this.getActiveLinkProps }
-              to = { path }
-            >
-              { name }
-            </Styled.a>
-          </li>
+            { name }
+          </Styled.a>
+        </li>
       );
     });
   }

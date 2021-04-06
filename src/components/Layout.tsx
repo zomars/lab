@@ -9,10 +9,11 @@ import './Layout.scss';
 
 const cnLayout = cn('Layout');
 
-export class Layout extends React.Component<{
+interface ILayoutProps {
   className?: string,
-  children?: ReactElement,
-}> {
+}
+
+export class Layout extends React.Component<ILayoutProps> {
   public render(): ReactElement {
     const {
       children,

@@ -4,16 +4,11 @@ import { graphql, PageRendererProps } from 'gatsby';
 import { Layout } from '../../components/Layout';
 import { SEO } from '../../components/seo';
 import { PostPreview } from '../../components/PostPreview/PostPreview';
+import { IBlogPost } from '../../types/common.types';
 import { PostListPaginator } from './PostListPaginator/PostListPaginator';
-import { IBlogPost } from '../../types/common.types'
 
 export const postsQuery = graphql`
   query blogListQuery($skip: Int!, $limit: Int!, $tag: String!) {
-    site {
-      siteMetadata {
-        title
-      }
-    }
     onePagePosts: allMdx(
       filter: { frontmatter: { tags: { in: [$tag] } } }
       sort: { fields: [frontmatter___date], order: DESC }
@@ -41,7 +36,6 @@ export const postsQuery = graphql`
 
 interface IGqlResponse {
   onePagePosts: { posts: IBlogPost[] },
-  site: { siteMetadata: { title: string} },
 }
 
 interface IPostListPageContext {
@@ -55,34 +49,28 @@ interface IPostListProps extends PageRendererProps {
   pageContext: IPostListPageContext;
 }
 
+const keywords = [
+  'blog',
+  'gatsby',
+  'javascript',
+  'react',
+];
+
 export class PostList extends React.Component<IPostListProps> {
   public render(): ReactElement {
     const { data, pageContext } = this.props;
-    const { title: siteTitle } = data.site.siteMetadata;
     const { posts } = data.onePagePosts;
 
     const postElements = posts.map(
-      (post: IBlogPost) => (
-        <PostPreview
-          tag = { pageContext.tag }
-          post = { post }
-          key = { post.fields.slug }
-        />
-        )
+      (post: IBlogPost) => <PostPreview
+        tag = { pageContext.tag }
+        post = { post }
+        key = { post.fields.slug }
+      />
     );
 
-    const keywords = [
-      'blog',
-      'gatsby',
-      'javascript',
-      'react'
-    ];
-
     return (
-      <Layout
-        location = { this.props.location }
-        title = { siteTitle }
-      >
+      <Layout>
         <SEO
           title = { `All #${pageContext.tag} posts` }
           keywords = { keywords }
@@ -100,4 +88,5 @@ export class PostList extends React.Component<IPostListProps> {
   }
 }
 
+// eslint-disable-next-line import/no-default-export
 export default PostList;

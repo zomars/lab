@@ -2,30 +2,44 @@ import React, { ReactElement } from 'react';
 import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
 
-class SEO extends React.Component {
-  protected static defaultProps = {
-    keywords: [],
-    lang: 'en',
-    meta: [],
-  };
+const detailsQuery = graphql`
+  query DefaultSEOQuery {
+    site {
+      siteMetadata {
+        title
+        description
+        author
+      }
+    }
+  }
+`;
 
+interface ISeoProps {
+  keywords?: string[],
+  lang?: string,
+  meta?: any[],
+  description?: string,
+  title?: string,
+}
+
+export class SEO extends React.Component<ISeoProps> {
   public render(): ReactElement {
     return (
       <StaticQuery
-        query={ detailsQuery }
-        render={ this.render_ }
+        query = { detailsQuery }
+        render = { this.render_ }
       />
     );
   }
 
-  private render_ = (data: any) => {
+  private render_ = (data: any): ReactElement => {
     const {
       description,
       lang,
       meta,
       title,
       keywords,
-    } = this.props as any;
+    } = this.props;
 
     const metaDescription =
       description || data.site.siteMetadata.description;
@@ -57,14 +71,14 @@ class SEO extends React.Component {
       }, {
         content: metaDescription,
         name: 'twitter:description',
-      }
+      },
     ];
 
-    if (meta.length) {
+    if (meta?.length) {
       metaTags.push(...meta);
     }
 
-    if (keywords.length) {
+    if (keywords?.length) {
       metaTags.push({
         name: 'keywords',
         content: keywords.join(),
@@ -79,20 +93,5 @@ class SEO extends React.Component {
         meta = { metaTags }
       />
     );
-  }
+  };
 }
-
-
-export { SEO };
-
-const detailsQuery = graphql`
-  query DefaultSEOQuery {
-    site {
-      siteMetadata {
-        title
-        description
-        author
-      }
-    }
-  }
-`;

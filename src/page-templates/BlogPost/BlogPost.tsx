@@ -8,9 +8,9 @@ import { Styled, jsx } from 'theme-ui';
 
 import { Layout } from '../../components/Layout';
 import { SEO } from '../../components/seo';
-import { PostTags } from './PostTags/PostTags';
 import { postsContext } from '../../react-contexts/posts.context';
 import { IBlogPost } from '../../types/common.types';
+import { PostTags } from './PostTags/PostTags';
 
 import './BlogPost.scss';
 
@@ -18,12 +18,6 @@ const cnBlogPost = cn('BlogPost');
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
-    site {
-      siteMetadata {
-        title
-        author
-      }
-    }
     post: mdx(fields: { slug: { eq: $slug } }) {
       fields {
         slug
@@ -45,11 +39,6 @@ enum adjacentPostType {
 
 interface IGqlResponse {
   post: IBlogPost,
-  site: {
-    siteMetadata: {
-      title: string,
-    },
-  },
 }
 
 interface IBlogPostTemplateProps extends PageRendererProps {
@@ -60,12 +49,10 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
   public render(): ReactElement {
     const {
       data,
-      location,
     } = this.props;
 
     const {
       post,
-      site
     } = data;
 
     const {
@@ -73,12 +60,8 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
       tags,
     } = post.frontmatter;
 
-    const { title: siteTitle } = site.siteMetadata;
-
     return (
       <Layout
-        location = { location }
-        title = { siteTitle }
         className = { cnBlogPost() }
       >
         <SEO
@@ -142,7 +125,7 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
     return [
       previousPost,
       nextPost,
-    ]
+    ];
   }
 
   /**
@@ -153,6 +136,7 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
     const { state } = props.location;
     const { tags } = props.data.post.frontmatter;
 
+    // eslint-disable-next-line no-extra-parens
     return (state as Record<string, string>)?.activeTag || tags[0];
   }
 
@@ -174,7 +158,7 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
     const arrows = {
       [adjacentPostType.next]: '\u2192',
       [adjacentPostType.prev]: '\u2190',
-    }
+    };
 
     const labels = [
       arrows[type],
@@ -221,4 +205,5 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
 
 BlogPostTemplate.contextType = postsContext;
 
+// eslint-disable-next-line import/no-default-export
 export default BlogPostTemplate;

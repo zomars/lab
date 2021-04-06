@@ -14,12 +14,10 @@ export function wrapPageElement(
   return (
     <postsContext.Consumer>
       {
-        postsContext => (
-          <>
-            <Header postsContext = { postsContext } { ...props }/>
-            { element }
-          </>
-        )
+        postsContext => <>
+          <Header postsContext = { postsContext } { ...props }/>
+          { element }
+        </>
       }
     </postsContext.Consumer>
   );

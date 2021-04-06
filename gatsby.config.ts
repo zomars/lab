@@ -12,8 +12,8 @@ const metadata = {
   description: 'We gonna figure what it is all about',
   siteUrl: 'https://amalitsky.com/',
   social: {
-    twitter: 'amalitsky'
-  }
+    twitter: 'amalitsky',
+  },
 };
 
 const plugins = [
@@ -21,8 +21,8 @@ const plugins = [
     resolve: 'gatsby-source-filesystem',
     options: {
       path: `${ __dirname }/content`,
-      name: 'blog'
-    }
+      name: 'blog',
+    },
   }, {
     resolve: 'gatsby-plugin-theme-ui',
     options: {
@@ -35,12 +35,12 @@ const plugins = [
   'gatsby-plugin-image',
   'gatsby-remark-images',
   // 'gatsby-plugin-feed',
-  /*{
+  /* {
     resolve: 'gatsby-plugin-google-analytics',
     options: {
       trackingId: 'ADD YOUR TRACKING ID HERE',
     }
-  },*/
+  }, */
   /* {
       resolve: 'gatsby-plugin-manifest',
       options: {
@@ -52,7 +52,7 @@ const plugins = [
           icon: 'content/assets/gatsby-icon.png'
       }
   },*/
-  //'gatsby-plugin-offline',
+  // 'gatsby-plugin-offline',
   'gatsby-plugin-react-helmet',
   'gatsby-plugin-mdx',
   'gatsby-plugin-typescript',
@@ -71,14 +71,14 @@ const plugins = [
             withWebp: true,
             maxWidth: 2048,
             quality: 80,
-          }
+          },
         },
         'gatsby-remark-prismjs',
         'gatsby-remark-reading-time',
-      ]
-    }
+      ],
+    },
   },
-  /*{
+  /* {
     resolve: 'gatsby-plugin-graphql-codegen',
     options: {
       fileName: 'graphql.types.ts',
@@ -88,13 +88,14 @@ const plugins = [
         './gatsby-node.ts',
       ]
     }
-  }*/
+  } */
 ];
 
 const config = {
   polyfill: false,
   siteMetadata: metadata,
-  plugins
+  plugins,
 };
 
+// eslint-disable-next-line import/no-default-export
 export default config;

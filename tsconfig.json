@@ -9,7 +9,7 @@
     "strict": true,
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
+    "esModuleInterop": true,
     "noImplicitThis": true,
     "resolveJsonModule": true,
     "noImplicitAny": true,
@@ -18,13 +18,14 @@
     "suppressImplicitAnyIndexErrors": true,
     "allowSyntheticDefaultImports": true,
     "noEmit": true,
+    "skipLibCheck": true,
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx"
   ],
   "exclude": [
-    "node_modules",
-    ".cache"
+    "node_modules/",
+    ".cache/"
   ]
 }

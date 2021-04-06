@@ -41,9 +41,13 @@
     "@types/react": "17.x.x",
     "@types/react-dom": "17.x.x",
     "@types/react-helmet": "6.x.x",
-    "eslint": "7.x.x",
+    "@typescript-eslint/eslint-plugin": "^4.20.0",
+    "@typescript-eslint/parser": "^4.20.0",
+    "babel-preset-gatsby": "^1.2.0",
+    "eslint": "7.23",
     "eslint-config-google": "0.x.x",
-    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-react": "7.23.1",
     "node-sass": "4.x.x",
     "typescript": "^3.4.4"
   },
@@ -59,16 +63,15 @@
     "url": "git+https://github.com/amalitsky/blog.git"
   },
   "scripts": {
+    "__eslint": "eslint --quiet --ext .js,.ts,.tsx",
     "dev": "gatsby develop",
-    "eslint": "eslint --ext .js,.jsx --ignore-pattern public .",
-    "lint": "tslint --project .",
-    "tsc": "tsc --noEmit",
+    "tsc-check": "tsc --noEmit",
+    "eslint": "yarn __eslint ./",
+    "lint": "yarn tsc-check && yarn eslint",
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\"",
-    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js' 'src/**/*.md'",
     "develop": "gatsby develop",
     "start": "npm run develop",
-    "build": "gatsby build",
-    "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js"
+    "build": "gatsby build"
   },
   "browserslist": [
     "last 2 years and > 1%",

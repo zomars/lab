@@ -1,30 +1,30 @@
 /** @jsx jsx */
-import { jsx, ThemeProvider } from 'theme-ui';
-import React, { ReactElement } from 'react'
-import { Styled } from 'theme-ui';
+import { jsx, ThemeProvider, Styled } from 'theme-ui';
+import React, { ReactElement } from 'react';
+
 import theme from '../../gatsby-plugin-theme-ui';
 
 const styles = {
   display: 'flex',
   flex: '0 0 auto',
   borderColor: 'secondary',
-  borderTopWidth: 1,
+  borderTopWidth: '1',
   borderTopStyle: 'solid',
-  py: 0,
-  px: 3,
+  py: '0',
+  px: '3',
   justifyContent: 'flex-end',
   alignItems: 'center',
-  fontSize: 1,
-  height: 10,
+  fontSize: '1',
+  height: '10',
 };
 
 const copyrightStyles = {
   flex: '0 1 auto',
-}
+};
 
 export const Footer = (): ReactElement => {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme = { theme }>
       <footer
         sx = { styles }
       >
@@ -36,4 +36,4 @@ export const Footer = (): ReactElement => {
       </footer>
     </ThemeProvider>
   );
-}
+};

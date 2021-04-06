@@ -16,7 +16,7 @@ const cnListElement = cnPostListPaginator('ListElement');
 function getListLink(
   tag: string,
   page: number,
-  label: string = `${page}`,
+  label = `${page}`,
   rel?: string,
 ): ReactElement {
   return (
@@ -40,7 +40,7 @@ export class PostListPaginator extends React.Component<{
   length: number,
   tag: string,
 }> {
-  render(): ReactElement {
+  public render(): ReactElement {
     const { current, length, tag } = this.props;
     const delta = 3;
 
@@ -63,7 +63,7 @@ export class PostListPaginator extends React.Component<{
           >
             { page }
           </li>
-        )
+        );
       }
     }
 
@@ -72,7 +72,6 @@ export class PostListPaginator extends React.Component<{
         getListLink(tag, 1, 'First'),
         getListLink(tag, current - 1, 'Previous', 'prev'),
       );
-
     }
 
     if (current < length) {

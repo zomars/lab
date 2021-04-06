@@ -1,7 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { HTMLAttributes, ReactElement } from 'react';
 
-export default function HTML(props) {
+interface IHTMLPageProps {
+  htmlAttributes: HTMLAttributes<unknown>,
+  headComponents: ReactElement[],
+  bodyAttributes: HTMLAttributes<unknown>,
+  preBodyComponents: ReactElement[],
+  body: string,
+  postBodyComponents: ReactElement[],
+}
+
+function HTML(props: IHTMLPageProps): ReactElement {
   return (
     <html { ...props.htmlAttributes }>
       <head>
@@ -29,14 +37,8 @@ export default function HTML(props) {
         { props.postBodyComponents }
       </body>
     </html>
-  )
+  );
 }
 
-HTML.propTypes = {
-  htmlAttributes: PropTypes.object,
-  headComponents: PropTypes.array,
-  bodyAttributes: PropTypes.object,
-  preBodyComponents: PropTypes.array,
-  body: PropTypes.string,
-  postBodyComponents: PropTypes.array,
-}
+// eslint-disable-next-line import/no-default-export
+export default HTML;
