@@ -1,5 +1,5 @@
 {
-  "name": "alex-malitsky-blog",
+  "name": "amlabs",
   "private": true,
   "version": "1.0.0",
   "author": "Alex Malitsky <mail@amalitsky.com>",
@@ -49,30 +49,34 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-react": "7.23.1",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4",
     "node-sass": "4.x.x",
     "typescript": "^3.4.4"
   },
-  "homepage": "https://github.com/amalitsky/blog",
+  "homepage": "https://github.com/amalitsky/amlabs",
   "keywords": [
     "development",
     "blog",
-    "tech chat"
+    "tech chat",
+    "frontend"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/amalitsky/blog.git"
+    "url": "git+https://github.com/amalitsky/amlabs.git"
   },
   "scripts": {
     "__eslint": "eslint --quiet --ext .js,.ts,.tsx",
     "dev": "gatsby develop",
-    "tsc-check": "tsc --noEmit",
-    "eslint": "yarn __eslint ./",
-    "lint": "yarn tsc-check && yarn eslint",
+    "tsc-check": "tsc --noEmit --project ./tsconfig.json",
+    "eslint-all": "yarn __eslint ./",
+    "lint": "yarn tsc-check && yarn eslint-all",
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\"",
     "develop": "gatsby develop",
     "start": "npm run develop",
-    "build": "gatsby build"
+    "build": "gatsby build",
+    "prepare": "husky install"
   },
   "browserslist": [
     "last 2 years and > 1%",
