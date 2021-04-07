@@ -1,0 +1,86 @@
+name: PR checks
+
+on:
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules-yarn
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.cache/yarn
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('yarn.lock') }}
+
+      - name: install dependencies
+        run: yarn install --prefer-offline
+
+  build-staging-deploy:
+    runs-on: ubuntu-latest
+
+    needs: setup
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules-yarn
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.cache/yarn
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('yarn.lock') }}
+
+      - name: install deps
+        run: yarn install --prefer-offline
+
+      - name: build the website
+        run: yarn build
+
+      - name: install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.MT_STAGING_SSH_KEY }}
+          name: mt_icode # optional
+          known_hosts: ${{ secrets.MT_SSH_KNOWN_HOSTS }}
+          if_key_exists: fail
+
+      - name: deploy to staging
+        run: ./scripts/deploy-staging.sh
+        env:
+          PR_ID: ${{ github.event.number }}
+
+  lint:
+    runs-on: ubuntu-latest
+
+    needs: setup
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules-yarn
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: ~/.cache/yarn
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('yarn.lock') }}
+
+      - name: install deps
+        run: yarn install --prefer-offline
+
+      - name: lint the code
+        run: yarn lint

@@ -39,7 +39,7 @@
     "@types/lodash": "^4.14.168",
     "@types/node": "11.x.x",
     "@types/react": "17.x.x",
-    "@types/react-dom": "17.x.x",
+    "@types/react-dom": "17.0.3",
     "@types/react-helmet": "6.x.x",
     "@typescript-eslint/eslint-plugin": "^4.20.0",
     "@typescript-eslint/parser": "^4.20.0",
