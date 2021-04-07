@@ -21,7 +21,7 @@ export class Layout extends React.Component<ILayoutProps> {
     } = this.props;
 
     return (
-      <div className={ classnames(cnLayout(), className) }>
+      <div className = { classnames(cnLayout(), className) }>
         <div
           className = { cnLayout('View') }
           sx = {{

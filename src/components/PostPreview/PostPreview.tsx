@@ -52,7 +52,8 @@ export class PostPreview extends React.Component<{
 
     return (
       <div
-        className = { classnames(cnPostPreview(), className) }>
+        className = { classnames(cnPostPreview(), className) }
+      >
         <Styled.h3>
           <Styled.a
             as = { Link }

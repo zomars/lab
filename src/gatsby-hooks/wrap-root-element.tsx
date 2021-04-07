@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement, ReactNode, useMemo } from 'react';
 import { graphql, StaticQuery, WrapRootElementBrowserArgs } from 'gatsby';
 
-import { postsContext } from '../react-contexts/posts.context';
+import { IPostContext, postsContext } from '../react-contexts/posts.context';
 import { IBlogPost, IUniquePostTag } from '../types/common.types';
 
 export const postsQuery = graphql`
@@ -38,15 +38,13 @@ interface IQueryResponse {
 }
 
 /**
- * Populate postsContext with data.
+ * Create context data structure from graphQL response.
+ * So that we can memoize it.
  */
-function staticQueryRender(
-  element: ReactNode,
-  queryData: IQueryResponse,
-): ReactNode {
-  const { posts } = queryData.allPosts;
-  const { tags } = queryData.uniqueTags;
-
+function computeContextValue(
+  posts: IBlogPost[],
+  tags: IUniquePostTag[],
+): IPostContext {
   const postsMap = new Map(
     posts.map(post => [post.fields.slug, post])
   );
@@ -61,16 +59,31 @@ function staticQueryRender(
     postsPerTag.set(tag, tagPosts);
   });
 
-  const contextValue = {
+  return {
     posts: postsMap,
     postsPerTag,
   };
+}
+
+/**
+ * Populate postsContext with data.
+ */
+function PostContextProvider(
+  { data, children }: { data: IQueryResponse, children: ReactElement },
+): ReactElement {
+  const { posts } = data.allPosts;
+  const { tags } = data.uniqueTags;
+
+  const memoizedValue = useMemo(
+    () => computeContextValue(posts, tags),
+    [posts, tags],
+  );
 
   return (
     <postsContext.Provider
-      value = { contextValue }
+      value = { memoizedValue }
     >
-      { element }
+      { children }
     </postsContext.Provider>
   );
 }
@@ -84,7 +97,13 @@ export function wrapRootElement(
   return (
     <StaticQuery
       query = { postsQuery }
-      render = { data => staticQueryRender(element, data) }
+      render = { data => (
+        <PostContextProvider
+          data = { data }
+        >
+          { element as ReactElement }
+        </PostContextProvider>
+      ) }
     />
   );
 }

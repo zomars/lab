@@ -23,17 +23,17 @@ export class Bio extends React.Component<{
     const { author } = data.site.siteMetadata;
 
     return (
-      <div className={`${cnBio()} ${this.props.className}`}>
+      <div className = { `${cnBio()} ${this.props.className}` }>
         <GatsbyImage
-          className={cnBio('Avatar')}
-          image={data.avatar.childImageSharp.gatsbyImageData}
-          alt={author}
-          imgStyle={{
+          className = { cnBio('Avatar') }
+          image = { data.avatar.childImageSharp.gatsbyImageData }
+          alt = { author }
+          imgStyle = {{
             borderRadius: '50%',
           }}
         />
         <div
-          className={cnBio('Text')}
+          className = { cnBio('Text') }
         >
           Made by <strong>{author}</strong> who lives and works in SF bay area
           building useful things.

@@ -8,7 +8,7 @@ import { Footer } from './src/components/Footer/Footer';
  */
 export function onRenderBody({ setPostBodyComponents }: RenderBodyArgs): void {
   setPostBodyComponents([
-    <Footer key='footer'/>,
+    <Footer key = 'footer'/>,
   ]);
 }
 

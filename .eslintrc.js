@@ -1,5 +1,6 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+/* eslint-disable @typescript-eslint/no-var-requires */
 const namingConventions = require('./naming.eslintrc');
+const reactRules = require('./react.eslintrc');
 
 const {
   classNamingConvention,
@@ -97,62 +98,6 @@ const tsEslintRules = {
   '@typescript-eslint/prefer-for-of': ERROR,
 };
 
-// eslint-disable-next-line no-unused-vars
-const reactRules = {
-  'react/no-unused-prop-types': ERROR,
-  'react/no-unused-state': ERROR,
-  'react/jsx-child-element-spacing': ERROR,
-  'react/jsx-closing-bracket-location': ERROR,
-  'react/jsx-curly-brace-presence': [
-    ERROR, {
-      props: NEVER,
-      children: NEVER,
-    },
-  ],
-  'react/jsx-curly-newline': ERROR,
-  'react/jsx-curly-spacing': [
-    ERROR, {
-      when: ALWAYS,
-    },
-  ],
-  'react/jsx-equals-spacing': [
-    ERROR,
-    ALWAYS,
-  ],
-  'react/jsx-filename-extension': [
-    ERROR, {
-      allow: 'as-needed',
-      extensions: ['.tsx'],
-    },
-  ],
-  'react/jsx-first-prop-new-line': ERROR,
-  'react/jsx-fragments': ERROR,
-  'react/jsx-indent': [
-    ERROR,
-    2, {
-      checkAttributes: true,
-    },
-  ],
-  'react/jsx-indent-props': [
-    ERROR, 2,
-  ],
-  'react/jsx-max-props-per-line': ERROR,
-  'react/jsx-no-bind': [
-    ERROR,
-    {
-      allowArrowFunctions: true,
-    },
-  ],
-  'react/jsx-no-comment-textnodes': ERROR,
-  'react/jsx-no-constructed-context-values': ERROR,
-  'react/jsx-no-script-url': ERROR,
-  'react/jsx-no-undef': ERROR,
-  'react/jsx-no-useless-fragment': ERROR,
-  'react/jsx-pascal-case': ERROR,
-  'react/jsx-props-no-multi-spaces': ERROR,
-  'react/jsx-tag-spacing': ERROR,
-  'react/jsx-wrap-multilines': ERROR,
-};
 
 const rules = {
   'wrap-iife': [
@@ -255,6 +200,7 @@ const rules = {
       conditionalAssign: false,
       enforceForArrowConditionals: false,
       enforceForNewInMemberExpressions: false,
+      ignoreJSX: 'multi-line',
     },
   ],
   'require-await': ERROR,
@@ -266,7 +212,7 @@ const rules = {
   'lines-between-class-members': ERROR,
   ...tsEslintRules,
   ...importRules,
-  // ...reactRules,
+  ...reactRules,
 };
 
 const config = {
@@ -289,6 +235,7 @@ const config = {
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
+    'plugin:react-hooks/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {

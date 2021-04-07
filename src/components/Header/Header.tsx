@@ -43,10 +43,10 @@ export class Header extends React.Component<{
 
     return (
       <header
-        className={ classnames(cnHeader(), className) }
+        className = { classnames(cnHeader(), className) }
       >
         <nav
-          className={ cnHeader('Nav') }
+          className = { cnHeader('Nav') }
         >
           <ol
             className = { cnHeader('List') }

@@ -31,7 +31,7 @@ export const Footer = (): ReactElement => {
         <Styled.div sx = { copyrightStyles }>
           { new Date().getFullYear() },
           built with { ` ` }
-          <Styled.a href='https://www.gatsbyjs.org'>Gatsby</Styled.a>
+          <Styled.a href = 'https://www.gatsbyjs.org'>Gatsby</Styled.a>
         </Styled.div>
       </footer>
     </ThemeProvider>

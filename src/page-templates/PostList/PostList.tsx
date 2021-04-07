@@ -62,11 +62,13 @@ export class PostList extends React.Component<IPostListProps> {
     const { posts } = data.onePagePosts;
 
     const postElements = posts.map(
-      (post: IBlogPost) => <PostPreview
-        tag = { pageContext.tag }
-        post = { post }
-        key = { post.fields.slug }
-      />
+      (post: IBlogPost) => (
+        <PostPreview
+          tag = { pageContext.tag }
+          post = { post }
+          key = { post.fields.slug }
+        />
+      )
     );
 
     return (

@@ -66,13 +66,15 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
       >
         <SEO
           title = { title }
-          description = { post.excerpt }/>
+          description = { post.excerpt }
+        />
 
         <Styled.h1>{ title }</Styled.h1>
 
-        <Styled.p sx={{
+        <Styled.p sx = {{
           color: 'textMuted',
-        }}>
+        }}
+        >
           { post.frontmatter.date }
         </Styled.p>
 
@@ -87,7 +89,8 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
 
         <Styled.hr sx = {{
           my: 2,
-        }}/>
+        }}
+        />
 
         { this.paginator }
       </Layout>
@@ -169,14 +172,16 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
       labels.reverse();
     }
 
-    return <Styled.a
-      as = { Link }
-      to = { post.fields.slug }
-      state = { postLinkPayload }
-      rel = { type }
-    >
-      { labels.join(' ') }
-    </Styled.a>;
+    return (
+      <Styled.a
+        as = { Link }
+        to = { post.fields.slug }
+        state = { postLinkPayload }
+        rel = { type }
+      >
+        { labels.join(' ') }
+      </Styled.a>
+    );
   }
 
   /**
