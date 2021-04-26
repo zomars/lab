@@ -3,7 +3,7 @@ name: prs
 on:
   pull_request:
 
-  # Allows you to run this workflow manually from the Actions tab
+  # Allows to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 env:
@@ -49,10 +49,10 @@ jobs:
       - name: lint the code
         run: yarn lint
 
-  build-staging-deploy:
+  build:
     runs-on: ubuntu-latest
 
-    needs: [setup, lint]
+    needs: setup
 
     steps:
       - uses: actions/checkout@v2
@@ -68,8 +68,32 @@ jobs:
       - name: install deps
         run: yarn install --prefer-offline
 
+      - name: Production build and cache it
+        uses: actions/cache@v2
+        env:
+          cache-name: prod-build
+        with:
+          path: public
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
+
       - name: build the website
         run: yarn build
+
+  staging-deploy:
+    runs-on: ubuntu-latest
+
+    needs: [build]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: restore website build from cache
+        uses: actions/cache@v2
+        env:
+          cache-name: prod-build
+        with:
+          path: public
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
 
       - name: netlify deploy
         run: yarn deploy-netlify --alias PR-$PR_ID --message $DEPLOY_MESSAGE
@@ -77,16 +101,3 @@ jobs:
           NETLIFY_SITE_ID: 0f94f863-38eb-4a4b-a1c3-dd677837bd32
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           DEPLOY_MESSAGE: PR${{ github.event.number }}/${{ github.sha }}
-#
-#      - name: install SSH key
-#        uses: shimataro/ssh-key-action@v2
-#        with:
-#          key: ${{ secrets.MT_STAGING_SSH_KEY }}
-#          name: mt_icode # optional
-#          known_hosts: ${{ secrets.MT_SSH_KNOWN_HOSTS }}
-#          if_key_exists: fail
-#
-#      - name: deploy to staging
-#        run: ./scripts/deploy-staging.sh
-#        env:
-#          PR_ID: ${{ github.event.number }}

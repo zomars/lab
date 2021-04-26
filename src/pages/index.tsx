@@ -1,20 +1,20 @@
-import { Styled } from 'theme-ui';
+/**
+ * @fileoverview
+ *
+ * Required to have index.html file created. Sic!
+ * Actual content doesn't really matter.
+ */
+
 import React, { ReactElement } from 'react';
 
 import { Layout } from '../components/Layout';
-import { Bio } from '../components/Bio/Bio';
 
-class AboutPage extends React.Component {
+class FakePage extends React.Component {
   // eslint-disable-next-line class-methods-use-this
   public render(): ReactElement {
-    return (
-      <Layout>
-        <Styled.h1>About this blog and the author</Styled.h1>
-        <Bio/>
-      </Layout>
-    );
+    return <Layout/>;
   }
 }
 
 // eslint-disable-next-line import/no-default-export
-export default AboutPage;
+export default FakePage;

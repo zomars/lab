@@ -47,7 +47,17 @@ jobs:
         - name: install deps
           run: yarn install --prefer-offline
 
+        - name: restore website build from cache
+          id: restore-website-build-from-cache
+          uses: actions/cache@v2
+          env:
+            cache-name: prod-build
+          with:
+            path: public
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
+
         - name: build the website
+          if: steps.restore-website-build-from-cache.outputs.cache-hit != 'true'
           run: yarn build
 
         - name: netlify deploy
@@ -55,4 +65,4 @@ jobs:
           env:
             NETLIFY_SITE_ID: 0f94f863-38eb-4a4b-a1c3-dd677837bd32
             NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-            DEPLOY_MESSAGE: Production update via PR${{ github.event.number }}/${{ github.sha }}
+            DEPLOY_MESSAGE: Production update by PR${{ github.event.number }}/${{ github.sha }}
