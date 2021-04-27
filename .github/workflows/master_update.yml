@@ -61,7 +61,7 @@ jobs:
         run: yarn build
 
       - name: netlify deploy
-        run: yarn deploy-netlify --prod --message $DEPLOY_MESSAGE
+        run: yarn deploy-netlify --prod --message "$DEPLOY_MESSAGE"
         env:
           NETLIFY_SITE_ID: 0f94f863-38eb-4a4b-a1c3-dd677837bd32
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
