@@ -54,7 +54,7 @@ jobs:
           cache-name: prod-build
         with:
           path: public
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
 
       - name: build the website
         if: steps.restore-website-build-from-cache.outputs.cache-hit != 'true'
