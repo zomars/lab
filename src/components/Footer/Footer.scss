@@ -1,0 +1,13 @@
+.Footer {
+  display: flex;
+  flex: 0 0 auto;
+  border-color: var(--theme-ui-color-gray-4);
+  border-top-width: var(--theme-ui-borderWidth-px);
+  border-top-style: solid;
+  padding: var(--theme-ui-size-0) var(--theme-ui-size-3);
+  justify-content: flex-end;
+  align-items: center;
+  font-size: var(--theme-ui-fontSize-1);
+  height: var(--theme-ui-size-10);
+  color: var(--theme-ui-borderWidth-0);
+}

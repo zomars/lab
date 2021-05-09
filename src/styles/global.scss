@@ -1,3 +1,8 @@
+// footer is added by SSR (gatsby-ssr), looks like style aren't pulled in
+// hence adding them here
+@import './src/components/Footer/Footer.scss';
+
+
 html {
   display: flex;
   flex-direction: column;

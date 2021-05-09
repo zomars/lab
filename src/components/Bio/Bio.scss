@@ -1,16 +1,15 @@
 .Bio {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 
   &-Avatar {
     flex: 0 0 auto;
-    margin-bottom: 0;
     min-width: 50px;
     border-radius: 100%;
-    margin-right: 1rem;
   }
 
   &-Text {
     flex: 1 1 auto;
+    margin-left: 2rem;
   }
 }

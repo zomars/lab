@@ -1,13 +1,9 @@
-@import '../../styles/variables';
-
-@use 'sass:map';
-
 .Header {
   display: flex;
-  border-color: $secondaryColor;
-  border-bottom-width: map-get($borderWidths, '1');
+  border-color: var(--theme-ui-color-gray-5);
+  border-bottom-width: var(--theme-ui-borderWidth-px);
   border-bottom-style: solid;
-  line-height: map-get($lineHeights, loose);
+  line-height: var(--theme-ui-lineHeight-loose);
 
   &-Nav {
     padding: 0 1rem;

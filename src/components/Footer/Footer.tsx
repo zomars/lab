@@ -1,38 +1,27 @@
 /** @jsx jsx */
 import { jsx, ThemeProvider, Styled } from 'theme-ui';
 import React, { ReactElement } from 'react';
+import { cn } from '@bem-react/classname';
 
 import theme from '../../gatsby-plugin-theme-ui';
 
-const styles = {
-  display: 'flex',
-  flex: '0 0 auto',
-  borderColor: 'secondary',
-  borderTopWidth: '1',
-  borderTopStyle: 'solid',
-  py: '0',
-  px: '3',
-  justifyContent: 'flex-end',
-  alignItems: 'center',
-  fontSize: '1',
-  height: '10',
-};
+const cnFooter = cn('Footer');
 
-const copyrightStyles = {
-  flex: '0 1 auto',
-};
+// this import doesn't really work for SSR build
+// have same import in globals.scss
+import './Footer.scss';
 
 export const Footer = (): ReactElement => {
   return (
     <ThemeProvider theme = { theme }>
       <footer
-        sx = { styles }
+        className = { cnFooter() }
       >
-        <Styled.div sx = { copyrightStyles }>
+        <div>
           { new Date().getFullYear() },
           built with { ` ` }
           <Styled.a href = 'https://www.gatsbyjs.org'>Gatsby</Styled.a>
-        </Styled.div>
+        </div>
       </footer>
     </ThemeProvider>
   );

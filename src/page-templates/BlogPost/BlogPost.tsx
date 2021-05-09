@@ -87,9 +87,8 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
 
         <MDXRenderer>{ post.body! }</MDXRenderer>
 
-        <Styled.hr sx = {{
-          my: 2,
-        }}
+        <Styled.hr
+          className = { cnBlogPost('BottomLine') }
         />
 
         { this.paginator }

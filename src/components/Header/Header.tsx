@@ -2,7 +2,7 @@ import { Styled } from 'theme-ui';
 import React, { ReactElement } from 'react';
 import { Link } from 'gatsby';
 import { cn } from '@bem-react/classname';
-import classnames from 'classnames';
+import { classnames } from '@bem-react/classnames';
 // eslint-disable-next-line import/no-unresolved
 import { LinkGetProps } from '@reach/router'; // peer dependency through gatsby
 
@@ -20,14 +20,11 @@ const topSections = [
     name: 'Cars Posts',
     path: '/blog/cars',
   }, {
-    name: 'Projects',
-    path: '/projects',
+    name: 'Sources',
+    path: '/sources',
   }, {
-    name: 'Tech Books',
-    path: '/tech-books',
-  }, {
-    name: 'Blogs to Follow',
-    path: '/tech-blogs',
+    name: 'About',
+    path: '/about',
   },
 ];
 
@@ -78,6 +75,7 @@ export class Header extends React.Component<{
     if (isCurrent || isPartiallyCurrent) {
       return positiveMatchProps;
     }
+
 
     const blogListMatch = blogListUrlRegex.exec(href);
 

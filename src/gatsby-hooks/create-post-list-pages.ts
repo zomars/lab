@@ -11,7 +11,7 @@ const postListComponentPath = path.resolve(
 /**
  * Number of posts per post index page.
  */
-const postsPerPage = 2;
+const postsPerPage = 4;
 
 const postsQuery = /* GraphQL */ `
   query PostsListByTag($tag: String) {

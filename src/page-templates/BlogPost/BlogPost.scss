@@ -1,9 +1,21 @@
 .BlogPost {
-  &-PaginatorList {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	list-style: none;
-	padding: 0;
+  flex-basis: auto;
+  justify-self: center;
+  align-self: center;
+
+  & &-BottomLine {
+    margin-top: var(--theme-ui-size-5);
+    margin-bottom: var(--theme-ui-size-0);
+  }
+
+  & &-PaginatorList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    margin-left: var(--theme-ui-size-0);
+    margin-top: var(--theme-ui-size-3);
+    margin-bottom: var(--theme-ui-size-3);
   }
 }

@@ -4,7 +4,7 @@ import React, { ReactElement } from 'react';
 import { Link } from 'gatsby';
 import { Styled, jsx } from 'theme-ui';
 import { cn } from '@bem-react/classname';
-import classnames from 'classnames';
+import { classnames } from '@bem-react/classnames';
 
 import { IBlogPost } from '../../types/common.types';
 

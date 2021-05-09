@@ -2,7 +2,7 @@
 
 import React, { ReactElement } from 'react';
 import { cn } from '@bem-react/classname';
-import classnames from 'classnames';
+import { classnames } from '@bem-react/classnames';
 import { jsx } from 'theme-ui';
 
 import './Layout.scss';
@@ -25,7 +25,7 @@ export class Layout extends React.Component<ILayoutProps> {
         <div
           className = { cnLayout('View') }
           sx = {{
-            width: ['full', 'full', 'full', '3/4', '3/5'],
+            width: ['full', 'full', 'full', 1024, 1024],
           }}
         >
           { children }
