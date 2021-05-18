@@ -1,9 +1,7 @@
 import React, { ReactElement } from 'react';
-import { StaticQuery, graphql } from 'gatsby';
-import { GatsbyImage } from 'gatsby-plugin-image';
+import { StaticImage } from 'gatsby-plugin-image';
 import { cn } from '@bem-react/classname';
 import { classnames } from '@bem-react/classnames';
-import { Styled } from 'theme-ui';
 
 import './Bio.scss';
 
@@ -14,43 +12,32 @@ export class Bio extends React.Component<{
 }> {
   public render(): ReactElement {
     return (
-      <StaticQuery
-        query = { bioQuery }
-        render = { this.render_ }
-      />
-    );
-  }
-
-  protected render_ = (data: any): ReactElement => {
-    return (
       <div className = { classnames(cnBio(), this.props.className) }>
-        <GatsbyImage
+        <StaticImage
           className = { cnBio('Avatar') }
-          image = { data.avatar.childImageSharp.gatsbyImageData }
+          src = '../../../content/assets/profile-pic.jpg'
           alt = 'Alex Malitsky photo'
-          imgStyle = {{
-            borderRadius: '50%',
-          }}
         />
         <div
           className = { cnBio('Text') }
         >
-          <Styled.p>
+          <p>
             Hi, I&apos;m <strong>Alex Malitsky</strong> &mdash;
-            frontend architect and engineer based in SF bay area. Born and raised in
+            frontend architect and engineer based in SF bay area. Originally from
             Moscow, Russia.
-          </Styled.p>
+          </p>
 
-          <Styled.p>
-            Until recently I worked for VMware as UI team lead and prior to that on UI for
-            the <a href = "https://www.vmware.com/topics/glossary/content/software-load-balancing">
+          <p>
+            Until recently I worked for VMware as UI team lead and prior to that as a senior
+            engineer on the UI for the{' '}
+            <a href = "https://www.vmware.com/topics/glossary/content/software-load-balancing">
               software load-balancer
-            </a> since early days
+            </a> since the early days
             of <a href = "https://avinetworks.com/">AviNetworks</a>.
-          </Styled.p>
+          </p>
 
-          <Styled.p>
-            <strong>I specialize in:</strong>
+          <p>
+            I specialize in:
             <ul>
               <li>UX</li>
               <li>UI app architecture</li>
@@ -59,37 +46,27 @@ export class Bio extends React.Component<{
               <li>AngularJs & Angular</li>
               <li>D3 (charts)</li>
             </ul>
-          </Styled.p>
+          </p>
 
-          <Styled.p>
-            Currently working on web projects of my own (including this website) and
+          <p>
+            Currently working on web projects of my own (including this blog) and
             contributing to open source.
-          </Styled.p>
+          </p>
 
-          <Styled.p>
-            I&apos;m also a big fan of cars (esp car design and racing) and nuclear energy.
-            Expect posts, projects or examples related to those topics.
-          </Styled.p>
+          <p>
+            I&apos;m a big fan of cars (esp car design and racing) and nuclear energy.
+            You can expect posts, projects or simply examples related to those.
+          </p>
 
-          <Styled.p>
-            You can find me on&nbsp;
-            <Styled.a href = 'https://twitter.com/amalitsky'>twitter</Styled.a>,&nbsp;
-            <Styled.a href = 'https://github.com/amalitsky/'>github</Styled.a>,&nbsp;
-            <Styled.a href = 'https://www.linkedin.com/in/amalitsky'>linkedin</Styled.a>
-            &nbsp;or reach out via <strong>alex at amalitsky dot com</strong>.
-          </Styled.p>
+          <p>
+            You can find me on
+            {' '}<a href = 'https://twitter.com/amalitsky'>twitter</a>,
+            {' '}<a href = 'https://github.com/amalitsky/'>github</a>,
+            {' '}<a href = 'https://www.linkedin.com/in/amalitsky'>linkedin</a>
+            {' '}or via <strong>alex at amalitsky dot com</strong>.
+          </p>
         </div>
       </div>
     );
-  };
-}
-
-const bioQuery = graphql`
-  query BioQuery {
-    avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
-      childImageSharp {
-        gatsbyImageData(width: 50)
-      }
-    }
   }
-`;
+}

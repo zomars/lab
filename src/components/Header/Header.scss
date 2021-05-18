@@ -1,23 +1,44 @@
+@use '../../styles/variables' as vars;
+
 .Header {
+  --header-line-height: var(--theme-ui-line-height-loose);
+
   display: flex;
   border-color: var(--theme-ui-color-gray-5);
-  border-bottom-width: var(--theme-ui-borderWidth-px);
+  border-bottom-width: var(--theme-ui-border-width-px);
   border-bottom-style: solid;
-  line-height: var(--theme-ui-lineHeight-loose);
+  line-height: var(--header-line-height);
 
   &-Nav {
-    padding: 0 1rem;
+    width: 100%;
+    max-width: var(--aml-global-layout-width-lg);
+    padding: 0 var(--aml-global-layout-padding-md);
+    margin: auto;
   }
 
   &-List {
     display: flex;
     margin: 0;
-    padding: 0;
-    list-style: none;
   }
 
   &-Link {
     display: inline-block;
-    padding: 0 1rem;
+    padding: 0 var(--aml-global-layout-padding-md);
+
+    &_first {
+      //so that text alignment in the header matches same in the body
+      margin-left: calc(-1 * var(--aml-global-layout-padding-md));
+    }
+  }
+
+  li {
+    list-style: none;
+    line-height: var(--header-line-height);
+  }
+}
+
+@media (max-width: vars.$breakpoint-sm) {
+  .Header {
+    --header-line-height: var(--theme-ui-line-height-body);
   }
 }

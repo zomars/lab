@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 import { Link } from 'gatsby';
-import { Styled } from 'theme-ui';
 import { cn } from '@bem-react/classname';
 
 import { getPostListUrlByTag } from '../../../services/urls.service';
@@ -20,14 +19,13 @@ export class PostTags extends React.Component<{
         cnPostTags('Link', { active: true }) : '';
 
       return (
-        <Styled.a
-          as = { Link }
+        <Link
           key = { tag }
           className = { className }
           to = { getPostListUrlByTag(tag) }
         >
           #{ tag }&nbsp;
-        </Styled.a>
+        </Link>
       );
     });
   }

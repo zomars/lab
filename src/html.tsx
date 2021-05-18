@@ -32,7 +32,7 @@ function HTML(props: IHTMLPageProps): ReactElement {
         { props.preBodyComponents }
         <div
           style = {{
-            flex: 1,
+            flexGrow: 1,
           }}
           key = 'body'
           id = '___gatsby'

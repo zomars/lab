@@ -1,5 +1,4 @@
 import React, { ReactElement } from 'react';
-import { Styled } from 'theme-ui';
 import { Link } from 'gatsby';
 import { cn } from '@bem-react/classname';
 
@@ -24,13 +23,12 @@ function getListLink(
       className = { cnListElement }
       key = { label }
     >
-      <Styled.a
-        as = { Link }
+      <Link
         to = { getPostListUrlByTag(tag, page) }
-        rel = { rel || null }
+        rel = { rel || undefined }
       >
         { label }
-      </Styled.a>
+      </Link>
     </li>
   );
 }

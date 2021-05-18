@@ -1,10 +1,7 @@
-/** @jsx jsx */
-
 import React, { ReactElement } from 'react';
 import { Link, graphql, PageRendererProps } from 'gatsby';
 import { cn } from '@bem-react/classname';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
-import { Styled, jsx } from 'theme-ui';
 
 import { Layout } from '../../components/Layout';
 import { SEO } from '../../components/seo';
@@ -69,27 +66,22 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
           description = { post.excerpt }
         />
 
-        <Styled.h1>{ title }</Styled.h1>
+        <h1>{ title }</h1>
 
-        <Styled.p sx = {{
-          color: 'textMuted',
-        }}
-        >
+        <p className = { cnBlogPost('Date') }>
           { post.frontmatter.date }
-        </Styled.p>
+        </p>
 
-        <Styled.p>
+        <p>
           <PostTags
             tags = { tags }
             activeTag = { this.activeTag }
           />
-        </Styled.p>
+        </p>
 
         <MDXRenderer>{ post.body! }</MDXRenderer>
 
-        <Styled.hr
-          className = { cnBlogPost('BottomLine') }
-        />
+        <hr/>
 
         { this.paginator }
       </Layout>
@@ -172,14 +164,13 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
     }
 
     return (
-      <Styled.a
-        as = { Link }
+      <Link
         to = { post.fields.slug }
         state = { postLinkPayload }
         rel = { type }
       >
         { labels.join(' ') }
-      </Styled.a>
+      </Link>
     );
   }
 
@@ -193,7 +184,7 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
     ] = this.adjacentPosts;
 
     return (
-      <Styled.ul
+      <ul
         className = { cnBlogPost('PaginatorList') }
       >
         <li>{
@@ -202,7 +193,7 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
         <li>{
           this.getAdjacentPostLink(nextPost, adjacentPostType.next)
         }</li>
-      </Styled.ul>
+      </ul>
     );
   }
 }

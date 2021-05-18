@@ -1,4 +1,3 @@
-import { Styled } from 'theme-ui';
 import React, { ReactElement } from 'react';
 
 import { Layout } from '../components/Layout';
@@ -9,7 +8,7 @@ class AboutPage extends React.Component {
   public render(): ReactElement {
     return (
       <Layout>
-        <Styled.h1>About me</Styled.h1>
+        <h1>About the author</h1>
         <Bio/>
       </Layout>
     );

@@ -1,0 +1,7 @@
+.PostList {
+  &-PostPreview {
+    &:first-child {
+      margin-top: var(--aml-global-layout-padding-md);
+    }
+  }
+}

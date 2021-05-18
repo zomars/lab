@@ -96,7 +96,7 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
 
       - name: netlify deploy
-        run: yarn deploy-netlify --alias PR-$PR_ID --message $DEPLOY_MESSAGE
+        run: yarn deploy-netlify --alias pr$PR_ID --message $DEPLOY_MESSAGE
         env:
           NETLIFY_SITE_ID: 0f94f863-38eb-4a4b-a1c3-dd677837bd32
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

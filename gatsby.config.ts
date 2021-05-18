@@ -23,12 +23,6 @@ const plugins = [
       path: `${ __dirname }/content`,
       name: 'blog',
     },
-  }, {
-    resolve: 'gatsby-plugin-theme-ui',
-    options: {
-      // prismPreset: 'prism-okaidia',
-      preset: false,
-    },
   },
   'gatsby-transformer-sharp',
   'gatsby-plugin-sharp',
@@ -73,7 +67,7 @@ const plugins = [
             quality: 80,
           },
         },
-        'gatsby-remark-prismjs',
+        // 'gatsby-remark-prismjs',
         'gatsby-remark-reading-time',
       ],
     },

@@ -1,13 +1,27 @@
+@use '../../styles/variables' as vars;
+
 .Footer {
+  --footer-line-height: var(--theme-ui-line-height-loose);
+
   display: flex;
-  flex: 0 0 auto;
   border-color: var(--theme-ui-color-gray-4);
-  border-top-width: var(--theme-ui-borderWidth-px);
+  border-top-width: var(--theme-ui-border-width-px);
   border-top-style: solid;
-  padding: var(--theme-ui-size-0) var(--theme-ui-size-3);
-  justify-content: flex-end;
-  align-items: center;
-  font-size: var(--theme-ui-fontSize-1);
-  height: var(--theme-ui-size-10);
-  color: var(--theme-ui-borderWidth-0);
+  line-height: var(--footer-line-height);
+
+  &-Wrapper {
+    display: flex;
+    flex: 1 1 100%;
+    color: var(--theme-ui-color-textMuted);
+    padding: 0 var(--aml-global-layout-padding-md);
+    max-width: var(--aml-global-layout-width-lg);
+    margin: auto;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: vars.$breakpoint-sm) {
+  .Footer {
+    --footer-line-height: var(--theme-ui-line-height-body);
+  }
 }

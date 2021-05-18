@@ -1,8 +1,5 @@
-/** @jsx jsx */
-
 import React, { ReactElement } from 'react';
 import { Link } from 'gatsby';
-import { Styled, jsx } from 'theme-ui';
 import { cn } from '@bem-react/classname';
 import { classnames } from '@bem-react/classnames';
 
@@ -54,38 +51,30 @@ export class PostPreview extends React.Component<{
       <div
         className = { classnames(cnPostPreview(), className) }
       >
-        <Styled.h3>
-          <Styled.a
-            as = { Link }
+        <h3>
+          <Link
             to = { slug }
             state = { blogPostLinkPayload }
           >
             { title }
-          </Styled.a>
-        </Styled.h3>
-        <Styled.p
-          sx = {{
-            marginBottom: 2,
-            color: 'textMuted',
-          }}
+          </Link>
+        </h3>
+        <p
+          className = { cnPostPreview('Details') }
         >
           { getDetailsString(post) }
-        </Styled.p>
-        <Styled.p
+        </p>
+        <p
           dangerouslySetInnerHTML = {{ __html: post.excerpt! }}
-          sx = {{
-            marginBottom: 1,
-          }}
         />
-        <Styled.p>
-          <Styled.a
-            as = { Link }
+        <p>
+          <Link
             to = { slug }
             state = { blogPostLinkPayload }
           >
             Read more
-          </Styled.a>
-        </Styled.p>
+          </Link>
+        </p>
       </div>
     );
   }

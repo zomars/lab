@@ -1,4 +1,3 @@
-import { Styled } from 'theme-ui';
 import React, { ReactElement } from 'react';
 import { Link } from 'gatsby';
 import { cn } from '@bem-react/classname';
@@ -63,7 +62,7 @@ export class Header extends React.Component<{
    */
   private getActiveLinkProps = (
     { href, location, isCurrent, isPartiallyCurrent }: LinkGetProps,
-  ): { style: Record<string, string> } | undefined => {
+  ): { style: Record<string, string> } | Record<string, unknown> => {
     const positiveMatchProps = {
       // can't add className here cause it messes up themeUI one
       style: {
@@ -80,13 +79,13 @@ export class Header extends React.Component<{
     const blogListMatch = blogListUrlRegex.exec(href);
 
     if (!blogListMatch) {
-      return;
+      return {};
     }
 
     const { pathname } = location;
 
     if (!blogPostUrlRegex.test(pathname)) {
-      return;
+      return {};
     }
 
     // at this point pathname is actually slug of the post
@@ -107,22 +106,23 @@ export class Header extends React.Component<{
         return positiveMatchProps;
       }
     }
+
+    return {};
   };
 
   private getTopMenuList(): ReactElement[] {
-    return topSections.map(({ name, path }) => {
+    return topSections.map(({ name, path }, index: number) => {
       return (
         <li
           key = { name }
         >
-          <Styled.a
-            as = { Link }
-            className = { cnHeader('Link') }
+          <Link
+            className = { cnHeader('Link', { first: !index }) }
             getProps = { this.getActiveLinkProps }
             to = { path }
           >
             { name }
-          </Styled.a>
+          </Link>
         </li>
       );
     });

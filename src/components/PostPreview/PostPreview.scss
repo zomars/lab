@@ -1,3 +1,7 @@
 .PostPreview {
   overflow: hidden;
+
+  &-Details {
+    color: var(--theme-ui-color-textMuted);
+  }
 }

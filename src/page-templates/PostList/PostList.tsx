@@ -1,11 +1,14 @@
 import React, { ReactElement } from 'react';
 import { graphql, PageRendererProps } from 'gatsby';
+import { cn } from '@bem-react/classname';
 
 import { Layout } from '../../components/Layout';
 import { SEO } from '../../components/seo';
 import { PostPreview } from '../../components/PostPreview/PostPreview';
 import { IBlogPost } from '../../types/common.types';
 import { PostListPaginator } from './PostListPaginator/PostListPaginator';
+
+import './PostList.scss';
 
 export const postsQuery = graphql`
   query blogListQuery($skip: Int!, $limit: Int!, $tag: String!) {
@@ -56,6 +59,8 @@ const keywords = [
   'react',
 ];
 
+const cnPostList = cn('PostList');
+
 export class PostList extends React.Component<IPostListProps> {
   public render(): ReactElement {
     const { data, pageContext } = this.props;
@@ -64,6 +69,7 @@ export class PostList extends React.Component<IPostListProps> {
     const postElements = posts.map(
       (post: IBlogPost) => (
         <PostPreview
+          className = { cnPostList('PostPreview') }
           tag = { pageContext.tag }
           post = { post }
           key = { post.fields.slug }

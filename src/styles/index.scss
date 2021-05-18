@@ -1,0 +1,29 @@
+@use './theme-ui-custom-props';
+@use './custom-props';
+@use './native-tags';
+
+// footer is added by SSR (gatsby-ssr), looks like style aren't pulled in
+// hence adding them here
+@use './src/components/Footer/Footer';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+body {
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  flex-direction: column;
+  margin: 0;
+  font-family: var(--theme-ui-font-body);
+  font-size: var(--theme-ui-font-size-2);
+  font-weight: var(--theme-ui-font-weight-body);
+  line-height: var(--theme-ui-line-height-body);
+}
