@@ -31,7 +31,7 @@ forEach(
   });
 
 forEach(
-  themeWoStyles.sizes,
+  themeWoStyles.sizes as Record<string, TCssPropValue>,
   (value: TCssPropValue, key: string) => {
     if (key.includes('/')) {
       key = key.replace('/', '-');
@@ -42,13 +42,13 @@ forEach(
 
 
 forEach(
-  themeWoStyles.borderWidths,
+  themeWoStyles.borderWidths as Record<string, TCssPropValue>,
   (value: TCssPropValue, key: string) => {
     customCssPropsMap.set(`border-width-${key}`, value);
   });
 
 forEach(
-  themeWoStyles.fonts,
+  themeWoStyles.fonts as Record<string, TCssPropValue>,
   (value: TCssPropValue, key: string) => {
     customCssPropsMap.set(`font-${key}`, value);
   });
@@ -65,13 +65,13 @@ forEach(
   });
 
 forEach(
-  themeWoStyles.lineHeights,
+  themeWoStyles.lineHeights as Record<string, TCssPropValue>,
   (value: TCssPropValue, key: string) => {
     customCssPropsMap.set(`line-height-${key}`, value);
   });
 
 forEach(
-  themeWoStyles.fontWeights,
+  themeWoStyles.fontWeights as Record<string, TCssPropValue>,
   (value: TCssPropValue, key: string) => {
     customCssPropsMap.set(`font-weight-${key}`, value);
   });
