@@ -2,18 +2,17 @@
 
 .Header {
   --header-line-height: var(--theme-ui-line-height-loose);
-
   display: flex;
-  border-color: var(--theme-ui-color-gray-5);
   border-bottom-width: var(--theme-ui-border-width-px);
   border-bottom-style: solid;
+  border-color: var(--theme-ui-color-gray-5);
   line-height: var(--header-line-height);
 
   &-Nav {
     width: 100%;
     max-width: var(--aml-global-layout-width-lg);
-    padding: 0 var(--aml-global-layout-padding-md);
     margin: auto;
+    padding: 0 var(--aml-global-layout-padding-md);
   }
 
   &-List {
@@ -32,8 +31,8 @@
   }
 
   li {
-    list-style: none;
     line-height: var(--header-line-height);
+    list-style: none;
   }
 }
 

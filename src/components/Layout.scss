@@ -1,9 +1,9 @@
 .Layout {
-  min-height: 100%;
   display: flex;
   flex-direction: column;
   width: 100%;
   max-width: var(--aml-global-layout-width-lg);
+  min-height: 100%;
   margin: auto;
 
   &-View {

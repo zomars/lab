@@ -3,15 +3,15 @@
   align-items: flex-start;
 
   &-Avatar {
-    order: 2;
     flex: 0 0 auto;
+    order: 2;
     width: 100px;
-    border-radius: 100%;
     margin-left: var(--aml-global-layout-space-lg);
+    border-radius: 100%;
   }
 
   &-Text {
-    order: 1;
     flex: 1 1 auto;
+    order: 1;
   }
 }

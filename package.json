@@ -39,6 +39,7 @@
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "4.24.0",
     "babel-preset-gatsby": "1.x.x",
+    "css-property-sort-order-smacss": "^2.1.3",
     "eslint": "^7.26.0",
     "eslint-config-google": "0.x.x",
     "eslint-plugin-import": "^2.23.2",
@@ -48,6 +49,9 @@
     "lint-staged": "^11.0.0",
     "netlify-cli": "^3.29.17",
     "sass": "^1.32.13",
+    "stylelint": "^13.13.1",
+    "stylelint-config-recommended": "^5.0.0",
+    "stylelint-order": "^4.1.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   },
@@ -68,14 +72,16 @@
     "__build-theme-ui-custom-props": "ts-node scripts/export-custom-props-into-styles-file.ts",
     "tsc-check": "tsc --noEmit --project ./tsconfig.json",
     "eslint-all": "yarn __eslint ./",
-    "lint": "yarn tsc-check && yarn eslint-all",
+    "lint": "yarn tsc-check && yarn eslint-all && yarn stylelint-all",
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\"",
     "deploy-netlify": "netlify deploy",
     "prestart": "yarn __build-theme-ui-custom-props",
     "start": "yarn gatsby develop",
     "prebuild": "yarn __build-theme-ui-custom-props",
     "build": "gatsby build",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "stylelint-all": "stylelint 'src/**/*.scss'",
+    "stylelint-fix": "yarn stylelint-all --fix"
   },
   "browserslist": [
     "last 2 years and > 1%",

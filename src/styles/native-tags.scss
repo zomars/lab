@@ -8,21 +8,21 @@ a {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  margin: var(--aml-global-layout-space-md) 0;
+  color: var(--theme-ui-color-primary);
   font-family: var(--theme-ui-font-heading);
   font-weight: var(--theme-ui-font-weight-heading);
   line-height: var(--theme-ui-line-height-heading);
-  color: var(--theme-ui-color-primary);
-  margin: var(--aml-global-layout-space-md) 0;
 }
 
 h1 {
-  font-size: var(--theme-ui-font-size-5);
   margin-top: var(--aml-global-layout-space-lg);
+  font-size: var(--theme-ui-font-size-5);
 }
 
 h2 {
-  font-size: var(--theme-ui-font-size-4);
   margin-top: var(--aml-global-layout-space-lg);
+  font-size: var(--theme-ui-font-size-4);
 }
 
 h3 {
@@ -38,20 +38,20 @@ h5, h6 {
 }
 
 blockquote {
-  color: var(--theme-ui-color-textMuted);
+  margin-left: var(--aml-global-layout-space-lg);
+  padding-left: var(--theme-ui-size-2);
   border-left-width: var(--theme-ui-border-width-4);
   border-left-style: solid;
   border-color: var(--theme-ui-color-gray-4);
-  padding-left: var(--theme-ui-size-2);
-  margin-left: var(--aml-global-layout-space-lg);
+  color: var(--theme-ui-color-textMuted);
 }
 
 code {
-  font-size: 85%;
-  background-color: var(--theme-ui-color-muted);
-  font-family: var(--theme-ui-font-mono);
   padding: var(--theme-ui-size-1);
   border-radius: calc(2 * var(--theme-ui-size-px));
+  background-color: var(--theme-ui-color-muted);
+  font-family: var(--theme-ui-font-mono);
+  font-size: 85%;
 }
 
 ol, ul {
@@ -69,9 +69,9 @@ p {
 }
 
 hr {
-  background-color: var(--theme-ui-color-gray-4);
-  margin-bottom: 0;
-  margin-top: var(--aml-global-layout-space-lg);
   height: var(--theme-ui-size-px);
+  margin-top: var(--aml-global-layout-space-lg);
+  margin-bottom: 0;
   border: none;
+  background-color: var(--theme-ui-color-gray-4);
 }
