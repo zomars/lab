@@ -1,7 +1,13 @@
 .PostPreview {
+  margin-bottom: var(--aml-global-layout-padding-md);
   overflow: hidden;
+
+  &-Header {
+    margin-top: 0;
+  }
 
   &-Details {
     color: var(--theme-ui-color-textMuted);
+    line-height: var(--theme-ui-line-height-none);
   }
 }

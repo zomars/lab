@@ -1,12 +1,9 @@
-@use '../../styles/variables' as vars;
-
 .Footer {
-  --footer-line-height: var(--theme-ui-line-height-loose);
   display: flex;
   border-top-width: var(--theme-ui-border-width-px);
   border-top-style: solid;
   border-color: var(--theme-ui-color-gray-4);
-  line-height: var(--footer-line-height);
+  line-height: var(--theme-ui-line-height-loose);
 
   &-Wrapper {
     display: flex;
@@ -16,11 +13,5 @@
     margin: auto;
     padding: 0 var(--aml-global-layout-padding-md);
     color: var(--theme-ui-color-textMuted);
-  }
-}
-
-@media (max-width: vars.$breakpoint-sm) {
-  .Footer {
-    --footer-line-height: var(--theme-ui-line-height-body);
   }
 }

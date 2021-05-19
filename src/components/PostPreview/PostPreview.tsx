@@ -13,17 +13,25 @@ const cnPostPreview = cn('PostPreview');
  * Return post date, reading time and list of tags.
  */
 function getDetailsString(post: IBlogPost): string {
-  const { date, tags } = post.frontmatter;
+  const { date } = post.frontmatter;
   const { text, words } = post.fields.readingTime;
 
   const details = [
     date,
     text,
     `${words} words`,
-    tags.map((tag: string) => `#${tag}`).join(' '),
   ];
 
   return details.join(' — ');
+}
+
+/**
+ * Return post tags as text.
+ */
+function getPostTags(post: IBlogPost): string {
+  const { tags } = post.frontmatter;
+
+  return tags.map((tag: string) => `#${tag}`).join(' ');
 }
 
 export class PostPreview extends React.Component<{
@@ -51,7 +59,10 @@ export class PostPreview extends React.Component<{
       <div
         className = { classnames(cnPostPreview(), className) }
       >
-        <h3>
+        <p className = { cnPostPreview('Details') }>
+          { getPostTags(post) }
+        </p>
+        <h3 className = { cnPostPreview('Header') }>
           <Link
             to = { slug }
             state = { blogPostLinkPayload }

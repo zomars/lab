@@ -11,10 +11,27 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-top: var(--theme-ui-size-3);
-    margin-bottom: var(--theme-ui-size-3);
-    margin-left: var(--theme-ui-size-0);
+    margin-top: var(--aml-global-layout-space-lg);
+    margin-bottom: var(--aml-global-layout-space-lg);
+    margin-left: 0;
     padding: 0;
+    line-height: var(--theme-ui-line-height-loose);
     list-style: none;
+
+    // for multi-row layout (mobile screen)
+    gap: var(--aml-global-layout-space-lg);
+  }
+
+  &-PaginatorListElement {
+    flex: 1 1 auto;
+
+    // for mobile screens (two rows) to have next link on the right
+    &_next {
+      text-align: right;
+    }
+  }
+
+  &-BottomLine {
+    margin-top: var(--aml-global-layout-space-xl);
   }
 }

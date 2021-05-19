@@ -1,12 +1,9 @@
-@use '../../styles/variables' as vars;
-
 .Header {
-  --header-line-height: var(--theme-ui-line-height-loose);
   display: flex;
   border-bottom-width: var(--theme-ui-border-width-px);
   border-bottom-style: solid;
   border-color: var(--theme-ui-color-gray-5);
-  line-height: var(--header-line-height);
+  line-height: var(--theme-ui-line-height-loose);
 
   &-Nav {
     width: 100%;
@@ -33,11 +30,5 @@
   li {
     line-height: var(--header-line-height);
     list-style: none;
-  }
-}
-
-@media (max-width: vars.$breakpoint-sm) {
-  .Header {
-    --header-line-height: var(--theme-ui-line-height-body);
   }
 }

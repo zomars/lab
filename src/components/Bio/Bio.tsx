@@ -16,6 +16,9 @@ export class Bio extends React.Component<{
         <StaticImage
           className = { cnBio('Avatar') }
           src = '../../../content/assets/profile-pic.jpg'
+          imgStyle = {{
+            borderRadius: '50%',
+          }}
           alt = 'Alex Malitsky photo'
         />
         <div

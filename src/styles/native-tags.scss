@@ -15,13 +15,15 @@ h1, h2, h3, h4, h5, h6 {
   line-height: var(--theme-ui-line-height-heading);
 }
 
-h1 {
+h1, h2, h3 {
   margin-top: var(--aml-global-layout-space-lg);
+}
+
+h1 {
   font-size: var(--theme-ui-font-size-5);
 }
 
 h2 {
-  margin-top: var(--aml-global-layout-space-lg);
   font-size: var(--theme-ui-font-size-4);
 }
 
@@ -48,15 +50,19 @@ blockquote {
 
 code {
   padding: var(--theme-ui-size-1);
-  border-radius: calc(2 * var(--theme-ui-size-px));
+  border-radius: var(--aml-global-layout-space-xs);
   background-color: var(--theme-ui-color-muted);
   font-family: var(--theme-ui-font-mono);
   font-size: 85%;
 }
 
 ol, ul {
-  margin: 0 0 0 var(--aml-global-layout-space-xl);
+  margin: 0 0 var(--aml-global-layout-space-lg) var(--aml-global-layout-space-xl);
   padding: 0;
+
+  ol, ul {
+    margin-bottom: var(--aml-global-layout-space-sm);
+  }
 }
 
 li {

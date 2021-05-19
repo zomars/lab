@@ -76,7 +76,7 @@
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\"",
     "deploy-netlify": "netlify deploy",
     "prestart": "yarn __build-theme-ui-custom-props",
-    "start": "yarn gatsby develop",
+    "start": "yarn gatsby develop -H 0.0.0.0",
     "prebuild": "yarn __build-theme-ui-custom-props",
     "build": "gatsby build",
     "prepare": "husky install",

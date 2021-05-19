@@ -81,7 +81,7 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
 
         <MDXRenderer>{ post.body! }</MDXRenderer>
 
-        <hr/>
+        <hr className = { cnBlogPost('BottomLine') }/>
 
         { this.paginator }
       </Layout>
@@ -183,16 +183,22 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
       nextPost,
     ] = this.adjacentPosts;
 
+    const prevLink = this.getAdjacentPostLink(previousPost, adjacentPostType.prev);
+    const nextLink = this.getAdjacentPostLink(nextPost, adjacentPostType.next);
+
     return (
       <ul
         className = { cnBlogPost('PaginatorList') }
       >
-        <li>{
-          this.getAdjacentPostLink(previousPost, adjacentPostType.prev)
-        }</li>
-        <li>{
-          this.getAdjacentPostLink(nextPost, adjacentPostType.next)
-        }</li>
+        { prevLink ?
+          <li className = { cnBlogPost('PaginatorListElement') }>
+            { prevLink }
+          </li> : null }
+
+        { nextLink ?
+          <li className = { cnBlogPost('PaginatorListElement', { next: true }) }>
+            { nextLink }
+          </li> : null }
       </ul>
     );
   }
