@@ -1,6 +1,11 @@
 [build]
-
   publish = "public"
-
   command = "yarn build"
 
+[[redirects]]
+  from = "/blog"
+  to = "/blog/tech/1"
+
+[[redirects]]
+  from = "/blog/tech"
+  to = "/blog/tech/1"
