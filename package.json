@@ -10,7 +10,7 @@
     "@theme-ui/presets": "^0.8.4",
     "gatsby": "^3.5.0",
     "gatsby-plugin-image": "^1.5.0",
-    "gatsby-plugin-mdx": "^2.5.0",
+    "gatsby-plugin-mdx": "^2.5.1",
     "gatsby-plugin-react-helmet": "^4.5.0",
     "gatsby-plugin-sass": "^4.5.0",
     "gatsby-plugin-sharp": "^3.5.0",
