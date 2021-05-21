@@ -11,4 +11,4 @@ updates:
     labels:
       - "dependencies"
       - "npm"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 7

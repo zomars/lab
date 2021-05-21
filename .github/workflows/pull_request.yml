@@ -1,10 +1,15 @@
-name: prs
+name: PRs
 
 on:
   pull_request:
-
-  # Allows to run this workflow manually from the Actions tab
+  # allows to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+  # same workflow triggered by dependabot_pr_check.yml
+  workflow_run:
+    workflows: ["Dependabot PR Check"]
+    types:
+      - completed
 
 env:
   PR_ID: ${{ github.event.number }}
@@ -12,6 +17,13 @@ env:
 jobs:
   setup:
     runs-on: ubuntu-latest
+    # don't need to run this (and dependant steps) for dependabot PRs since it will get
+    # re-triggered by dependabot_pr_check workflow completion
+    if: |
+      ${{
+        (github.event.workflow_run.event == 'pull_request' && github.actor != 'dependabot[bot]') ||
+        (github.event.workflow_run.event == 'workflow_run')
+      }}
 
     steps:
       - uses: actions/checkout@v2
