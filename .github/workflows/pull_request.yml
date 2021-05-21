@@ -1,4 +1,4 @@
-name: Pull Request Update
+name: PR Update
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ env:
 
 jobs:
   setup:
-    name: Checkout and yarn install
+    name: Yarn install
 
     runs-on: ubuntu-latest
 
