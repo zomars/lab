@@ -19,10 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     # don't need to run this (and dependant steps) for dependabot PRs since it will get
     # re-triggered by dependabot_pr_check workflow completion
-    if: |
-      ${{
+    if: ${{
         (github.event_name == 'pull_request' && github.actor != 'dependabot[bot]') ||
-        github.event_name == 'workflow_run'
+        github.event_name == 'workflow_run' && github.actor == 'dependabot[bot]'
       }}
 
     steps:
