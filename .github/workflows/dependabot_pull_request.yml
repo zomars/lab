@@ -1,8 +1,10 @@
-name: Pull Request Update
+# actual workflow is exactly almost the same as pull_request.yml but runs on the different event
+# and for Dependabot only
+# Linting is removed since that is done on the main PR workflow.
+name: Dependabot PR
 
 on:
-  pull_request:
-  # allows to run this workflow manually from the Actions tab
+  pull_request_target:
   workflow_dispatch:
 
 env:
@@ -14,10 +16,14 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    if: ${{ github.actor != 'dependabot[bot]' }}
+    # this job is for dependabot PRs only
+    if: ${{ github.actor == 'dependabot[bot]' }}
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -39,6 +45,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -63,6 +71,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -95,6 +105,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: restore website build from cache
         uses: actions/cache@v2
