@@ -1,6 +1,7 @@
 # Automatically merge Dependabot PRs which have passed all the tests
 name: DB PR Automerge
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: ["Dependabot PR"]
     types:
@@ -21,7 +22,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           test: true
           reviewers: false
-          labels: []
+          labels:
           blocking_labels: do not merge
           checks_enabled: true
           method: rebase
