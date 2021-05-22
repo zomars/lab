@@ -138,4 +138,5 @@ jobs:
 
       - uses: actions-ecosystem/action-add-labels@v1.1.0
         with:
+          github-token: ${{ github.token }}
           labels: ready to merge
