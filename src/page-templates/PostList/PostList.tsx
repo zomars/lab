@@ -61,39 +61,37 @@ const keywords = [
 
 const cnPostList = cn('PostList');
 
-export class PostList extends React.Component<IPostListProps> {
-  public render(): ReactElement {
-    const { data, pageContext } = this.props;
-    const { posts } = data.onePagePosts;
+export function PostList(props: IPostListProps): ReactElement {
+  const { data, pageContext } = props;
+  const { posts } = data.onePagePosts;
 
-    const postElements = posts.map(
-      (post: IBlogPost) => (
-        <PostPreview
-          className = { cnPostList('PostPreview') }
-          tag = { pageContext.tag }
-          post = { post }
-          key = { post.fields.slug }
-        />
-      )
-    );
+  const postElements = posts.map(
+    (post: IBlogPost) => (
+      <PostPreview
+        className = { cnPostList('PostPreview') }
+        tag = { pageContext.tag }
+        post = { post }
+        key = { post.fields.slug }
+      />
+    )
+  );
 
-    return (
-      <Layout>
-        <SEO
-          title = { `All #${pageContext.tag} posts` }
-          keywords = { keywords }
-        />
+  return (
+    <Layout>
+      <SEO
+        title = { `All #${pageContext.tag} posts` }
+        keywords = { keywords }
+      />
 
-        { postElements }
+      { postElements }
 
-        <PostListPaginator
-          current = { pageContext.currentPage }
-          length = { pageContext.numPages }
-          tag = { pageContext.tag }
-        />
-      </Layout>
-    );
-  }
+      <PostListPaginator
+        current = { pageContext.currentPage }
+        length = { pageContext.numPages }
+        tag = { pageContext.tag }
+      />
+    </Layout>
+  );
 }
 
 // eslint-disable-next-line import/no-default-export

@@ -34,59 +34,57 @@ function getPostTags(post: IBlogPost): string {
   return tags.map((tag: string) => `#${tag}`).join(' ');
 }
 
-export class PostPreview extends React.Component<{
+export function PostPreview(props: {
   className?: string,
   post: IBlogPost,
   tag: string,
-}> {
-  public render(): ReactElement {
-    const {
-      post,
-      className,
-      tag,
-    } = this.props;
+}): ReactElement {
+  const {
+    post,
+    className,
+    tag,
+  } = props;
 
-    const { slug } = post.fields;
-    const { title } = post.frontmatter;
+  const { slug } = post.fields;
+  const { title } = post.frontmatter;
 
-    // so that we have active tag info in the runtime
-    // for the PostPage prev/next links
-    const blogPostLinkPayload = {
-      activeTag: tag,
-    };
+  // so that we have active tag info in the runtime
+  // for the PostPage prev/next links
+  const blogPostLinkPayload = {
+    activeTag: tag,
+  };
 
-    return (
-      <div
-        className = { classnames(cnPostPreview(), className) }
-      >
-        <p className = { cnPostPreview('Details') }>
-          { getPostTags(post) }
-        </p>
-        <h3 className = { cnPostPreview('Header') }>
-          <Link
-            to = { slug }
-            state = { blogPostLinkPayload }
-          >
-            { title }
-          </Link>
-        </h3>
-        <p
-          className = { cnPostPreview('Details') }
+  return (
+    <div
+      className = { classnames(cnPostPreview(), className) }
+    >
+      <p className = { cnPostPreview('Details') }>
+        { getPostTags(post) }
+      </p>
+      <h3 className = { cnPostPreview('Header') }>
+        <Link
+          to = { slug }
+          state = { blogPostLinkPayload }
         >
-          { getDetailsString(post) }
-        </p>
-        <p
-          dangerouslySetInnerHTML = {{ __html: post.excerpt! }}
-        />
-        <p>
-          <Link
-            to = { slug }
-            state = { blogPostLinkPayload }
-          >
-            Read more
-          </Link>
-        </p>
-      </div>
-    );
-  }
+          { title }
+        </Link>
+      </h3>
+      <p
+        className = { cnPostPreview('Details') }
+      >
+        { getDetailsString(post) }
+      </p>
+      <p
+        dangerouslySetInnerHTML = {{ __html: post.excerpt! }}
+      />
+      <p>
+        <Link
+          to = { slug }
+          state = { blogPostLinkPayload }
+        >
+          Read more
+        </Link>
+      </p>
+    </div>
+  );
 }

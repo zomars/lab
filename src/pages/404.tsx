@@ -13,17 +13,14 @@ export const pageQuery = graphql`
   }
 `;
 
-class NotFoundPage extends React.Component<PageRendererProps> {
-  // eslint-disable-next-line class-methods-use-this
-  public render(): ReactElement {
-    return (
-      <Layout>
-        <SEO title = '404: Not Found'/>
-        <h1>Not Found</h1>
-        <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-      </Layout>
-    );
-  }
+function NotFoundPage(props: PageRendererProps): ReactElement {
+  return (
+    <Layout>
+      <SEO title = '404: Not Found'/>
+      <h1>Not Found</h1>
+      <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
+    </Layout>
+  );
 }
 
 // eslint-disable-next-line import/no-default-export

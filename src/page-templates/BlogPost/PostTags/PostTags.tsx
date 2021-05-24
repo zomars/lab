@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 import { Link } from 'gatsby';
 import { cn } from '@bem-react/classname';
 
@@ -7,26 +7,27 @@ import './PostTags.scss';
 
 const cnPostTags = cn('PostTags');
 
-export class PostTags extends React.Component<{
+export function PostTags(props: {
   tags: string[],
   activeTag?: string,
-}> {
-  public render(): ReactNode {
-    const { tags, activeTag } = this.props;
+}): ReactElement {
+  const { tags, activeTag } = props;
 
-    return tags.sort().map((tag: string) => {
-      const className = tag === activeTag ?
-        cnPostTags('Link', { active: true }) : '';
+  const tagElements = tags.sort().map((tag: string) => {
+    const className = tag === activeTag ?
+      cnPostTags('Link', { active: true }) : '';
 
-      return (
-        <Link
-          key = { tag }
-          className = { className }
-          to = { getPostListUrlByTag(tag) }
-        >
-          #{ tag }&nbsp;
-        </Link>
-      );
-    });
-  }
+    return (
+      <Link
+        key = { tag }
+        className = { className }
+        to = { getPostListUrlByTag(tag) }
+      >
+        #{ tag }&nbsp;
+      </Link>
+    );
+  });
+
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <>{ tagElements }</>;
 }

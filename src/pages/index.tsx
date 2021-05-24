@@ -7,13 +7,8 @@
 
 import React, { ReactElement } from 'react';
 
-import { Layout } from '../components/Layout';
-
-class FakePage extends React.Component {
-  // eslint-disable-next-line class-methods-use-this
-  public render(): ReactElement {
-    return <Layout/>;
-  }
+function FakePage(): ReactElement {
+  return <span/>;
 }
 
 // eslint-disable-next-line import/no-default-export
