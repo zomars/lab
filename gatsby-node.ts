@@ -1,4 +1,7 @@
+import { ProvidePlugin } from 'webpack';
+
 import {
+  Actions,
   CreateNodeArgs,
   CreatePagesArgs,
 } from 'gatsby';
@@ -7,6 +10,25 @@ import { createFilePath } from 'gatsby-source-filesystem';
 
 import { createPostPages } from './src/gatsby-hooks/create-post-pages';
 import { createPostIndexPages } from './src/gatsby-hooks/create-post-list-pages';
+
+/**
+ * Make preact Fragment globally available.
+ */
+export function onCreateWebpackConfig({ actions }: { actions: Actions }): void {
+  const plugins: ProvidePlugin[] = [];
+
+  plugins.push(
+    new ProvidePlugin({
+      // wo it I'm getting Fragment is not defined error
+      // even when it is in fact defined
+      Fragment: ['preact', 'Fragment'],
+    }),
+  );
+
+  actions.setWebpackConfig({
+    plugins,
+  });
+}
 
 /**
  * Create site level redirects.

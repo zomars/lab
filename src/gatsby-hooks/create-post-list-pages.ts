@@ -107,7 +107,9 @@ export async function createPostIndexPages(
   const tagsReq = await args.graphql(postTagsQuery) as { data: IPostTagsQueryResponse };
   const uniqueTags = parseUniqueTagsResponse(tagsReq);
 
-  uniqueTags.forEach(
-    ({ name: tag }) => createPostListPagesPerTag(args, tag),
+  await Promise.all(
+    uniqueTags.map(
+      ({ name: tag }) => createPostListPagesPerTag(args, tag),
+    ),
   );
 }

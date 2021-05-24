@@ -28,6 +28,10 @@ function Sources(): ReactElement {
           Quite controversial fellow
         </li>
         <li>
+          <a href = 'https://www.jasonformat.com'>Jason Miller</a>
+          {' '}&mdash; author of Preact. JS and UI goodies
+        </li>
+        <li>
           <a href = 'https://www.mynameisjehad.com/author/jehad/'>
             Jehad Affoneh
           </a>

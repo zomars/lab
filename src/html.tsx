@@ -1,15 +1,17 @@
-import React, { HTMLAttributes, ReactElement } from 'react';
+/** @jsx h */
+
+import { h, VNode, Attributes } from 'preact';
 
 interface IHTMLPageProps {
-  htmlAttributes: HTMLAttributes<unknown>,
-  headComponents: ReactElement[],
-  bodyAttributes: HTMLAttributes<unknown>,
-  preBodyComponents: ReactElement[],
+  htmlAttributes: Attributes,
+  headComponents: VNode[],
+  bodyAttributes: Attributes,
+  preBodyComponents: VNode[],
   body: string,
-  postBodyComponents: ReactElement[],
+  postBodyComponents: VNode[],
 }
 
-function HTML(props: IHTMLPageProps): ReactElement {
+function HTML(props: IHTMLPageProps): VNode {
   return (
     <html { ...props.htmlAttributes }>
       <head>

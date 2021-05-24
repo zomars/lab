@@ -28,6 +28,7 @@ const plugins = [
   'gatsby-plugin-sharp',
   'gatsby-plugin-image',
   'gatsby-remark-images',
+  'gatsby-plugin-preact',
   // 'gatsby-plugin-feed',
   /* {
     resolve: 'gatsby-plugin-google-analytics',

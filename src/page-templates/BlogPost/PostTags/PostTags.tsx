@@ -1,4 +1,9 @@
-import React, { ReactElement } from 'react';
+/**
+ * @jsx h
+ * @jsxFrag Fragment
+ **/
+
+import { h, VNode, Fragment } from 'preact';
 import { Link } from 'gatsby';
 import { cn } from '@bem-react/classname';
 
@@ -10,7 +15,7 @@ const cnPostTags = cn('PostTags');
 export function PostTags(props: {
   tags: string[],
   activeTag?: string,
-}): ReactElement {
+}): VNode {
   const { tags, activeTag } = props;
 
   const tagElements = tags.sort().map((tag: string) => {

@@ -1,3 +1,4 @@
+const OFF = 0;
 const ERROR = 2;
 
 const ALWAYS = 'always';
@@ -75,6 +76,7 @@ const reactRules = {
     },
   ],
   'react/jsx-wrap-multilines': ERROR,
+  'react/react-in-jsx-scope': OFF, // TODO change to h-in-jsx-scope
   ...reactHookRules,
 };
 
