@@ -36,7 +36,7 @@
     "@types/react": "^17.0.6",
     "@types/react-dom": "17.x.x",
     "@types/react-helmet": "^6.1.1",
-    "@typescript-eslint/eslint-plugin": "^4.24.0",
+    "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "4.25.0",
     "babel-preset-gatsby": "1.x.x",
     "css-property-sort-order-smacss": "^2.1.3",
