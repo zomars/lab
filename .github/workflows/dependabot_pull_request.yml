@@ -11,6 +11,18 @@ env:
   PR_ID: ${{ github.event.number }}
 
 jobs:
+  remove_labels:
+    name: Remove labels
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions-ecosystem/action-remove-labels@v1.1.1
+        with:
+          github_token: ${{ github.token }}
+          labels: ready to merge
+
   setup:
     name: Yarn install
 

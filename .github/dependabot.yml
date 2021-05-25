@@ -10,6 +10,5 @@ updates:
       - "amalitsky"
     labels:
       - "dependencies"
-      - "npm"
       - "dependabot"
     open-pull-requests-limit: 7
