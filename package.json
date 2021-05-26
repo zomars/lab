@@ -51,7 +51,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
-    "netlify-cli": "^3.30.7",
+    "netlify-cli": "^3.31.3",
     "sass": "^1.34.0",
     "stylelint": "^13.13.1",
     "stylelint-config-recommended": "^5.0.0",
