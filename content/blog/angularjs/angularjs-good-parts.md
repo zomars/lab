@@ -4,7 +4,7 @@ date: '2021-05-07T23:59:59.000Z'
 tags: ['tech', 'anguarjs']
 ---
 
-Everyone knows **AngularJs** is done and dusted! Why to write anything about it today, in 2021?
+Everyone knows AngularJs is done and dusted! Why to write anything about it today, in 2021?
 
 Well, the reason is simple - history moves in spirals and things we've learned yesterday
 shape today and tomorrow.

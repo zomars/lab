@@ -10,6 +10,7 @@ import './Footer.scss';
 export const Footer = (): ReactElement => {
   return (
     <footer
+      data-testid = { cnFooter() }
       className = { cnFooter() }
     >
       <div className = { cnFooter('Wrapper') }>

@@ -75,6 +75,7 @@ export function PostPreview(props: {
         { getDetailsString(post) }
       </p>
       <p
+        data-testid = { cnPostPreview('Excerpt') }
         dangerouslySetInnerHTML = {{ __html: post.excerpt! }}
       />
       <p>

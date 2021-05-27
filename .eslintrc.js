@@ -98,6 +98,24 @@ const tsEslintRules = {
   '@typescript-eslint/prefer-for-of': ERROR,
 };
 
+const e2eTestOverrides = {
+  files: [
+    'e2e-test/**/*.ts',
+  ],
+  env: {
+    jest: true,
+  },
+  extends: [
+    'plugin:jest-playwright/recommended',
+  ],
+  rules: {
+    'import/no-extraneous-dependencies': [
+      ERROR, {
+        devDependencies: true,
+      },
+    ],
+  },
+};
 
 const rules = {
   'wrap-iife': [
@@ -250,6 +268,9 @@ const config = {
     ...rules,
   },
   settings,
+  overrides: [
+    e2eTestOverrides,
+  ],
 };
 
 module.exports = config;

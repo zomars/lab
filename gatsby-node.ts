@@ -41,8 +41,6 @@ function createRedirects(hookArgs: CreatePagesArgs): void {
 
   // TODO add backend redirects or duplicated page
   const rootRedirectFromPaths = [
-    '',
-    '/',
     '/blog',
     '/blog/',
   ];

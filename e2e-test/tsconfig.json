@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "esnext",
+    "strict": true,
+    "esModuleInterop": true,
+    "noImplicitAny": true,
+    "strictNullChecks": false,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "types": [
+      "@types/jest",
+      "jest-playwright-preset",
+      "expect-playwright",
+      "playwright-chromium"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "baseUrl": ".",
+  }
+}

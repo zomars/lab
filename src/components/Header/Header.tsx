@@ -2,14 +2,20 @@ import React, { ReactElement } from 'react';
 import { Link } from 'gatsby';
 import { cn } from '@bem-react/classname';
 import { classnames } from '@bem-react/classnames';
-// eslint-disable-next-line import/no-unresolved
 import { LinkGetProps } from '@reach/router'; // peer dependency through gatsby
+import { snakeCase } from 'lodash';
 
 import { IPostContext } from '../../react-contexts/posts.context';
 
 import './Header.scss';
 
 const cnHeader = cn('Header');
+
+interface ISection {
+  name: string;
+  path: string;
+  testId: string;
+}
 
 const topSections = [
   {
@@ -25,7 +31,11 @@ const topSections = [
     name: 'About',
     path: '/about',
   },
-];
+] as ISection[];
+
+topSections.forEach((section: ISection) => {
+  section.testId = snakeCase(section.name);
+});
 
 const blogPostUrlRegex = /\/blog\/\d{4}\/(.*?)\//;
 const blogListUrlRegex = /\/blog\/(\w{2,})\/?/;
@@ -39,6 +49,7 @@ export class Header extends React.Component<{
 
     return (
       <header
+        data-testid = { cnHeader() }
         className = { classnames(cnHeader(), className) }
       >
         <nav
@@ -111,20 +122,22 @@ export class Header extends React.Component<{
   };
 
   private getTopMenuList(): ReactElement[] {
-    return topSections.map(({ name, path }, index: number) => {
-      return (
-        <li
-          key = { name }
-        >
-          <Link
-            className = { cnHeader('Link', { first: !index }) }
-            getProps = { this.getActiveLinkProps }
-            to = { path }
+    return topSections.map(
+      ({ name, path, testId }, index: number) => {
+        return (
+          <li
+            data-testid = { cnHeader(testId) }
+            key = { name }
           >
-            { name }
-          </Link>
-        </li>
-      );
-    });
+            <Link
+              className = { cnHeader('Link', { first: !index }) }
+              getProps = { this.getActiveLinkProps }
+              to = { path }
+            >
+              { name }
+            </Link>
+          </li>
+        );
+      });
   }
 }
