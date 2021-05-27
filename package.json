@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@mdx-js/react": "^1.6.22",
-    "@theme-ui/typography": "^0.9.0",
+    "@theme-ui/typography": "^0.9.1",
     "@types/lodash": "4.x.x",
     "@types/node": "^15.6.1",
     "@types/react": "^17.0.8",
