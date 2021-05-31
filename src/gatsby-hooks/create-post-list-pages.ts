@@ -3,15 +3,11 @@ import { CreatePagesArgs } from 'gatsby';
 
 import { getPostListUrlByTag } from '../services/urls.service';
 import { IBlogPost, IUniquePostTag } from '../types/common.types';
+import { postsPerPage } from '../constants';
 
 const postListComponentPath = path.resolve(
   './src/page-templates/PostList/PostList.tsx',
 );
-
-/**
- * Number of posts per post index page.
- */
-const postsPerPage = 4;
 
 const postsQuery = /* GraphQL */ `
   query PostsListByTag($tag: String) {
@@ -80,7 +76,6 @@ async function createPostListPagesPerTag(
       context: {
         skip: (page - 1) * postsPerPage,
         limit: postsPerPage,
-        numPages,
         currentPage: page,
         tag,
       },

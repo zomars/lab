@@ -86,7 +86,12 @@ function Sources(): ReactElement {
             The Mythical Man-Month
           </a>
           {' '}by Fred Brooks
-          &mdash;Management/leading perspective on software development
+          &mdash; Management/lead perspective on software development
+        </li>
+        <li>
+          <a href = 'https://www.juliezhuo.com/book/manager.html'>The Making of a Manager</a>
+          {' '}by <a href = 'https://twitter.com/joulee'>Julie Zhuo</a>
+          {' '}&mdash; Management 101 course
         </li>
       </ul>
 

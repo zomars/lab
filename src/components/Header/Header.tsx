@@ -6,6 +6,7 @@ import { LinkGetProps } from '@reach/router'; // peer dependency through gatsby
 import { snakeCase } from 'lodash';
 
 import { IPostContext } from '../../react-contexts/posts.context';
+import { indexPageTag } from '../../constants';
 
 import './Header.scss';
 
@@ -37,8 +38,9 @@ topSections.forEach((section: ISection) => {
   section.testId = snakeCase(section.name);
 });
 
-const blogPostUrlRegex = /\/blog\/\d{4}\/(.*?)\//;
-const blogListUrlRegex = /\/blog\/(\w{2,})\/?/;
+const postUrlRegex = /^\/blog\/posts\/.+$/;
+// ie: blog/tag/1
+const postListUrlRegex = /^\/blog\/([^/]+)(?:\/\d+\/)?$/;
 
 export class Header extends React.Component<{
   postsContext: IPostContext,
@@ -66,13 +68,14 @@ export class Header extends React.Component<{
   }
 
   /**
-   * Returns style object for active (current) links.
-   * Has two cases:
+   * Return style object for active (current) links.
+   * There are three cases:
    *  - full and partial match
    *  - tries to match post page to the tag post list
+   *  - index page (tech posts, page 1)
    */
   private getActiveLinkProps = (
-    { href, location, isCurrent, isPartiallyCurrent }: LinkGetProps,
+    { href: target, location, isCurrent, isPartiallyCurrent }: LinkGetProps,
   ): { style: Record<string, string> } | Record<string, unknown> => {
     const positiveMatchProps = {
       // can't add className here cause it messes up themeUI one
@@ -86,34 +89,40 @@ export class Header extends React.Component<{
       return positiveMatchProps;
     }
 
+    // custom behavior affects post tags links only
+    const blogListTargetMatch = postListUrlRegex.exec(target);
 
-    const blogListMatch = blogListUrlRegex.exec(href);
-
-    if (!blogListMatch) {
+    if (!blogListTargetMatch) {
       return {};
     }
 
     const { pathname } = location;
 
-    if (!blogPostUrlRegex.test(pathname)) {
+    const [, tag] = blogListTargetMatch;
+
+    // index page case
+    if (pathname === '/' && tag === indexPageTag) {
+      return positiveMatchProps;
+    }
+
+    // nothing to do here if active page is not a post page
+    if (!postUrlRegex.test(pathname)) {
       return {};
     }
 
     // at this point pathname is actually slug of the post
-    const postSlug = pathname;
-
-    const [, tag] = blogListMatch;
+    const postPath = pathname;
 
     const { postsPerTag } = this.props.postsContext;
 
     // if post belongs to more than one top-level tags
     // both will get highlighted in the header
     if (postsPerTag.has(tag)) {
-      const postSlugs =
+      const postPaths =
         postsPerTag.get(tag)!
           .map(({ fields: { slug } }) => slug);
 
-      if (postSlugs.includes(postSlug)) {
+      if (postPaths.includes(postPath)) {
         return positiveMatchProps;
       }
     }

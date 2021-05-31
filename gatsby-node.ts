@@ -1,8 +1,10 @@
+import path from 'path';
 import { ProvidePlugin } from 'webpack';
 
 import {
   Actions,
   CreateNodeArgs,
+  CreatePageArgs,
   CreatePagesArgs,
 } from 'gatsby';
 
@@ -10,6 +12,7 @@ import { createFilePath } from 'gatsby-source-filesystem';
 
 import { createPostPages } from './src/gatsby-hooks/create-post-pages';
 import { createPostIndexPages } from './src/gatsby-hooks/create-post-list-pages';
+import { createIndexPage } from './src/gatsby-hooks/create-index-page';
 
 /**
  * Make preact Fragment globally available.
@@ -86,7 +89,7 @@ export function onCreateNode(
   ) {
     const { createNodeField } = actions;
 
-    const value = createFilePath({
+    const path = createFilePath({
       node,
       getNode,
     });
@@ -94,7 +97,30 @@ export function onCreateNode(
     createNodeField({
       name: 'slug',
       node,
-      value,
+      value: `/blog${path}`,
     });
+  }
+}
+
+/**
+ * Remove dummy index page from pages/index (required to get index.html created) and
+ * replace with the first page of tech posts list.
+ */
+export function onCreatePage(args: CreatePageArgs): void {
+  const { page } = args;
+
+  if (page.path === '/') {
+    const { deletePage } = args.actions;
+
+    const indexPageComponentPath = path.resolve(
+      './src/pages/index.tsx',
+    );
+
+    deletePage({
+      path: '/',
+      component: indexPageComponentPath,
+    });
+
+    createIndexPage(args);
   }
 }

@@ -6,6 +6,7 @@ import { Layout } from '../../components/Layout';
 import { SEO } from '../../components/seo';
 import { PostPreview } from '../../components/PostPreview/PostPreview';
 import { IBlogPost } from '../../types/common.types';
+import { postsPerPage } from '../../constants';
 import { PostListPaginator } from './PostListPaginator/PostListPaginator';
 
 import './PostList.scss';
@@ -18,6 +19,7 @@ export const postsQuery = graphql`
       limit: $limit
       skip: $skip
     ) {
+      totalCount
       posts: nodes {
         excerpt(pruneLength: 400)
         fields {
@@ -38,12 +40,14 @@ export const postsQuery = graphql`
 `;
 
 interface IGqlResponse {
-  onePagePosts: { posts: IBlogPost[] },
+  onePagePosts: {
+    posts: IBlogPost[],
+    totalCount: number,
+  },
 }
 
 interface IPostListPageContext {
   tag: string,
-  numPages: number,
   currentPage: number,
 }
 
@@ -63,7 +67,7 @@ const cnPostList = cn('PostList');
 
 export function PostList(props: IPostListProps): ReactElement {
   const { data, pageContext } = props;
-  const { posts } = data.onePagePosts;
+  const { posts, totalCount } = data.onePagePosts;
 
   const postElements = posts.map(
     (post: IBlogPost) => (
@@ -76,6 +80,8 @@ export function PostList(props: IPostListProps): ReactElement {
     )
   );
 
+  const numPages = Math.ceil(totalCount / postsPerPage);
+
   return (
     <Layout>
       <SEO
@@ -87,7 +93,7 @@ export function PostList(props: IPostListProps): ReactElement {
 
       <PostListPaginator
         current = { pageContext.currentPage }
-        length = { pageContext.numPages }
+        length = { numPages }
         tag = { pageContext.tag }
       />
     </Layout>

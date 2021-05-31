@@ -1,7 +1,7 @@
 ---
 title: 'Unglamorous end of AngularJs development'
 date: '2021-05-06T23:59:59.000Z'
-tags: ['tech', 'anguarjs']
+tags: ['tech', 'angularjs']
 ---
 
 A bit of whining for history's sake.

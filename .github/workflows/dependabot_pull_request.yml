@@ -141,7 +141,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    needs: staging-deploy
+    needs: [lint, staging-deploy]
 
     steps:
       - uses: actions/checkout@v2
@@ -166,7 +166,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    needs: [lint, e2e-test]
+    needs: [e2e-test]
 
     steps:
       - uses: actions/checkout@v2

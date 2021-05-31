@@ -62,7 +62,7 @@ if (prId) {
   hostname = 'localhost:8000';
 }
 
-globals.url = `${ protocol }://${ hostname }/blog/tech/1`;
+globals.url = `${ protocol }://${ hostname }`;
 
 const jestConfig = {
   testMatch: [
