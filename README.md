@@ -1,5 +1,5 @@
 Personal website, sandbox for various UX/UI experiments and tech blog.
-Live at [labs.amalitsky.com](https://labs.amalitsky.com).
+Live at [lab.amalitsky.com](https://lab.amalitsky.com).
 
 **At an early development stage.** Doesn't have much content as this point.
 

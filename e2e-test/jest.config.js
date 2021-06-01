@@ -56,7 +56,7 @@ const {
 } = process.env;
 
 if (prId) {
-  hostname = `pr${ prId }--amlabs.netlify.app`;
+  hostname = `pr${ prId }--amlab.netlify.app`;
 } else if (env === 'development') {
   protocol = 'http';
   hostname = 'localhost:8000';

@@ -1,5 +1,5 @@
 {
-  "name": "amlabs",
+  "name": "amlab",
   "private": true,
   "version": "1.0.0",
   "author": "Alex Malitsky <mail@amalitsky.com>",
@@ -69,7 +69,7 @@
     "ts-node": "^10.0.0",
     "typescript": "^4.3.2"
   },
-  "homepage": "https://github.com/amalitsky/amlabs",
+  "homepage": "https://github.com/amalitsky/lab",
   "keywords": [
     "development",
     "blog",
@@ -79,7 +79,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/amalitsky/amlabs.git"
+    "url": "git+https://github.com/amalitsky/lab.git"
   },
   "scripts": {
     "__eslint": "eslint --quiet --ext .js,.ts,.tsx",
