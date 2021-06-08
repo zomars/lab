@@ -1,34 +1,6 @@
 .Header {
-  display: flex;
-  border-bottom-width: var(--theme-ui-border-width-px);
-  border-bottom-style: solid;
-  border-color: var(--theme-ui-color-gray-5);
-  line-height: var(--theme-ui-line-height-loose);
-
-  &-Nav {
-    width: 100%;
-    max-width: var(--aml-global-layout-width-lg);
-    margin: auto;
-    padding: 0 var(--aml-global-layout-padding-md);
-  }
-
-  &-List {
+  &-IconWrapper {
     display: flex;
-    margin: 0;
-  }
-
-  &-Link {
-    display: inline-block;
-    padding: 0 var(--aml-global-layout-padding-md);
-
-    &_first {
-      //so that text alignment in the header matches same in the body
-      margin-left: calc(-1 * var(--aml-global-layout-padding-md));
-    }
-  }
-
-  li {
-    line-height: var(--header-line-height);
-    list-style: none;
+    margin-left: auto;
   }
 }

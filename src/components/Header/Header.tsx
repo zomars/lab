@@ -1,12 +1,24 @@
 import React, { ReactElement } from 'react';
-import { Link } from 'gatsby';
+import { navigate, PageRendererProps } from 'gatsby';
 import { cn } from '@bem-react/classname';
 import { classnames } from '@bem-react/classnames';
-import { LinkGetProps } from '@reach/router'; // peer dependency through gatsby
 import { snakeCase } from 'lodash';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Tabs,
+  Tab,
+} from '@material-ui/core';
+
+import {
+  RssFeed as RssFeedIcon,
+  Twitter as TwitterIcon,
+} from '@material-ui/icons';
 
 import { IPostContext } from '../../react-contexts/posts.context';
 import { indexPageTag } from '../../constants';
+import { getPostListUrlByTag } from '../../services/urls.service';
 
 import './Header.scss';
 
@@ -16,136 +28,150 @@ interface ISection {
   name: string;
   path: string;
   testId: string;
+  tag?: string;
 }
 
 const topSections = [
   {
     name: 'Tech Posts',
-    path: '/blog/tech',
+    tag: 'tech',
   }, {
-    name: 'Cars Posts',
-    path: '/blog/cars',
+    name: 'Car Posts',
+    tag: 'cars',
   }, {
     name: 'Sources',
-    path: '/sources',
+    path: '/sources/',
   }, {
     name: 'About',
-    path: '/about',
+    path: '/about/',
   },
 ] as ISection[];
 
 topSections.forEach((section: ISection) => {
   section.testId = snakeCase(section.name);
+  const { tag } = section;
+
+  if (tag) {
+    section.path = getPostListUrlByTag(tag);
+  }
 });
 
 const postUrlRegex = /^\/blog\/posts\/.+$/;
-// ie: blog/tag/1
-const postListUrlRegex = /^\/blog\/([^/]+)(?:\/\d+\/)?$/;
 
-export class Header extends React.Component<{
+interface IHeaderProps extends PageRendererProps {
   postsContext: IPostContext,
   className?: string,
-}> {
+}
+
+export class Header extends React.Component<IHeaderProps> {
+  /**
+   * There are three cases:
+   *  - full and partial match
+   *  - index page (tech posts, page 1)
+   *  - match post page (when applicable) to the tag post list
+   */
+  public get selectedTab(): string | false {
+    const { pathname } = this.props.location;
+
+    for (const section of topSections) {
+      const { path } = section;
+
+      if (pathname.startsWith(path)) {
+        return path;
+      }
+    }
+
+    if (pathname === '/') {
+      return getPostListUrlByTag(indexPageTag);
+    }
+
+    if (postUrlRegex.test(pathname)) {
+      const { postsPerTag } = this.props.postsContext;
+
+      for (const section of topSections) {
+        const { tag } = section;
+
+        // if post belongs to more than one top-level tags
+        // first will get highlighted in the header
+        if (tag && postsPerTag.has(tag)) {
+          const postPaths =
+            postsPerTag.get(tag)!
+              .map(({ fields: { slug } }) => slug);
+
+          if (postPaths.includes(pathname)) {
+            return section.path;
+          }
+        }
+      }
+    }
+
+    return false;
+  }
+
   public render(): ReactElement {
     const { className } = this.props;
 
     return (
-      <header
+      <AppBar
+        position = 'static'
         data-testid = { cnHeader() }
         className = { classnames(cnHeader(), className) }
       >
-        <nav
-          className = { cnHeader('Nav') }
+        <Toolbar
+          variant = 'dense'
         >
-          <ol
-            className = { cnHeader('List') }
+          <Tabs
+            scrollButtons = 'on'
+            value = { this.selectedTab }
+            onChange = { this.onTabSelect }
           >
-            { this.getTopMenuList() }
-          </ol>
-        </nav>
-      </header>
+            { this.getMenuTabs() }
+          </Tabs>
+          <div
+            className = { cnHeader('IconWrapper') }
+          >
+            <IconButton
+              color = 'inherit'
+              aria-label = 'menu'
+            >
+              <RssFeedIcon/>
+            </IconButton>
+            <IconButton
+              href = 'https://twitter.com/amalitsky'
+              edge = 'end'
+              color = 'inherit'
+              aria-label = 'menu'
+              component = 'a'
+            >
+              <TwitterIcon/>
+            </IconButton>
+          </div>
+        </Toolbar>
+      </AppBar>
     );
   }
 
-  /**
-   * Return style object for active (current) links.
-   * There are three cases:
-   *  - full and partial match
-   *  - tries to match post page to the tag post list
-   *  - index page (tech posts, page 1)
-   */
-  private getActiveLinkProps = (
-    { href: target, location, isCurrent, isPartiallyCurrent }: LinkGetProps,
-  ): { style: Record<string, string> } | Record<string, unknown> => {
-    const positiveMatchProps = {
-      // can't add className here cause it messes up themeUI one
-      style: {
-        backgroundColor: '#e2e8f0',
-      },
-    };
-
-    // full match and partial match
-    if (isCurrent || isPartiallyCurrent) {
-      return positiveMatchProps;
-    }
-
-    // custom behavior affects post tags links only
-    const blogListTargetMatch = postListUrlRegex.exec(target);
-
-    if (!blogListTargetMatch) {
-      return {};
-    }
-
-    const { pathname } = location;
-
-    const [, tag] = blogListTargetMatch;
-
-    // index page case
-    if (pathname === '/' && tag === indexPageTag) {
-      return positiveMatchProps;
-    }
-
-    // nothing to do here if active page is not a post page
-    if (!postUrlRegex.test(pathname)) {
-      return {};
-    }
-
-    // at this point pathname is actually slug of the post
-    const postPath = pathname;
-
-    const { postsPerTag } = this.props.postsContext;
-
-    // if post belongs to more than one top-level tags
-    // both will get highlighted in the header
-    if (postsPerTag.has(tag)) {
-      const postPaths =
-        postsPerTag.get(tag)!
-          .map(({ fields: { slug } }) => slug);
-
-      if (postPaths.includes(postPath)) {
-        return positiveMatchProps;
-      }
-    }
-
-    return {};
+  private onTabSelect = (event: unknown, value: string): void => {
+    navigate(value);
   };
 
-  private getTopMenuList(): ReactElement[] {
+  // eslint-disable-next-line class-methods-use-this
+  private getMenuTabs(): ReactElement[] {
     return topSections.map(
-      ({ name, path, testId }, index: number) => {
+      ({ name, path, testId }) => {
+        const completeTestId = cnHeader('Tab', {
+          selected: path === this.selectedTab,
+          [testId]: true,
+        });
+
         return (
-          <li
-            data-testid = { cnHeader(testId) }
+          <Tab
+            data-testid = { completeTestId }
             key = { name }
+            value = { path }
+            label = { name }
           >
-            <Link
-              className = { cnHeader('Link', { first: !index }) }
-              getProps = { this.getActiveLinkProps }
-              to = { path }
-            >
-              { name }
-            </Link>
-          </li>
+          </Tab>
         );
       });
   }

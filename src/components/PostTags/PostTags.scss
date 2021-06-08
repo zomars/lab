@@ -1,6 +1,6 @@
 .PostTags {
-  &-Link {
-    &_active {
+  &-Tag {
+    &_active#{&}_link {
       font-weight: bold;
     }
   }

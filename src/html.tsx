@@ -28,6 +28,14 @@ function HTML(props: IHTMLPageProps): VNode {
           rel = 'stylesheet'
           href = 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Merriweather:700'
         />
+        <link
+          rel = 'stylesheet'
+          href = 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
+        />
+        <link
+          rel = 'stylesheet'
+          href = 'https://fonts.googleapis.com/icon?family=Material+Icons'
+        />
         { props.headComponents }
       </head>
       <body { ...props.bodyAttributes }>

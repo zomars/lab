@@ -7,7 +7,7 @@ import { Layout } from '../../components/Layout';
 import { SEO } from '../../components/seo';
 import { postsContext } from '../../react-contexts/posts.context';
 import { IBlogPost } from '../../types/common.types';
-import { PostTags } from './PostTags/PostTags';
+import { PostTags } from '../../components/PostTags/PostTags';
 
 import './BlogPost.scss';
 

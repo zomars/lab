@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import { Link } from 'gatsby';
 import { cn } from '@bem-react/classname';
 import { classnames } from '@bem-react/classnames';
+import { PostTags } from '../PostTags/PostTags';
 
 import { IBlogPost } from '../../types/common.types';
 
@@ -25,15 +26,6 @@ function getDetailsString(post: IBlogPost): string {
   return details.join(' — ');
 }
 
-/**
- * Return post tags as text.
- */
-function getPostTags(post: IBlogPost): string {
-  const { tags } = post.frontmatter;
-
-  return tags.map((tag: string) => `#${tag}`).join(' ');
-}
-
 export function PostPreview(props: {
   className?: string,
   post: IBlogPost,
@@ -46,7 +38,7 @@ export function PostPreview(props: {
   } = props;
 
   const { slug } = post.fields;
-  const { title } = post.frontmatter;
+  const { title, tags } = post.frontmatter;
 
   // so that we have active tag info in the runtime
   // for the PostPage prev/next links
@@ -57,9 +49,14 @@ export function PostPreview(props: {
   return (
     <div
       className = { classnames(cnPostPreview(), className) }
+      data-testid = { cnPostPreview() }
     >
       <p className = { cnPostPreview('Details') }>
-        { getPostTags(post) }
+        <PostTags
+          tags = { tags }
+          activeTag = { props.tag }
+          textOnly = { true }
+        />
       </p>
       <h3 className = { cnPostPreview('Header') }>
         <Link
