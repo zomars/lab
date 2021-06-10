@@ -14,10 +14,14 @@ jobs:
   remove_labels:
     name: Remove labels
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'ready to merge')
+    if: |
+      ${{ github.actor == 'dependabot[bot]' || github.event_name == 'workflow_dispatch' }} &&
+      contains(github.event.pull_request.labels.*.name, 'ready to merge')
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - uses: actions-ecosystem/action-remove-labels@v1.1.1
         with:
@@ -30,13 +34,12 @@ jobs:
     runs-on: ubuntu-latest
 
     # this job is for dependabot PRs only
-    if: ${{ github.actor == 'dependabot[bot]' }}
+    if: ${{ github.actor == 'dependabot[bot]' || github.event_name == 'workflow_dispatch' }}
 
     steps:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -145,6 +148,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Cache node modules
         uses: actions/cache@v2
