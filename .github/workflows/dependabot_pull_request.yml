@@ -15,8 +15,8 @@ jobs:
     name: Remove labels
     runs-on: ubuntu-latest
     if: |
-      ${{ (github.actor == 'dependabot[bot]' || github.event_name == 'workflow_dispatch') &&
-      contains(github.event.pull_request.labels.*.name, 'ready to merge') }}
+      (github.actor == 'dependabot[bot]' || github.event_name == 'workflow_dispatch') &&
+      contains(github.event.pull_request_target.labels.*.name, 'ready to merge')
 
     steps:
       - uses: actions/checkout@v2
@@ -28,13 +28,16 @@ jobs:
           github_token: ${{ github.token }}
           labels: ready to merge
 
+      - run: |
+          echo event: ${{ github.event_name }}
+
   setup:
     name: Yarn install
 
     runs-on: ubuntu-latest
 
     # this job is for dependabot PRs only
-    if: ${{ github.actor == 'dependabot[bot]' || github.event_name == 'workflow_dispatch' }}
+    if: github.actor == 'dependabot[bot]' || github.event_name == 'workflow_dispatch'
 
     steps:
       - uses: actions/checkout@v2
