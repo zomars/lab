@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - run: |
-          echo event: ${{ github.event_name }}
+          echo event: ${{ github.event_name }} ${{ github.event }}
 
   remove_labels:
     name: Remove labels
