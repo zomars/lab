@@ -58,7 +58,7 @@
     "expect-playwright": "^0.3.4",
     "husky": "^6.0.0",
     "jest": "^27.0.4",
-    "jest-playwright-preset": "1.6.0",
+    "jest-playwright-preset": "1.6.1",
     "lint-staged": "^11.0.0",
     "netlify-cli": "^3.37.6",
     "playwright": "^1.11.1",
