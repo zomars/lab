@@ -11,6 +11,14 @@ env:
   PR_ID: ${{ github.event.number }}
 
 jobs:
+  debug:
+    name: Debug logs
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: |
+          echo event: ${{ github.event_name }}
+
   remove_labels:
     name: Remove labels
     runs-on: ubuntu-latest
@@ -27,9 +35,6 @@ jobs:
         with:
           github_token: ${{ github.token }}
           labels: ready to merge
-
-      - run: |
-          echo event: ${{ github.event_name }}
 
   setup:
     name: Yarn install
