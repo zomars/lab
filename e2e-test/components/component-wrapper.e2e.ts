@@ -1,4 +1,4 @@
-import { ElementHandle } from 'playwright-chromium';
+import { ElementHandle } from 'playwright';
 import { isString } from 'lodash';
 
 export interface IComponentWrapperArgs {
@@ -36,7 +36,8 @@ export abstract class ComponentWrapper {
       const scopeElementSelector = scopeElement as string || 'body';
 
       this.mountPromise = page.$(scopeElementSelector)
-        .then(($scopeElement: ElementHandle<HTMLElement | SVGElement>) => {
+        // @ts-ignore
+        .then(($scopeElement: ElementHandle) => {
           return this.setHostElement(
             $scopeElement as ElementHandle<HTMLElement>,
             hostSelector,

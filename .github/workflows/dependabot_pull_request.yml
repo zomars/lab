@@ -15,8 +15,8 @@ jobs:
     name: Remove labels
     runs-on: ubuntu-latest
     if: |
-      ${{ github.actor == 'dependabot[bot]' || github.event_name == 'workflow_dispatch' }} &&
-      contains(github.event.pull_request.labels.*.name, 'ready to merge')
+      ${{ (github.actor == 'dependabot[bot]' || github.event_name == 'workflow_dispatch') &&
+      contains(github.event.pull_request.labels.*.name, 'ready to merge') }}
 
     steps:
       - uses: actions/checkout@v2
