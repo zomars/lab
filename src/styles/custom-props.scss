@@ -7,22 +7,13 @@
   --aml-breakpoint-lg: #{vars.$breakpoint-lg};
   --aml-breakpoint-xl: #{vars.$breakpoint-xl};
 
-  // taken from CDS
-  --aml-global-layout-space-xxs: 0.1rem;
-  --aml-global-layout-space-xs: 0.2rem;
-  --aml-global-layout-space-sm: 0.3rem;
-  --aml-global-layout-space-md: 0.6rem;
-  --aml-global-layout-space-lg: 1.2rem;
-  --aml-global-layout-space-xl: 2.4rem;
-  --aml-global-layout-space-xxl: 4.8rem;
-
   // completely custom and responsive
-  --aml-global-layout-padding-md: var(--aml-global-layout-space-lg);
+  --aml-global-layout-padding-md: var(--theme-ui-size-lg);
   --aml-global-layout-width-lg: var(--aml-breakpoint-md);
 }
 
-@media (max-width: vars.$breakpoint-sm) {
+@media (max-width: vars.$breakpoint-md) {
   :root {
-    --aml-global-layout-padding-md: var(--aml-global-layout-space-md);
+    --aml-global-layout-padding-md: var(--theme-ui-size-md);
   }
 }

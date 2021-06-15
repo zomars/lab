@@ -26,11 +26,7 @@ function HTML(props: IHTMLPageProps): VNode {
         />
         <link
           rel = 'stylesheet'
-          href = 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Merriweather:700'
-        />
-        <link
-          rel = 'stylesheet'
-          href = 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
+          href = 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,500,600,700|Merriweather:700'
         />
         <link
           rel = 'stylesheet'

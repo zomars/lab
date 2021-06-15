@@ -24,40 +24,46 @@ export function Bio(
         className = { cnBio('Text') }
       >
         <p>
-          Hi, I&apos;m <strong>Alex Malitsky</strong> &mdash;
-          frontend architect and engineer based in SF bay area. Originally from
-          Moscow, Russia.
+          Hi, I&apos;m Alex Malitsky &mdash;
+          frontend architect and engineer based in SF bay area.
         </p>
 
         <p>
-          Until recently I worked for VMware as UI team lead and prior to that as a senior
-          engineer on the UI for the{' '}
+          Until recently I worked for VMware as UI team lead and prior to that as a senior UI
+          engineer for the{' '}
           <a href = "https://www.vmware.com/topics/glossary/content/software-load-balancing">
             software load-balancer
-          </a> since the early days
+          </a> UI since the early days
           of <a href = "https://avinetworks.com/">AviNetworks</a>.
         </p>
 
         <p>
           I specialize in:
           <ul>
-            <li>UX</li>
-            <li>UI app architecture</li>
+            <li>frontend architecture</li>
             <li>UI infrastructure (bundlers, linters, dev servers, testing)</li>
             <li>JavaScript, TypeScript and OOP</li>
             <li>AngularJs & Angular</li>
             <li>D3 (charts)</li>
+            <li>UX</li>
           </ul>
         </p>
 
         <p>
-          Currently working on web projects of my own (including this blog) and
+          Currently I&apos;m working on web projects of my own (including this blog) and
           contributing to open source.
         </p>
 
         <p>
           I&apos;m a big fan of cars (esp car design and racing) and nuclear energy.
-          You can expect posts, projects or simply examples related to those.
+          You can expect posts, projects and examples/illustrations related to those subjects.
+        </p>
+
+        <p>
+          In this blog I&apos;m writing down ideas and learnings from my development and
+          engineering experience. Main reason being the desire to reflect on these and have
+          them formulated in more or less succinct form so that I, myself, could come back and
+          re-learn something if needed.
         </p>
 
         <p>

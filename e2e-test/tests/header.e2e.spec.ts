@@ -63,7 +63,7 @@ describe('site header', () => {
 
     await expect(page).toHaveText(
       'h1',
-      'About the author',
+      'About me',
     );
   });
 

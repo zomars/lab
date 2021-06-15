@@ -3,6 +3,15 @@ import { merge, forEach } from 'lodash';
 import { toTheme } from '@theme-ui/typography';
 // @ts-ignore-next-line
 import { tailwind } from '@theme-ui/presets';
+import {
+  colors,
+  customSizes,
+  primaryColor,
+  mutedColor,
+  mutedTextColor,
+  sizes,
+} from '../theme';
+
 import { options as typographyOptions } from './typography';
 
 export type TCssPropValue = string|number;
@@ -17,29 +26,28 @@ const themeWoStyles = merge(
 export const customCssPropsMap = new Map<string, TCssPropValue>();
 
 forEach(
-  themeWoStyles.colors as Record<string, TCssPropValue|TCssPropValue[]>,
-  (value: TCssPropValue|TCssPropValue[], key: string) => {
-    if (typeof value === 'string') {
-      customCssPropsMap.set(`color-${key}`, value);
-    } else if (Array.isArray(value)) {
-      value.forEach((color: TCssPropValue|null, index: number) => {
-        if (color !== null) {
-          customCssPropsMap.set(`color-${ key }-${ index }`, color);
-        }
+  colors,
+  (colorHexHash: Record<string, string>, colorName: string) => {
+    forEach(
+      colorHexHash, (value: string, key: string) => {
+        customCssPropsMap.set(`color-${ colorName }-${ key }`, value);
       });
-    }
   });
+
+customCssPropsMap.set('color-muted', mutedColor);
+customCssPropsMap.set('color-muted-text', mutedTextColor);
+customCssPropsMap.set('color-primary', primaryColor);
+
+sizes.forEach((size: number, index: number) => {
+  customCssPropsMap.set(`size-${ index }`, `${ size }px`);
+});
 
 forEach(
-  themeWoStyles.sizes as Record<string, TCssPropValue>,
-  (value: TCssPropValue, key: string) => {
-    if (key.includes('/')) {
-      key = key.replace('/', '-');
-    }
-
-    customCssPropsMap.set(`size-${key}`, value);
-  });
-
+  customSizes,
+  (size: number, key: string) => {
+    customCssPropsMap.set(`size-${ key }`, `${ size }px`);
+  }
+);
 
 forEach(
   themeWoStyles.borderWidths as Record<string, TCssPropValue>,
@@ -52,7 +60,6 @@ forEach(
   (value: TCssPropValue, key: string) => {
     customCssPropsMap.set(`font-${key}`, value);
   });
-
 
 forEach(
   themeWoStyles.fontSizes,

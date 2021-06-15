@@ -28,7 +28,7 @@ enum HeaderSelector {
   sources = '[data-testid*=Header-Tab_sources]',
 }
 
-const selectedTabSelector = 'Header-Tab_selected';
+const selectedTabSelector = 'Header-Tab_active';
 
 export class Header extends ComponentWrapper {
   constructor(args: Partial<IComponentWrapperArgs> = {}) {

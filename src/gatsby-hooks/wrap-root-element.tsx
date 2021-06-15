@@ -1,7 +1,11 @@
 import React, { ReactElement, ReactNode } from 'react';
 import { graphql, StaticQuery, WrapRootElementBrowserArgs } from 'gatsby';
+import {
+  ThemeProvider,
+} from '@material-ui/core/styles';
 
 import { PostContextProvider } from '../components/PostContextProvider/PostContextProvider';
+import { theme } from '../theme.mui';
 
 export const postsQuery = graphql`
   query Posts {
@@ -34,15 +38,17 @@ export function wrapRootElement(
   { element }: WrapRootElementBrowserArgs,
 ): ReactNode {
   return (
-    <StaticQuery
-      query = { postsQuery }
-      render = { data => (
-        <PostContextProvider
-          data = { data }
-        >
-          { element as ReactElement }
-        </PostContextProvider>
-      ) }
-    />
+    <ThemeProvider theme = { theme }>
+      <StaticQuery
+        query = { postsQuery }
+        render = { data => (
+          <PostContextProvider
+            data = { data }
+          >
+            { element as ReactElement }
+          </PostContextProvider>
+        ) }
+      />
+    </ThemeProvider>
   );
 }

@@ -1,6 +1,23 @@
 .Header {
+  // magic number so that tabs indicator is properly aligned
+  $magic-max-height: 2.66rem; // 48px
+
   &-IconWrapper {
     display: flex;
+    max-height: $magic-max-height;
     margin-left: auto;
+  }
+
+  &-MenuButton {
+    max-height: $magic-max-height;
+  }
+
+  &-MenuItems {
+    width: calc(var(--theme-ui-size-xxl) * 2);
+
+    .MuiTabs-indicator {
+      right: auto;
+      left: 0;
+    }
   }
 }

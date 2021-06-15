@@ -25,6 +25,7 @@ const plugins = [
     },
   },
   'gatsby-transformer-sharp',
+  'gatsby-plugin-material-ui',
   'gatsby-plugin-sharp',
   'gatsby-plugin-image',
   'gatsby-remark-images',
