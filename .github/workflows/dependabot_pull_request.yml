@@ -11,19 +11,12 @@ env:
   PR_ID: ${{ github.event.number }}
 
 jobs:
-  debug:
-    name: Debug logs
-    runs-on: ubuntu-latest
-
-    steps:
-      - run: |
-          echo event: ${{ github.event_name }} ${{ toJSON(github.event) }}
-
   remove_labels:
     name: Remove labels
     runs-on: ubuntu-latest
+    # sender.login is needed for checks re-triggered from GH UI
     if: |
-      (github.actor == 'dependabot[bot]' || github.event_name == 'workflow_dispatch') &&
+      (github.actor == 'dependabot[bot]' || github.event.sender.login == 'dependabot[bot]') &&
       contains(github.event.pull_request_target.labels.*.name, 'ready to merge')
 
     steps:
