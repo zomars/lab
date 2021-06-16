@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
 
     # this job is for dependabot PRs only
-    if: github.actor == 'dependabot[bot]' || github.event_name == 'workflow_dispatch'
+    if: github.actor == 'dependabot[bot]' || github.event.sender.login == 'dependabot[bot]'
 
     steps:
       - uses: actions/checkout@v2
