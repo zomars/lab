@@ -9,14 +9,6 @@ env:
   PR_ID: ${{ github.event.number }}
 
 jobs:
-  debug:
-    name: Debug logs
-    runs-on: ubuntu-latest
-
-    steps:
-      - run: |
-          echo event: ${{ github.event_name }} ${{ github.event.sender.login }}
-
   setup:
     name: Yarn install
 

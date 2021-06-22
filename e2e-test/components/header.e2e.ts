@@ -21,14 +21,14 @@ export const menuLabelsMap = new Map<MenuListItem, string>(
 );
 
 enum HeaderSelector {
-  about = '[data-testid*=Header-Tab_about]',
+  about = '[data-testid*=HeaderTabs-Tab_about]',
   host = 'data-testid=Header',
-  carPosts = '[data-testid*=Header-Tab_car_posts]',
-  techPosts = '[data-testid*=Header-Tab_tech_posts]',
-  sources = '[data-testid*=Header-Tab_sources]',
+  carPosts = '[data-testid*=HeaderTabs-Tab_car_posts]',
+  techPosts = '[data-testid*=HeaderTabs-Tab_tech_posts]',
+  sources = '[data-testid*=HeaderTabs-Tab_sources]',
 }
 
-const selectedTabSelector = 'Header-Tab_active';
+const selectedTabSelector = 'HeaderTabs-Tab_active';
 
 export class Header extends ComponentWrapper {
   constructor(args: Partial<IComponentWrapperArgs> = {}) {

@@ -2,15 +2,13 @@ import React, { ReactElement, useState } from 'react';
 import { navigate, PageRendererProps } from 'gatsby';
 import { cn } from '@bem-react/classname';
 import { classnames } from '@bem-react/classnames';
-import { snakeCase } from 'lodash';
 import {
   AppBar,
   IconButton,
   Menu,
   PaperProps,
-  Tab,
-  Tabs,
   Toolbar,
+  Fade,
 } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -22,46 +20,11 @@ import {
 } from '@material-ui/icons';
 
 import { IPostContext } from '../../react-contexts/posts.context';
-import { indexPageTag } from '../../constants';
-import { getPostListUrlByTag } from '../../services/urls.service';
 
 import './Header.scss';
+import { HeaderTabs } from './HeaderTabs/HeaderTabs';
 
 const cnHeader = cn('Header');
-
-interface ISection {
-  name: string;
-  path: string;
-  testId: string;
-  tag?: string;
-}
-
-const topSections = [
-  {
-    name: 'Tech Posts',
-    tag: 'tech',
-  }, {
-    name: 'Car Posts',
-    tag: 'cars',
-  }, {
-    name: 'Sources',
-    path: '/sources/',
-  }, {
-    name: 'About',
-    path: '/about/',
-  },
-] as ISection[];
-
-topSections.forEach((section: ISection) => {
-  section.testId = snakeCase(section.name);
-  const { tag } = section;
-
-  if (tag) {
-    section.path = getPostListUrlByTag(tag);
-  }
-});
-
-const postUrlRegex = /^\/blog\/posts\/.+$/;
 
 interface IHeaderProps extends PageRendererProps {
   postsContext: IPostContext,
@@ -69,95 +32,10 @@ interface IHeaderProps extends PageRendererProps {
 }
 
 /**
- * Return list of tabs. On small screens show active tab only.
+ * Have two views based on the screen width:
+ *   - all tabs are rendered horizontally (large screens)
+ *   - only active tab is rendered horizontally and the rest are rendered in the hamburger menu
  */
-function getMenuTabs(
-  selectedTabPath: string | false,
-  activeTabOnly = false,
-): ReactElement[] {
-  const tabs = [];
-
-  for (const section of topSections) {
-    const { name, path, testId } = section;
-
-    const isActive = path === selectedTabPath;
-
-    if (activeTabOnly && !isActive) {
-      continue;
-    }
-
-    const completeTestId = cnHeader('Tab', {
-      active: isActive,
-      [testId]: true,
-    });
-
-    tabs.push(
-      <Tab
-        data-testid = { completeTestId }
-        key = { name }
-        value = { path }
-        label = { name }
-      >
-      </Tab>
-    );
-  }
-
-  return tabs;
-}
-
-/**
- * Activate navigation action.
- */
-function onTabSelect(event: unknown, value: string): void {
-  navigate(value);
-}
-
-/**
- * Return selected/active tab path.
- * There are three cases:
- *  - full and partial match
- *  - index page (tech posts, page 1)
- *  - match post page (when applicable) to the tag post list
- */
-function getSelectedTabPath(
-  activePath: string,
-  postsContext: IPostContext,
-): string | false {
-  for (const section of topSections) {
-    const { path } = section;
-
-    if (activePath.startsWith(path)) {
-      return path;
-    }
-  }
-
-  if (activePath === '/') {
-    return getPostListUrlByTag(indexPageTag);
-  }
-
-  if (postUrlRegex.test(activePath)) {
-    const { postsPerTag } = postsContext;
-
-    for (const section of topSections) {
-      const { tag } = section;
-
-      // if post belongs to more than one top-level tags
-      // first will get highlighted in the header
-      if (tag && postsPerTag.has(tag)) {
-        const postPaths =
-          postsPerTag.get(tag)!
-            .map(({ fields: { slug } }) => slug);
-
-        if (postPaths.includes(activePath)) {
-          return section.path;
-        }
-      }
-    }
-  }
-
-  return false;
-}
-
 export function Header(props: IHeaderProps): ReactElement {
   const {
     className,
@@ -167,33 +45,31 @@ export function Header(props: IHeaderProps): ReactElement {
 
   const { pathname: activePath } = location;
 
-  const selectedTabPath = getSelectedTabPath(activePath, postsContext);
-
   const theme = useTheme();
   const largeScreen = useMediaQuery(theme.breakpoints.up('md'));
 
   const [menuAnchor, setMenuAnchor] = useState<null | HTMLElement>(null);
 
-  const menuIsOpen = !!menuAnchor && !largeScreen;
-
-  if (menuAnchor && largeScreen) {
+  function closeMenu(): void {
     setMenuAnchor(null);
   }
+
+  if (menuAnchor && largeScreen) {
+    closeMenu();
+  }
+
+  const menuIsOpen = !!menuAnchor || largeScreen;
 
   function openMenu(event: React.MouseEvent<HTMLElement>): void {
     setMenuAnchor(event.currentTarget);
   }
 
-  function closeMenu(): void {
-    setMenuAnchor(null);
-  }
+  function onTabSelection(selectedPath: string): void {
+    if (menuIsOpen) {
+      closeMenu();
+    }
 
-  /**
-   * Close menu and head to the link target.
-   */
-  function onMenuItemClick(event: unknown, value: string): void {
-    onTabSelect(event, value);
-    closeMenu();
+    navigate(selectedPath);
   }
 
   const buttons = [
@@ -217,16 +93,6 @@ export function Header(props: IHeaderProps): ReactElement {
     </IconButton>,
   ];
 
-  const tabs = (
-    <Tabs
-      scrollButtons = 'on'
-      value = { selectedTabPath }
-      onChange = { onTabSelect }
-    >
-      { getMenuTabs(selectedTabPath, !largeScreen) }
-    </Tabs>
-  );
-
   const menuPaperProps: PaperProps = {
     square: true,
   };
@@ -242,6 +108,7 @@ export function Header(props: IHeaderProps): ReactElement {
       >
         <MenuIcon/>
       </IconButton>
+
       <Menu
         id = 'app-menu'
         anchorReference = 'anchorPosition'
@@ -254,15 +121,15 @@ export function Header(props: IHeaderProps): ReactElement {
         keepMounted
         open = { menuIsOpen }
         onClose = { closeMenu }
+        TransitionComponent = { Fade }
       >
         <div className = { cnHeader('MenuItems') }>
-          <Tabs
-            orientation = 'vertical'
-            value = { selectedTabPath }
-            onChange = { onMenuItemClick }
-          >
-            { getMenuTabs(selectedTabPath) }
-          </Tabs>
+          <HeaderTabs
+            activePath = { activePath }
+            postsContext = { postsContext }
+            onTabSelection = { onTabSelection }
+            vertical = { true }
+          />
         </div>
       </Menu>
     </>
@@ -278,7 +145,14 @@ export function Header(props: IHeaderProps): ReactElement {
         variant = 'dense'
       >
         { largeScreen ? null : MenuTemplate }
-        { tabs }
+
+        <HeaderTabs
+          activePath = { activePath }
+          postsContext = { postsContext }
+          onTabSelection = { onTabSelection }
+          activeTabOnly = { !largeScreen }
+        />
+
         <div
           className = { cnHeader('IconWrapper') }
         >
