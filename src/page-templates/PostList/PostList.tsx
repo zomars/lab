@@ -92,6 +92,7 @@ export function PostList(props: IPostListProps): ReactElement {
       { postElements }
 
       <PostListPaginator
+        className = { cnPostList('Paginator') }
         current = { pageContext.currentPage }
         length = { numPages }
         tag = { pageContext.tag }

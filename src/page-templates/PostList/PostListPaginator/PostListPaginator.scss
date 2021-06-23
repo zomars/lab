@@ -1,14 +1,4 @@
 .PostListPaginator {
-  &-Nav {
-    text-align: center;
-  }
-
-  &-List {
-    list-style: none;
-  }
-
-  &-ListElement {
-    display: inline;
-    margin-right: 0.5rem;
-  }
+  display: flex;
+  justify-content: center;
 }

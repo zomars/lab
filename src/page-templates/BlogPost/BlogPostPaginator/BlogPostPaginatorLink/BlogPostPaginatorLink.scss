@@ -1,0 +1,8 @@
+.BlogPostPaginatorLink {
+  flex: 1 1 auto;
+
+  // for mobile screens (two rows) to have next link on the right
+  &_next {
+    text-align: right;
+  }
+}

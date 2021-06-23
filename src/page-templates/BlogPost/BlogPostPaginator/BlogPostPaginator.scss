@@ -1,0 +1,15 @@
+.BlogPostPaginator {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: var(--theme-ui-size-md);
+  margin-bottom: var(--theme-ui-size-md);
+  margin-left: 0;
+  padding: 0;
+  line-height: var(--theme-ui-line-height-loose);
+  list-style: none;
+
+  // for multi-row layout (mobile screen)
+  gap: var(--theme-ui-size-md);
+}
+
