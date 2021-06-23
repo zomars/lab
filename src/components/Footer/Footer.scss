@@ -1,17 +1,41 @@
+@use '../../styles/variables' as vars;
+
 .Footer {
   display: flex;
   border-top-width: var(--theme-ui-border-width-px);
   border-top-style: solid;
   border-color: var(--theme-ui-color-gray-400);
-  line-height: var(--theme-ui-line-height-loose);
+  background-color: var(--theme-ui-color-gray-300);
+  line-height: var(--theme-ui-size-xl);
 
   &-Wrapper {
     display: flex;
     flex: 1 1 100%;
-    justify-content: flex-end;
-    max-width: var(--aml-global-layout-width-lg);
-    margin: auto;
+    justify-content: space-between;
     padding: 0 var(--aml-global-layout-padding-md);
-    color: var(--theme-ui-color-muted-text);
+  }
+
+  &-Item {
+    &:first-child, &:last-child {
+      min-width: var(--theme-ui-size-xxl);
+    }
+
+    &:last-child {
+      text-align: right;
+    }
+
+    &_muted {
+      color: var(--theme-ui-color-muted-text);
+    }
+  }
+}
+
+@media (max-width: vars.$breakpoint-md) {
+  .Footer {
+    &-Item {
+      &_joy-note {
+        display: none;
+      }
+    }
   }
 }

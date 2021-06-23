@@ -50,7 +50,6 @@ function parseUniqueTagsResponse(
   return tags;
 }
 
-
 /**
  * Create multiple (paginated) listing pages per post tag passed.
  */

@@ -1,3 +1,5 @@
+@use '../../styles/variables' as vars;
+
 .PostPreview {
   margin-bottom: var(--aml-global-layout-padding-md);
   overflow: hidden;
@@ -9,5 +11,45 @@
   &-Details {
     color: var(--theme-ui-color-muted-text);
     line-height: var(--theme-ui-line-height-none);
+  }
+
+  &-PreviewWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &-ImageWrapper {
+    display: flex;
+    flex: 0 1 33%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-Image {
+    border: 2px solid var(--theme-ui-color-gray-300);
+    border-radius: var(--theme-ui-size-sm);
+  }
+
+  &-DetailsAndExcerpt {
+    flex: 1 1 64%;
+    margin-right: var(--aml-global-layout-padding-md);
+  }
+
+  &-ReadMore {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: vars.$breakpoint-sm) {
+  .PostPreview {
+    &-ImageWrapper {
+      flex-basis: 100%;
+      margin-bottom: var(--theme-ui-size-sm);
+    }
+
+    &-ReadMore {
+      text-align: right;
+    }
   }
 }

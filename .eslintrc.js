@@ -101,6 +101,8 @@ const tsEslintRules = {
 const e2eTestOverrides = {
   files: [
     'e2e-test/**/*.ts',
+    'src/**/*.e2e.ts',
+    'src/**/*.e2e.spec.ts',
   ],
   env: {
     jest: true,

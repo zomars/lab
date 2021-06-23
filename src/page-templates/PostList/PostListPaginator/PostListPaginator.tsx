@@ -1,4 +1,6 @@
 import { classnames } from '@bem-react/classnames';
+import { useTheme } from '@material-ui/core/styles';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import React, { ReactElement } from 'react';
 import { cn } from '@bem-react/classname';
 import { Pagination } from '@material-ui/lab';
@@ -25,14 +27,17 @@ export function PostListPaginator(props: {
     navigate(getPostListUrlByTag(tag, page));
   }
 
+  const theme = useTheme();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up('sm'));
+
   return (
     <Pagination
       className = { classnames(cnPostListPaginator(), props.className) }
-      siblingCount = { 2 }
+      siblingCount = { isLargeScreen ? 2 : 1 }
       color = 'primary'
       page = { current }
-      showFirstButton = { true }
-      showLastButton = { true }
+      showFirstButton = { isLargeScreen }
+      showLastButton = { isLargeScreen }
       count = { length }
       onChange = { onPageSelection }
     />

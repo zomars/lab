@@ -38,7 +38,7 @@ const jestPlaywrightOptions = {
 };
 
 const tsJestConfig = {
-  tsconfig: 'e2e-test/tsconfig.json',
+  tsconfig: 'tsconfig.e2e.json',
 };
 
 // production
@@ -66,7 +66,7 @@ globals.url = `${ protocol }://${ hostname }`;
 
 const jestConfig = {
   testMatch: [
-    '**/tests/*.e2e.spec.ts',
+    '**/*.e2e.spec.ts',
   ],
   preset: 'jest-playwright-preset',
   transform: {

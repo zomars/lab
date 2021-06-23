@@ -77,7 +77,7 @@ export function Header(props: IHeaderProps): ReactElement {
       disabled
       key = 'rss'
       color = 'inherit'
-      aria-label = 'menu'
+      aria-label = 'RSS'
     >
       <RssFeedIcon/>
     </IconButton>,
@@ -86,7 +86,7 @@ export function Header(props: IHeaderProps): ReactElement {
       href = 'https://twitter.com/amalitsky'
       edge = 'end'
       color = 'inherit'
-      aria-label = 'menu'
+      aria-label = 'Twitter'
       component = 'a'
     >
       <TwitterIcon/>

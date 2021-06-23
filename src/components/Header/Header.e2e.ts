@@ -1,6 +1,9 @@
 import { ElementHandle } from 'playwright';
 
-import { ComponentWrapper, IComponentWrapperArgs } from './component-wrapper.e2e';
+import {
+  ComponentWrapper,
+  IComponentWrapperArgs,
+} from '../../../e2e-test/components/component-wrapper.e2e';
 
 export enum MenuListItem {
   techPosts = 'techPosts',

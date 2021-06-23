@@ -88,10 +88,11 @@
   "scripts": {
     "__eslint": "eslint --quiet --ext .js,.ts,.tsx",
     "__build-theme-ui-custom-props": "ts-node scripts/export-custom-props-into-styles-file.ts",
-    "__test-e2e": "yarn jest -c e2e-test/jest.config.js",
+    "__test-e2e": "yarn jest -c jest.e2e.config.js",
     "tsc-check": "tsc --noEmit --project ./tsconfig.json",
+    "tsc-check-e2e-tests": "tsc --noEmit --project ./tsconfig.e2e.json",
     "eslint-all": "yarn __eslint ./",
-    "lint": "yarn tsc-check && yarn eslint-all && yarn stylelint-all",
+    "lint": "yarn tsc-check && yarn tsc-check-e2e-tests && yarn eslint-all && yarn stylelint-all",
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\"",
     "test-e2e": "yarn __test-e2e",
     "test-e2e-dev": "cross-env NODE_ENV=development yarn __test-e2e",

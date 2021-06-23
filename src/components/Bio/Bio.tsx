@@ -44,7 +44,7 @@ export function Bio(
             <li>UI infrastructure (bundlers, linters, dev servers, testing)</li>
             <li>JavaScript, TypeScript and OOP</li>
             <li>AngularJs & Angular</li>
-            <li>D3 (charts)</li>
+            <li>D3 (data visualizations)</li>
             <li>UX</li>
           </ul>
         </p>

@@ -21,7 +21,7 @@ const arrows = {
   [AdjacentPostType.prev]: '\u2190',
 };
 
-const cnBlogPostPaginatorLink = cn('cnBlogPostPaginatorLink');
+const cnBlogPostPaginatorLink = cn('BlogPostPaginatorLink');
 
 /**
  * Render link for the previous or following post based on tag and current post slug.
@@ -49,7 +49,9 @@ export function BlogPostPaginatorLink(props: IBlogPostPaginatorLinkProps): React
 
   return (
     <Link
-      className = { cnBlogPostPaginatorLink() }
+      className = {
+        cnBlogPostPaginatorLink({ next: type === AdjacentPostType.next })
+      }
       to = { slug }
       state = { postLinkPayload }
       rel = { type }

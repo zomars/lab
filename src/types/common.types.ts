@@ -1,4 +1,5 @@
 import { Node } from 'gatsby';
+import { ImageDataLike } from 'gatsby-plugin-image/dist/src/components/hooks';
 
 export interface INodeFields {
   [key: string]: unknown,
@@ -12,6 +13,7 @@ interface IBlogPostFrontmatter {
   title: string,
   date: string,
   tags: string[],
+  coverImage?: ImageDataLike,
 }
 
 interface IReadingTime {

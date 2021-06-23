@@ -33,6 +33,11 @@ export const postsQuery = graphql`
           date(formatString: "MMM DD, YYYY")
           tags
           title
+          coverImage {
+            childImageSharp {
+              gatsbyImageData(width: 600)
+            }
+          }
         }
       }
     }
@@ -85,7 +90,7 @@ export function PostList(props: IPostListProps): ReactElement {
   return (
     <Layout>
       <SEO
-        title = { `All #${pageContext.tag} posts` }
+        title = { `All #${ pageContext.tag } posts, page ${ pageContext.currentPage }` }
         keywords = { keywords }
       />
 

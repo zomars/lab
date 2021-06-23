@@ -108,6 +108,21 @@ export abstract class ComponentWrapper {
   }
 
   /**
+   * Return list of elements within host by the selector passed.
+   */
+  protected getElements(
+    selector: string,
+  ): Promise<ElementHandle[]> {
+    const { $host } = this;
+
+    if (!$host) {
+      throw Error('Not mounted yet');
+    }
+
+    return $host.$$(selector);
+  }
+
+  /**
    * Sets $host reference.
    */
   private setHostElement(

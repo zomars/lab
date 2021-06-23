@@ -4,10 +4,8 @@
  * Actual Gatsby config file (in TypeScript).
  */
 
-const title = 'AM Labs';
-
 const metadata = {
-  title,
+  title: 'Alex M Lab',
   author: 'Alex Malitsky',
   description: 'We gonna figure what it is all about',
   siteUrl: 'https://amalitsky.com/',
