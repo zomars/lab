@@ -32,6 +32,11 @@ function HTML(props: IHTMLPageProps): VNode {
           rel = 'stylesheet'
           href = 'https://fonts.googleapis.com/icon?family=Material+Icons'
         />
+
+        <script
+          defer
+          src = 'https://www.googletagmanager.com/gtag/js?id=G-6G7FL8W2JR'
+        />
         { props.headComponents }
       </head>
       <body { ...props.bodyAttributes }>

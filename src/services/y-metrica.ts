@@ -19,7 +19,7 @@ export function yMetricsInit(
   const scriptTagName = 'script';
   const script = document.createElement(scriptTagName) as HTMLScriptElement;
 
-  script.defer = true;
+  script.async = true;
   script.src = apiUrl;
 
   const firstScript = document.getElementsByTagName(scriptTagName)[0];
