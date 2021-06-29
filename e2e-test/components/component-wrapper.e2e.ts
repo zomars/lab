@@ -9,6 +9,7 @@ export interface IComponentWrapperArgs {
 
 type TWaitForOptions = Record<string, any>;
 
+// @todo wrap child components automatically
 export abstract class ComponentWrapper {
   /** ElementHandle of component's host element. */
   protected $host: ElementHandle<HTMLElement> | null = null;

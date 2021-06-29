@@ -94,7 +94,7 @@ export function PostPreview(props: {
         <PostTags
           tags = { tags }
           activeTag = { props.tag }
-          textOnly = { true }
+          noLinkForActiveTag = { true }
         />
       </p>
 

@@ -12,6 +12,7 @@ enum PostPreviewSelector {
   excerpt = 'data-testid=PostPreview-Excerpt',
   readMore = 'data-testid=PostPreview-ReadMore',
   header = 'data-testid=PostPreview-Header',
+  tag = '[data-testid*=PostTags-Tag]',
 }
 
 interface IPostPreviewArgs extends Partial<IComponentWrapperArgs> {
@@ -24,6 +25,13 @@ export class PostPreview extends ComponentWrapper {
       hostSelector: args.withPreview ? PostPreviewSelector.hostWithImage : PostPreviewSelector.host,
       ...args,
     });
+  }
+
+  public static async isTagLink($tag: ElementHandle): Promise<boolean> {
+    const dataId = await $tag.getAttribute('data-testid');
+    const dataIds = dataId.split(' ');
+
+    return dataIds.includes('PostTags-Tag_link');
   }
 
   public getImage(): Promise<ElementHandle | null> {
@@ -48,5 +56,18 @@ export class PostPreview extends ComponentWrapper {
 
   public getReadMore(): Promise<ElementHandle> {
     return this.getElementHandle(PostPreviewSelector.readMore);
+  }
+
+  public async getTags(): Promise<string[]> {
+    const $elements = await this.getTagElements();
+
+    const tags = $elements.map($element => $element.innerText());
+
+    return Promise.all(tags)
+      .then((tags: string[]) => tags.map(tag => tag.trim()));
+  }
+
+  public getTagElements(): Promise<ElementHandle[]> {
+    return this.getElements(PostPreviewSelector.tag);
   }
 }

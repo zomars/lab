@@ -7,7 +7,7 @@ export function gAnalyticsInit(window: IGAnalyticsWindow): void {
   window.dataLayer = window.dataLayer || [];
 
   function gtag(...args: any[]): void {
-    window.dataLayer.push(...args);
+    window.dataLayer.push(args);
   }
 
   window.gtag = window.gtag || gtag;
