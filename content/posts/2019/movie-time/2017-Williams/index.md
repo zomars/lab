@@ -43,3 +43,5 @@ On this point you might be thinking that Williams team was always mixed up or ev
 I found movie to be mostly on the dark side of things but it is deeply touching and enjoyable enough to write this post trying to share Williams history bits with you, dear reader. Cheers and hope you enjoy the movie!
 
 Couldn't find full version on youtube, hence the trailer:
+
+<VideoPlayer src = 'https://www.youtube-nocookie.com/embed/ItTKBbAsLMc'/>
