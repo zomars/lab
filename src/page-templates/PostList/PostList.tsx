@@ -3,7 +3,7 @@ import { graphql, PageRendererProps } from 'gatsby';
 import { cn } from '@bem-react/classname';
 
 import { Layout } from '../../components/Layout';
-import { SEO } from '../../components/seo';
+import { Seo } from '../../components/Seo';
 import { PostPreview } from '../../components/PostPreview/PostPreview';
 import { IBlogPost } from '../../types/common.types';
 import { postsPerPage } from '../../constants';
@@ -95,7 +95,7 @@ export function PostList(props: IPostListProps): ReactElement {
 
   return (
     <Layout>
-      <SEO
+      <Seo
         title = { `All #${ pageContext.tag } posts, page ${ pageContext.currentPage }` }
         keywords = { keywords }
       />

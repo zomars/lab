@@ -39,3 +39,9 @@ export interface IUniquePostTag {
   name: string;
   count: number;
 }
+
+export interface ISiteMetadata {
+  title: string;
+  description: string;
+  author: string;
+}

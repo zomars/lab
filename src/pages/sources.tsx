@@ -1,10 +1,30 @@
 import React, { ReactElement } from 'react';
 
 import { Layout } from '../components/Layout';
+import { Seo } from '../components/Seo';
 
-function Sources(): ReactElement {
+const pageKeywords = [
+  'frontend',
+  'books',
+  'people',
+  'podcasts',
+  'twitter',
+  'courses',
+  'UI',
+  'experts',
+  'UX',
+  'engineering',
+  'javascript',
+  'typescript',
+];
+
+export function Sources(): ReactElement {
   return (
     <Layout>
+      <Seo
+        title = 'Frontend sources, references, conversations, books and courses'
+        keywords = { pageKeywords }
+      />
       <h1>Sources</h1>
 
       <p>
@@ -93,6 +113,11 @@ function Sources(): ReactElement {
           {' '}by <a href = 'https://twitter.com/joulee'>Julie Zhuo</a>
           {' '}&mdash; Management 101 course
         </li>
+      </ul>
+
+      <h2>Twitter lists</h2>
+      <ul>
+        <li>My compilation of prominent <a href = 'https://twitter.com/i/lists/1163692012383588352'>frontend folks</a> and devs in general</li>
       </ul>
 
       <p>

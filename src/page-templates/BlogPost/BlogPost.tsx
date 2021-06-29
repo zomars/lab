@@ -4,7 +4,7 @@ import { cn } from '@bem-react/classname';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 import { Layout } from '../../components/Layout';
-import { SEO } from '../../components/seo';
+import { Seo } from '../../components/Seo';
 import { IBlogPost } from '../../types/common.types';
 import { PostTags } from '../../components/PostTags/PostTags';
 import { BlogPostPaginator } from './BlogPostPaginator/BlogPostPaginator';
@@ -65,7 +65,7 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
       <Layout
         className = { cnBlogPost() }
       >
-        <SEO
+        <Seo
           title = { title }
           description = { post.excerpt }
         />
