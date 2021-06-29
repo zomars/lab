@@ -14,7 +14,12 @@ import './PostList.scss';
 export const postsQuery = graphql`
   query blogListQuery($skip: Int!, $limit: Int!, $tag: String!) {
     onePagePosts: allMdx(
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      filter: {
+        frontmatter: {
+          published: { ne: false }
+          tags: { in: [$tag] }
+        }
+      }
       sort: { fields: [frontmatter___date], order: DESC }
       limit: $limit
       skip: $skip
@@ -31,6 +36,7 @@ export const postsQuery = graphql`
         }
         frontmatter {
           date(formatString: "MMM DD, YYYY")
+          updated(formatString: "MMM DD, YYYY")
           tags
           title
           coverImage {

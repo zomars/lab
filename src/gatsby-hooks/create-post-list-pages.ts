@@ -12,7 +12,12 @@ const postListComponentPath = path.resolve(
 const postsQuery = /* GraphQL */ `
   query PostsListByTag($tag: String) {
     allPostsByTag: allMdx(
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      filter: {
+        frontmatter: {
+          published: { ne: false }
+          tags: { in: [$tag] }
+        }
+      }
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
       nodes {

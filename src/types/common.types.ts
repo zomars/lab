@@ -14,6 +14,8 @@ interface IBlogPostFrontmatter {
   date: string,
   tags: string[],
   coverImage?: ImageDataLike,
+  published?: boolean,
+  updated?: string,
 }
 
 interface IReadingTime {

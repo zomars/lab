@@ -17,8 +17,14 @@ const cnPostPreview = cn('PostPreview');
  * Return post date, reading time and list of tags.
  */
 function getDetailsString(post: IBlogPost): string {
-  const { date } = post.frontmatter;
+  const { date: posted, updated } = post.frontmatter;
   const { text, words } = post.fields.readingTime;
+
+  let date = posted;
+
+  if (updated) {
+    date += ` (updated ${ updated })`;
+  }
 
   const details = [
     date,

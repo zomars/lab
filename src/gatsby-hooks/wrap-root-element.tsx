@@ -10,6 +10,11 @@ import { theme } from '../theme.mui';
 export const postsQuery = graphql`
   query Posts {
     allPosts: allMdx(
+      filter: {
+        frontmatter: {
+          published: { ne: false }
+        }
+      }
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
       posts: nodes {

@@ -6,6 +6,11 @@ import { IBlogPost } from '../types/common.types';
 export const postsQuery = /* GraphQL */ `
   query GatsbyNode {
     allPosts: allMdx(
+      filter: {
+        frontmatter: {
+          published: { ne: false }
+        }
+      }
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
       nodes {

@@ -22,6 +22,7 @@ export const pageQuery = graphql`
       body
       frontmatter {
         date(formatString: "MMM DD, YYYY")
+        updated(formatString: "MMM DD, YYYY")
         tags
         title
       }
@@ -50,7 +51,15 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
     const {
       title,
       tags,
+      date: posted,
+      updated,
     } = post.frontmatter;
+
+    let date = posted;
+
+    if (updated) {
+      date = `Originally posted ${ date }. Last update - ${ updated }`;
+    }
 
     return (
       <Layout
@@ -64,7 +73,7 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
         <h1>{ title }</h1>
 
         <p className = { cnBlogPost('Date') }>
-          { post.frontmatter.date }
+          { date }
         </p>
 
         <p>
