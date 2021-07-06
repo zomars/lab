@@ -24,8 +24,6 @@ describe('site header', () => {
     await expect(postPreview.getTitleText()).resolves.toEqual(expect.any(String));
 
     await expect(postPreview.getExcerptText()).resolves.toEqual(expect.any(String));
-
-    await expect(postPreview.getReadMore()).resolves.toBeTruthy();
   });
 
   it('post with image is present and has an image', async () => {

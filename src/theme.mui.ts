@@ -13,7 +13,8 @@ import {
   fontSize,
   fontSizes,
   fontWeights,
-  headerFontFamily, lineHeights,
+  headerFontFamily,
+  lineHeights,
   primaryColor,
   radii,
 } from './theme';

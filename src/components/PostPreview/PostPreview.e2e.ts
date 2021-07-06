@@ -54,10 +54,6 @@ export class PostPreview extends ComponentWrapper {
     return $title.innerText();
   }
 
-  public getReadMore(): Promise<ElementHandle> {
-    return this.getElementHandle(PostPreviewSelector.readMore);
-  }
-
   public async getTags(): Promise<string[]> {
     const $elements = await this.getTagElements();
 

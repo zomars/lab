@@ -1,4 +1,5 @@
 @use '../../styles/variables' as vars;
+@use '../../styles/mixins' as mixins;
 
 .PostPreview {
   margin-bottom: var(--aml-global-layout-padding-md);
@@ -9,6 +10,8 @@
   }
 
   &-Details {
+    flex-basis: 64%;
+    order: 1;
     color: var(--aml-color-muted-text);
     line-height: var(--aml-line-height-none);
   }
@@ -16,40 +19,49 @@
   &-PreviewWrapper {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    overflow: hidden;
   }
 
   &-ImageWrapper {
     display: flex;
     flex: 0 1 33%;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    order: 3;
+    margin-top: calc(-1 * var(--aml-font-size-5)); // to start from details line (desktop only)
+    margin-left: 1rem;
+    overflow: hidden;
+  }
+
+  &-Excerpt {
+    flex-basis: 64%;
+    flex-grow: 1;
+    order: 2;
+    color: var(--aml-color-text);
+
+    @include mixins.noLinkDecoration;
   }
 
   &-Image {
-    border: 2px solid var(--aml-color-gray-300);
+    border: var(--aml-border-width-2) solid var(--aml-color-gray-300);
     border-radius: var(--aml-radii-lg);
-  }
-
-  &-DetailsAndExcerpt {
-    flex: 1 1 64%;
-    margin-right: var(--aml-global-layout-padding-md);
-  }
-
-  &-ReadMore {
-    flex-basis: 100%;
   }
 }
 
-@media (max-width: vars.$breakpoint-sm) {
+@media (max-width: vars.$breakpoint-md) {
   .PostPreview {
     &-ImageWrapper {
       flex-basis: 100%;
+      justify-content: flex-start;
+      order: 2;
+      margin-top: 0;
       margin-bottom: var(--aml-size-sm);
+      margin-left: 0;
     }
 
-    &-ReadMore {
-      text-align: right;
+    &-Excerpt {
+      flex-basis: 100%;
+      order: 3;
     }
   }
 }

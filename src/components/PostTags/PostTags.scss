@@ -1,5 +1,9 @@
 .PostTags {
   &-Tag {
+    &:nth-last-child(n+2) {
+      margin-right: var(--aml-size-xs);
+    }
+
     &_active#{&}_link {
       font-weight: bold;
     }

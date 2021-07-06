@@ -3,7 +3,7 @@ import {
   bodyFontFamily,
   borderWidths,
   colors,
-  customSizes,
+  customSizes, fontSize,
   fontSizes,
   fontWeights,
   headerFontFamily,
@@ -12,7 +12,7 @@ import {
   mutedTextColor,
   primaryColor,
   radii,
-  sizes,
+  sizes, textColor,
 } from '../theme';
 
 export type TCssPropValue = string|number;
@@ -20,11 +20,13 @@ export type TCssPropValue = string|number;
 export const customCssPropsMap = new Map<string, TCssPropValue>();
 
 // single props
-customCssPropsMap.set('color-muted', mutedColor);
-customCssPropsMap.set('color-muted-text', mutedTextColor);
-customCssPropsMap.set('color-primary', primaryColor);
+customCssPropsMap.set('color-muted', mutedColor.toUpperCase());
+customCssPropsMap.set('color-text', textColor.toUpperCase());
+customCssPropsMap.set('color-muted-text', mutedTextColor.toUpperCase());
+customCssPropsMap.set('color-primary', primaryColor.toUpperCase());
 customCssPropsMap.set('font-body', bodyFontFamily.join(', '));
 customCssPropsMap.set('font-heading', headerFontFamily.join(', '));
+customCssPropsMap.set('font-size-body', `${ fontSize }px`);
 
 forEach(
   colors,
@@ -59,7 +61,7 @@ forEach(
 forEach(
   fontWeights,
   (value: TCssPropValue, key: string) => {
-    customCssPropsMap.set(`line-weight-${key}`, value);
+    customCssPropsMap.set(`font-weight-${key}`, value);
   },
 );
 

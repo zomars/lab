@@ -1,5 +1,3 @@
-import { useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
 import React, { ReactElement } from 'react';
 import { Link } from 'gatsby';
@@ -70,33 +68,19 @@ export function PostPreview(props: {
           data-testid = { cnPostPreview('Image') }
           imgClassName = { cnPostPreview('Image') }
           alt = { `Cover photo for ${ title } post` }
+          loading = 'eager'
           image = { imageData }
         />
       </Link>
     );
   }
 
-  const theme = useTheme();
-  const isLargeScreen = useMediaQuery(theme.breakpoints.up('sm'));
-
-  const ReadMore = (
-    <div className = { cnPostPreview('ReadMore') }>
-      <Link
-        data-testid = { cnPostPreview('ReadMore') }
-        to = { slug }
-        state = { blogPostLinkPayload }
-      >
-        Read more
-      </Link>
-    </div>
-  );
-
   return (
     <div
       className = { classnames(cnPostPreview(), className) }
       data-testid = { cnPostPreview({ withImage: !!coverImage }) }
     >
-      <p className = { cnPostPreview('Details') }>
+      <p>
         <PostTags
           tags = { tags }
           activeTag = { props.tag }
@@ -115,26 +99,22 @@ export function PostPreview(props: {
       </h3>
 
       <div className = { cnPostPreview('PreviewWrapper') }>
-        <div
-          className = { cnPostPreview('DetailsAndExcerpt') }
+        <p
+          className = { cnPostPreview('Details') }
         >
-          <p
-            className = { cnPostPreview('Details') }
-          >
-            { getDetailsString(post) }
-          </p>
+          { getDetailsString(post) }
+        </p>
 
-          { isLargeScreen ? null : CoverImage }
+        <Link
+          data-testid = { cnPostPreview('Excerpt') }
+          className = { cnPostPreview('Excerpt') }
+          to = { slug }
+          state = { blogPostLinkPayload }
+        >
+          <p dangerouslySetInnerHTML = {{ __html: post.excerpt! }}/>
+        </Link>
 
-          <p
-            data-testid = { cnPostPreview('Excerpt') }
-            dangerouslySetInnerHTML = {{ __html: post.excerpt! }}
-          />
-
-          { isLargeScreen ? ReadMore : null }
-        </div>
-
-        { isLargeScreen ? CoverImage : ReadMore }
+        { CoverImage }
       </div>
     </div>
   );

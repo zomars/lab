@@ -22,11 +22,23 @@ const plugins = [
       name: 'blog',
     },
   },
-  'gatsby-transformer-sharp',
   'gatsby-plugin-material-ui',
-  'gatsby-plugin-sharp',
+  {
+    resolve: 'gatsby-plugin-sharp',
+    options: {
+      defaults: {
+        breakpoints: [
+          600,
+          960,
+          1280,
+          1920,
+        ],
+      },
+    },
+  },
   'gatsby-plugin-image',
   'gatsby-remark-images',
+  'gatsby-transformer-sharp',
   'gatsby-plugin-preact',
   // 'gatsby-plugin-feed',
   /* {
