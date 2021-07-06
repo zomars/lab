@@ -18,10 +18,10 @@ interface ISection {
 
 const topSections = [
   {
-    name: 'Tech Posts',
+    name: 'Tech',
     tag: 'tech',
   }, {
-    name: 'Car Posts',
+    name: 'Cars',
     tag: 'cars',
   }, {
     name: 'Sources',

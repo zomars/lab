@@ -1,12 +1,10 @@
 import React, { ReactElement, ReactNode } from 'react';
 import { graphql, StaticQuery, WrapRootElementBrowserArgs } from 'gatsby';
-import { MDXProvider } from '@mdx-js/react';
 import {
   ThemeProvider,
 } from '@material-ui/core/styles';
 
 import { PostContextProvider } from '../components/PostContextProvider/PostContextProvider';
-import { VideoPlayer } from '../components/VideoPlayer/VideoPlayer';
 import { theme } from '../theme.mui';
 
 export const postsQuery = graphql`
@@ -38,10 +36,6 @@ export const postsQuery = graphql`
   }
 `;
 
-const mdxComponents = {
-  VideoPlayer,
-};
-
 /**
  * Set up postsContext for all nested elements.
  */
@@ -49,21 +43,17 @@ export function wrapRootElement(
   { element }: WrapRootElementBrowserArgs,
 ): ReactNode {
   return (
-    <MDXProvider
-      components = { mdxComponents }
-    >
-      <ThemeProvider theme = { theme }>
-        <StaticQuery
-          query = { postsQuery }
-          render = { data => (
-            <PostContextProvider
-              data = { data }
-            >
-              { element as ReactElement }
-            </PostContextProvider>
-          ) }
-        />
-      </ThemeProvider>
-    </MDXProvider>
+    <ThemeProvider theme = { theme }>
+      <StaticQuery
+        query = { postsQuery }
+        render = { data => (
+          <PostContextProvider
+            data = { data }
+          >
+            { element as ReactElement }
+          </PostContextProvider>
+        ) }
+      />
+    </ThemeProvider>
   );
 }

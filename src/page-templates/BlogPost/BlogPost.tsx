@@ -2,9 +2,12 @@ import React, { ReactElement } from 'react';
 import { graphql, PageRendererProps } from 'gatsby';
 import { cn } from '@bem-react/classname';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
+import { MDXProvider } from '@mdx-js/react';
 
 import { Layout } from '../../components/Layout';
+import { H1, H2, H3, H4, H5, H6 } from '../../components/MDXHeader/MDXHeader';
 import { Seo } from '../../components/Seo';
+import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
 import { IBlogPost } from '../../types/common.types';
 import { PostTags } from '../../components/PostTags/PostTags';
 import { BlogPostPaginator } from './BlogPostPaginator/BlogPostPaginator';
@@ -29,6 +32,16 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+const mdxComponents = {
+  VideoPlayer,
+  h1: H1,
+  h2: H2,
+  h3: H3,
+  h4: H4,
+  h5: H5,
+  h6: H6,
+};
 
 interface IGqlResponse {
   post: IBlogPost,
@@ -83,7 +96,11 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
           />
         </p>
 
-        <MDXRenderer>{ post.body! }</MDXRenderer>
+        <MDXProvider
+          components = { mdxComponents }
+        >
+          <MDXRenderer>{ post.body! }</MDXRenderer>
+        </MDXProvider>
 
         <hr className = { cnBlogPost('BottomLine') }/>
 

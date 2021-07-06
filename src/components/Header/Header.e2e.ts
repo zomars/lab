@@ -13,8 +13,8 @@ export enum MenuListItem {
 }
 
 const labels = {
-  [MenuListItem.techPosts]: 'Tech Posts',
-  [MenuListItem.carPosts]: 'Car Posts',
+  [MenuListItem.techPosts]: 'Tech',
+  [MenuListItem.carPosts]: 'Cars',
   [MenuListItem.sources]: 'Sources',
   [MenuListItem.about]: 'About',
 };
@@ -26,8 +26,8 @@ export const menuLabelsMap = new Map<MenuListItem, string>(
 enum HeaderSelector {
   about = '[data-testid*=HeaderTabs-Tab_about]',
   host = 'data-testid=Header',
-  carPosts = '[data-testid*=HeaderTabs-Tab_car_posts]',
-  techPosts = '[data-testid*=HeaderTabs-Tab_tech_posts]',
+  carPosts = '[data-testid*=HeaderTabs-Tab_cars]',
+  techPosts = '[data-testid*=HeaderTabs-Tab_tech]',
   sources = '[data-testid*=HeaderTabs-Tab_sources]',
 }
 

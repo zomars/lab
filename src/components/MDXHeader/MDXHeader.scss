@@ -1,0 +1,26 @@
+.MDXHeader {
+  &:hover {
+    .MDXHeader-ChainLink {
+      opacity: 1;
+    }
+  }
+
+  &-ChainLink {
+    margin-right: 0.2rem;
+    opacity: 0;
+  }
+
+  &-ChainLinkIcon {
+    transform: rotate(-45deg) translateY(2px);
+  }
+
+  &-Anchor {
+    text-decoration: none;
+    cursor: default;
+
+    &:hover {
+      text-decoration: none;
+      cursor: default;
+    }
+  }
+}
