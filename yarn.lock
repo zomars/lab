@@ -4584,7 +4584,7 @@ babel-plugin-polyfill-regenerator@^0.2.2:
   dependencies:
     "@babel/helper-define-polyfill-provider" "^0.2.2"
 
-babel-plugin-remove-graphql-queries@^3.8.0, babel-plugin-remove-graphql-queries@^3.9.0:
+babel-plugin-remove-graphql-queries@^3.9.0:
   version "3.9.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-remove-graphql-queries/-/babel-plugin-remove-graphql-queries-3.9.0.tgz#73732b5632a944ad4d623a30b8dca69c529ffceb"
   integrity sha512-gr7n6Ytoyp6Ix7XX071oVPynC+jfesYH05fzg8Ih8yKQsBxmqWiMxAUIHuD70ieZJ94TxlXQQbHYi6oibmlx7w==
@@ -8848,7 +8848,7 @@ gatsby-cli@^3.9.0:
     yoga-layout-prebuilt "^1.9.6"
     yurnalist "^2.1.0"
 
-gatsby-core-utils@^2.8.0, gatsby-core-utils@^2.9.0:
+gatsby-core-utils@^2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-2.9.0.tgz#f1ba30dfa687bdd2c1c5106d29e6491e5376e8c5"
   integrity sha512-LKmkk4B/VnSEYKR9W/C8Lp9lwk/l/qY5jbsoiChc43F67VM667gITWH0noSUdcGzbEsN8xi0Wuc8dMA6BvKkvg==
@@ -8907,21 +8907,21 @@ gatsby-plugin-google-gtag@^3.9.0:
     "@babel/runtime" "^7.14.0"
     minimatch "^3.0.4"
 
-gatsby-plugin-image@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-image/-/gatsby-plugin-image-1.8.0.tgz#9a530cbd2c7b8219d36bb47081e01b3684fa6d41"
-  integrity sha512-nE7VAjhoKlAEtiBmDYo7PFsr4InyrKaHg47ou2b3PG++JiZQRkeVYDq1qeBPmbjh0DA93KMVOheIlc1NuVZvAQ==
+gatsby-plugin-image@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-image/-/gatsby-plugin-image-1.9.0.tgz#2728a166ac541933754828ee1a4fcd8a24e1c796"
+  integrity sha512-MxqXsgMpAfzm2HhySlv1enojy15BkAhm96tiVPkSO7BMiufm6eS9VvIu+eJ4cthCdJztOcYlzTlWNCI+whEUPg==
   dependencies:
     "@babel/code-frame" "^7.14.0"
     "@babel/parser" "^7.14.0"
     "@babel/traverse" "^7.14.0"
     babel-jsx-utils "^1.1.0"
-    babel-plugin-remove-graphql-queries "^3.8.0"
+    babel-plugin-remove-graphql-queries "^3.9.0"
     camelcase "^5.3.1"
     chokidar "^3.5.1"
     common-tags "^1.8.0"
     fs-extra "^8.1.0"
-    gatsby-core-utils "^2.8.0"
+    gatsby-core-utils "^2.9.0"
     objectFitPolyfill "^2.3.0"
     prop-types "^15.7.2"
 
