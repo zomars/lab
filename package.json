@@ -13,7 +13,7 @@
     "@theme-ui/presets": "^0.10.0",
     "gatsby": "^3.9.1",
     "gatsby-plugin-google-gtag": "^3.10.0",
-    "gatsby-plugin-image": "^1.9.0",
+    "gatsby-plugin-image": "^1.10.1",
     "gatsby-plugin-material-ui": "^3.0.1",
     "gatsby-plugin-mdx": "^2.10.0",
     "gatsby-plugin-preact": "^5.10.0",
