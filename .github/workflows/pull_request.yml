@@ -8,6 +8,10 @@ on:
 env:
   PR_ID: ${{ github.event.number }}
 
+concurrency:
+  group: pr-update-${{ github.event.number }}
+  cancel-in-progress: true
+
 jobs:
   setup:
     name: Yarn install

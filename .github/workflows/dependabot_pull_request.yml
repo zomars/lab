@@ -10,6 +10,10 @@ on:
 env:
   PR_ID: ${{ github.event.number }}
 
+concurrency:
+  group: dependabot-pr-${{ github.event.number }}
+  cancel-in-progress: true
+
 jobs:
   remove_labels:
     name: Remove labels
