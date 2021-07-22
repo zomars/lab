@@ -109,6 +109,8 @@ const e2eTestOverrides = {
   },
   extends: [
     'plugin:jest-playwright/recommended',
+    'plugin:jest/recommended',
+    'plugin:jest/style',
   ],
   rules: {
     'import/no-extraneous-dependencies': [
@@ -243,6 +245,7 @@ const config = {
   },
   plugins: [
     'react',
+    'jest',
   ],
   globals: {
     graphql: false,

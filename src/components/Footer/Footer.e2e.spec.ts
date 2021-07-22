@@ -29,7 +29,7 @@ describe('site header', () => {
 
       const icons = await footer.getIcons();
 
-      expect(icons.length).toEqual(3);
+      expect(icons).toHaveLength(3);
 
       await expect(footer.getCopyright()).resolves.toBeTruthy();
 
