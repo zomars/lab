@@ -66,7 +66,7 @@
     "lint-staged": "^11.0.1",
     "netlify-cli": "^5.0.0",
     "playwright": "^1.12.3",
-    "playwright-chromium": "^1.12.3",
+    "playwright-chromium": "^1.13.0",
     "sass": "^1.35.2",
     "stylelint": "^13.13.1",
     "stylelint-config-recommended": "^5.0.0",
