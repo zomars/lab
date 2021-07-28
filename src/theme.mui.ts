@@ -1,9 +1,21 @@
+/**
+ * @fileoverview
+ * Here we are making runtime-styling through material theme aware of our own theme.
+ * So that stuff rendered by it matches our own styling.
+ */
+
 import { createTheme } from '@material-ui/core/styles';
 import {
   bodyFontFamily,
   breakpoints,
   colors,
-  headerFontFamily,
+  customSizes,
+  fontSize,
+  fontSizes,
+  fontWeights,
+  headerFontFamily, lineHeights,
+  primaryColor,
+  radii,
 } from './theme';
 
 const headerFontFamilyList = headerFontFamily.join(', ');
@@ -14,22 +26,29 @@ const headers = {};
   .forEach((headerType: string) => {
     headers[headerType] = {
       fontFamily: headerFontFamilyList,
-      fontWeight: 600,
+      fontWeight: fontWeights.heading,
+      lineHeight: lineHeights.heading,
+      my: customSizes.md,
+      color: primaryColor,
     };
   });
+
+// might need to export header customization too
 
 const typography = {
   fontFamily: bodyFontFamily.join(', '),
   ...headers,
   button: {
-    fontWeight: 600,
-    fontSize: '1.1rem',
+    fontWeight: fontWeights.semibold,
+    fontSize: fontSizes[3] * fontSize, // px
   },
 };
 
 export const theme = createTheme({
   palette: {
-    // @todo: pass primary color
+    primary: {
+      main: primaryColor,
+    },
     ...colors,
   },
   typography,
@@ -37,6 +56,6 @@ export const theme = createTheme({
     values: breakpoints,
   },
   shape: {
-    borderRadius: 4, // radii.md
+    borderRadius: radii.md, // radii.md
   },
 });

@@ -1,4 +1,69 @@
-// from https://github.com/system-ui/theme-ui/blob/develop/packages/preset-tailwind/src/index.ts
+// originally from
+// https://github.com/system-ui/theme-ui/blob/develop/packages/preset-tailwind/src/index.ts
+// with quite a bit of customization
+
+
+// Have to match SCSS variables! No export here, sorry
+export const breakpoints = {
+  xs: 0,
+  sm: 600,
+  md: 960,
+  lg: 1280,
+  xl: 1920,
+};
+
+export const fontSize = 16; // px
+
+export const headerFontFamily = [
+  'Merriweather',
+  'serif',
+];
+
+export const bodyFontFamily = [
+  'Source Sans Pro',
+  'sans-serif',
+];
+
+// rems
+export const fontSizes = [
+  0.75,
+  0.875,
+  1,
+  1.1,
+  1.25,
+  1.5, // 5th
+  1.75,
+  2.125,
+  3,
+  3.75,
+  4.5, // 10th
+  6,
+];
+
+export const lineHeights = {
+  none: 1,
+  tight: 1.25,
+  snug: 1.375,
+  normal: 1.5,
+  relaxed: 1.625,
+  loose: 2,
+  body: 1.53,
+  heading: 1.1,
+};
+
+export const fontWeights = {
+  hairline: 100,
+  thin: 200,
+  light: 300,
+  normal: 400,
+  body: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+  heading: 700,
+  extrabold: 800,
+  black: 900,
+};
 
 const sourceColors: Record<string, string[]> = {
   grey: [
@@ -130,22 +195,10 @@ Object.entries(sourceColors)
     colors[colorName] = hash;
   });
 
-export const headerFontFamily = [
-  'Merriweather',
-  'serif',
-];
-
-export const bodyFontFamily = [
-  'Source Sans Pro',
-  'sans-serif',
-];
 
 export const primaryColor = colors.blue[700];
-
 export const mutedColor = colors.grey[300];
 export const mutedTextColor = colors.grey[600];
-
-export const fontSize = 16; // px
 
 export const sizes = [
   0,
@@ -175,63 +228,18 @@ export const customSizes = {
 }; // in px
 
 export const borderWidths = [
-  0, 2, 4, 8,
-];
-
-export const fontSizes = [
-  0.75,
-  0.875,
+  0,
   1,
-  1.1,
-  1.25,
-  1.5,
-  1.75, // 5th
-  2.125,
-  3,
-  3.75,
-  4.5,
-  6, // 10th
+  2,
+  4,
+  8,
 ];
 
-export const breakpoints = {
-  xs: 0,
-  sm: 600,
-  md: 960,
-  lg: 1280,
-  xl: 1920,
-};
-
-// below constants are not used yet
-
-export const lineHeights = {
-  none: 1,
-  tight: 1.25,
-  snug: 1.375,
-  normal: 1.5,
-  relaxed: 1.625,
-  loose: 2,
-  body: 1.53,
-  heading: 1.1,
-};
-
-export const fontWeights = {
-  hairline: 100,
-  thin: 200,
-  light: 300,
-  normal: 400,
-  body: 400,
-  medium: 500,
-  semibold: 600,
-  bold: 700,
-  heading: 700,
-  extrabold: 800,
-  black: 900,
-};
-
+// border-radius
 export const radii = {
-  none: '0',
-  sm: '0.125rem',
-  default: '0.25rem',
-  md: '0.25rem',
-  lg: '0.5rem',
+  none: 0,
+  sm: 0.125 * fontSize,
+  default: 0.25 * fontSize,
+  md: 0.25 * fontSize,
+  lg: 0.5 * fontSize,
 };

@@ -49,7 +49,7 @@ describe('site header', () => {
 
     await expect(page).toHaveSelectorCount(
       `${postTagSelector}:has-text("tech")`,
-      3,
+      2,
     );
 
     await expect(header.clickMenuItem(MenuListItem.carPosts)).resolves.toBe(true);

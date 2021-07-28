@@ -19,7 +19,7 @@ yarn-error.log
 .yarn-integrity
 
 # automatically created files
-src/styles/theme-ui-custom-props.css
+src/styles/theme-custom-props.css
 
 # Local Netlify folder
 .netlify

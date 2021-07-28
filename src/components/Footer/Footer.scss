@@ -2,11 +2,11 @@
 
 .Footer {
   display: flex;
-  border-top-width: var(--theme-ui-border-width-px);
+  border-top-width: var(--aml-border-width-1);
   border-top-style: solid;
-  border-color: var(--theme-ui-color-gray-400);
-  background-color: var(--theme-ui-color-gray-300);
-  line-height: var(--theme-ui-size-xl);
+  border-color: var(--aml-color-gray-400);
+  background-color: var(--aml-color-gray-300);
+  line-height: var(--aml-size-xl);
 
   &-Wrapper {
     display: flex;
@@ -17,7 +17,7 @@
 
   &-Item {
     &:first-child, &:last-child {
-      min-width: var(--theme-ui-size-xxl);
+      min-width: var(--aml-size-xxl);
     }
 
     &:last-child {
@@ -25,7 +25,7 @@
     }
 
     &_muted {
-      color: var(--theme-ui-color-muted-text);
+      color: var(--aml-color-muted-text);
     }
   }
 }

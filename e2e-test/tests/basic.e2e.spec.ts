@@ -14,7 +14,7 @@ describe('basics', () => {
   it('has list of posts', async () => {
     await expect(page).toHaveText(
       'data-testid=PostPreview-Excerpt',
-      'Everyone knows AngularJs',
+      'Everyone knows  AngularJs',
     );
   });
 });

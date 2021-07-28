@@ -1,7 +1,7 @@
 ---
 title: 'Mazda RF Test Drive'
 date: '2021-02-01T23:59:59.000Z'
-tags: ['tech', 'cars', 'mazda']
+tags: ['cars', 'mazda']
 coverImage: './front.jpg'
 ---
 

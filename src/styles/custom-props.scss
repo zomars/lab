@@ -8,12 +8,12 @@
   --aml-breakpoint-xl: #{vars.$breakpoint-xl};
 
   // completely custom and responsive
-  --aml-global-layout-padding-md: var(--theme-ui-size-lg);
+  --aml-global-layout-padding-md: var(--aml-size-lg);
   --aml-global-layout-width-lg: var(--aml-breakpoint-md);
 }
 
 @media (max-width: vars.$breakpoint-md) {
   :root {
-    --aml-global-layout-padding-md: var(--theme-ui-size-md);
+    --aml-global-layout-padding-md: var(--aml-size-md);
   }
 }

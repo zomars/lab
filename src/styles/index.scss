@@ -1,4 +1,4 @@
-@use './theme-ui-custom-props';
+@use './theme-custom-props';
 @use './custom-props';
 @use './native-tags';
 
@@ -22,8 +22,8 @@ body {
   flex-direction: column;
   flex-grow: 1;
   margin: 0;
-  font-family: var(--theme-ui-font-body);
-  font-size: var(--theme-ui-font-size-2);
-  font-weight: var(--theme-ui-font-weight-body);
-  line-height: var(--theme-ui-line-height-body);
+  font-family: var(--aml-font-body);
+  font-size: var(--aml-font-size-2);
+  font-weight: var(--aml-font-weight-body);
+  line-height: var(--aml-line-height-body);
 }

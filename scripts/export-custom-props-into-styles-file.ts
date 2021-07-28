@@ -4,9 +4,9 @@ import { join } from 'path';
 import {
   customCssPropsMap,
   TCssPropValue,
-} from '../src/utils/load-custom-props-from-theme-ui';
+} from '../src/utils/create-custom-props-map-from-theme';
 
-const path = join(__dirname, '../src/styles/theme-ui-custom-props.css');
+const path = join(__dirname, '../src/styles/theme-custom-props.css');
 
 /**
  * Generate string content for CSS file with custom properties.
@@ -17,7 +17,7 @@ function generateCssContent(propsMap: Map<string, TCssPropValue>): string {
   const propsLines = Array.from(
     propsMap.entries(),
   ).map(([key, value]: [string, TCssPropValue]): string => {
-    return `--theme-ui-${key}: ${value};`;
+    return `--aml-${key}: ${value};`;
   });
 
   res += propsLines.join('\n  ');
