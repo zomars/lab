@@ -1,4 +1,8 @@
-import { GatsbyImage, getImage, IGatsbyImageData } from 'gatsby-plugin-image';
+import {
+  GatsbyImage,
+  getImage,
+  IGatsbyImageData,
+} from 'gatsby-plugin-image';
 import React, { ReactElement } from 'react';
 import { Link } from 'gatsby';
 import { cn } from '@bem-react/classname';

@@ -80,4 +80,6 @@ const reactRules = {
   ...reactHookRules,
 };
 
-module.exports = reactRules;
+module.exports = {
+  rule: reactRules,
+};

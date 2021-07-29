@@ -1,14 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const namingConventions = require('./naming.eslintrc');
-const reactRules = require('./react.eslintrc');
-
-const {
-  classNamingConvention,
-  constantNamingConvention,
-  interfaceNamingConvention,
-  propertyNamingConvention,
-  variableNamingConvention,
-} = namingConventions;
+const { rules: namingRules } = require('./naming.eslintrc');
+const { rules: reactRules } = require('./react.eslintrc');
+const { rules: newlineRules } = require('./newline.eslintrc');
 
 const OFF = 0;
 const WARN = 1;
@@ -58,14 +51,6 @@ const importRules = {
 
 const tsEslintRules = {
   '@typescript-eslint/ban-ts-comment': WARN,
-  '@typescript-eslint/naming-convention': [
-    ERROR,
-    variableNamingConvention,
-    constantNamingConvention,
-    propertyNamingConvention,
-    classNamingConvention,
-    interfaceNamingConvention,
-  ],
   '@typescript-eslint/indent': [
     ERROR,
     2,
@@ -232,9 +217,11 @@ const rules = {
     1,
   ],
   'lines-between-class-members': ERROR,
+  ...namingRules,
   ...tsEslintRules,
   ...importRules,
   ...reactRules,
+  ...newlineRules,
 };
 
 const config = {

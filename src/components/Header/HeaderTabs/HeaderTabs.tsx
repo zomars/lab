@@ -34,6 +34,7 @@ const topSections = [
 
 topSections.forEach((section: ISection) => {
   section.testId = snakeCase(section.name);
+
   const { tag } = section;
 
   if (tag) {

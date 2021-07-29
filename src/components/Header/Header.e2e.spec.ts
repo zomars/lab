@@ -1,5 +1,9 @@
 import { IGlobal } from '../../../e2e-test/e2e.types';
-import { Header, MenuListItem, menuLabelsMap } from './Header.e2e';
+import {
+  Header,
+  MenuListItem,
+  menuLabelsMap,
+} from './Header.e2e';
 
 const localGlobal = global as IGlobal & typeof globalThis;
 

@@ -1,6 +1,10 @@
 /** @jsx h */
 
-import { h, VNode, Attributes } from 'preact';
+import {
+  h,
+  VNode,
+  Attributes,
+} from 'preact';
 
 interface IHTMLPageProps {
   htmlAttributes: Attributes,

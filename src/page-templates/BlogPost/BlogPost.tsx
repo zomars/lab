@@ -5,7 +5,14 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 
 import { Layout } from '../../components/Layout';
-import { H1, H2, H3, H4, H5, H6 } from '../../components/MDXHeader/MDXHeader';
+import {
+  H1,
+  H2,
+  H3,
+  H4,
+  H5,
+  H6,
+} from '../../components/MDXHeader/MDXHeader';
 import { Seo } from '../../components/Seo';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
 import { IBlogPost } from '../../types/common.types';

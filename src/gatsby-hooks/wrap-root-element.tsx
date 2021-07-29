@@ -1,5 +1,9 @@
 import React, { ReactElement, ReactNode } from 'react';
-import { graphql, StaticQuery, WrapRootElementBrowserArgs } from 'gatsby';
+import {
+  graphql,
+  StaticQuery,
+  WrapRootElementBrowserArgs,
+} from 'gatsby';
 import {
   ThemeProvider,
 } from '@material-ui/core/styles';

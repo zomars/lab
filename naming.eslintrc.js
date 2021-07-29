@@ -1,6 +1,7 @@
 const CAMELCASE = 'camelCase';
 const UPPERCASE = 'UPPER_CASE';
 const PASCALCASE = 'PascalCase';
+const ERROR = 2;
 
 const ALLOW = 'allow';
 
@@ -50,10 +51,17 @@ const interfaceNamingConvention = {
   ],
 };
 
+const rules = {
+  '@typescript-eslint/naming-convention': [
+      ERROR,
+      variableNamingConvention,
+      constantNamingConvention,
+      propertyNamingConvention,
+      classNamingConvention,
+      interfaceNamingConvention,
+  ],
+};
+
 module.exports = {
-  classNamingConvention,
-  constantNamingConvention,
-  interfaceNamingConvention,
-  propertyNamingConvention,
-  variableNamingConvention,
+  rules,
 };
