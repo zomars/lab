@@ -63,7 +63,7 @@
     "jest-playwright-preset": "1.7.0",
     "lint-staged": "^11.1.1",
     "netlify-cli": "^5.4.1",
-    "playwright": "^1.13.0",
+    "playwright": "^1.13.1",
     "playwright-chromium": "^1.13.1",
     "sass": "^1.37.0",
     "stylelint": "^13.13.1",
