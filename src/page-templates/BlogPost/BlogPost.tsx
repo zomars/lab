@@ -13,6 +13,12 @@ import {
   H5,
   H6,
 } from '../../components/MDXHeader/MDXHeader';
+import {
+  MDXTableBody,
+  MDXTableCell,
+  MDXTableHead,
+  MDXTableRow,
+} from '../../components/MDXTable';
 import { Seo } from '../../components/Seo';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
 import { IBlogPost } from '../../types/common.types';
@@ -41,13 +47,18 @@ export const pageQuery = graphql`
 `;
 
 const mdxComponents = {
-  VideoPlayer,
   h1: H1,
   h2: H2,
   h3: H3,
   h4: H4,
   h5: H5,
   h6: H6,
+  th: MDXTableCell,
+  td: MDXTableCell,
+  thead: MDXTableHead,
+  tbody: MDXTableBody,
+  tr: MDXTableRow,
+  VideoPlayer,
 };
 
 interface IGqlResponse {

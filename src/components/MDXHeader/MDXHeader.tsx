@@ -3,11 +3,13 @@ import { kebabCase } from 'lodash';
 import { cn } from '@bem-react/classname';
 import { Link as LinkIcon } from '@material-ui/icons';
 
+import { IReactNodeProps } from '../../types/common.types';
+
 import './MDXHeader.scss';
 
 type THeaderTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
-interface IMDXHeaderProps {
+interface IMDXHeaderProps extends IReactNodeProps {
   children: string, // text content of the header
 }
 

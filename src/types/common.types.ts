@@ -1,4 +1,5 @@
 import { Node } from 'gatsby';
+import { ReactNode } from 'react';
 import { ImageDataLike } from 'gatsby-plugin-image/dist/src/components/hooks';
 
 export interface INodeFields {
@@ -44,4 +45,8 @@ export interface ISiteMetadata {
   title: string;
   description: string;
   author: string;
+}
+
+export interface IReactNodeProps {
+  children: string | ReactNode;
 }
