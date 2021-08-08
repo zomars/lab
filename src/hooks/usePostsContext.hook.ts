@@ -23,13 +23,13 @@ export function useAdjacentPosts(
   const currentPostIndex = postsPerTag
     .findIndex(post => post.fields.slug === slug);
 
-  const previousPost = currentPostIndex > 0 ?
+  const nextPost = currentPostIndex > 0 ?
     postsPerTag[currentPostIndex - 1] : null;
 
-  const nextPostIndex = currentPostIndex + 1;
+  const previousPostIndex = currentPostIndex + 1;
 
-  const nextPost = nextPostIndex < postsPerTag.length ?
-    postsPerTag[nextPostIndex] : null;
+  const previousPost = previousPostIndex < postsPerTag.length ?
+    postsPerTag[previousPostIndex] : null;
 
   return [
     previousPost,
