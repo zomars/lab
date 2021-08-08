@@ -3,6 +3,7 @@ title: 'GTI MK7 test drive'
 date: '2019-04-10T23:59:59.000Z'
 tags: ['cars']
 coverImage: './steering-wheels.jpg'
+published: false
 ---
 
 Покатался два дня на машине 2017-ого года - тоже белой, с пробегом в 20+ тысяч, на ручке и с performance package: диф и тормоза от R. Думал покупать или нет, но отказался в итоге от этой идеи.

@@ -3,6 +3,7 @@ title: 'Mazda RF Test Drive'
 date: '2021-02-01T23:59:59.000Z'
 tags: ['cars', 'mazda']
 coverImage: './front.jpg'
+published: false
 ---
 
 В конце прошлого года мы летали в <i>Los Angeles Porsche Experience Center</i> кататься на 718-ом Boxster. Но про этот двухчасовой опыт в следующих сериях.

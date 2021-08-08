@@ -10,4 +10,9 @@
   &-BottomLine {
     margin-top: var(--aml-size-8);
   }
+
+  .MuiTable-root {
+    margin-top: var(--aml-size-sm);
+    margin-bottom: var(--aml-size-md);
+  }
 }
