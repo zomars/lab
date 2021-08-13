@@ -75,8 +75,9 @@ const plugins = [
           options: {
             withAvif: true,
             withWebp: true,
-            maxWidth: 2048,
+            maxWidth: 650,
             quality: 80,
+            showCaptions: ['title'],
           },
         },
         // 'gatsby-remark-prismjs',

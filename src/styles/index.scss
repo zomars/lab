@@ -1,6 +1,7 @@
 @use './theme-custom-props';
 @use './custom-props';
 @use './native-tags';
+@use './gatsby-and-plugins';
 
 // footer is added by SSR (gatsby-ssr), looks like style aren't pulled in
 // hence adding them here
