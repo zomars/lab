@@ -81,6 +81,7 @@ const tsEslintRules = {
   '@typescript-eslint/member-ordering': ERROR,
   '@typescript-eslint/semi': ERROR,
   '@typescript-eslint/prefer-for-of': ERROR,
+  '@typescript-eslint/comma-dangle': [ERROR, 'always-multiline'],
 };
 
 const e2eTestOverrides = {
@@ -217,6 +218,7 @@ const rules = {
     1,
   ],
   'lines-between-class-members': ERROR,
+  'comma-dangle': OFF, // replaced with ts rule
   ...namingRules,
   ...tsEslintRules,
   ...importRules,

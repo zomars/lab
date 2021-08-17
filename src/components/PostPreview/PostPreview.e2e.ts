@@ -40,8 +40,9 @@ export class PostPreview extends ComponentWrapper {
 
   public async getExcerptText(): Promise<string> {
     const $excerpt = await this.getElementHandle(PostPreviewSelector.excerpt);
+    const text = await $excerpt.innerText();
 
-    return $excerpt.innerText();
+    return text.trim();
   }
 
   public getTitle(): Promise<ElementHandle> {
@@ -50,8 +51,9 @@ export class PostPreview extends ComponentWrapper {
 
   public async getTitleText(): Promise<string> {
     const $title = await this.getTitle();
+    const title = await $title.innerText();
 
-    return $title.innerText();
+    return title.trim();
   }
 
   public async getTags(): Promise<string[]> {

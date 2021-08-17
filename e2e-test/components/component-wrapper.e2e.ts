@@ -2,7 +2,9 @@ import { ElementHandle } from 'playwright';
 import { isString } from 'lodash';
 
 export interface IComponentWrapperArgs {
-  hostSelector: string
+  hostSelector: string,
+  nthOfType?: number, // to find the nth element within the 'scope'
+  hostElement?: ElementHandle<HTMLElement>, // can be passed as a ref
   mountTimeout?: number,
   scopeElement?: ElementHandle<HTMLElement> | string,
 }
@@ -26,11 +28,11 @@ export abstract class ComponentWrapper {
   protected constructor(args: IComponentWrapperArgs) {
     const {
       hostSelector,
-      scopeElement,
       mountTimeout,
+      scopeElement,
     } = args;
 
-    // not sure if needed on this, not used as of now
+    // not sure if needed on 'this', not used as of now
     this.hostSelector = hostSelector;
 
     if (!scopeElement || isString(scopeElement)) {
@@ -49,10 +51,17 @@ export abstract class ComponentWrapper {
       return;
     }
 
+    const {
+      hostElement,
+      nthOfType,
+    } = args;
+
     this.mountPromise = this.setHostElement(
       scopeElement,
       hostSelector,
+      nthOfType,
       mountTimeout,
+      hostElement,
     );
   }
 
@@ -111,16 +120,20 @@ export abstract class ComponentWrapper {
   /**
    * Return list of elements within host by the selector passed.
    */
-  protected getElements(
+  protected async getElements(
     selector: string,
-  ): Promise<ElementHandle[]> {
+  ): Promise<ElementHandle<HTMLElement>[]> {
     const { $host } = this;
 
     if (!$host) {
       throw Error('Not mounted yet');
     }
 
-    return $host.$$(selector);
+    // need this await cause it seems like $$ doesn't have an embedded timeout
+    await $host.waitForSelector(selector);
+
+    // figure out how to pass timeout here
+    return $host.$$(selector) as Promise<ElementHandle<HTMLElement>[]>;
   }
 
   /**
@@ -129,12 +142,24 @@ export abstract class ComponentWrapper {
   private setHostElement(
     scopeElement: ElementHandle<HTMLElement>,
     selector: string,
+    nthOfType?: number,
     timeout?: number,
+    hostElement?: ElementHandle<HTMLElement>,
   ): Promise<void> {
     const options: TWaitForOptions = {};
 
+    if (hostElement) {
+      this.$host = hostElement;
+
+      return Promise.resolve();
+    }
+
     if (timeout !== undefined) {
       options.timeout = timeout;
+    }
+
+    if (nthOfType !== undefined) {
+      selector += ` >> nth=${nthOfType}`;
     }
 
     return scopeElement.waitForSelector(selector, options)

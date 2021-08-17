@@ -56,8 +56,12 @@ export class Header extends ComponentWrapper {
   public async clickMenuItem(menuItem: MenuListItem): Promise<boolean> {
     const $elem = await this.getMenuItem(menuItem);
 
-    return $elem.click()
-      .then(() => true);
+    await Promise.all([
+      $elem.click(),
+      page.waitForNavigation(),
+    ]);
+
+    return true;
   }
 
   /**

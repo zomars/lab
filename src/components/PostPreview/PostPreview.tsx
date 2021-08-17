@@ -39,6 +39,7 @@ function getDetailsString(post: IBlogPost): string {
 
 export function PostPreview(props: {
   className?: string,
+  testId?: string,
   post: IBlogPost,
   tag: string,
 }): ReactElement {
@@ -79,10 +80,17 @@ export function PostPreview(props: {
     );
   }
 
+  const { testId } = props;
+
   return (
     <div
       className = { classnames(cnPostPreview(), className) }
-      data-testid = { cnPostPreview({ withImage: !!coverImage }) }
+      data-testid = {
+        classnames(
+          cnPostPreview({ withImage: !!coverImage }),
+          testId,
+        )
+      }
     >
       <p>
         <PostTags

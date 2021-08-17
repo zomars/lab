@@ -84,6 +84,7 @@ export function PostList(props: IPostListProps): ReactElement {
     (post: IBlogPost) => (
       <PostPreview
         className = { cnPostList('PostPreview') }
+        testId = { cnPostList('PostPreview') }
         tag = { pageContext.tag }
         post = { post }
         key = { post.fields.slug }
@@ -94,7 +95,9 @@ export function PostList(props: IPostListProps): ReactElement {
   const numPages = Math.ceil(totalCount / postsPerPage);
 
   return (
-    <Layout>
+    <Layout
+      testId = { cnPostList() }
+    >
       <Seo
         title = { `All #${ pageContext.tag } posts, page ${ pageContext.currentPage }` }
         keywords = { keywords }

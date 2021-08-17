@@ -8,6 +8,7 @@ const cnLayout = cn('Layout');
 
 interface ILayoutProps {
   className?: string,
+  testId?: string,
   children: ReactNode,
 }
 
@@ -15,10 +16,14 @@ export function Layout(props: ILayoutProps): ReactElement {
   const {
     children,
     className,
+    testId,
   } = props;
 
   return (
-    <div className = { classnames(cnLayout(), className) }>
+    <div
+      className = { classnames(cnLayout(), className) }
+      data-testid = { classnames(cnLayout(), testId) }
+    >
       <div
         className = { cnLayout('View') }
       >
