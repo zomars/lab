@@ -20,7 +20,7 @@
     "gatsby-plugin-sass": "^4.12.0",
     "gatsby-plugin-sharp": "^3.11.0",
     "gatsby-plugin-typescript": "^3.12.0",
-    "gatsby-remark-copy-linked-files": "^4.8.0",
+    "gatsby-remark-copy-linked-files": "^4.9.0",
     "gatsby-remark-images": "^5.8.0",
     "gatsby-remark-prismjs": "^5.9.0",
     "gatsby-remark-reading-time": "^1.1.0",
