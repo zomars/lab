@@ -1337,10 +1337,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@bem-react/classname@^1.5.11":
-  version "1.5.11"
-  resolved "https://registry.yarnpkg.com/@bem-react/classname/-/classname-1.5.11.tgz#5c13415e3318989bba848b69163a871eaa2b33ad"
-  integrity sha512-+fm/VojaS1VFAGOPs4E+/ayMTt7fUBrlFrEEP/xXKk8J/BB2F1fb/s3E2ep1Cw2//pceaH/qn7D/XAHdLeXIcg==
+"@bem-react/classname@^1.5.12":
+  version "1.5.12"
+  resolved "https://registry.yarnpkg.com/@bem-react/classname/-/classname-1.5.12.tgz#cd7e8fe68abd5d0ab79d8dc27fb40b12c8fb7715"
+  integrity sha512-7wc2zfHwGplXh1izmVfM8cHWOHx9eQEl4b2KiVp4Wa6Va/MEhnz+eFwEK+5A8o1tVKvHX0wiXkwDQLfFDl2wYw==
 
 "@bem-react/classnames@^1.3.10":
   version "1.3.10"
