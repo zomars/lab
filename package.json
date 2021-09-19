@@ -25,7 +25,7 @@
     "gatsby-remark-prismjs": "^5.11.0",
     "gatsby-remark-reading-time": "^1.1.0",
     "gatsby-source-filesystem": "^3.13.0",
-    "gatsby-transformer-sharp": "^3.13.0",
+    "gatsby-transformer-sharp": "^3.14.0",
     "lodash": "^4.17.21",
     "preact": "^10.5.14",
     "preact-compat": "^3.19.0",
