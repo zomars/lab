@@ -21,7 +21,10 @@ function useLocationChange(): void {
     if (window) {
       const event = new CustomEvent(STATE_CHANGE_EVENT);
 
-      window.dispatchEvent(event);
+      // what we actually want is componentDidMount after all the children got rendered
+      setTimeout(() => {
+        window.dispatchEvent(event);
+      }, 0);
     }
   }, [location]);
 }

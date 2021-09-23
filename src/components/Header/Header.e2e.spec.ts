@@ -54,7 +54,7 @@ describe('site header', () => {
 
     const allTechPostsTags = await techPostList.getAllPostsTags();
 
-    const techTags = allTechPostsTags.filter(tag => tag === 'tech');
+    const techTags = allTechPostsTags.filter((tag: string) => tag === 'tech');
 
     expect(techTags.length).toBeGreaterThanOrEqual(3);
 
@@ -68,7 +68,7 @@ describe('site header', () => {
 
     const allCarPostsTags = await carPostList.getAllPostsTags();
 
-    const carTags = allCarPostsTags.filter(tag => tag === 'cars');
+    const carTags = allCarPostsTags.filter((tag: string) => tag === 'cars');
 
     // seems to be affected by the race condition (dev build)
     expect(carTags.length).toBeGreaterThanOrEqual(4);
