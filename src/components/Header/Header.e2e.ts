@@ -61,11 +61,18 @@ export class Header extends ComponentWrapper {
     // waiting for the actual state change event within SPA
     function pageFunction(STATE_CHANGE_EVENT: string): Promise<void> {
       return new Promise((resolve) => {
+        const eventListener = (): void => resolve();
+
         window.addEventListener(
           STATE_CHANGE_EVENT,
-          () => resolve(),
+          eventListener,
           { once: true },
         );
+
+        // cleanup in case of timeout or non-event
+        setTimeout(() => {
+          window.removeEventListener(STATE_CHANGE_EVENT, eventListener);
+        }, 10000);
       });
     }
 
