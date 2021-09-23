@@ -4,3 +4,5 @@
 export const postsPerPage = 4;
 
 export const indexPageTag = 'tech';
+
+export const STATE_CHANGE_EVENT = 'REACT_ROUTER_PAGE_CHANGE_EVENT';

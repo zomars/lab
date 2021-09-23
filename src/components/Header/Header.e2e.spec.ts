@@ -50,7 +50,7 @@ describe('site header', () => {
 
     const techPostList = new PostList();
 
-    await techPostList.isConnected;
+    await expect(techPostList.isConnected).resolves.toBe(true);
 
     const allTechPostsTags = await techPostList.getAllPostsTags();
 
@@ -60,9 +60,11 @@ describe('site header', () => {
 
     await expect(header.clickMenuItem(MenuListItem.carPosts)).resolves.toBe(true);
 
+    await expect(techPostList.isConnected).resolves.toBe(false);
+
     const carPostList = new PostList();
 
-    await carPostList.isConnected;
+    await expect(carPostList.isConnected).resolves.toBe(true);
 
     const allCarPostsTags = await carPostList.getAllPostsTags();
 
@@ -72,6 +74,8 @@ describe('site header', () => {
     expect(carTags.length).toBeGreaterThanOrEqual(4);
 
     await expect(header.clickMenuItem(MenuListItem.about)).resolves.toBe(true);
+
+    await expect(carPostList.isConnected).resolves.toBe(false);
 
     await expect(page).toHaveText(
       'h1',
