@@ -43,7 +43,7 @@ describe('site header', () => {
 
     await expect(page).toHaveText(
       'h2',
-      'Blogs to follow',
+      'Blogs',
     );
 
     await expect(header.clickMenuItem(MenuListItem.techPosts)).resolves.toBe(true);

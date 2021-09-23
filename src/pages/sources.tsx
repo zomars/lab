@@ -32,7 +32,7 @@ export function Sources(): ReactElement {
         and beyond. Most of these I&apos;ve read or listened to more than once.
       </p>
 
-      <h2>Blogs to follow</h2>
+      <h2>Blogs</h2>
       <ul>
         <li>
           <a href = 'https://blog.mgechev.com'>Minko Gechev</a>
@@ -63,7 +63,7 @@ export function Sources(): ReactElement {
         </li>
       </ul>
 
-      <h2>Outstanding articles and conversations</h2>
+      <h2>Outstanding Articles</h2>
 
       <p>Truly extraordinary stuff! Can&apos;t recommend these enough:</p>
 
@@ -84,10 +84,25 @@ export function Sources(): ReactElement {
           </a>
           {' '}by Joel M. Podolny and Morten T. Hansen
         </li>
+      </ul>
+
+      <h2>Outstanding Conversations</h2>
+
+      <ul>
         <li>
           <a href = 'https://soundcloud.com/invisionapp/silicon-valley-product-groups'>
             Why product management is misunderstood
           </a> with <a href = 'https://twitter.com/cagan'>Marty Cagan</a>
+        </li>
+        <li>
+          <a href = 'https://podcasts.apple.com/us/podcast/build-with-maggie-crowley/id1445050691'>
+            How to Negotiate a Job Offer
+          </a> with <a href = 'https://twitter.com/thelindazhang'>Linda Zhang</a>
+        </li>
+        <li>
+          <a href = 'https://podcasts.apple.com/us/podcast/design-better-podcast/id1266839739'>
+            Navigating career changes
+          </a> with <a href = 'https://twitter.com/wertandcompany'>Judy Wert</a>
         </li>
       </ul>
 
@@ -119,10 +134,6 @@ export function Sources(): ReactElement {
       <ul>
         <li>My compilation of prominent <a href = 'https://twitter.com/i/lists/1163692012383588352'>frontend folks</a> and devs in general</li>
       </ul>
-
-      <p>
-        <i>TBD: Add sources in russian</i>
-      </p>
     </Layout>
   );
 }
