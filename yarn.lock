@@ -14408,10 +14408,10 @@ platform@^1.3.6:
   resolved "https://registry.yarnpkg.com/platform/-/platform-1.3.6.tgz#48b4ce983164b209c2d45a107adb31f473a6e7a7"
   integrity sha512-fnWVljUchTro6RiCFvCXBbNhJc2NijN7oIQxbwsyL0buWJPG85v81ehlHI9fXrJsMNgTofEoWIQeClKpgxFLrg==
 
-playwright-chromium@^1.15.1:
-  version "1.15.1"
-  resolved "https://registry.yarnpkg.com/playwright-chromium/-/playwright-chromium-1.15.1.tgz#cc8233bdcc3eb7150730293e6422a9e8d8b18ef9"
-  integrity sha512-69zZGAb6XTNyAGfbnCUiGItCMQo/5c9XW/DkdRyC89WoLGix/dH9TwrqiDEzRTwqnSYNJNT43S13w/mDE6+1Xg==
+playwright-chromium@^1.15.2:
+  version "1.15.2"
+  resolved "https://registry.yarnpkg.com/playwright-chromium/-/playwright-chromium-1.15.2.tgz#59493f7843c7fd0e40b909cce7494a8032026b96"
+  integrity sha512-YF1hnBHXAMSXRaVN+wzEoifWq0Q2zEH5P8CoTAKp/Xvzgetc0x/IVzcyIgPzrGxfdqczP43bXhpD6TY0NTOubQ==
   dependencies:
     commander "^6.1.0"
     debug "^4.1.1"
