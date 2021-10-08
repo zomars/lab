@@ -1,3 +1,7 @@
+import {
+  options as sitemapPluginOptions,
+} from './gatsby-sitemap-plugin.options';
+
 /**
  * @fileoverview
  *
@@ -8,7 +12,7 @@ const metadata = {
   title: 'Alex M Lab',
   author: 'Alex Malitsky',
   description: 'We gonna figure what it is all about',
-  siteUrl: 'https://amalitsky.com/',
+  siteUrl: 'https://lab.amalitsky.com/',
   social: {
     twitter: 'amalitsky',
   },
@@ -104,18 +108,10 @@ const plugins = [
         respectDNT: true,
       },
     },
+  }, {
+    resolve: 'gatsby-plugin-sitemap',
+    options: sitemapPluginOptions,
   },
-  /* {
-    resolve: 'gatsby-plugin-graphql-codegen',
-    options: {
-      fileName: 'graphql.types.ts',
-      documentPaths: [
-        './src/!**!/!*.{ts,tsx}',
-        './node_modules/gatsby-*!/!**!/!*.js',
-        './gatsby-node.ts',
-      ]
-    }
-  } */
 ];
 
 const config = {

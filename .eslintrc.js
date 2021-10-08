@@ -219,6 +219,10 @@ const rules = {
   ],
   'lines-between-class-members': ERROR,
   'comma-dangle': OFF, // replaced with ts rule
+  'no-multiple-empty-lines': [ERROR, {
+    max: 2,
+    maxEOF: 0,
+  }],
   ...namingRules,
   ...tsEslintRules,
   ...importRules,

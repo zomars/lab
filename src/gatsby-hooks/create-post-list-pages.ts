@@ -25,7 +25,8 @@ const postsQuery = /* GraphQL */ `
           slug
         }
         frontmatter {
-          title
+          title,
+          date(formatString: "YYYY-MM-DD")
         }
       }
     }
@@ -73,6 +74,13 @@ async function createPostListPagesPerTag(
 
   const numPages = Math.ceil(posts.length / postsPerPage);
 
+  let mostRecentPostDate;
+
+  if (posts.length) {
+    // todo: take updated date into account
+    mostRecentPostDate = posts[0].frontmatter.date;
+  }
+
   for (let page = 1; page <= numPages; page++) {
     const args = {
       path: getPostListUrlByTag(tag, page),
@@ -82,6 +90,7 @@ async function createPostListPagesPerTag(
         limit: postsPerPage,
         currentPage: page,
         tag,
+        updated: mostRecentPostDate, // need this for sitemap.xml only, not for the react component
       },
     };
 

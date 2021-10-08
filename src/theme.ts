@@ -195,7 +195,6 @@ Object.entries(sourceColors)
     colors[colorName] = hash;
   });
 
-
 export const primaryColor = colors.blue[700];
 export const textColor = colors.grey[800];
 export const mutedColor = colors.grey[300];
