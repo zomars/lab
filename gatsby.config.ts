@@ -111,6 +111,16 @@ const plugins = [
   }, {
     resolve: 'gatsby-plugin-sitemap',
     options: sitemapPluginOptions,
+  }, {
+    resolve: 'gatsby-plugin-robots-txt',
+    options: {
+      policy: [
+        {
+          userAgent: '*',
+          allow: '/',
+        },
+      ],
+    },
   },
 ];
 
