@@ -55,6 +55,8 @@ const {
   PR_ID: prId,
 } = process.env;
 
+globals.nodeEnv = env;
+
 if (prId) {
   hostname = `pr${ prId }--amlab.netlify.app`;
 } else if (env === 'development') {

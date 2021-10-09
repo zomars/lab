@@ -6,4 +6,5 @@ type TGlobal = typeof global;
 export interface IGlobal extends TGlobal {
   readonly url: string;
   readonly defaultTimeout: number; // ms
+  readonly nodeEnv: string;
 }

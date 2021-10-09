@@ -31,4 +31,62 @@ describe('basics', () => {
       expect(excerpt).not.toBe('');
     }
   });
+
+  it('serves robots txt file', async () => {
+    if (localGlobal.nodeEnv === 'development') {
+      return;
+    }
+
+    await page.goto(`${localGlobal.url}/robots.txt`);
+
+    const contentRegexStr = '^Sitemap:.*sitemap-index\\.xml$';
+
+    const element = await page.$(`text=/${contentRegexStr}/m`);
+
+    expect(element).not.toBeNull();
+  });
+
+  it('serves sitemap-index.xml', async () => {
+    if (localGlobal.nodeEnv === 'development') {
+      return;
+    }
+
+    await page.goto(`${localGlobal.url}/sitemap/sitemap-index.xml`);
+
+    const sitemaps = await page.$$('loc');
+
+    expect(sitemaps.length).toBeGreaterThanOrEqual(1);
+
+    const firstLocText = await sitemaps[0].textContent();
+
+    expect(firstLocText).toMatch(/\/sitemap-0\.xml/);
+  });
+
+  it('serves proper sitemap-0.xml', async () => {
+    if (localGlobal.nodeEnv === 'development') {
+      return;
+    }
+
+    await page.goto(`${localGlobal.url}/sitemap/sitemap-0.xml`);
+
+    const pages = await page.$$('url');
+
+    expect(pages.length).toBeGreaterThanOrEqual(10);
+
+    for (const page of pages) {
+      const locs = await page.$$('loc');
+      const lastMods = await page.$$('lastmod');
+
+      expect(locs).toHaveLength(1);
+      expect(lastMods.length).toBeLessThanOrEqual(1);
+
+      const url = await locs[0].textContent();
+
+      // all blog posts and post listings should have creation date defined
+      if (url.indexOf('/blog/') !== -1) {
+        // eslint-disable-next-line jest/no-conditional-expect
+        expect(lastMods).toHaveLength(1);
+      }
+    }
+  });
 });
