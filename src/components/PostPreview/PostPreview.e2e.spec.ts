@@ -56,7 +56,7 @@ describe('site header', () => {
 
     expect(tags.length).toBeGreaterThan(0);
 
-    expect(tags.indexOf(`#${ activeTag }`)).toEqual(0);
+    expect(tags.indexOf(`#${ activeTag }`)).toBe(0);
   });
 
   it('renders active tag as text and other tags as links', async () => {
@@ -70,12 +70,12 @@ describe('site header', () => {
 
     const [$activeTag, ...$otherTags] = $tags;
 
-    await expect(PostPreview.isTagLink($activeTag)).resolves.toEqual(false);
+    await expect(PostPreview.isTagLink($activeTag)).resolves.toBe(false);
 
     expect($otherTags.length).toBeGreaterThan(0);
 
     const promises = $otherTags.map(($tag: ElementHandle) => {
-      return expect(PostPreview.isTagLink($tag)).resolves.toEqual(true);
+      return expect(PostPreview.isTagLink($tag)).resolves.toBe(true);
     });
 
     await Promise.all(promises);
