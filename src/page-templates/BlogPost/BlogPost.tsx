@@ -1,3 +1,10 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from '@material-ui/core';
 import React, { ReactElement } from 'react';
 import { graphql, PageRendererProps } from 'gatsby';
 import { cn } from '@bem-react/classname';
@@ -13,12 +20,6 @@ import {
   H5,
   H6,
 } from '../../components/MDXHeader/MDXHeader';
-import {
-  MDXTableBody,
-  MDXTableCell,
-  MDXTableHead,
-  MDXTableRow,
-} from '../../components/MDXTable';
 import { Seo } from '../../components/Seo';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
 import { IBlogPost } from '../../types/common.types';
@@ -53,11 +54,12 @@ const mdxComponents = {
   h4: H4,
   h5: H5,
   h6: H6,
-  th: MDXTableCell,
-  td: MDXTableCell,
-  thead: MDXTableHead,
-  tbody: MDXTableBody,
-  tr: MDXTableRow,
+  table: Table,
+  th: TableCell,
+  thead: TableHead,
+  tbody: TableBody,
+  td: TableCell,
+  tr: TableRow,
   VideoPlayer,
 };
 

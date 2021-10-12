@@ -4,6 +4,7 @@
  * So that stuff rendered by it matches our own styling.
  */
 
+import { Size } from '@material-ui/core';
 import { createTheme } from '@material-ui/core/styles';
 import {
   bodyFontFamily,
@@ -38,10 +39,39 @@ const headers = {};
 
 const typography = {
   fontFamily: bodyFontFamily.join(', '),
+  fontSize,
   ...headers,
   button: {
     fontWeight: fontWeights.semibold,
     fontSize: fontSizes[3] * fontSize, // px
+  },
+};
+
+const muiTableCellStyles = {
+  head: {
+    'font-weight': 'var(--aml-font-weight-semibold)',
+  },
+};
+
+const muiTableRowStyles = {
+  head: {
+    'background-color': 'white',
+  },
+  root: {
+    '&:nth-child(even)': {
+      'background-color': 'var(--aml-color-grey-100)',
+    },
+  },
+};
+
+const muiComponentStyles = {
+  MuiTableCell: muiTableCellStyles,
+  MuiTableRow: muiTableRowStyles,
+};
+
+const muiComponentDefaultProps = {
+  MuiTable: {
+    size: 'small' as Size,
   },
 };
 
@@ -59,4 +89,6 @@ export const theme = createTheme({
   shape: {
     borderRadius: radii.md, // radii.md
   },
+  overrides: muiComponentStyles,
+  props: muiComponentDefaultProps,
 });
