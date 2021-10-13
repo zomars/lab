@@ -1,6 +1,6 @@
 import { Node } from 'gatsby';
 import { ReactNode } from 'react';
-import { ImageDataLike } from 'gatsby-plugin-image/dist/src/components/hooks';
+import { ImageDataLike } from 'gatsby-plugin-image';
 
 export interface INodeFields {
   [key: string]: unknown,
