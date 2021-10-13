@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { kebabCase } from 'lodash';
 import { cn } from '@bem-react/classname';
-import { Link as LinkIcon } from '@material-ui/icons';
+import { Link as LinkIcon } from '@mui/icons-material';
 
 import { IReactNodeProps } from '../../types/common.types';
 

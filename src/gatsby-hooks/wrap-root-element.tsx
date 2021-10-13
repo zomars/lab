@@ -6,10 +6,10 @@ import {
 } from 'gatsby';
 import {
   ThemeProvider,
-} from '@material-ui/core/styles';
+} from '@mui/material/styles';
 
 import { PostContextProvider } from '../components/PostContextProvider/PostContextProvider';
-import { theme } from '../theme.mui';
+import { theme } from '../theme/theme.mui';
 
 export const postsQuery = graphql`
   query Posts {

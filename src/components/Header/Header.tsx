@@ -9,15 +9,15 @@ import {
   PaperProps,
   Toolbar,
   Fade,
-} from '@material-ui/core';
-import { useTheme } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 
 import {
   RssFeed as RssFeedIcon,
   Twitter as TwitterIcon,
   Menu as MenuIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 
 import { IPostContext } from '../../react-contexts/posts.context';
 

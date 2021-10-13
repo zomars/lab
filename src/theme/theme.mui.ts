@@ -4,8 +4,14 @@
  * So that stuff rendered by it matches our own styling.
  */
 
-import { Size } from '@material-ui/core';
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme } from '@mui/material/styles';
+
+import {
+  muiTable,
+  muiTableCell,
+  muiTableRow,
+} from './mui-components-overrides';
+
 import {
   bodyFontFamily,
   breakpoints,
@@ -18,6 +24,8 @@ import {
   lineHeights,
   primaryColor,
   radii,
+  secondaryColor,
+  textColor,
 } from './theme';
 
 const headerFontFamilyList = headerFontFamily.join(', ');
@@ -47,38 +55,17 @@ const typography = {
   },
 };
 
-const muiTableCellStyles = {
-  head: {
-    'font-weight': 'var(--aml-font-weight-semibold)',
-  },
-};
-
-const muiTableRowStyles = {
-  head: {
-    'background-color': 'white',
-  },
-  root: {
-    '&:nth-child(even)': {
-      'background-color': 'var(--aml-color-grey-100)',
-    },
-  },
-};
-
-const muiComponentStyles = {
-  MuiTableCell: muiTableCellStyles,
-  MuiTableRow: muiTableRowStyles,
-};
-
-const muiComponentDefaultProps = {
-  MuiTable: {
-    size: 'small' as Size,
-  },
-};
-
 export const theme = createTheme({
   palette: {
     primary: {
       main: primaryColor,
+    },
+    secondary: {
+      main: secondaryColor,
+    },
+    text: {
+      primary: textColor,
+      secondary: textColor,
     },
     ...colors,
   },
@@ -89,6 +76,10 @@ export const theme = createTheme({
   shape: {
     borderRadius: radii.md, // radii.md
   },
-  overrides: muiComponentStyles,
-  props: muiComponentDefaultProps,
+  components: {
+    // @ts-ignore Fuck TS's string enums handling
+    MuiTable: muiTable,
+    MuiTableCell: muiTableCell,
+    MuiTableRow: muiTableRow,
+  },
 });

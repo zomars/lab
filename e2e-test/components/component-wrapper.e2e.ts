@@ -76,6 +76,17 @@ export abstract class ComponentWrapper {
   }
 
   /**
+   * Returns promise which get resolved upon finding component wrapper's host element.
+   */
+  protected get isMounted(): Promise<void> {
+    if (this.$host !== null) {
+      return Promise.resolve();
+    }
+
+    return this.mountPromise;
+  }
+
+  /**
    * Returns a promise to be resolved with a true if element is hidden or gets hidden withing the
    * timeframe passed (or default timeframe if not) and false if it remains.
    */
@@ -89,17 +100,6 @@ export abstract class ComponentWrapper {
     return this.$host.waitForElementState('hidden', options)
       .then(() => true)
       .catch(() => false);
-  }
-
-  /**
-   * Returns promise which get resolved upon finding component wrapper's host element.
-   */
-  protected get isMounted(): Promise<void> {
-    if (this.$host !== null) {
-      return Promise.resolve();
-    }
-
-    return this.mountPromise;
   }
 
   /**

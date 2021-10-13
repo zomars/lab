@@ -13,7 +13,7 @@ import {
   primaryColor,
   radii,
   sizes, textColor,
-} from '../theme';
+} from '../theme/theme';
 
 export type TCssPropValue = string|number;
 

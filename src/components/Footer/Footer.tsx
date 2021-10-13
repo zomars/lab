@@ -1,9 +1,9 @@
-import { IconButton } from '@material-ui/core';
+import { IconButton } from '@mui/material';
 import {
   GitHub as GutHubIcon,
   LinkedIn as LinkedInIcon,
   Mail as MailIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import React, { ReactElement } from 'react';
 import { cn } from '@bem-react/classname';
 

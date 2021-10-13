@@ -4,7 +4,7 @@ import {
   TableCell,
   TableHead,
   TableRow,
-} from '@material-ui/core';
+} from '@mui/material';
 import React, { ReactElement } from 'react';
 import { graphql, PageRendererProps } from 'gatsby';
 import { cn } from '@bem-react/classname';
@@ -72,6 +72,18 @@ interface IBlogPostTemplateProps extends PageRendererProps {
 }
 
 export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
+  /**
+   * Return current post active tag.
+   */
+  private get activeTag(): string {
+    const { props } = this;
+    const { state } = props.location;
+    const { tags } = props.data.post.frontmatter;
+
+    // eslint-disable-next-line no-extra-parens
+    return (state as Record<string, string>)?.activeTag || tags[0];
+  }
+
   public render(): ReactElement {
     const {
       data,
@@ -130,18 +142,6 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
         />
       </Layout>
     );
-  }
-
-  /**
-   * Return current post active tag.
-   */
-  private get activeTag(): string {
-    const { props } = this;
-    const { state } = props.location;
-    const { tags } = props.data.post.frontmatter;
-
-    // eslint-disable-next-line no-extra-parens
-    return (state as Record<string, string>)?.activeTag || tags[0];
   }
 }
 

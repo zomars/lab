@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { snakeCase } from 'lodash';
 import { cn } from '@bem-react/classname';
-import { Tab, Tabs } from '@material-ui/core';
+import { Tab, Tabs } from '@mui/material';
 
 import { indexPageTag } from '../../../constants';
 import { IPostContext } from '../../../react-contexts/posts.context';
@@ -76,8 +76,7 @@ function getMenuTabs(
         key = { name }
         value = { path }
         label = { name }
-      >
-      </Tab>
+      />
     );
   }
 
@@ -162,6 +161,8 @@ export function HeaderTabs(props: IHeaderTabsProps): ReactElement {
       orientation = { vertical ? 'vertical' : 'horizontal' }
       value = { selectedTabPath }
       onChange = { (event, path) => onTabSelection(path) }
+      indicatorColor = 'secondary'
+      textColor = 'inherit'
     >
       { getMenuTabs(selectedTabPath, activeTabOnly) }
     </Tabs>
