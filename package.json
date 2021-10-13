@@ -30,7 +30,7 @@
     "gatsby-source-filesystem": "^3.14.0",
     "gatsby-transformer-sharp": "^3.14.0",
     "lodash": "^4.17.21",
-    "preact": "^10.5.14",
+    "preact": "^10.5.15",
     "preact-compat": "^3.19.0",
     "preact-render-to-string": "^5.1.19",
     "prismjs": "^1.25.0",
