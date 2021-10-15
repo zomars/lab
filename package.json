@@ -11,7 +11,7 @@
     "@mdx-js/mdx": "^1.6.22",
     "@mui/core": "^5.0.0-alpha.50",
     "@mui/icons-material": "^5.0.0",
-    "@mui/lab": "^5.0.0-alpha.50",
+    "@mui/lab": "^5.0.0-alpha.51",
     "@mui/material": "^5.0.3",
     "gatsby": "^3.14.2",
     "gatsby-plugin-google-gtag": "^3.14.0",
