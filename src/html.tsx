@@ -30,7 +30,7 @@ function HTML(props: IHTMLPageProps): VNode {
         />
         <link
           rel = 'stylesheet'
-          href = 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,500,600,700|Merriweather:700'
+          href = 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,500,600,700|Merriweather:700&display=swap'
         />
         <link
           rel = 'stylesheet'

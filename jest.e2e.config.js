@@ -45,9 +45,17 @@ const tsJestConfig = {
 let hostname = 'labs.amalitsky.com';
 let protocol = 'https';
 
+const networkThrottleOptions = {
+  downloadThroughput: 1000 * 1000, // 1Mb/s
+  uploadThroughput: 512 * 1000,
+  latency: 150,
+  offline: false,
+};
+
 const globals = {
   defaultTimeout,
   'ts-jest': tsJestConfig,
+  networkThrottleOptions,
 };
 
 const {
