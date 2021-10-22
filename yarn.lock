@@ -5713,11 +5713,6 @@ commander@^5.1.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-5.1.0.tgz#46abbd1652f8e059bddaef99bbdcb2ad9cf179ae"
   integrity sha512-P0CysNDQ7rtVw4QIQtm+MRxV66vKFSvlsQvGYXZWR3qFU0jlMKHZZZgw8e+8DSah4UDKMqnknRDQz+xuQXQ/Zg==
 
-commander@^6.1.0:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-6.2.1.tgz#0792eb682dfbc325999bb2b84fddddba110ac73c"
-  integrity sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA==
-
 commander@^7.2.0:
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-7.2.0.tgz#a36cb57d0b501ce108e4d20559a150a391d97ab7"
@@ -14506,25 +14501,12 @@ playwright-core@=1.16.0, playwright-core@>=1.2.0:
     yauzl "^2.10.0"
     yazl "^2.5.1"
 
-playwright@^1.15.2:
-  version "1.15.2"
-  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.15.2.tgz#b350056d1fffbe5de5b1bdaca6ab73e35758baad"
-  integrity sha512-+Z+7ckihyxR6rK5q8DWC6eUbKARfXpyxpjNcoJfgwSr64lAOzjhyFQiPC/JkdIqhsLgZjxpWfl1S7fLb+wPkgA==
+playwright@^1.16.0:
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/playwright/-/playwright-1.16.0.tgz#2a3a87de34dee6aad6d07f6fa05fdb5d57455058"
+  integrity sha512-EFjixq8/wT1So6TH1yXoJ3fxFJkEhmmi8BanR5yfCScG76x4WDH0zj8mVkDl9ovfODjy9g6Ba/a/5rXO+0sz6Q==
   dependencies:
-    commander "^6.1.0"
-    debug "^4.1.1"
-    extract-zip "^2.0.1"
-    https-proxy-agent "^5.0.0"
-    jpeg-js "^0.4.2"
-    mime "^2.4.6"
-    pngjs "^5.0.0"
-    progress "^2.0.3"
-    proper-lockfile "^4.1.1"
-    proxy-from-env "^1.1.0"
-    rimraf "^3.0.2"
-    stack-utils "^2.0.3"
-    ws "^7.4.6"
-    yazl "^2.5.1"
+    playwright-core "=1.16.0"
 
 please-upgrade-node@^3.2.0:
   version "3.2.0"
