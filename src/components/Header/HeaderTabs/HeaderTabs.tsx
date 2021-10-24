@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, SyntheticEvent } from 'react';
 import { snakeCase } from 'lodash';
 import { cn } from '@bem-react/classname';
 import { Tab, Tabs } from '@mui/material';
@@ -52,6 +52,7 @@ const cnHeaderTabs = cn('HeaderTabs');
 function getMenuTabs(
   selectedTabPath: string | false,
   activeTabOnly = false,
+  onChange: (event: SyntheticEvent, path: string) => void,
 ): ReactElement[] {
   const tabs = [];
 
@@ -69,6 +70,16 @@ function getMenuTabs(
       [testId]: true,
     });
 
+    // need this hack to support nested pages
+    // so that the corresponding header tab which is active
+    // takes user to the root of category on click
+    // https://github.com/mui-org/material-ui/blob/0da2f4a39e1821d76c93ae198d440e5082b10f78/packages/mui-material/src/Tab/Tab.js#L167-L175
+    const onClick = (event: SyntheticEvent): void => {
+      if (isActive) {
+        onChange(event, path);
+      }
+    };
+
     tabs.push(
       <Tab
         data-testid = { completeTestId }
@@ -76,6 +87,7 @@ function getMenuTabs(
         key = { name }
         value = { path }
         label = { name }
+        onClick = { onClick }
       />
     );
   }
@@ -155,16 +167,21 @@ export function HeaderTabs(props: IHeaderTabsProps): ReactElement {
 
   const selectedTabPath = getSelectedTabPath(activePath, postsContext);
 
+  // see comment about regarding onClick passed to getMenuTabs
+  function onChange(event: SyntheticEvent, path: string): void {
+    onTabSelection(path);
+  }
+
   return (
     <Tabs
       className = { cnHeaderTabs() }
       orientation = { vertical ? 'vertical' : 'horizontal' }
       value = { selectedTabPath }
-      onChange = { (event, path) => onTabSelection(path) }
+      onChange = { onChange } // regular 'change' support
       indicatorColor = 'secondary'
       textColor = 'inherit'
     >
-      { getMenuTabs(selectedTabPath, activeTabOnly) }
+      { getMenuTabs(selectedTabPath, activeTabOnly, onChange) }
     </Tabs>
   );
 }

@@ -1,13 +1,13 @@
 .MDXHeader {
   &:hover {
     .MDXHeader-ChainLink {
-      opacity: 1;
+      opacity: 100%;
     }
   }
 
   &-ChainLink {
     margin-right: 0.2rem;
-    opacity: 0;
+    opacity: 0%;
   }
 
   &-ChainLinkIcon {

@@ -1,11 +1,11 @@
 import { classnames } from '@bem-react/classnames';
 import {
+  Pagination,
   useMediaQuery,
   useTheme,
 } from '@mui/material';
 import React, { ReactElement } from 'react';
 import { cn } from '@bem-react/classname';
-import { Pagination } from '@mui/lab';
 import { navigate } from 'gatsby';
 
 import { getPostListUrlByTag } from '../../../services/urls.service';

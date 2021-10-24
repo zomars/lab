@@ -17,6 +17,7 @@ Object.values(orderedPropertyHash).forEach((listOrListOfLists) => {
 const always = 'always';
 const never = 'never';
 const alwaysSingleLine = 'always-single-line';
+const OFF = null;
 
 const typeOrder = [
   'at-variables',
@@ -29,14 +30,15 @@ const typeOrder = [
 
 /** @type {Object} Stylelint config object */
 const config = {
-  extends: 'stylelint-config-recommended',
+  extends: [
+    'stylelint-config-standard-scss',
+  ],
   plugins: [
     'stylelint-order',
   ],
-  syntax: 'scss',
   ignoreFiles: [],
   rules: {
-    'at-rule-no-unknown': null,
+    'at-rule-no-unknown': OFF,
     'at-rule-empty-line-before': [
       'always', {
         except: ['first-nested'],
@@ -64,9 +66,9 @@ const config = {
     'color-hex-case': 'upper',
     'color-hex-length': 'short',
     linebreaks: 'unix',
-    'selector-type-no-unknown': null,
-    'no-descending-specificity': null,
-    'font-family-name-quotes': null,
+    'selector-type-no-unknown': OFF,
+    'no-descending-specificity': OFF,
+    'font-family-name-quotes': OFF,
     'function-url-quotes': never,
     'declaration-colon-space-after': always,
     'declaration-colon-space-before': never,
@@ -100,6 +102,9 @@ const config = {
     ],
     'declaration-block-no-duplicate-properties': true,
     'declaration-block-no-duplicate-custom-properties': true,
+    'selector-class-pattern': OFF,
+    'scss/at-mixin-pattern': OFF,
+    'selector-list-comma-newline-after': OFF,
   },
 };
 
