@@ -7,9 +7,7 @@ const siteMapQuery = `{
   allPages: allSitePage {
     nodes {
       path
-      context {
-        updated
-      }
+      context: pageContext
     }
   }
   allPosts: allMdx(
