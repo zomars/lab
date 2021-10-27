@@ -70,7 +70,7 @@
     "playwright": "^1.16.1",
     "playwright-chromium": "^1.16.1",
     "sass": "^1.43.4",
-    "stylelint": "^14.0.0",
+    "stylelint": "^14.0.1",
     "stylelint-config-standard-scss": "^2.0.0",
     "stylelint-order": "^5.0.0",
     "ts-jest": "^27.0.7",
