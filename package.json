@@ -14,7 +14,7 @@
     "@mui/material": "^5.0.6",
     "gatsby": "^4.0.2",
     "gatsby-plugin-google-gtag": "^4.0.0",
-    "gatsby-plugin-image": "^2.0.0",
+    "gatsby-plugin-image": "^2.1.0",
     "gatsby-plugin-material-ui": "^4.0.3",
     "gatsby-plugin-mdx": "^3.0.0",
     "gatsby-plugin-preact": "^6.0.0",
