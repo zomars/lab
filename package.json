@@ -71,7 +71,7 @@
     "playwright-chromium": "^1.16.3",
     "sass": "^1.43.4",
     "stylelint": "^14.0.1",
-    "stylelint-config-standard-scss": "^2.0.0",
+    "stylelint-config-standard-scss": "^2.0.1",
     "stylelint-order": "^5.0.0",
     "ts-jest": "^27.0.7",
     "ts-node": "^10.4.0",
