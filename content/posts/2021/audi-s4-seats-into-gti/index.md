@@ -134,6 +134,8 @@ I've experienced some rubbing of an Audi seat against the armrest cover and rear
 Not much to worry about since you can hear it only moving the seat forward and aft. Also folding of
 the rear seat becomes more of an issue - you might want to remove those headrests.
 
+![VW GTI folded rear seats wo the headrest](vw-folded-back-seat.jpg)
+
 Audi seat is also noticeably heavier than GTI one: 28.5kg vs 24.5kg. Extra four kilos (nine pounds)
 doesn't sound like much, but they do make seats installation (and removal) significantly more
 physical.
@@ -237,8 +239,10 @@ both ground wires colored brown.
 
 ![seat position wires](seat-position-sensor-wires.jpg)
 
-I tried to validate correctness of Audi sensor with VCDS _Measure Adv. Values_ but was
-constantly getting smth like _seat further away_ reading no matter what.
+I tried to validate correctness of Audi sensor with VCDS _Adv. Measuring Values_ but was
+constantly getting _position: rear_ reading no matter what.
+
+![VCDS Measured Values for the seat position sensor](vw-vcds-drivers-seat.png)
 
 Which means one of the two things - either Audi sensor is not working properly (i.e. has
 to be calibrated) or original reading is in fact (almost) always the same.
@@ -314,6 +318,8 @@ shape and subsequently different resistance (voltage) curve based on the pressur
 
 If I remember correctly VCDS Advanced Measurements was showing 50 as a base (no load)
 value for VW seat sensor while in Audi seat that value is around 110.
+
+![VCDS PODS System Measured Values](vw-vcds-pass-seat.png)
 
 I assume calibration was failing because of the base value being out of the range.
 And without proper calibration I was getting _calibration required_ error and orange
