@@ -58,6 +58,10 @@ const globals = {
   networkThrottleOptions,
 };
 
+const testPathIgnorePatterns = [
+  '/node_modules/',
+];
+
 const {
   NODE_ENV: env,
   PR_ID: prId,
@@ -72,12 +76,18 @@ if (prId) {
   hostname = 'localhost:8000';
 }
 
+// skipping performance related test for dev builds
+if (env === 'development') {
+  testPathIgnorePatterns.push('/performance/');
+}
+
 globals.url = `${ protocol }://${ hostname }`;
 
 const jestConfig = {
   testMatch: [
     '**/*.e2e.spec.ts',
   ],
+  testPathIgnorePatterns,
   preset: 'jest-playwright-preset',
   transform: {
     '\\.ts$': 'ts-jest',

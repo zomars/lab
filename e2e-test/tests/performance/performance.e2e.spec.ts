@@ -1,8 +1,8 @@
 import { groupBy, forEach } from 'lodash';
 import { CDPSession } from 'playwright';
 
-import { IGlobal } from '../e2e.types';
-import { getResolvablePromise } from '../utils';
+import { IGlobal } from '../../e2e.types';
+import { getResolvablePromise } from '../../utils';
 
 import {
   NetworkRequestsCdpInterceptor,
@@ -11,7 +11,7 @@ import {
   parsePerfTiming,
   getPerfResourceTiming,
   parseResourceTiming,
-} from '../performance-utils';
+} from '../../performance-utils';
 
 const localGlobal = global as IGlobal & typeof globalThis;
 
