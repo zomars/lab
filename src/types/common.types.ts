@@ -14,7 +14,9 @@ interface IBlogPostFrontmatter {
   title: string,
   date: string,
   tags: string[],
-  coverImage?: ImageDataLike,
+  coverImage?: {
+    childImageSharp: ImageDataLike,
+  },
   published?: boolean,
   updated?: string,
 }
@@ -45,6 +47,7 @@ export interface ISiteMetadata {
   title: string;
   description: string;
   author: string;
+  siteUrl: string;
 }
 
 export interface IReactNodeProps {

@@ -33,6 +33,7 @@ const cnBlogPost = cn('BlogPost');
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
     post: mdx(fields: { slug: { eq: $slug } }) {
+      excerpt(pruneLength: 200)
       fields {
         slug
       }
@@ -42,6 +43,11 @@ export const pageQuery = graphql`
         updated(formatString: "MMM DD, YYYY")
         tags
         title
+        coverImage {
+          childImageSharp {
+            gatsbyImageData(height: 540)
+          }
+        }
       }
     }
   }
@@ -87,6 +93,7 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
   public render(): ReactElement {
     const {
       data,
+      location,
     } = this.props;
 
     const {
@@ -98,12 +105,20 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
       tags,
       date: posted,
       updated,
+      coverImage,
     } = post.frontmatter;
 
     let date = posted;
 
     if (updated) {
       date = `Originally posted ${ date }. Last update - ${ updated }`;
+    }
+
+    let image = null;
+
+    if (coverImage) {
+      // eslint-disable-next-line no-extra-parens
+      ({ fallback: image } = (coverImage as any).childImageSharp.gatsbyImageData.images);
     }
 
     return (
@@ -113,6 +128,8 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
         <Seo
           title = { title }
           description = { post.excerpt }
+          pathname = { location.pathname }
+          image = { image }
         />
 
         <h1>{ title }</h1>

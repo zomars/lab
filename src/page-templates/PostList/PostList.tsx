@@ -101,6 +101,7 @@ export function PostList(props: IPostListProps): ReactElement {
       <Seo
         title = { `All #${ pageContext.tag } posts, page ${ pageContext.currentPage }` }
         keywords = { keywords }
+        pathname = { props.location.pathname }
       />
 
       { postElements }

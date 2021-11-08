@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
+import { each } from 'lodash';
 
 import { ISiteMetadata } from '../types/common.types';
 
@@ -11,12 +12,17 @@ const detailsQuery = graphql`
         title
         description
         author
+        siteUrl
       }
     }
   }
 `;
 
-/* eslint-disable react/no-unused-prop-types */
+interface IHelmetMetaTag {
+  property?: string;
+  name?: string;
+  content: string;
+}
 
 interface ISeoProps {
   keywords?: string[],
@@ -24,11 +30,8 @@ interface ISeoProps {
   meta?: IHelmetMetaTag[],
   description?: string,
   title?: string,
-}
-
-interface IHelmetMetaTag {
-  content: string;
-  name: string;
+  pathname?: string,
+  image?: { src: string },
 }
 
 function render(
@@ -36,44 +39,79 @@ function render(
   siteMetadata: ISiteMetadata,
 ): ReactElement {
   const {
-    description,
+    description: propsDescription,
     lang,
     meta,
-    title,
+    title: propsTitle,
+    pathname,
+    image,
     keywords,
   } = props;
 
-  const metaDescription = description || siteMetadata.description;
+  const description = propsDescription || siteMetadata.description;
+  const title = propsTitle || siteMetadata.title;
 
   const attrs = { lang };
 
-  const metaTags = [
+  // developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image
+  const twitterCard = {
+    card: image ? 'summary_large_image' : 'summary',
+    site: '@amalitsky',
+    creator: siteMetadata.author,
+    title,
+    image: '',
+    // @todo: add image alt
+    description,
+  };
+
+  // developers.facebook.com/docs/sharing/webmasters#markup
+  const fbCard = {
+    type: 'website',
+    title,
+    description,
+    image: '',
+    url: pathname ? siteMetadata.siteUrl + pathname : '',
+  };
+
+  if (image) {
+    const imgSrc = siteMetadata.siteUrl + image.src;
+
+    twitterCard.image = imgSrc;
+    fbCard.image = imgSrc;
+  }
+
+  const metaTags: IHelmetMetaTag[] = [
     {
-      content: metaDescription,
       name: 'description',
-    }, {
-      content: title,
-      property: 'og:title',
-    }, {
-      content: metaDescription,
-      property: 'og:description',
-    }, {
-      content: 'website',
-      property: 'og:type',
-    }, {
-      content: 'summary',
-      name: 'twitter:card',
-    }, {
-      content: siteMetadata.author,
-      name: 'twitter:creator',
-    }, {
-      content: title,
-      name: 'twitter:title',
-    }, {
-      content: metaDescription,
-      name: 'twitter:description',
+      content: description,
     },
   ];
+
+  each(twitterCard, (value: string, propName: string): void => {
+    if (value === '') {
+      return;
+    }
+
+    const tag = {
+      name: `twitter:${ propName }`,
+      content: value,
+    };
+
+    metaTags.push(tag);
+  });
+
+  each(fbCard, (value: string, propName: string): void => {
+    if (value === '') {
+      return;
+    }
+
+    const tag = {
+      property: `og:${ propName }`,
+      content: value,
+    };
+
+    metaTags.push(tag);
+  });
 
   if (meta?.length) {
     metaTags.push(...meta);

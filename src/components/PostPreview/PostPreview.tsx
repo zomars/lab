@@ -61,7 +61,7 @@ export function PostPreview(props: {
   let CoverImage = null;
 
   if (coverImage) {
-    const imageData = getImage(coverImage) as IGatsbyImageData;
+    const imageData = getImage(coverImage.childImageSharp) as IGatsbyImageData;
 
     CoverImage = (
       <Link

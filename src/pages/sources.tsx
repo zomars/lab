@@ -1,3 +1,4 @@
+import { PageRendererProps } from 'gatsby';
 import React, { ReactElement } from 'react';
 
 import { Layout } from '../components/Layout';
@@ -18,18 +19,22 @@ const pageKeywords = [
   'typescript',
 ];
 
-export function Sources(): ReactElement {
+export function Sources(props: PageRendererProps): ReactElement {
+  const description =
+    'List of incredibly useful and insightful resources related to frontend development ' +
+    'and beyond. Most of these I\'ve read or listened to more than once.';
+
   return (
     <Layout>
       <Seo
         title = 'Frontend sources, references, conversations, books and courses'
         keywords = { pageKeywords }
+        pathname = { props.location.pathname }
+        description = { description }
       />
       <h1>Sources</h1>
-
       <p>
-        List of incredibly useful and insightful resources related to frontend development
-        and beyond. Most of these I&apos;ve read or listened to more than once.
+        { description }
       </p>
 
       <h2>Blogs</h2>
