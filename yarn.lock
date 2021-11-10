@@ -8566,10 +8566,10 @@ gatsby-plugin-material-ui@^4.0.3:
     "@emotion/cache" "^11.4.0"
     "@emotion/server" "^11.4.0"
 
-gatsby-plugin-mdx@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-3.1.0.tgz#02b1253e20c5c67e2369ac00290da74b9304e0bb"
-  integrity sha512-Go+wZXVz3DdC+YVbIZqPvE/GVoAM1D2GfzutorkbjrNItvdmvWbuiA3IpWWOXZjiUYTbd/lbpqRUZ6SRLaQRaw==
+gatsby-plugin-mdx@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-3.1.1.tgz#abdf75a890cce954abf42dce312da5165f6c9cf1"
+  integrity sha512-hlYod6SGh0YoIt12D8lP6VyvDOrmYgNw4s0k6xEJv+4Bk02+jol5oNn2pFShXwA8dxDaPXKQLBDk+K9UOlmaSw==
   dependencies:
     "@babel/core" "^7.15.5"
     "@babel/generator" "^7.15.4"
