@@ -2,7 +2,7 @@ import { PageRendererProps } from 'gatsby';
 import React, { ReactElement } from 'react';
 
 import { Layout } from '../components/Layout';
-import { Seo } from '../components/Seo';
+import { Seo } from '../components/Seo/Seo';
 
 const pageKeywords = [
   'frontend',

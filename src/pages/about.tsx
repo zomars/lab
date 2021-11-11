@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 
 import { Layout } from '../components/Layout';
 import { Bio } from '../components/Bio/Bio';
-import { Seo } from '../components/Seo';
+import { Seo } from '../components/Seo/Seo';
 
 export function About(props: PageRendererProps): ReactElement {
   return (

@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { graphql, PageRendererProps } from 'gatsby';
 import { Layout } from '../components/Layout';
-import { Seo } from '../components/Seo';
+import { Seo } from '../components/Seo/Seo';
 
 export const pageQuery = graphql`
   query {

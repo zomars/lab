@@ -4,6 +4,7 @@ import {
   ComponentWrapper,
   IComponentWrapperArgs,
 } from '../../../e2e-test/components/component-wrapper.e2e';
+import { getElementHandleInnerTexts } from '../../../e2e-test/utils';
 
 enum PostPreviewSelector {
   host = '[data-testid*=PostPreview]',
@@ -57,12 +58,9 @@ export class PostPreview extends ComponentWrapper {
   }
 
   public async getTags(): Promise<string[]> {
-    const $elements = await this.getTagElements();
+    const $tags = await this.getTagElements() as ElementHandle<HTMLElement>[];
 
-    const tags = $elements.map($element => $element.innerText());
-
-    return Promise.all(tags)
-      .then((tags: string[]) => tags.map(tag => tag.trim()));
+    return getElementHandleInnerTexts($tags);
   }
 
   public getTagElements(): Promise<ElementHandle[]> {

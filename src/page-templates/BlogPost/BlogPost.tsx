@@ -20,7 +20,7 @@ import {
   H5,
   H6,
 } from '../../components/MDXHeader/MDXHeader';
-import { Seo } from '../../components/Seo';
+import { Seo } from '../../components/Seo/Seo';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
 import { IBlogPost } from '../../types/common.types';
 import { PostTags } from '../../components/PostTags/PostTags';
@@ -124,6 +124,7 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
     return (
       <Layout
         className = { cnBlogPost() }
+        testId = { cnBlogPost() }
       >
         <Seo
           title = { title }
@@ -132,24 +133,32 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
           image = { image }
         />
 
-        <h1>{ title }</h1>
+        <article>
+          <h1
+            data-testid = { cnBlogPost('Title') }
+          >{ title }</h1>
 
-        <p className = { cnBlogPost('Date') }>
-          { date }
-        </p>
+          <p className = { cnBlogPost('Date') }>
+            { date }
+          </p>
 
-        <p>
-          <PostTags
-            tags = { tags }
-            activeTag = { this.activeTag }
-          />
-        </p>
+          <p>
+            <PostTags
+              tags = { tags }
+              activeTag = { this.activeTag }
+            />
+          </p>
 
-        <MDXProvider
-          components = { mdxComponents }
-        >
-          <MDXRenderer>{ post.body! }</MDXRenderer>
-        </MDXProvider>
+          <section
+            data-testid = { cnBlogPost('Body') }
+          >
+            <MDXProvider
+              components = { mdxComponents }
+            >
+              <MDXRenderer>{ post.body! }</MDXRenderer>
+            </MDXProvider>
+          </section>
+        </article>
 
         <hr className = { cnBlogPost('BottomLine') }/>
 

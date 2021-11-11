@@ -1,3 +1,5 @@
+import { ElementHandle } from 'playwright';
+
 interface IResolvablePromise<T, U = unknown> extends Promise<T> {
   resolve: (payload: T) => void;
   reject: (payload: U) => void;
@@ -26,4 +28,31 @@ export function getResolvablePromise<T, U = unknown>(
   promise.reject = reject;
 
   return promise;
+}
+
+/**
+ * Return list of innerTexts for the list of ElementHandles.
+ */
+export async function getElementHandleInnerTexts(
+  $elements: ElementHandle<HTMLElement>[],
+): Promise<string[]> {
+  const promises = $elements.map($element => $element.innerText());
+
+  const texts = await Promise.all(promises);
+
+  return texts.map(text => text.trim());
+}
+
+/**
+ * Return list of attributes for the list of ElementHandles.
+ */
+export async function getElementHandleAttributes(
+  $elements: ElementHandle<HTMLElement>[],
+  attribute: string,
+): Promise<string[]> {
+  const promises = $elements.map($element => $element.getAttribute(attribute));
+
+  const attrValues = await Promise.all(promises);
+
+  return attrValues.map(value => value?.trim());
 }

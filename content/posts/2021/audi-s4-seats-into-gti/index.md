@@ -187,6 +187,7 @@ Then cut _T4l_ connector and connect four wires going into it with the
 Audi seat heating wires (green connector).
 
 VW color listed first:
+
 | VW Color | Audi Color (green plug) | Description |
 | :-- | :-- | :-- |
 | green (1mm) | red/white (1mm) | heater power |
@@ -472,11 +473,11 @@ Generally speaking:
 - black plug has wires for Audi seat buckle switch and seat position sensor
 - green plug has heating and temp sensor wires
 
-#### Driver Seat
+#### Driver Seat Connectors
 ![Audi drivers seat to body connectors](audi-drivers-seat-connectors.jpg)
 
-#### Passenger Seat
-![Audi passanger seat to body connectors](audi-pass-seat-connectors.jpg)
+#### Passenger Seat Connectors
+![Audi passenger seat to body connectors](audi-pass-seat-connectors.jpg)
 
 ### Related Part Numbers
 - driver VW seat wire harness: _5K0 971 391 R_

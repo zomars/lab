@@ -1,23 +1,32 @@
 import { ElementHandle } from 'playwright';
 import { isString } from 'lodash';
 
+export interface IElementHandleWaitForSelectorOptions {
+  state?: 'attached' | 'detached' | 'visible' | 'hidden';
+  strict?: boolean;
+  timeout?: number;
+}
+
 export interface IComponentWrapperArgs {
   hostSelector: string,
   nthOfType?: number, // to find the nth element within the 'scope'
   hostElement?: ElementHandle<HTMLElement>, // can be passed as a ref
-  mountTimeout?: number,
   scopeElement?: ElementHandle<HTMLElement> | string,
+  waitForSelectorOptions?: IElementHandleWaitForSelectorOptions,
 }
 
-type TWaitForOptions = Record<string, any>;
+interface ISetHostElementArgs {
+  scopeElement: ElementHandle<HTMLElement>,
+  hostSelector?: string,
+  nthOfType?: number,
+  waitForSelectorOptions?: IElementHandleWaitForSelectorOptions,
+  hostElement?: ElementHandle<HTMLElement>,
+}
 
 // @todo wrap child components automatically
 export abstract class ComponentWrapper {
   /** ElementHandle of component's host element. */
   protected $host: ElementHandle<HTMLElement> | null = null;
-
-  /** Host element selector. */
-  private readonly hostSelector: string;
 
   /**
    * Promise which get resolved once host element of the component wrapper gets found.
@@ -28,45 +37,36 @@ export abstract class ComponentWrapper {
   protected constructor(args: IComponentWrapperArgs) {
     const {
       hostSelector,
-      mountTimeout,
+      waitForSelectorOptions,
+      hostElement,
       scopeElement,
+      nthOfType,
     } = args;
 
-    // not sure if needed on 'this', not used as of now
-    this.hostSelector = hostSelector;
+    let scopeElementPromise;
 
     if (!scopeElement || isString(scopeElement)) {
       const scopeElementSelector = scopeElement as string || 'body';
 
-      this.mountPromise = page.$(scopeElementSelector)
-        // @ts-ignore
-        .then(($scopeElement: ElementHandle) => {
-          return this.setHostElement(
-            $scopeElement as ElementHandle<HTMLElement>,
-            hostSelector,
-            mountTimeout,
-          );
-        });
-
-      return;
+      scopeElementPromise = page.$(scopeElementSelector);
+    } else {
+      scopeElementPromise = Promise.resolve(scopeElement);
     }
 
-    const {
-      hostElement,
-      nthOfType,
-    } = args;
-
-    this.mountPromise = this.setHostElement(
-      scopeElement,
-      hostSelector,
-      nthOfType,
-      mountTimeout,
-      hostElement,
-    );
+    this.mountPromise = scopeElementPromise
+      .then(($scopeElement: ElementHandle) => {
+        return this.setHostElement({
+          scopeElement: $scopeElement as ElementHandle<HTMLElement>,
+          waitForSelectorOptions,
+          hostSelector,
+          hostElement,
+          nthOfType,
+        });
+      });
   }
 
   /**
-   * Checks whether host element is "connected". Waits for mountPromise to get resolved.
+   * Checks whether host element is 'connected'. Waits for mountPromise to get resolved.
    */
   public get isConnected(): Promise<boolean> {
     return this.isMounted
@@ -91,7 +91,7 @@ export abstract class ComponentWrapper {
    * timeframe passed (or default timeframe if not) and false if it remains.
    */
   public waitForDisconnected(timeout?: number): Promise<boolean> {
-    const options: TWaitForOptions = {};
+    const options: IElementHandleWaitForSelectorOptions = {};
 
     if (timeout) {
       options.timeout = timeout;
@@ -105,24 +105,26 @@ export abstract class ComponentWrapper {
   /**
    * Returns ElementHandler for the element within the host element by selector.
    */
-  protected getElementHandle(
+  protected getElementHandle<T extends HTMLElement = HTMLElement>(
     selector: string,
-  ): Promise<ElementHandle | null> {
+    options?: IElementHandleWaitForSelectorOptions,
+  ): Promise<ElementHandle<T> | null> {
     const { $host } = this;
 
     if (!$host) {
       throw Error('Not mounted yet');
     }
 
-    return $host.waitForSelector(selector);
+    return $host.waitForSelector(selector, options) as unknown as Promise<ElementHandle<T> | null>;
   }
 
   /**
    * Return list of elements within host by the selector passed.
    */
-  protected async getElements(
+  protected async getElements<T extends HTMLElement = HTMLElement>(
     selector: string,
-  ): Promise<ElementHandle<HTMLElement>[]> {
+    options?: IElementHandleWaitForSelectorOptions,
+  ): Promise<ElementHandle<T>[]> {
     const { $host } = this;
 
     if (!$host) {
@@ -130,23 +132,17 @@ export abstract class ComponentWrapper {
     }
 
     // need this await cause it seems like $$ doesn't have an embedded timeout
-    await $host.waitForSelector(selector);
+    await $host.waitForSelector(selector, options);
 
     // figure out how to pass timeout here
-    return $host.$$(selector) as Promise<ElementHandle<HTMLElement>[]>;
+    return $host.$$(selector) as unknown as Promise<ElementHandle<T>[]>;
   }
 
   /**
    * Sets $host reference.
    */
-  private setHostElement(
-    scopeElement: ElementHandle<HTMLElement>,
-    selector: string,
-    nthOfType?: number,
-    timeout?: number,
-    hostElement?: ElementHandle<HTMLElement>,
-  ): Promise<void> {
-    const options: TWaitForOptions = {};
+  private setHostElement(args: ISetHostElementArgs): Promise<void> {
+    const { hostElement } = args;
 
     if (hostElement) {
       this.$host = hostElement;
@@ -154,15 +150,19 @@ export abstract class ComponentWrapper {
       return Promise.resolve();
     }
 
-    if (timeout !== undefined) {
-      options.timeout = timeout;
-    }
+    const {
+      scopeElement,
+      nthOfType,
+      waitForSelectorOptions,
+    } = args;
+
+    let { hostSelector } = args;
 
     if (nthOfType !== undefined) {
-      selector += ` >> nth=${nthOfType}`;
+      hostSelector += ` >> nth=${nthOfType}`;
     }
 
-    return scopeElement.waitForSelector(selector, options)
+    return scopeElement.waitForSelector(hostSelector, waitForSelectorOptions)
       .then(($elem: ElementHandle) => {
         this.$host = $elem as ElementHandle<HTMLElement>;
       });

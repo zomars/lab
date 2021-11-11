@@ -3,7 +3,7 @@ import { graphql, PageRendererProps } from 'gatsby';
 import { cn } from '@bem-react/classname';
 
 import { Layout } from '../../components/Layout';
-import { Seo } from '../../components/Seo';
+import { Seo } from '../../components/Seo/Seo';
 import { PostPreview } from '../../components/PostPreview/PostPreview';
 import { IBlogPost } from '../../types/common.types';
 import { postsPerPage } from '../../constants';

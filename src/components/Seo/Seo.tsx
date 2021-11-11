@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 import { each } from 'lodash';
 
-import { ISiteMetadata } from '../types/common.types';
+import { ISiteMetadata } from '../../types/common.types';
 
 const detailsQuery = graphql`
   query DefaultSEOQuery {
