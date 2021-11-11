@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Helmet } from 'react-helmet';
-import { StaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql } from 'gatsby';
 import { each } from 'lodash';
 
 import { ISiteMetadata } from '../types/common.types';
@@ -18,6 +18,12 @@ const detailsQuery = graphql`
   }
 `;
 
+const useSiteMetadata = (): ISiteMetadata => {
+  const { site } = useStaticQuery(detailsQuery);
+
+  return site.siteMetadata;
+};
+
 interface IHelmetMetaTag {
   property?: string;
   name?: string;
@@ -25,19 +31,18 @@ interface IHelmetMetaTag {
 }
 
 interface ISeoProps {
-  keywords?: string[],
-  lang?: string,
-  meta?: IHelmetMetaTag[],
-  description?: string,
   title?: string,
+  description?: string,
+  meta?: IHelmetMetaTag[],
+  keywords?: string[],
   pathname?: string,
   image?: { src: string },
+  lang?: string,
 }
 
-function render(
-  props: ISeoProps,
-  siteMetadata: ISiteMetadata,
-): ReactElement {
+export function Seo(props: ISeoProps): ReactElement {
+  const siteMetadata = useSiteMetadata();
+
   const {
     description: propsDescription,
     lang,
@@ -53,7 +58,8 @@ function render(
 
   const attrs = { lang };
 
-  // developer.twitter.com/en/docs/twitter-for-websites/cards/overview/summary-card-with-large-image
+  // developer.twitter.com/en/docs/twitter-for-websites/cards/
+  // overview/summary-card-with-large-image
   const twitterCard = {
     card: image ? 'summary_large_image' : 'summary',
     site: '@amalitsky',
@@ -126,21 +132,10 @@ function render(
 
   return (
     <Helmet
-      htmlAttributes = { attrs }
       title = { title }
+      htmlAttributes = { attrs }
       titleTemplate = { `%s | ${ siteMetadata.title }` }
       meta = { metaTags }
-    />
-  );
-}
-
-export function Seo(props: ISeoProps): ReactElement {
-  return (
-    <StaticQuery
-      query = { detailsQuery }
-      render = {
-        (data: { site: { siteMetadata: ISiteMetadata }}) => render(props, data.site.siteMetadata)
-      }
     />
   );
 }

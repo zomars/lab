@@ -12,5 +12,7 @@ export function onRenderBody({ setPostBodyComponents }: RenderBodyArgs): void {
   ]);
 }
 
+export { onPreRenderHTML } from './src/gatsby-hooks/on-pre-render-html';
+export { replaceRenderer } from './src/gatsby-hooks/replace-renderer';
 export { wrapPageElement } from './src/gatsby-hooks/wrap-page-element';
 export { wrapRootElement } from './src/gatsby-hooks/wrap-root-element';

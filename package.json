@@ -37,7 +37,7 @@
     "prismjs": "^1.25.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-helmet": "6.x.x"
+    "react-helmet": "^6.1.0"
   },
   "devDependencies": {
     "@mdx-js/react": "^1.6.22",
@@ -107,7 +107,8 @@
     "build": "gatsby build",
     "prepare": "husky install",
     "stylelint-all": "stylelint 'src/**/*.scss'",
-    "stylelint-fix": "yarn stylelint-all --fix"
+    "stylelint-fix": "yarn stylelint-all --fix",
+    "debug": "node $NODE_DEBUG_OPTION ./node_modules/.bin/gatsby build"
   },
   "browserslist": [
     "last 2 years and > 1%",

@@ -72,8 +72,8 @@ globals.nodeEnv = env;
 if (prId) {
   hostname = `pr${ prId }--amlab.netlify.app`;
 } else if (env === 'development') {
-  protocol = 'http';
   hostname = 'localhost:8000';
+  protocol = 'http';
 }
 
 // skipping performance related test for dev builds

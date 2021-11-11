@@ -5,14 +5,30 @@ import {
 /**
  * @fileoverview
  *
- * Actual Gatsby config file (in TypeScript).
+ * Actual Gatsby config file in TypeScript.
  */
+
+const {
+  NODE_ENV: env,
+  PR_ID: prId,
+} = process.env;
+
+// production
+let hostname = 'labs.amalitsky.com';
+let protocol = 'https';
+
+if (prId) {
+  hostname = `pr${ prId }--amlab.netlify.app`;
+} else if (env === 'development') {
+  hostname = 'localhost:8000';
+  protocol = 'http';
+}
 
 const metadata = {
   title: 'Alex M Lab',
   author: 'Alex Malitsky',
   description: 'We gonna figure what it is all about',
-  siteUrl: 'https://lab.amalitsky.com/',
+  siteUrl: `${ protocol }://${ hostname }`,
   social: {
     twitter: 'amalitsky',
   },
@@ -44,27 +60,6 @@ const plugins = [
   'gatsby-remark-images',
   'gatsby-transformer-sharp',
   'gatsby-plugin-preact',
-  // 'gatsby-plugin-feed',
-  /* {
-    resolve: 'gatsby-plugin-google-analytics',
-    options: {
-      trackingId: 'ADD YOUR TRACKING ID HERE',
-    }
-  }, */
-  /* {
-      resolve: 'gatsby-plugin-manifest',
-      options: {
-          name: title,
-          start_url: '/',
-          background_color: '#ffffff',
-          theme_color: '#663399',
-          display: 'minimal-ui',
-          icon: 'content/assets/gatsby-icon.png'
-      }
-  },*/
-  // 'gatsby-plugin-offline',
-  'gatsby-plugin-react-helmet',
-  'gatsby-plugin-mdx',
   'gatsby-plugin-typescript',
   'gatsby-plugin-sass',
   'gatsby-plugin-sharp',

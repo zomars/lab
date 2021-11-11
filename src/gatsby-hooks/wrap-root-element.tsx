@@ -4,6 +4,7 @@ import {
   StaticQuery,
   WrapRootElementBrowserArgs,
 } from 'gatsby';
+
 import {
   ThemeProvider,
 } from '@mui/material/styles';

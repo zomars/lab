@@ -1,15 +1,10 @@
 import React, { ReactElement, useMemo } from 'react';
 import { IPostContext, postsContext } from '../../react-contexts/posts.context';
-import { IBlogPost, IUniquePostTag } from '../../types/common.types';
-
-interface IQueryResponse {
-  allPosts: {
-    posts: IBlogPost[],
-  },
-  uniqueTags: {
-    tags: IUniquePostTag[],
-  },
-}
+import {
+  IBlogPost,
+  IPostTagsMappingQResponse,
+  IUniquePostTag,
+} from '../../types/common.types';
 
 /**
  * Create context data structure from graphQL response.
@@ -43,7 +38,7 @@ function computeContextValue(
  * Populate postsContext with data.
  */
 export function PostContextProvider(
-  { data, children }: { data: IQueryResponse, children: ReactElement },
+  { data, children }: { data: IPostTagsMappingQResponse, children: ReactElement },
 ): ReactElement {
   const { posts } = data.allPosts;
   const { tags } = data.uniqueTags;

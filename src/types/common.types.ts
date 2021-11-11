@@ -53,3 +53,12 @@ export interface ISiteMetadata {
 export interface IReactNodeProps {
   children: string | ReactNode;
 }
+
+export interface IPostTagsMappingQResponse {
+  allPosts: {
+    posts: IBlogPost[],
+  },
+  uniqueTags: {
+    tags: IUniquePostTag[],
+  },
+}
