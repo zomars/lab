@@ -8493,6 +8493,22 @@ gatsby-core-utils@^3.1.0, gatsby-core-utils@^3.1.1:
     tmp "^0.2.1"
     xdg-basedir "^4.0.0"
 
+gatsby-core-utils@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-3.1.1.tgz#ba4ac26c43c803ef7322f8825bc9b94bdf8c9003"
+  integrity sha512-Z7H0UtKct5oukYkyyBMlRi1zpJfD2hhE5+eV6fYpHQCjlzmx2aSdumgFcDuQfJeqcnCSnfhlZM1wcaJ8WxI5Jg==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
+    ci-info "2.0.0"
+    configstore "^5.0.1"
+    file-type "^16.5.3"
+    fs-extra "^10.0.0"
+    got "^11.8.2"
+    node-object-hash "^2.3.9"
+    proper-lockfile "^4.1.2"
+    tmp "^0.2.1"
+    xdg-basedir "^4.0.0"
+
 gatsby-graphiql-explorer@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/gatsby-graphiql-explorer/-/gatsby-graphiql-explorer-2.1.0.tgz#0bbe0298956381baeeb45ca36409fdd4ac8c9a8b"
