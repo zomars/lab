@@ -9,7 +9,7 @@ interface IResolvablePromise<T, U = unknown> extends Promise<T> {
  * Return promise which can be resolved and rejected from the "outside".
  */
 export function getResolvablePromise<T, U = unknown>(
-  callback?: (resolve: (payload: T) => void, reject: (payload: U) => void) => void
+  callback?: (resolve: (payload: T) => void, reject: (payload: U) => void) => void,
 ): IResolvablePromise<T, U> {
   let resolve: (payload: T) => void;
   let reject: (payload: U) => void;
@@ -55,4 +55,8 @@ export async function getElementHandleAttributes(
   const attrValues = await Promise.all(promises);
 
   return attrValues.map(value => value?.trim());
+}
+
+export function bytesToRoundKiloBytes(value: number): number {
+  return Math.round(value / 1000);
 }

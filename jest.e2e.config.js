@@ -42,8 +42,8 @@ const tsJestConfig = {
 };
 
 // production
-let hostname = 'labs.amalitsky.com';
-let protocol = 'https';
+let hostname = 'localhost:9000';
+let protocol = 'http';
 
 const networkThrottleOptions = {
   downloadThroughput: 1000 * 1000, // 1Mb/s
@@ -65,20 +65,24 @@ const testPathIgnorePatterns = [
 const {
   NODE_ENV: env,
   PR_ID: prId,
+  TEST_PUBLIC: testPublic,
 } = process.env;
 
 globals.nodeEnv = env;
 
-if (prId) {
-  hostname = `pr${ prId }--amlab.netlify.app`;
-} else if (env === 'development') {
+if (env === 'development') {
   hostname = 'localhost:8000';
   protocol = 'http';
-}
 
-// skipping performance related test for dev builds
-if (env === 'development') {
   testPathIgnorePatterns.push('/performance/');
+} else if (prId) {
+  // github action run
+  hostname = `pr${ prId }--amlab.netlify.app`;
+  protocol = 'https';
+} else if (testPublic) {
+  // test publicly deployed production version
+  hostname = 'labs.amalitsky.com';
+  protocol = 'https';
 }
 
 globals.url = `${ protocol }://${ hostname }`;

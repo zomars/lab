@@ -112,6 +112,10 @@ describe('Blog Post page', () => {
 
   // eslint-disable-next-line jest/expect-expect
   it('renders the post wo JS', async () => {
+    if (localGlobal.nodeEnv === 'development') {
+      return;
+    }
+
     const cdpSession = await page.context().newCDPSession(page);
 
     // turn JS off

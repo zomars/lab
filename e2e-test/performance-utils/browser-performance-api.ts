@@ -86,7 +86,7 @@ export function getPerfResourceTiming(): Promise<PerformanceResourceTiming[]> {
     resolved = true;
 
     promiseResolve(
-      resources.map(resource => resource.toJSON())
+      resources.map(resource => resource.toJSON()),
     );
 
     observer.disconnect();

@@ -11,6 +11,8 @@ concurrency: master_update
 
 jobs:
   setup:
+    name: yarn install
+
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +30,11 @@ jobs:
         run: yarn install --prefer-offline
 
   deploy:
+    name: build & deploy
+
     runs-on: ubuntu-latest
+
+    timeout-minutes: 30
 
     needs: setup
 

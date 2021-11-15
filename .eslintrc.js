@@ -97,6 +97,7 @@ const e2eTestOverrides = {
     'plugin:jest-playwright/recommended',
     'plugin:jest/recommended',
     'plugin:jest/style',
+    'plugin:rxjs/recommended',
   ],
   rules: {
     'import/no-extraneous-dependencies': [
@@ -104,6 +105,11 @@ const e2eTestOverrides = {
         devDependencies: true,
       },
     ],
+  },
+  parserOptions: {
+    ecmaVersion: 2019,
+    sourceType: 'module',
+    project: 'tsconfig.e2e.json',
   },
 };
 
