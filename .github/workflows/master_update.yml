@@ -3,34 +3,37 @@ name: master update
 on:
   push:
     branches: [ master ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 concurrency: master_update
 
 jobs:
   setup:
-    name: yarn install
+    name: Yarn install & cache
 
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
+        name: Checkout
 
-      - name: Cache node modules
+      - name: node_modules cache
         uses: actions/cache@v2
         env:
-          cache-name: cache-node-modules-yarn
+          cache-name: node-modules-yarn
+          cache-fingerprint: ${{ hashFiles('yarn.lock') }}
         with:
-          path: ~/.cache/yarn
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('yarn.lock') }}
+          path: node_modules
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-
+            ${{ runner.os }}-${{ env.cache-name }}-
 
-      - name: install dependencies
-        run: yarn install --prefer-offline
+      - name: Yarn install
+        run: yarn install --prefer-offline --frozen-lockfile
 
-  deploy:
-    name: build & deploy
+  build:
+    name: Build
 
     runs-on: ubuntu-latest
 
@@ -40,34 +43,68 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        name: Checkout
 
-      - name: Cache node modules
+      - name: Restore node_modules from cache
         uses: actions/cache@v2
         env:
-          cache-name: cache-node-modules-yarn
+          cache-name: node-modules-yarn
+          cache-fingerprint: ${{ hashFiles('yarn.lock') }}
         with:
-          path: ~/.cache/yarn
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('yarn.lock') }}
+          path: node_modules
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
 
-      - name: install deps
-        run: yarn install --prefer-offline
-
-      - name: restore website build from cache
-        id: restore-website-build-from-cache
+      - name: Cache production build
+        id: prod-build-cache
         uses: actions/cache@v2
         env:
           cache-name: prod-build
+          cache-fingerprint: >-
+            ${{ hashFiles('package.json','gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx') }}-
+            ${{ hashFiles('src/html.tsx', 'src/gatsby-hooks/*.*','src/page-templates/**/*.tsx') }}
         with:
-          path: public
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.sha }}
+          path: |
+            public
+            .cache
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
+          restore-keys: |-
+            ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-
+            ${{ runner.os }}-${{ env.cache-name }}-
 
-      - name: build the website
-        if: steps.restore-website-build-from-cache.outputs.cache-hit != 'true'
+      - name: Gatsby production build
+        if: steps.prod-build-cache.outputs.cache-hit != 'true'
         run: yarn build
 
-      - name: netlify deploy
+  deploy:
+    name: Deploy
+
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 10
+
+    needs: build
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache production build
+        id: prod-build-cache
+        uses: actions/cache@v2
+        env:
+          cache-name: prod-build
+          cache-fingerprint: >-
+            ${{ hashFiles('package.json','gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx') }}-
+            ${{ hashFiles('src/html.tsx', 'src/gatsby-hooks/*.*','src/page-templates/**/*.tsx') }}
+        with:
+          path: |
+            public
+            .cache
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
+
+      - name: Production deploy
         run: yarn deploy-netlify --prod --message "$DEPLOY_MESSAGE"
         env:
-          NETLIFY_SITE_ID: 0f94f863-38eb-4a4b-a1c3-dd677837bd32
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           DEPLOY_MESSAGE: Production update by ${{ github.sha }} merge
