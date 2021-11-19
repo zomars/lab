@@ -60,7 +60,7 @@ jobs:
             ${{ runner.os }}-${{ env.cache-name }}-
 
       - name: Yarn install
-        run: yarn install --prefer-offline --frozen-lockfile
+        run: yarn install --prefer-offline --frozen-lockfile --verbose
 
   lint:
     name: Linters
