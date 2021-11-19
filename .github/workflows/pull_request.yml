@@ -29,20 +29,6 @@ jobs:
         with:
           node-version: ${{ env.node-version }}
 
-      # yarn cache helps when yarn.lock gets updated
-      # and yarn install call removes node_modules folder when present
-      - name: Yarn cache
-        uses: actions/cache@v2
-        env:
-          cache-name: yarn-cache
-          cache-fingerprint: ${{ hashFiles('yarn.lock') }}
-        with:
-          path: ~/.cache/yarn
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
-          restore-keys: |
-            ${{ runner.os }}-${{ env.cache-name }}-
-
-      # node_module cache helps to avoid 1 minute copying from yarn cache
       - name: node_modules cache
         uses: actions/cache@v2
         env:
@@ -51,8 +37,6 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
-          # we have to install node_modules from scratch when yarn cache is empty (no hit)
-          # otherwise new yarn cache stored will get no files in it
           restore-keys: |
             ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-
 
