@@ -8,6 +8,7 @@ on:
 
 env:
   PR_ID: ${{ github.event.number }}
+  node-version: 14
 
 concurrency:
   group: dependabot-pr-${{ github.event.number }}
@@ -47,6 +48,24 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
+      - uses: actions/setup-node@v2
+        name: Set nodeJs version
+        with:
+          node-version: ${{ env.node-version }}
+
+      # yarn cache helps when yarn.lock gets updated
+      # and yarn install call removes node_modules folder when present
+      - name: Yarn cache
+        uses: actions/cache@v2
+        env:
+          cache-name: yarn-cache
+          cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+        with:
+          path: ~/.cache/yarn
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache-name }}-
+
       - name: node_modules cache
         uses: actions/cache@v2
         env:
@@ -75,6 +94,11 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
+      - uses: actions/setup-node@v2
+        name: Set nodeJs version
+        with:
+          node-version: ${{ env.node-version }}
+
       - name: Restore node_modules from cache
         uses: actions/cache@v2
         env:
@@ -102,14 +126,10 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Restore node_modules from cache
-        uses: actions/cache@v2
-        env:
-          cache-name: node-modules-yarn
-          cache-fingerprint: ${{ hashFiles('yarn.lock') }}
+      - uses: actions/setup-node@v2
+        name: Set nodeJs version
         with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
+          node-version: ${{ env.node-version }}
 
       - name: Cache production build
         id: prod-build-cache
@@ -128,6 +148,16 @@ jobs:
             ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-
             ${{ runner.os }}-${{ env.cache-name }}-
 
+      - name: Restore node_modules from cache
+        if: steps.prod-build-cache.outputs.cache-hit != 'true'
+        uses: actions/cache@v2
+        env:
+          cache-name: node-modules-yarn
+          cache-fingerprint: ${{ hashFiles('yarn.lock') }}
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
+
       - name: Gatsby production build
         if: steps.prod-build-cache.outputs.cache-hit != 'true'
         run: yarn build
@@ -144,6 +174,11 @@ jobs:
         name: Checkout
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+
+      - uses: actions/setup-node@v2
+        name: Set nodeJs version
+        with:
+          node-version: ${{ env.node-version }}
 
       - name: Restore exact production build from cache
         uses: actions/cache@v2
@@ -180,6 +215,11 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
+      - uses: actions/setup-node@v2
+        name: Set nodeJs version
+        with:
+          node-version: ${{ env.node-version }}
+
       - name: Restore node_modules from cache
         uses: actions/cache@v2
         env:
@@ -209,6 +249,11 @@ jobs:
         name: Checkout
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+
+      - uses: actions/setup-node@v2
+        name: Set nodeJs version
+        with:
+          node-version: ${{ env.node-version }}
 
       - uses: actions-ecosystem/action-add-labels@v1.1.0
         name: Add labels

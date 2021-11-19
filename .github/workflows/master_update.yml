@@ -5,6 +5,9 @@ on:
     branches: [ master ]
   workflow_dispatch:
 
+env:
+  node-version: 14
+
 concurrency: master_update
 
 jobs:
@@ -16,6 +19,24 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         name: Checkout
+
+      - uses: actions/setup-node@v2
+        name: Set nodeJs version
+        with:
+          node-version: ${{ env.node-version }}
+
+      # yarn cache helps when yarn.lock gets updated
+      # and yarn install call removes node_modules folder when present
+      - name: Yarn cache
+        uses: actions/cache@v2
+        env:
+          cache-name: yarn-cache
+          cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+        with:
+          path: ~/.cache/yarn
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache-name }}-
 
       - name: node_modules cache
         uses: actions/cache@v2
@@ -44,6 +65,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         name: Checkout
+
+      - uses: actions/setup-node@v2
+        name: Set nodeJs version
+        with:
+          node-version: ${{ env.node-version }}
 
       - name: Restore node_modules from cache
         uses: actions/cache@v2
@@ -87,6 +113,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        name: Set nodeJs version
+        with:
+          node-version: ${{ env.node-version }}
 
       - name: Cache production build
         id: prod-build-cache
