@@ -35,7 +35,7 @@ jobs:
         uses: actions/cache@v2
         env:
           cache-name: yarn-cache
-          cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+          cache-fingerprint: ${{ hashFiles('yarn.lock') }}
         with:
           path: ~/.cache/yarn
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
@@ -51,9 +51,10 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
+          # we have to install node_modules from scratch when yarn cache is empty (no hit)
+          # otherwise new yarn cache stored will get no files in it
           restore-keys: |
             ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-
-            ${{ runner.os }}-${{ env.cache-name }}-
 
       - name: Yarn install
         run: yarn install --prefer-offline --frozen-lockfile

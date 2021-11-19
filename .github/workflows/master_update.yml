@@ -31,7 +31,7 @@ jobs:
         uses: actions/cache@v2
         env:
           cache-name: yarn-cache
-          cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+          cache-fingerprint: ${{ hashFiles('yarn.lock') }}
         with:
           path: ~/.cache/yarn
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
@@ -48,7 +48,6 @@ jobs:
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-
-            ${{ runner.os }}-${{ env.cache-name }}-
 
       - name: Yarn install
         run: yarn install --prefer-offline --frozen-lockfile
