@@ -13,7 +13,7 @@ describe('site header', () => {
 
     context.setDefaultTimeout(localGlobal.defaultTimeout);
 
-    await page.goto(`${ localGlobal.url }/blog/${ activeTag }/1`);
+    await page.goto(`${ localGlobal.url }/tags/${ activeTag }/1`);
   });
 
   it('random (first) preview has all expected elements', async () => {

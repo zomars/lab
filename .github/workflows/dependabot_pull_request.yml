@@ -59,7 +59,7 @@ jobs:
         uses: actions/cache@v2
         env:
           cache-name: node-modules-yarn
-          cache-fingerprint: ${{ hashFiles('yarn.lock') }}
+          cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
@@ -91,7 +91,7 @@ jobs:
         uses: actions/cache@v2
         env:
           cache-name: node-modules-yarn
-          cache-fingerprint: ${{ hashFiles('yarn.lock') }}
+          cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
@@ -125,6 +125,7 @@ jobs:
         env:
           cache-name: prod-build
           cache-fingerprint: >-
+            ${{ env.node-version }}-
             ${{ hashFiles('package.json','gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx') }}-
             ${{ hashFiles('src/html.tsx', 'src/gatsby-hooks/*.*','src/page-templates/**/*.tsx') }}
         with:
@@ -134,14 +135,13 @@ jobs:
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
           restore-keys: |-
             ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-
-            ${{ runner.os }}-${{ env.cache-name }}-
 
       - name: Restore node_modules from cache
         if: steps.prod-build-cache.outputs.cache-hit != 'true'
         uses: actions/cache@v2
         env:
           cache-name: node-modules-yarn
-          cache-fingerprint: ${{ hashFiles('yarn.lock') }}
+          cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
@@ -173,6 +173,7 @@ jobs:
         env:
           cache-name: prod-build
           cache-fingerprint: >-
+            ${{ env.node-version }}-
             ${{ hashFiles('package.json','gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx') }}-
             ${{ hashFiles('src/html.tsx', 'src/gatsby-hooks/*.*','src/page-templates/**/*.tsx') }}
         with:
@@ -180,6 +181,15 @@ jobs:
             public
             .cache
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
+
+      - name: Restore node_modules from cache
+        uses: actions/cache@v2
+        env:
+          cache-name: node-modules-yarn
+          cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
 
       - name: Staging deploy
         run: yarn deploy-netlify --alias pr$PR_ID --message $DEPLOY_MESSAGE
@@ -212,7 +222,7 @@ jobs:
         uses: actions/cache@v2
         env:
           cache-name: node-modules-yarn
-          cache-fingerprint: ${{ hashFiles('yarn.lock') }}
+          cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}

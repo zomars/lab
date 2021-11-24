@@ -228,8 +228,8 @@ describe('basics', () => {
     });
   });
 
-  describe('blog post page', () => {
-    const url = `${localGlobal.url}/blog/posts/2021/audi-s4-seats-into-gti/`;
+  describe('post page', () => {
+    const url = `${localGlobal.url}/posts/2021/audi-s4-seats-into-gti/`;
 
     it('loads and renders the page in a reasonable time', async () => {
       await page.goto(url);

@@ -24,6 +24,7 @@ import { Seo } from '../../components/Seo/Seo';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
 import { IBlogPost } from '../../types/common.types';
 import { PostTags } from '../../components/PostTags/PostTags';
+import { CodeSnippet } from '../../components/CodeSnippet/CodeSnippet';
 import { BlogPostPaginator } from './BlogPostPaginator/BlogPostPaginator';
 
 import './BlogPost.scss';
@@ -54,6 +55,7 @@ export const pageQuery = graphql`
 `;
 
 const mdxComponents = {
+  code: CodeSnippet,
   h1: H1,
   h2: H2,
   h3: H3,

@@ -6,6 +6,7 @@ import {
   CreateNodeArgs,
   CreatePageArgs,
   CreatePagesArgs,
+  CreateSchemaCustomizationArgs,
 } from 'gatsby';
 
 import { createFilePath } from 'gatsby-source-filesystem';
@@ -34,43 +35,9 @@ export function onCreateWebpackConfig({ actions }: { actions: Actions }): void {
 }
 
 /**
- * Create site level redirects.
- * More will be added by programmatic page creation later on.
- */
-function createRedirects(hookArgs: CreatePagesArgs): void {
-  const {
-    createRedirect,
-  } = hookArgs.actions;
-
-  // TODO add backend redirects or duplicated page
-  const rootRedirectFromPaths = [
-    '/blog',
-    '/blog/',
-  ];
-
-  const rootRedirectToTarget = '/blog/tech/1';
-
-  const redirectSettings = {
-    toPath: rootRedirectToTarget,
-    redirectInBrowser: true,
-    isPermanent: true,
-  };
-
-  rootRedirectFromPaths
-    .forEach((fromPath) => {
-      createRedirect({
-        ...redirectSettings,
-        fromPath,
-      });
-    });
-}
-
-/**
  * Create post lists and post pages themselves.
  */
 export async function createPages(hookArgs: CreatePagesArgs): Promise<void> {
-  createRedirects(hookArgs);
-
   await createPostPages(hookArgs);
 
   await createPostIndexPages(hookArgs);
@@ -89,15 +56,24 @@ export function onCreateNode(
   ) {
     const { createNodeField } = actions;
 
-    const path = createFilePath({
+    let path = createFilePath({
       node,
       getNode,
     });
 
+    const folders = path.split('/');
+    const { length } = folders;
+
+    // strip away duplicated paths when post folder name matches the markdown file name
+    // last part is always an empty string due to the trailing slash
+    if (length > 3 && folders[length - 2] === folders[length - 3]) {
+      path = `${ folders.slice(0, -2).join('/') }/`;
+    }
+
     createNodeField({
       name: 'slug',
       node,
-      value: `/blog${path}`,
+      value: path,
     });
   }
 }
@@ -123,4 +99,30 @@ export function onCreatePage(args: CreatePageArgs): void {
 
     createIndexPage(args);
   }
+}
+
+/**
+ * Define frontmatter schema manually wo inferring.
+ */
+export function createSchemaCustomization(
+  { actions }: CreateSchemaCustomizationArgs,
+): void {
+  const { createTypes } = actions;
+
+  // should match IBlogPostFrontmatter
+  const typeDefs = `
+    type Mdx implements Node {
+      frontmatter: MdxFrontmatter
+    }
+    type MdxFrontmatter @dontInfer {
+      title: String!,
+      date: Date! @dateformat,
+      updated: Date @dateformat,
+      tags: [String!],
+      coverImage: File @fileByRelativePath,
+      published: Boolean,
+    }
+  `;
+
+  createTypes(typeDefs);
 }

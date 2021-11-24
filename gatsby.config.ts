@@ -79,7 +79,6 @@ const plugins = [
             showCaptions: ['title'],
           },
         },
-        // 'gatsby-remark-prismjs',
         'gatsby-remark-reading-time',
       ],
     },

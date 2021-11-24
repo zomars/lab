@@ -1,6 +1,6 @@
 ---
 title: 'The Making of a Manager by Julie Zhuo'
-date: '2021-07-02T10:00:00.000-07:00'
+date: '2021-07-03T10:00:00.000-07:00'
 tags: ['review', 'book', 'management', 'tech', 'highlights']
 coverImage: './book-cover.jpg'
 ---

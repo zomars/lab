@@ -83,7 +83,7 @@ describe('basics', () => {
       const url = await locs[0].textContent();
 
       // all blog posts and post listings should have creation date defined
-      if (url.indexOf('/blog/') !== -1) {
+      if (url.indexOf('/posts/') !== -1) {
         // eslint-disable-next-line jest/no-conditional-expect
         expect(lastMods).toHaveLength(1);
       }

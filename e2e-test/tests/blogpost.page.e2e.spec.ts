@@ -5,7 +5,7 @@ import { getElementHandleAttributes } from '../utils';
 
 const localGlobal = global as IGlobal & typeof globalThis;
 
-const postUrl = `${localGlobal.url}/blog/posts/2021/audi-s4-seats-into-gti/`;
+const postUrl = `${localGlobal.url}/posts/2021/audi-s4-seats-into-gti/`;
 
 const fbCardFields = [
   'type',
@@ -93,7 +93,7 @@ async function testBlogPostPage(
   }
 }
 
-describe('Blog Post page', () => {
+describe('Post page', () => {
   beforeEach(async () => {
     await jestPlaywright.resetContext();
 

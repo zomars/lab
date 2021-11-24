@@ -41,14 +41,14 @@ export async function createPostPages(
   // eslint-disable-next-line no-extra-parens
   const { nodes: posts }: { nodes: IBlogPost[] } = (postsReq.data as any).allPosts;
 
-  posts.forEach((post, index: number) => {
-    const { slug } = post.fields;
+  posts.forEach((post) => {
+    const { slug: path } = post.fields;
 
     createPage({
-      path: slug,
+      path,
       component: blogPostComponentPath,
       context: {
-        slug,
+        slug: path,
       },
     });
   });

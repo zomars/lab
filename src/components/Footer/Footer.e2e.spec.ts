@@ -6,8 +6,8 @@ const localGlobal = global as IGlobal & typeof globalThis;
 
 const urlsToTest = [
   '/',
-  '/blog/tech/1/',
-  '/blog/cars/1/',
+  '/tags/tech/1/',
+  '/tags/cars/1/',
   '/sources/',
   '/about/',
 ];

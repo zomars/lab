@@ -92,7 +92,15 @@ export function PostList(props: IPostListProps): ReactElement {
     )
   );
 
-  const numPages = Math.ceil(totalCount / postsPerPage);
+  const totalPages = Math.ceil(totalCount / postsPerPage);
+
+  const Paginator = totalPages > 1 ?
+    <PostListPaginator
+      className = { cnPostList('Paginator') }
+      current = { pageContext.currentPage }
+      length = { totalPages }
+      tag = { pageContext.tag }
+    /> : null;
 
   return (
     <Layout
@@ -106,12 +114,7 @@ export function PostList(props: IPostListProps): ReactElement {
 
       { postElements }
 
-      <PostListPaginator
-        className = { cnPostList('Paginator') }
-        current = { pageContext.currentPage }
-        length = { numPages }
-        tag = { pageContext.tag }
-      />
+      { Paginator }
     </Layout>
   );
 }

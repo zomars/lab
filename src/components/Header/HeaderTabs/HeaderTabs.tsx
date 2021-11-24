@@ -42,7 +42,7 @@ topSections.forEach((section: ISection) => {
   }
 });
 
-const postUrlRegex = /^\/blog\/posts\/.+$/;
+const postUrlRegex = /^\/posts\/.+$/;
 
 const cnHeaderTabs = cn('HeaderTabs');
 

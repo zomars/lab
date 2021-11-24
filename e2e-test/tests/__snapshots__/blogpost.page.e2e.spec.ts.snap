@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Blog Post page renders the post with JS 1`] = `"Audi B8 S4/S5/TT Seats into MK6 GTI Installation Guide"`;
+exports[`Post page renders the post with JS 1`] = `"Audi B8 S4/S5/TT Seats into MK6 GTI Installation Guide"`;
 
-exports[`Blog Post page renders the post with JS 2`] = `
+exports[`Post page renders the post with JS 2`] = `
 Array [
   "Audi B8 S4/S5/TT Seats into MK6 GTI Installation Guide",
   "Electric Modules of the VW seat",
@@ -38,7 +38,7 @@ Array [
 ]
 `;
 
-exports[`Blog Post page renders the post with JS 3`] = `
+exports[`Post page renders the post with JS 3`] = `
 "My original GTI leather seats look good and hold me pretty well until I get close to 1 lateral G on the raceway or canyons!
 
 They also have a mechanical lever for simultaneous adjustment of the seat height and angle. That means that you can't keep the seat at it's lowest position while tilting only the front edge of the cushion.
@@ -369,7 +369,7 @@ Golf MK6 Component Locations. Same as above - wait for a few seconds, then click
 If any of the resources above go down please ping me to have them updated. Good luck!"
 `;
 
-exports[`Blog Post page renders the post with JS 4`] = `
+exports[`Post page renders the post with JS 4`] = `
 Array [
   "VW GTI seat controls",
   "Audi seat controls",
@@ -396,9 +396,9 @@ Array [
 ]
 `;
 
-exports[`Blog Post page renders the post wo JS 1`] = `"Audi B8 S4/S5/TT Seats into MK6 GTI Installation Guide"`;
+exports[`Post page renders the post wo JS 1`] = `"Audi B8 S4/S5/TT Seats into MK6 GTI Installation Guide"`;
 
-exports[`Blog Post page renders the post wo JS 2`] = `
+exports[`Post page renders the post wo JS 2`] = `
 Array [
   "Audi B8 S4/S5/TT Seats into MK6 GTI Installation Guide",
   "Electric Modules of the VW seat",
@@ -434,7 +434,7 @@ Array [
 ]
 `;
 
-exports[`Blog Post page renders the post wo JS 3`] = `
+exports[`Post page renders the post wo JS 3`] = `
 "My original GTI leather seats look good and hold me pretty well until I get close to 1 lateral G on the raceway or canyons!
 
 They also have a mechanical lever for simultaneous adjustment of the seat height and angle. That means that you can't keep the seat at it's lowest position while tilting only the front edge of the cushion.
@@ -765,7 +765,7 @@ Golf MK6 Component Locations. Same as above - wait for a few seconds, then click
 If any of the resources above go down please ping me to have them updated. Good luck!"
 `;
 
-exports[`Blog Post page renders the post wo JS 4`] = `
+exports[`Post page renders the post wo JS 4`] = `
 Array [
   "VW GTI seat controls",
   "Audi seat controls",

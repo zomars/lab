@@ -3,9 +3,9 @@
   command = "yarn build"
 
 [[redirects]]
-  from = "/blog"
-  to = "/blog/tech/1"
+  from = "/tags/"
+  to = "/tags/tech/1/"
 
 [[redirects]]
-  from = "/blog/tech"
-  to = "/blog/tech/1"
+  from = "/tags/tech/"
+  to = "/tags/tech/1/"

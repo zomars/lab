@@ -46,14 +46,15 @@ blockquote {
   border-left-style: solid;
   border-color: var(--aml-color-gray-400);
   color: var(--aml-color-muted-text);
+  font-size: 85%;
 }
 
-code {
-  padding: var(--aml-size-px);
+// excluding code snippets
+code:not([class|='language-']) {
+  padding: var(--aml-size-xs);
   border-radius: var(--aml-radii-default);
   background-color: var(--aml-color-muted);
   font-family: var(--aml-font-mono);
-  font-size: 85%;
 }
 
 ol, ul {

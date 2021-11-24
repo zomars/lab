@@ -36,7 +36,9 @@ const config = {
   plugins: [
     'stylelint-order',
   ],
-  ignoreFiles: [],
+  ignoreFiles: [
+    '**/*.md',
+  ],
   rules: {
     'at-rule-no-unknown': OFF,
     'at-rule-empty-line-before': [
