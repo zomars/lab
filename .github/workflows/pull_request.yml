@@ -29,18 +29,35 @@ jobs:
         with:
           node-version: ${{ env.node-version }}
 
+      # node_module cache helps to avoid 1 minute copying from yarn cache on every job run
       - name: node_modules cache
+        id: node-modules-cache
         uses: actions/cache@v2
         env:
           cache-name: node-modules-yarn
           cache-fingerprint: ${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+          restore-keys: ${{ runner.os }}-${{ env.cache-name }}-
 
+      # yarn cache helps when yarn.lock gets updated
+      # and yarn install call removes pre-existent node_modules folder
+      - name: Yarn cache
+        # if there is no change to yarn.lock there is no need to load/update package manager cache
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
+        uses: actions/cache@v2
+        env:
+          cache-name: yarn-cache
+          cache-fingerprint: ${{ hashFiles('yarn.lock') }}
+        with:
+          path: ~/.cache/yarn
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+          restore-keys: ${{ runner.os }}-${{ env.cache-name }}-
+
+        # updating both yarn cache and node_modules
       - name: Yarn install
+        if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: yarn install --prefer-offline --frozen-lockfile
 
   lint:
@@ -66,7 +83,7 @@ jobs:
           cache-fingerprint: ${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
 
       - name: lint the code
         run: yarn lint
@@ -115,7 +132,7 @@ jobs:
           cache-fingerprint: ${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
       - name: Gatsby production build
         if: steps.prod-build-cache.outputs.cache-hit != 'true'
         run: yarn build
@@ -150,7 +167,7 @@ jobs:
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
 
       - name: Staging deploy
-        # no need to copy node_modules cause of ~/.yarn/cache(?)
+        # no need to copy node_modules and I'm not sure why
         run: yarn deploy-netlify --alias pr$PR_ID --message $DEPLOY_MESSAGE
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
@@ -182,7 +199,7 @@ jobs:
           cache-fingerprint: ${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
 
         # figure the better way supporting all the packages
       - name: Fake yarn postinstall
