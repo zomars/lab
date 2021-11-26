@@ -41,21 +41,6 @@ jobs:
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
           restore-keys: ${{ runner.os }}-${{ env.cache-name }}-
 
-      # yarn cache helps when yarn.lock gets updated
-      # and yarn install call removes pre-existent node_modules folder
-      - name: Yarn cache
-        # if there is no change to yarn.lock there is no need to load/update package manager cache
-        if: steps.node-modules-cache.outputs.cache-hit != 'true'
-        uses: actions/cache@v2
-        env:
-          cache-name: yarn-cache
-          cache-fingerprint: ${{ hashFiles('yarn.lock') }}
-        with:
-          path: ~/.cache/yarn
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
-          restore-keys: ${{ runner.os }}-${{ env.cache-name }}-
-
-        # updating both yarn cache and node_modules
       - name: Yarn install
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: yarn install --prefer-offline --frozen-lockfile
