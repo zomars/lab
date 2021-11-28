@@ -13,8 +13,9 @@ anywhere from 14 to 20 minutes.
 Which is too long of a wait for a website preview deployed or pull requests verified.
 I decided to figure out what can be optimized and ended up with 6 to 10 minutes
 GitHub action runs.
-In this post I'd like to share my learnings - hopefully it can help you to reduce caffeine
-consumption while waiting for PR to get verified by linters or website to go live.
+In this post I'd like to share my learnings.
+Hopefully it can help you to reduce the caffeine consumption while waiting for PR to
+get verified by linters or website to go live.
 
 ![GitHub acton runs: before and after](./gh-action-runs.png)
 
@@ -23,16 +24,16 @@ consumption while waiting for PR to get verified by linters or website to go liv
 First, few notes on GitHub action terms and debugging options. If you are familiar with
 them feel free to head straight to [optimization techniques](#caching-node-modules).
 
-_Workflow_ is the whole yaml file describing events triggering it and list of _jobs_ performed
-once it is triggered.
+_Workflow_ is the whole yaml file describing _events_ triggering it and list of _jobs_
+performed once it is triggered.
 
 Workflow _jobs_ run on different nodes (containers) in parallel, unless you explicitly define
 relations between them with `job.needs` property.
 
 Every _job_ contains a list of _steps_ which are executed on the _same_ node sequentially.
 
-Because of the independent nature of _jobs_ execution, state of the working directory is
-**not** shared between different jobs of a single workflow.
+Because of the independent nature of _jobs_ execution, state of the working directory
+is **not** shared between different jobs of a single workflow.
 That's why pretty much every job starts with checking out the branch with
 `uses: actions/checkout@v2` action.
 
@@ -41,10 +42,10 @@ That's why pretty much every job starts with checking out the branch with
 Even though verifying GitHub action workflow locally is not possible and working on it
 requires trial-and-error iterations there is an `ACTIONS_RUNNER_DEBUG`
 [environment flag](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/enabling-debug-logging)
-which makes it a little easier and less frustrating.
+which makes this process a little easier.
 
-In relation to caching debugging flag helps us to see what keys are used for the exact and/or
-partial match and what kind of cache hit (if any) happened during the workflow run.
+In relation to caching, debugging flag helps us to see what _keys_ are used for the exact
+and/or partial match and what kind of cache hit (if any) happened during the workflow run.
 
 ### Dependency Cache vs Artifacts
 
@@ -55,18 +56,18 @@ _Artifacts_ are better suited for exporting something out of the CI pipe (i.e. t
 logging or analytics system) and have more restrictive storage limits.
 Also, artifacts are "scoped" by the workflow, while dependency cache is not.
 
-We will be using dependency caching today since we don't need workflow scoping nor plan to
-make our cache public and definitely can enjoy _10Gb_ of free storage we don't need to manage
+We will be using dependency caching since we don't need workflow scoping nor plan to
+make our cache public and can totally enjoy _10Gb_ of free storage we don't need to manage
 in any way.
 
 ### GitHub Dependency Cache Branch Scope
 
 By design _dependency cache_ is scoped within the branch originating the event triggering the
-workflow. At the same time, workflows triggered of any branch have **read** access to the
-caches of respective _base_ (when applicable) and _master_ branches.
+workflow. At the same time, workflows triggered of any branch have **read** access to
+cache records of respective _base_ (when applicable) and _master_ branches.
 
-This is important case you might see cache misses once PR is merged into the _master_ branch even
-though minutes ago pull request update workflow had successfully built cache for it on the
+This is important case you might see cache misses once PR is merged into the _master_ branch
+even though minutes ago pull request update workflow had successfully built cache for it on the
 _feature_ branch.
 
 This is similar to variables scoping in programming languages where inner functions have access
@@ -76,15 +77,15 @@ to parent function and global scope variables but not the other way around.
 
 Recommended `actions/cache` requires you to set the `key` for the **exact** cache hit.
 
-Using the optional `restore-key` allows you to start with the older cache version
+Using the optional `restore-key` field allows you to start with the older cache version
 (whenever it makes sense) and then, after updating cache with your application logic
 (i.e. `yarn install`), save it with the exact `key` you were looking for in the first place.
 
-This approach works very well when storing npm package manager cache folder, _node_module_s and
-also for incremental production builds of GatsbyJs.
+This approach works very well when storing npm package manager cache folder, _node_modules_ and
+also for incremental GatsbyJS production builds.
 
-Please note the while `key` field takes the whole string, `restore-keys` takes a list
-of key **prefixes** and they are used as such during the cache matching process.
+Please note that while `key` field takes the whole string, `restore-keys` takes a list
+of key _prefixes_ and they are used as such during the cache matching process.
 More on [cache key matching](https://docs.github.com/en/actions/advanced-guides/caching-dependencies-to-speed-up-workflows#matching-a-cache-key).
 
 Last thing to note is that between multiple _partial_ matches for any given key _prefix_,
@@ -98,7 +99,7 @@ should be applicable to **npm**._
 ### Caching Package Manager Cache Folder
 
 Recommended approach to caching npm dependencies is to cache package manager cache folder
-(`~/.cache/yarn` or `~/.npm/_cacache`) rather than project's own _node_modules_ folder.
+(`~/.cache/yarn` or `~/.npm/_cacache`) rather than project's own _node_modules_.
 That implies executing `yarn install --prefer-offline` to get dependencies copied from
 the local cache into the _node_modules_ folder whenever you need them.
 
@@ -110,37 +111,37 @@ If your workflow has four _jobs_ and each of them requires _node_modules_ folder
 four minutes will be spent on copying npm dependencies from one local folder to another.
 
 Recommended [`actions/setup-node` action](https://github.com/actions/setup-node) is
-using this approach along with lock-file hash as a `key`.
+using this approach and lock-file hash as an exact match `key`.
 
 ### Caching node_modules Folder
 
 I tried caching _node_modules_ folder itself.
-With that `yarn install` can be called only once - by the initial _setup_ job when exact
-cache hit was not found.
-All subsequent jobs (and even workflow runs) will restore exact _node_modules_ folder
+With that `yarn install` can be called only once per workflow run - by the initial
+_setup_ job and only when exact cache hit didn't happen.
+All subsequent jobs (and even workflow runs) will be restoring exact _node_modules_ folder
 from the dependency cache using the _exact_ key match.
 
-Surprisingly restoring _node_modules_ from cache is _two_ times faster than copying files
-from package manager cache and takes about 30 seconds (for every job).
+Apparently restoring _node_modules_ from cache is _two_ times faster than copying files
+from package manager cache and takes about 30 seconds (per _job_).
 **2 minutes saved right there!**
 
-On the flip side - whenever lock-file gets updated `yarn install` seems to remove **all**
+On the flip side - whenever lock-file is updated `yarn install` seems to remove **all**
 the content of _node_modules_ folder (if restored from the partial cache match) and download
 all the dependencies (rather than just updated ones) over the network.
 
 Basically for dependency update scenario caching _node_modules_ doesn't help at all.
-At least not whith _yarn_ 1.x.
-For me "regular" updates when `yarn.lock` doesn't change was a priority and that's what I was
-optimizing for.
+At least not with _yarn_ 1.x! Curious if _npm_ behavior is different.
+For me "regular" updates when `yarn.lock` file isn't changed were a priority and
+that's what I was optimizing for.
 
-Here is the code snippet I'm using to set up the caching:
+Here is the code snippet I'm using to set up _node_modules_ caching:
 ```yaml
 - name: node_modules cache
   id: node-modules-cache
   uses: actions/cache@v2
   env:
     cache-name: node-modules-yarn
-    cache-fingerprint: ${{ hashFiles('yarn.lock') }}
+    cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
   with:
     path: node_modules
     key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
@@ -152,12 +153,19 @@ Here is the code snippet I'm using to set up the caching:
   run: yarn install --prefer-offline --frozen-lockfile
 ```
 
+I'm setting `node-version` manually in `yaml` file as a
+[workflow scope environment variable](https://docs.github.com/en/actions/learn-github-actions/workflow-syntax-for-github-actions#env).
+Mainly to make sure I'm running [particular node version](https://github.com/actions/setup-node#usage)
+for all of my scripts.
+But it also helps me to invalidate all existent caches by updating the value of the variable,
+i.e. from `14` to `14.18` and vice versa.
+
 ### Caching Both: Node Modules and Yarn Cache
 
-I've tried to optimize dependency update scenario by caching package manager cache along with
-_node_modules_, but it didn't work.
-Downloading and uploading lots of files from the folder actually made the `yarn install` process
-slower than loading all the dependencies over the network!
+I tried to optimize package-lock file update scenario by caching package manager...
+cache along with _node_modules_, but it didn't work.
+Downloading and uploading lots of files from the folder actually made the `yarn install`
+run slower than downloading all the dependencies over the network!
 
 You can check my [failed approach here](https://github.com/amalitsky/lab/pull/782/files).
 
@@ -189,7 +197,6 @@ with:
   key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
   restore-keys: |-
     ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-
-    ${{ runner.os }}-${{ env.cache-name }}-
 ```
 
 In my workflow _Production build_ and _Deploy_ are two separate (albeit sequential) jobs.
@@ -199,6 +206,11 @@ To increase the cache key specificity (and with that - quality of the partial ca
 I'm using `hashFiles` of GatsbyJS configuration files and application level components.
 We could totally get away with just `${{ runner.os }}-${{ env.cache-name }}-${{ github.sha }}`.
 
+Also, sometimes GatsbyJs doesn't do a great job of cache invalidation, and I'm practically doing it
+myself to be on the safe side.
+That's why you don't see `${{ runner.os }}-${{ env.cache-name }}-` being used as `restore-key`
+option.
+
 On average **incremental builds reduced production build times from ten to three minutes**.
 That's three to four times faster than it was!
 With just ten lines of code and no need to dive deep into intricacies of Gatsby's build process.
@@ -206,7 +218,7 @@ Wow!
 
 ## Conclusion
 Using dependency cache for GitHub actions is fairly straightforward and, even though not
-without catches, can significantly reduce workflow running times with just a few lines of yaml.
+without catches, can significantly reduce workflow running times with a few lines of yaml.
 
 For now, I'm very satisfied with results of this optimization as well as overall workflow run times.
 
