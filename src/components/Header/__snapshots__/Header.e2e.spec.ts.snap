@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`site header click navigates user between pages 1`] = `
+Array [
+  "Optimize GitHub Actions for UI Builds and Tests with Cache",
+  "The Making of a Manager by Julie Zhuo",
+  "Efficient Code Review",
+  "Good Parts of AngularJs Framework",
+  "Unglamorous end of AngularJs development",
+]
+`;
+
+exports[`site header click navigates user between pages 2`] = `
+Array [
+  "Audi B8 S4/S5/TT Seats into MK6 GTI Installation Guide",
+]
+`;

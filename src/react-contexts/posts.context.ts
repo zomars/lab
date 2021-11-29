@@ -8,8 +8,8 @@ export interface IPostContext {
 }
 
 const defaultValue: IPostContext = {
-  posts: new Map(),
-  postsPerTag: new Map(),
+  posts: new Map<string, IBlogPost>(),
+  postsPerTag: new Map<string, IBlogPost[]>(),
 };
 
 export const postsContext = React.createContext(defaultValue);

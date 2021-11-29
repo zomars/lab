@@ -28,8 +28,7 @@
     align-items: flex-start;
     justify-content: center;
     order: 3;
-    margin-top: calc(-1 * var(--aml-font-size-5)); // to start from details line (desktop only)
-    margin-left: 1rem;
+    margin-left: var(--aml-global-layout-padding-md);
     overflow: hidden;
   }
 
@@ -52,7 +51,7 @@
   .PostPreview {
     &-ImageWrapper {
       flex-basis: 100%;
-      justify-content: flex-start;
+      justify-content: center;
       order: 2;
       margin-top: 0;
       margin-bottom: var(--aml-size-sm);

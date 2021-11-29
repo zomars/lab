@@ -96,17 +96,16 @@ jobs:
         uses: actions/cache@v2
         env:
           cache-name: prod-build
-          cache-fingerprint: >-
-            ${{ env.node-version }}-
-            ${{ hashFiles('package.json','gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx') }}-
-            ${{ hashFiles('src/html.tsx', 'src/gatsby-hooks/*.*','src/page-templates/**/*.tsx') }}
+          key-1: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
+          key-2: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: |
             public
             .cache
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-${{ github.sha }}
           restore-keys: |-
-            ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-
+            ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-
+            ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-
 
       # skipping build on exact cache hit
       - name: Restore node_modules from cache
@@ -142,15 +141,13 @@ jobs:
         uses: actions/cache@v2
         env:
           cache-name: prod-build
-          cache-fingerprint: >-
-            ${{ env.node-version }}-
-            ${{ hashFiles('package.json','gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx') }}-
-            ${{ hashFiles('src/html.tsx', 'src/gatsby-hooks/*.*','src/page-templates/**/*.tsx') }}
+          key-1: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
+          key-2: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: |
             public
             .cache
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-${{ github.sha }}
 
       - name: Restore node_modules from cache
         uses: actions/cache@v2

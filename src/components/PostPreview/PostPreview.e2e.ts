@@ -4,7 +4,6 @@ import {
   ComponentWrapper,
   IComponentWrapperArgs,
 } from '../../../e2e-test/components/component-wrapper.e2e';
-import { getElementHandleInnerTexts } from '../../../e2e-test/utils';
 
 enum PostPreviewSelector {
   host = '[data-testid*=PostPreview]',
@@ -13,7 +12,7 @@ enum PostPreviewSelector {
   excerpt = 'data-testid=PostPreview-Excerpt',
   readMore = 'data-testid=PostPreview-ReadMore',
   header = 'data-testid=PostPreview-Header',
-  tag = '[data-testid*=PostTags-Tag]',
+  details = 'data-testid=PostPreview-Details',
 }
 
 interface IPostPreviewArgs extends Partial<IComponentWrapperArgs> {
@@ -28,22 +27,19 @@ export class PostPreview extends ComponentWrapper {
     });
   }
 
-  public static async isTagLink($tag: ElementHandle): Promise<boolean> {
-    const dataId = await $tag.getAttribute('data-testid');
-    const dataIds = dataId.split(' ');
-
-    return dataIds.includes('PostTags-Tag_link');
-  }
-
   public getImage(): Promise<ElementHandle | null> {
     return this.getElementHandle(PostPreviewSelector.image);
   }
 
   public async getExcerptText(): Promise<string> {
-    const $excerpt = await this.getElementHandle(PostPreviewSelector.excerpt);
+    const $excerpt = await this.getExcerpt();
     const text = await $excerpt.innerText();
 
     return text.trim();
+  }
+
+  public getExcerpt(): Promise<ElementHandle<HTMLElement>> {
+    return this.getElementHandle(PostPreviewSelector.excerpt);
   }
 
   public getTitle(): Promise<ElementHandle> {
@@ -57,13 +53,25 @@ export class PostPreview extends ComponentWrapper {
     return title.trim();
   }
 
-  public async getTags(): Promise<string[]> {
-    const $tags = await this.getTagElements() as ElementHandle<HTMLElement>[];
+  public async getPostedDateText(): Promise<string> {
+    const details = await this.getDetailsString();
 
-    return getElementHandleInnerTexts($tags);
+    const parts = details.split('—');
+
+    return parts[0].trim();
   }
 
-  public getTagElements(): Promise<ElementHandle[]> {
-    return this.getElements(PostPreviewSelector.tag);
+  public async getPostReadTime(): Promise<string> {
+    const details = await this.getDetailsString();
+
+    const parts = details.split('—');
+
+    return parts[1].trim();
+  }
+
+  private async getDetailsString(): Promise<string> {
+    const $details = await this.getElementHandle(PostPreviewSelector.details);
+
+    return $details.innerText();
   }
 }

@@ -1,3 +1,5 @@
+@use '../../styles/variables' as vars;
+
 .MDXHeader {
   &:hover {
     .MDXHeader-ChainLink {
@@ -21,6 +23,15 @@
     &:hover {
       text-decoration: none;
       cursor: default;
+    }
+  }
+}
+
+@media (max-width: vars.$breakpoint-md) {
+  .MDXHeader {
+    // remove indentation on mobile screens
+    &-ChainLink {
+      display: none;
     }
   }
 }

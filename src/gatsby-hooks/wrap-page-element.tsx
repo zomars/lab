@@ -8,7 +8,6 @@ import {
 } from '@reach/router';
 
 import { Header } from '../components/Header/Header';
-import { postsContext } from '../react-contexts/posts.context';
 import { STATE_CHANGE_EVENT } from '../constants';
 
 /**
@@ -39,17 +38,12 @@ function WrapPageElement(
   useLocationChange();
 
   return (
-    <postsContext.Consumer>
-      {
-        postsContext => (<>
-          <Header
-            postsContext = { postsContext }
-            { ...props }
-          />
-          { element }
-        </>)
-      }
-    </postsContext.Consumer>
+    <>
+      <Header
+        { ...props }
+      />
+      { element }
+    </>
   );
 }
 

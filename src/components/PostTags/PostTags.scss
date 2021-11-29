@@ -4,8 +4,12 @@
       margin-right: var(--aml-size-xs);
     }
 
-    &_active#{&}_link {
+    &_active {
       font-weight: bold;
+    }
+
+    &:not(#{&}_link) {
+      color: var(--aml-color-muted-text);
     }
   }
 }

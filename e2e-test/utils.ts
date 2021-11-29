@@ -1,4 +1,6 @@
-import { ElementHandle } from 'playwright';
+import { ElementHandle, Page } from 'playwright';
+import { BrowserContext } from 'playwright-core';
+import { STATE_CHANGE_EVENT } from '../src/constants';
 
 interface IResolvablePromise<T, U = unknown> extends Promise<T> {
   resolve: (payload: T) => void;
@@ -59,4 +61,37 @@ export async function getElementHandleAttributes(
 
 export function bytesToRoundKiloBytes(value: number): number {
   return Math.round(value / 1000);
+}
+
+function waitForSpaNavigationPageFunction(STATE_CHANGE_EVENT: string): Promise<true> {
+  return new Promise((resolve) => {
+    const eventListener = (): void => resolve(true);
+
+    window.addEventListener(
+      STATE_CHANGE_EVENT,
+      eventListener,
+      { once: true },
+    );
+
+    // cleanup in case of timeout or non-event
+    setTimeout(() => {
+      window.removeEventListener(STATE_CHANGE_EVENT, eventListener);
+    }, 10000);
+  });
+}
+
+/**
+ * Proper wait for SPA application page change event.
+ * Requires matching product code triggering event from router to work.
+ */
+export function waitForSpaNavigation(page: Page): Promise<true> {
+  // can't pass string constant by reference cause function is executed in the browser context
+  return page.evaluate(waitForSpaNavigationPageFunction, STATE_CHANGE_EVENT);
+}
+
+/**
+ * Resolves the promise with Page object of the new page once SPA navigation happened.
+ */
+export function waitForSpaNavigationInNewTab(context: BrowserContext): Promise<Page> {
+  return context.waitForEvent('page', waitForSpaNavigation);
 }

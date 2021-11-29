@@ -1,10 +1,15 @@
-import React, { ReactElement, SyntheticEvent } from 'react';
+import React, {
+  ReactElement,
+  SyntheticEvent,
+  useContext,
+} from 'react';
+
 import { snakeCase } from 'lodash';
 import { cn } from '@bem-react/classname';
 import { Tab, Tabs } from '@mui/material';
 
 import { indexPageTag } from '../../../constants';
-import { IPostContext } from '../../../react-contexts/posts.context';
+import { IPostContext, postsContext } from '../../../react-contexts/posts.context';
 import { getPostListUrlByTag } from '../../../services/urls.service';
 
 import './HeaderTabs.scss';
@@ -107,7 +112,7 @@ function getMenuTabs(
  */
 function getSelectedTabPath(
   activePath: string,
-  postsContext: IPostContext,
+  posts: IPostContext,
 ): string | false {
   for (const section of topSections) {
     const { path } = section;
@@ -122,7 +127,7 @@ function getSelectedTabPath(
   }
 
   if (postUrlRegex.test(activePath)) {
-    const { postsPerTag } = postsContext;
+    const { postsPerTag } = posts;
 
     for (const section of topSections) {
       const { tag } = section;
@@ -146,7 +151,6 @@ function getSelectedTabPath(
 
 interface IHeaderTabsProps {
   activePath: string,
-  postsContext: IPostContext,
   onTabSelection: (selectedPath: string) => void,
   activeTabOnly?: boolean,
   vertical?: boolean,
@@ -160,12 +164,13 @@ export function HeaderTabs(props: IHeaderTabsProps): ReactElement {
   const {
     activePath,
     activeTabOnly = false,
-    postsContext,
     onTabSelection,
     vertical,
   } = props;
 
-  const selectedTabPath = getSelectedTabPath(activePath, postsContext);
+  const posts = useContext(postsContext);
+
+  const selectedTabPath = getSelectedTabPath(activePath, posts);
 
   // see comment about regarding onClick passed to getMenuTabs
   function onChange(event: SyntheticEvent, path: string): void {

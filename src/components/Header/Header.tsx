@@ -1,4 +1,7 @@
-import React, { ReactElement, useState } from 'react';
+import React, {
+  ReactElement,
+  useState,
+} from 'react';
 import { navigate, PageRendererProps } from 'gatsby';
 import { cn } from '@bem-react/classname';
 import { classnames } from '@bem-react/classnames';
@@ -19,15 +22,12 @@ import {
   Menu as MenuIcon,
 } from '@mui/icons-material';
 
-import { IPostContext } from '../../react-contexts/posts.context';
-
 import './Header.scss';
 import { HeaderTabs } from './HeaderTabs/HeaderTabs';
 
 const cnHeader = cn('Header');
 
 interface IHeaderProps extends PageRendererProps {
-  postsContext: IPostContext,
   className?: string,
 }
 
@@ -39,7 +39,6 @@ interface IHeaderProps extends PageRendererProps {
 export function Header(props: IHeaderProps): ReactElement {
   const {
     className,
-    postsContext,
     location,
   } = props;
 
@@ -126,7 +125,6 @@ export function Header(props: IHeaderProps): ReactElement {
         <div className = { cnHeader('MenuItems') }>
           <HeaderTabs
             activePath = { activePath }
-            postsContext = { postsContext }
             onTabSelection = { onTabSelection }
             vertical = { true }
           />
@@ -148,7 +146,6 @@ export function Header(props: IHeaderProps): ReactElement {
 
         <HeaderTabs
           activePath = { activePath }
-          postsContext = { postsContext }
           onTabSelection = { onTabSelection }
           activeTabOnly = { !largeScreen }
         />

@@ -58,13 +58,12 @@ code:not([class|='language-']) {
 }
 
 ol, ul {
-  margin: 0 0 var(--aml-size-lg) var(--aml-size-xl);
+  margin: 0 0 var(--aml-global-layout-padding-md) var(--aml-size-6);
   padding: 0;
 
   // nested lists
   ol, ul {
     margin-bottom: 0;
-    margin-left: var(--aml-size-lg);
   }
 }
 

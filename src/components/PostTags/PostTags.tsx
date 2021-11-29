@@ -1,6 +1,8 @@
 import { Link } from 'gatsby';
 import { cn } from '@bem-react/classname';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useContext } from 'react';
+
+import { postsContext } from '../../react-contexts/posts.context';
 
 import { getPostListUrlByTag } from '../../services/urls.service';
 import './PostTags.scss';
@@ -15,19 +17,17 @@ interface IPostTagsProps {
 
 function getTagElement(
   tag: string,
-  activeTag?: string,
-  noLinkForActiveTag?: boolean,
+  withLink: boolean,
+  isActive: boolean,
 ): ReactElement {
-  const textElement = noLinkForActiveTag && tag === activeTag;
-
   const className =
     cnPostTags('Tag', {
-      active: tag === activeTag,
-      link: !textElement,
+      active: isActive,
+      link: withLink,
     });
 
   const testId = cnPostTags('Tag', {
-    link: !textElement,
+    link: withLink,
   });
 
   const label = `#${ tag } `;
@@ -38,7 +38,7 @@ function getTagElement(
     key: tag,
   };
 
-  if (textElement) {
+  if (!withLink) {
     return (
       <span
         { ...commonProps }
@@ -60,7 +60,13 @@ function getTagElement(
 }
 
 export function PostTags(props: IPostTagsProps): ReactElement {
-  const { tags, activeTag, noLinkForActiveTag = false } = props;
+  const {
+    tags,
+    activeTag,
+    noLinkForActiveTag = false,
+  } = props;
+
+  const posts = useContext(postsContext);
 
   const sortedTags = tags.sort();
 
@@ -73,9 +79,18 @@ export function PostTags(props: IPostTagsProps): ReactElement {
     }
   }
 
+
   const tagElements = sortedTags
     .map((tag: string) => {
-      return getTagElement(tag, activeTag, noLinkForActiveTag);
+      const isActive = tag === activeTag;
+
+      let withLink = posts.postsPerTag.get(tag)!.length > 1;
+
+      if (isActive && noLinkForActiveTag) {
+        withLink = false;
+      }
+
+      return getTagElement(tag, withLink, isActive);
     });
 
   return <> { tagElements } </>;

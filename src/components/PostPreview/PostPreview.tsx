@@ -8,7 +8,6 @@ import { Link } from 'gatsby';
 import { cn } from '@bem-react/classname';
 import { classnames } from '@bem-react/classnames';
 
-import { PostTags } from '../PostTags/PostTags';
 import { IBlogPost } from '../../types/common.types';
 
 import './PostPreview.scss';
@@ -20,7 +19,7 @@ const cnPostPreview = cn('PostPreview');
  */
 function getDetailsString(post: IBlogPost): string {
   const { date: posted, updated } = post.frontmatter;
-  const { text, words } = post.fields.readingTime;
+  const { text } = post.fields.readingTime;
 
   let date = posted;
 
@@ -31,7 +30,7 @@ function getDetailsString(post: IBlogPost): string {
   const details = [
     date,
     text,
-    `${words} words`,
+    // `${words} words`,
   ];
 
   return details.join(' — ');
@@ -50,7 +49,7 @@ export function PostPreview(props: {
   } = props;
 
   const { slug } = post.fields;
-  const { title, tags, coverImage } = post.frontmatter;
+  const { title, coverImage } = post.frontmatter;
 
   // so that we have active tag info in the runtime
   // for the PostPage prev/next links
@@ -92,14 +91,6 @@ export function PostPreview(props: {
         )
       }
     >
-      <p>
-        <PostTags
-          tags = { tags }
-          activeTag = { props.tag }
-          noLinkForActiveTag = { true }
-        />
-      </p>
-
       <h3 className = { cnPostPreview('Header') }>
         <Link
           data-testid = { cnPostPreview('Header') }
@@ -113,6 +104,7 @@ export function PostPreview(props: {
       <div className = { cnPostPreview('PreviewWrapper') }>
         <p
           className = { cnPostPreview('Details') }
+          data-testid = { cnPostPreview('Details') }
         >
           { getDetailsString(post) }
         </p>

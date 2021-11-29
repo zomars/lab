@@ -4,8 +4,7 @@ import {
   ComponentWrapper,
   IComponentWrapperArgs,
 } from '../../../e2e-test/components/component-wrapper.e2e';
-
-import { STATE_CHANGE_EVENT } from '../../constants';
+import { waitForSpaNavigation } from '../../../e2e-test/utils';
 
 export enum MenuListItem {
   techPosts = 'techPosts',
@@ -58,28 +57,9 @@ export class Header extends ComponentWrapper {
   public async clickMenuItem(menuItem: MenuListItem): Promise<boolean> {
     const $elem = await this.getMenuItem(menuItem);
 
-    // waiting for the actual state change event within SPA
-    function pageFunction(STATE_CHANGE_EVENT: string): Promise<void> {
-      return new Promise((resolve) => {
-        const eventListener = (): void => resolve();
-
-        window.addEventListener(
-          STATE_CHANGE_EVENT,
-          eventListener,
-          { once: true },
-        );
-
-        // cleanup in case of timeout or non-event
-        setTimeout(() => {
-          window.removeEventListener(STATE_CHANGE_EVENT, eventListener);
-        }, 10000);
-      });
-    }
-
     await Promise.all([
       $elem.click(),
-      page.waitForNavigation(),
-      page.evaluate(pageFunction, STATE_CHANGE_EVENT),
+      waitForSpaNavigation(page),
     ]);
 
     return true;

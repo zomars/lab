@@ -52,30 +52,33 @@ describe('site header', () => {
 
     await expect(techPostList.isConnected).resolves.toBe(true);
 
-    const allTechPostsTags = await techPostList.getAllPostsTags();
+    const techPosts = await techPostList.getAllPosts();
 
-    const techTags = allTechPostsTags.filter((tag: string) => tag === 'tech');
+    const techTitlePromises = Promise.all(
+      techPosts.map(post => post.getTitleText()),
+    );
 
-    expect(techTags.length).toBeGreaterThanOrEqual(3);
+    await expect(techTitlePromises).resolves.toMatchSnapshot();
 
     await expect(header.clickMenuItem(MenuListItem.carPosts)).resolves.toBe(true);
 
     await expect(techPostList.isConnected).resolves.toBe(false);
 
-    const carPostList = new PostList();
+    const autoPostList = new PostList();
 
-    await expect(carPostList.isConnected).resolves.toBe(true);
+    await expect(autoPostList.isConnected).resolves.toBe(true);
 
-    const allCarPostsTags = await carPostList.getAllPostsTags();
+    const autoPosts = await autoPostList.getAllPosts();
 
-    const carTags = allCarPostsTags.filter((tag: string) => tag === 'cars');
+    const autoTitlePromises = Promise.all(
+      autoPosts.map(post => post.getTitleText()),
+    );
 
-    // seems to be affected by the race condition (dev build)
-    expect(carTags.length).toBeGreaterThanOrEqual(1);
+    await expect(autoTitlePromises).resolves.toMatchSnapshot();
 
     await expect(header.clickMenuItem(MenuListItem.about)).resolves.toBe(true);
 
-    await expect(carPostList.isConnected).resolves.toBe(false);
+    await expect(autoPostList.isConnected).resolves.toBe(false);
 
     await expect(page).toHaveText(
       'h1',

@@ -1,11 +1,10 @@
-import { ElementHandle } from 'playwright';
-
 import { IGlobal } from '../../../e2e-test/e2e.types';
+import { waitForSpaNavigation } from '../../../e2e-test/utils';
 import { PostPreview } from './PostPreview.e2e';
 
 const localGlobal = global as IGlobal & typeof globalThis;
 
-const activeTag = 'cars';
+const activeTag = 'tech';
 
 describe('site header', () => {
   beforeEach(async () => {
@@ -16,14 +15,18 @@ describe('site header', () => {
     await page.goto(`${ localGlobal.url }/tags/${ activeTag }/1`);
   });
 
-  it('random (first) preview has all expected elements', async () => {
+  it('first preview has all expected elements', async () => {
     const postPreview = new PostPreview();
 
     await expect(postPreview.isConnected).resolves.toBe(true);
 
-    await expect(postPreview.getTitleText()).resolves.toEqual(expect.any(String));
+    await expect(postPreview.getTitleText()).resolves.toMatchSnapshot();
 
-    await expect(postPreview.getExcerptText()).resolves.toEqual(expect.any(String));
+    await expect(postPreview.getExcerptText()).resolves.toMatchSnapshot();
+
+    await expect(postPreview.getPostedDateText()).resolves.toMatchSnapshot();
+
+    await expect(postPreview.getPostReadTime()).resolves.toMatchSnapshot();
   });
 
   it('post with image is present and has an image', async () => {
@@ -34,50 +37,52 @@ describe('site header', () => {
     await expect(postPreview.getImage()).resolves.toBeTruthy();
   });
 
-  // @todo need to handle links open in other tabs
-  it.skip('has three areas to click in order to get to the post', async () => {
-    const postPreview = new PostPreview({ withPreview: true });
+  describe('post link click', () => {
+    let postPreview: PostPreview;
 
-    await expect(postPreview.isConnected).resolves.toBe(true);
+    beforeEach(async (): Promise<void> => {
+      postPreview = new PostPreview({ withPreview: true });
 
-    const $title = await postPreview.getTitle();
-
-    $title.click()
-      .then();
-  });
-
-  // @todo test the whole list of tags - need to know what we are looking for
-  it('renders active tag as first', async () => {
-    const postPreview = new PostPreview();
-
-    await expect(postPreview.isConnected).resolves.toBe(true);
-
-    const tags = await postPreview.getTags();
-
-    expect(tags.length).toBeGreaterThan(0);
-
-    expect(tags.indexOf(`#${ activeTag }`)).toBe(0);
-  });
-
-  it('renders active tag as text and other tags as links', async () => {
-    const postPreview = new PostPreview();
-
-    await expect(postPreview.isConnected).resolves.toBe(true);
-
-    const $tags = await postPreview.getTagElements();
-
-    expect($tags.length).toBeGreaterThan(0);
-
-    const [$activeTag, ...$otherTags] = $tags;
-
-    await expect(PostPreview.isTagLink($activeTag)).resolves.toBe(false);
-
-    expect($otherTags.length).toBeGreaterThan(0);
-
-    const promises = $otherTags.map(($tag: ElementHandle) => {
-      return expect(PostPreview.isTagLink($tag)).resolves.toBe(true);
+      await postPreview.isConnected;
     });
 
-    await Promise.all(promises);
+    it('works on image', async () => {
+      const $image = await postPreview.getImage();
+
+      await Promise.all([
+        $image.click(),
+        waitForSpaNavigation(page),
+      ]);
+
+      const { pathname: urlPath } = new URL(page.url());
+
+      await expect(urlPath).toMatchSnapshot();
+    });
+
+    it('works on title', async () => {
+      const $title = await postPreview.getTitle();
+
+      await Promise.all([
+        $title.click(),
+        waitForSpaNavigation(page),
+      ]);
+
+      const { pathname: urlPath } = new URL(page.url());
+
+      await expect(urlPath).toMatchSnapshot();
+    });
+
+    it('works on excerpt', async () => {
+      const $excerpt = await postPreview.getExcerpt();
+
+      await Promise.all([
+        $excerpt.click(),
+        waitForSpaNavigation(page),
+      ]);
+
+      const { pathname: urlPath } = new URL(page.url());
+
+      await expect(urlPath).toMatchSnapshot();
+    });
   });
 });

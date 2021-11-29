@@ -113,7 +113,8 @@ export async function createPostIndexPages(
   args: CreatePagesArgs,
 ): Promise<void> {
   const tagsReq = await args.graphql(postTagsQuery) as { data: IPostTagsQueryResponse };
-  const uniqueTags = parseUniqueTagsResponse(tagsReq);
+  const uniqueTags = parseUniqueTagsResponse(tagsReq)
+    .filter(({ count }) => count > 1);
 
   await Promise.all(
     uniqueTags.map(

@@ -184,19 +184,23 @@ All we need to do is to configure caching for aforementioned folders:
 name: Cache production build
 id: prod-build-cache
 uses: actions/cache@v2
-env:
-  cache-name: prod-build
-  cache-fingerprint: >-
-    ${{ hashFiles('package.json','gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx') }}-
-    ${{ hashFiles('src/html.tsx','src/gatsby-hooks/*.*','src/page-templates/**/*.tsx') }}
-with:
-  path: |
-    public
-    .cache
-  # save the build for this update (sha) so that we could deploy it in the next job
-  key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-${{ github.sha }}
-  restore-keys: |-
-    ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}-
+  env:
+    cache-name: prod-build
+    # most sensitive files from the build caching perspective
+    key-1: >-
+      ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx') }}-
+      ${{ hashFiles('src/html.tsx','src/gatsby-hooks/*.*') }}
+    # less impactful changes but important enough to make them part of the key
+    key-2: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+  with:
+    path: |
+      public
+      .cache
+    key: |-
+      ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-${{ github.sha }}
+    restore-keys: |-
+      ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-
+      ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-
 ```
 
 In my workflow _Production build_ and _Deploy_ are two separate (albeit sequential) jobs.
@@ -209,7 +213,7 @@ We could totally get away with just `${{ runner.os }}-${{ env.cache-name }}-${{ 
 Also, sometimes GatsbyJs doesn't do a great job of cache invalidation, and I'm practically doing it
 myself to be on the safe side.
 That's why you don't see `${{ runner.os }}-${{ env.cache-name }}-` being used as `restore-key`
-option.
+option - I do want so start from scratch whenever gatsby config files change.
 
 On average **incremental builds reduced production build times from ten to three minutes**.
 That's three to four times faster than it was!
