@@ -52,7 +52,8 @@ describe('basics', () => {
 
     context.setDefaultTimeout(localGlobal.defaultTimeout);
 
-    cdpSession = await page.context().newCDPSession(page);
+    // type casting due to types mismatch between jest preset and playwright 1.17
+    cdpSession = await page.context().newCDPSession(page) as CDPSession;
 
     await cdpSession.send('Network.enable');
 

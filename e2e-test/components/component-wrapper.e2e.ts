@@ -54,7 +54,7 @@ export abstract class ComponentWrapper {
     }
 
     this.mountPromise = scopeElementPromise
-      .then(($scopeElement: ElementHandle) => {
+      .then(($scopeElement) => {
         return this.setHostElement({
           scopeElement: $scopeElement as ElementHandle<HTMLElement>,
           waitForSelectorOptions,

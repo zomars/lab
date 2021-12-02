@@ -1,4 +1,4 @@
-import { ElementHandle } from 'playwright';
+import { ElementHandle, Page } from 'playwright';
 
 import {
   ComponentWrapper,
@@ -59,7 +59,7 @@ export class Header extends ComponentWrapper {
 
     await Promise.all([
       $elem.click(),
-      waitForSpaNavigation(page),
+      waitForSpaNavigation(page as Page),
     ]);
 
     return true;
