@@ -8648,7 +8648,7 @@ gatsby-cli@^4.3.0:
     yoga-layout-prebuilt "^1.10.0"
     yurnalist "^2.1.0"
 
-gatsby-core-utils@^3.2.0, gatsby-core-utils@^3.3.0:
+gatsby-core-utils@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-3.3.0.tgz#a8fb10e2341fd0e98a50ee3dd2b707bcca65fdee"
   integrity sha512-Mr90+2T5mUie2fCkQS3dM6oHzTyt1vLbpJ2nU2OsdF95LHnLBt0kDgK+qEIuz7Ypr91gFN8y2HoP08vuokq7ZQ==
@@ -8798,10 +8798,10 @@ gatsby-plugin-page-creator@^4.3.0:
     globby "^11.0.4"
     lodash "^4.17.21"
 
-gatsby-plugin-preact@^6.2.0:
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-preact/-/gatsby-plugin-preact-6.2.0.tgz#6e78cdaa30d87e5cdd8edbcd569b107e4002c377"
-  integrity sha512-o9QHsQbq5BkUTFTsfwtjmmfPomWcPFl3ReQlu7F52udNRRGFMvSDsdHKSYIoFfTDwfOhFDOPeVgzc2d4T0D/wA==
+gatsby-plugin-preact@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-preact/-/gatsby-plugin-preact-6.3.0.tgz#a7c9c2bd1bdc2f0cc612aa70094a3708f121e9e0"
+  integrity sha512-36P7uRGsV+JHat9DF9qU25gNLUWXh57Jfcdz++s/xUaRJn8Rxx/OdqgBgmqUKyRGFO++hcJeBloMAB+ona0qpQ==
   dependencies:
     "@babel/runtime" "^7.15.4"
     "@gatsbyjs/webpack-hot-middleware" "^2.25.2"
