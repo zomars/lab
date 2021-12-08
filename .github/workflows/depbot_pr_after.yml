@@ -1,4 +1,4 @@
-name: Dependabot PR Labels Check - After
+name: DepBot PR - After
 
 on:
   workflow_dispatch:
@@ -27,5 +27,6 @@ jobs:
       - uses: actions-ecosystem/action-add-labels@v1.1.0
         name: Add label
         with:
+          github_token: ${{ github.token }}
           number: ${{ env.PR_ID }}
           labels: ready to merge
