@@ -1,4 +1,4 @@
-name: Dependabot PR Completed
+name: Dependabot PR Labels Check - Before
 
 on:
   workflow_dispatch:
@@ -23,5 +23,5 @@ jobs:
     steps:
       - uses: actions-ecosystem/action-remove-labels@v1.1.1
         with:
-          github_token: ${{ github.token }}
+          number: ${{ github.event.workflow_run.check_suite.pull_requests[0].number }}
           labels: ready to merge
