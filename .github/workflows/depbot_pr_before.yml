@@ -15,7 +15,7 @@ env:
   PR_ID: ${{ github.event.workflow_run.pull_requests[0].number }}
 
 jobs:
-  remove_labels:
+  remove_label:
     name: Remove label
     runs-on: ubuntu-latest
     # sender.login is needed for checks re-triggered from GH UI

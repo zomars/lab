@@ -211,7 +211,7 @@ describe('basics', () => {
 
       console.log(printAllRequestsReport(report));
 
-      expect(report.totalRequests).toBeLessThanOrEqual(25);
+      expect(report.totalRequests).toBeLessThanOrEqual(30);
       expect(report.totalEncodedSize).toBeLessThanOrEqual(500);
       expect(report.totalDecodedSize).toBeLessThanOrEqual(1100);
       expect(report.totalLoadDuration).toBeLessThanOrEqual(1300);

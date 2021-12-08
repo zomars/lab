@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`site header first preview has all expected elements 1`] = `"Optimize GitHub Actions for UI Builds and Tests with Cache"`;
+exports[`site header first preview has all expected elements 1`] = `"Github Actions for Dependabot PRs"`;
 
-exports[`site header first preview has all expected elements 2`] = `"This blog is very new and quite empty (less than 20 pages) and yet I was experiencing 10 minutes long production builds on my local machine. And GitHub actions (which execute the production build at some point) were taking anywhere from 14 to 20 minutes. Which is too long of a wait for a website preview deployed or pull requests verified. I decided to figure out what can be optimized and ended up…"`;
+exports[`site header first preview has all expected elements 2`] = `"In this post I want to explore and walk through options we have to get Dependabot PRs checked and verified with GitHub actions. Context Setting up GitHub Dependabot for the repository was one of the best workflow decisions I ever made. Return on the modest investment of setting it up is huge. I don't have to worry about updating dependencies ever again. Unless, of course, it is a major version…"`;
 
-exports[`site header first preview has all expected elements 3`] = `"Nov 23, 2021"`;
+exports[`site header first preview has all expected elements 3`] = `"Dec 07, 2021"`;
 
-exports[`site header first preview has all expected elements 4`] = `"8 min read"`;
+exports[`site header first preview has all expected elements 4`] = `"4 min read"`;
 
-exports[`site header post link click works on excerpt 1`] = `"/posts/2021/optimize-github-actions-with-cache/"`;
+exports[`site header post link click works on excerpt 1`] = `"/posts/2021/dependabot-pull-request-github-actions/"`;
 
-exports[`site header post link click works on image 1`] = `"/posts/2021/optimize-github-actions-with-cache/"`;
+exports[`site header post link click works on image 1`] = `"/posts/2021/dependabot-pull-request-github-actions/"`;
 
-exports[`site header post link click works on title 1`] = `"/posts/2021/optimize-github-actions-with-cache/"`;
+exports[`site header post link click works on title 1`] = `"/posts/2021/dependabot-pull-request-github-actions/"`;
