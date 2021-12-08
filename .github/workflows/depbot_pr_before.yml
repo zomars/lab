@@ -23,12 +23,6 @@ jobs:
       (github.actor == 'dependabot[bot]' || github.event.sender.login == 'dependabot[bot]')
 
     steps:
-      - name: debug
-        run: |
-          echo "${{ github.event.worklfow_run.pull_requests[0].pull_request }}"
-          echo "${{ github.event.worklfow_run.pull_requests[0] }}"
-          echo "${{ github.event.worklfow_run.pull_requests[0].pull_request.labels }}"
-
       - uses: actions-ecosystem/action-remove-labels@v1.1.1
         name: Remove label
         with:
