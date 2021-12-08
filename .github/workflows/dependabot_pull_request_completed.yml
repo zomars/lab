@@ -1,0 +1,27 @@
+name: Dependabot PR Completed
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["PR Update"]
+    types:
+      - completed
+
+concurrency:
+  group: dependabot-pr-${{ github.event.action }}-${{ github.event.workflow_run.head_sha }}
+  cancel-in-progress: true
+
+jobs:
+  remove_labels:
+    name: Remove labels
+    runs-on: ubuntu-latest
+    # sender.login is needed for checks re-triggered from GH UI
+    if: |
+      (github.actor == 'dependabot[bot]' || github.event.sender.login == 'dependabot[bot]') &&
+      github.event.workflow_run.conclusion == 'success'
+
+    steps:
+      - uses: actions-ecosystem/action-remove-labels@v1.1.1
+        with:
+          github_token: ${{ github.token }}
+          labels: ready to merge
