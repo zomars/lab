@@ -3,7 +3,6 @@
 name: Dependabot PR
 
 on:
-  pull_request_target:
   workflow_dispatch:
 
 env:
