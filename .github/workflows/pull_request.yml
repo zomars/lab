@@ -6,7 +6,7 @@ on:
 
 env:
   PR_ID: ${{ github.event.number }}
-  node-version: 14
+  node-version: 16
 
 concurrency:
   group: pr-update-${{ github.event.number }}
