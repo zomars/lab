@@ -41,9 +41,10 @@ export const postsQuery = graphql`
           title
           coverImage {
             childImageSharp {
-              gatsbyImageData(height: 250)
+              gatsbyImageData(height: 200)
             }
           }
+          summary
         }
       }
     }

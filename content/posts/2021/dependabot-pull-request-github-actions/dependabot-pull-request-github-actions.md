@@ -3,11 +3,20 @@ title: 'Github Actions for Dependabot PRs'
 date: '2021-12-07T10:10:00.000Z'
 tags: ['tech', 'GitHub', 'CI', 'automation', 'devflow']
 coverImage: './weekend.jpg'
+description: >-
+  Learn how to extend Pull Request Update GitHub Actions workflow
+  with steps (or additional workflows) specific for Dependabot pull requests (i.e. extra labels).
+summary: >-
+  Let's learn how to extend existent _Pull Request Update_ GitHub Actions workflow
+  with steps specific for Dependabot pull requests (i.e. labels).
+  We will add two jobs to the existent `pull_request` workflow and
+  experiment with separate _before_ and _after_ `workflow_run` event workflows.
+  Fortunately, after the recent GitHub actions update we don't need to use a separate
+  `pull_request_target` event workflow as a workaround.
 ---
 
 In this post I want to explore and walk through options we have to get Dependabot PRs
 checked and verified with GitHub actions.
-
 
 ### Context
 
@@ -29,7 +38,8 @@ to gain access to the github token and action secrets.
 Fortunately now that is a thing of the past.
 
 Today we can use our regular `pull_request` event workflow with
-additional jobs specific for Dependabot PRs.
+additional jobs specific for Dependabot PRs. Another thing you need to do is to copy
+relevant secrets from action secrets to dependabot secrets.
 
 ### Additional jobs
 

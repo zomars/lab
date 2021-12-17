@@ -3,6 +3,7 @@ import {
   getImage,
   IGatsbyImageData,
 } from 'gatsby-plugin-image';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React, { ReactElement } from 'react';
 import { Link } from 'gatsby';
 import { cn } from '@bem-react/classname';
@@ -49,7 +50,7 @@ export function PostPreview(props: {
   } = props;
 
   const { slug } = post.fields;
-  const { title, coverImage } = post.frontmatter;
+  const { title, coverImage, summary } = post.frontmatter;
 
   // so that we have active tag info in the runtime
   // for the PostPage prev/next links
@@ -115,7 +116,7 @@ export function PostPreview(props: {
           to = { slug }
           state = { blogPostLinkPayload }
         >
-          <p dangerouslySetInnerHTML = {{ __html: post.excerpt! }}/>
+          { summary ? <MDXRenderer>{ summary }</MDXRenderer> : <p> { post.excerpt! } </p>}
         </Link>
 
         { CoverImage }

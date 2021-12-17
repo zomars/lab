@@ -7,6 +7,7 @@ import {
   CreatePageArgs,
   CreatePagesArgs,
   CreateSchemaCustomizationArgs,
+  Node,
 } from 'gatsby';
 
 import { createFilePath } from 'gatsby-source-filesystem';
@@ -105,11 +106,11 @@ export function onCreatePage(args: CreatePageArgs): void {
  * Define frontmatter schema manually wo inferring.
  */
 export function createSchemaCustomization(
-  { actions }: CreateSchemaCustomizationArgs,
+  { actions, createContentDigest }: CreateSchemaCustomizationArgs,
 ): void {
-  const { createTypes } = actions;
+  const { createTypes, createFieldExtension } = actions;
 
-  // should match IBlogPostFrontmatter
+  // should match IBlogPostFrontmatter interface
   const typeDefs = `
     type Mdx implements Node {
       frontmatter: MdxFrontmatter
@@ -121,8 +122,46 @@ export function createSchemaCustomization(
       tags: [String!],
       coverImage: File @fileByRelativePath,
       published: Boolean,
+      summary: String @stringToMdx,
+      description: String,
     }
   `;
+
+  createFieldExtension({
+    name: 'stringToMdx',
+    extend() {
+      return {
+        type: 'String',
+        resolve(
+          source: Node,
+          args: unknown,
+          context: unknown,
+          info: Record<string, any>,
+        ) {
+          const value = source[info.fieldName] as string;
+          const mdxType = info.schema.getType('Mdx');
+          const { resolve } = mdxType.getFields().body;
+
+          if (!value) {
+            return value;
+          }
+
+          return resolve(
+            {
+              rawBody: value,
+              internal: {
+                type: 'String',
+                contentDigest: createContentDigest(value),
+              },
+            },
+            args,
+            context,
+            info,
+          );
+        },
+      };
+    },
+  });
 
   createTypes(typeDefs);
 }

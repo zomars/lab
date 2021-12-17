@@ -19,6 +19,8 @@ interface IBlogPostFrontmatter {
   },
   published?: boolean,
   updated?: string,
+  summary?: string & ReactNode,
+  description: string,
 }
 
 interface IReadingTime {

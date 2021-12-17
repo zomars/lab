@@ -3,6 +3,16 @@ title: 'Audi B8 S4/S5/TT Seats into MK6 GTI Installation Guide'
 date: '2021-11-05T23:59:59.000Z'
 tags: ['cars', 'manual', 'tuning', 'GTI', 'VW', 'Audi']
 coverImage: './audi-sport-seats-in-vw-gti-mk6.jpg'
+description: >-
+  Review and step-by-step installation guide for putting Audi Sport seats into MK6 VW GTI.
+  With electric schemes, wire colors and photos taken during the process.
+summary: >-
+  I wanted to swap my OEM GTI seats for something gripier and better looking for quite some time.
+  Finally, got hold of fairly affordable used Audi S4 seats and thoroughly enjoyed
+  the journey of fitting them into the GTI.
+  In fact, I enjoyed it so much that wrote down a detailed and fairly thorough
+  installation guide with all the pieces involved, electrical schemes and wire colors.
+  And yes, Audi seats are pretty good indeed!
 ---
 
 My original GTI leather seats look good and hold me pretty well until I get close to 1 lateral G

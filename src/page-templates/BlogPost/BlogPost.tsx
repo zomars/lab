@@ -44,6 +44,7 @@ export const pageQuery = graphql`
         updated(formatString: "MMM DD, YYYY")
         tags
         title
+        description
         coverImage {
           childImageSharp {
             gatsbyImageData(height: 540)
@@ -108,6 +109,7 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
       date: posted,
       updated,
       coverImage,
+      description,
     } = post.frontmatter;
 
     let date = posted;
@@ -130,7 +132,7 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
       >
         <Seo
           title = { title }
-          description = { post.excerpt }
+          description = { description || post.excerpt }
           pathname = { location.pathname }
           image = { image }
         />

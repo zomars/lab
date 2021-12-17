@@ -3,6 +3,9 @@ title: 'The Making of a Manager by Julie Zhuo'
 date: '2021-07-03T10:00:00.000-07:00'
 tags: ['review', 'book', 'management', 'tech', 'highlights']
 coverImage: './book-cover.jpg'
+description: >-
+  Brief review and highlights from the Making of a Manager book by Julie Zhuo.
+  Amazing book, highly recommended for current and future managers.
 ---
 
 Just finished this very insightful and down-to-earth book on team management basics.

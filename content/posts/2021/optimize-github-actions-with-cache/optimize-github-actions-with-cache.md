@@ -3,6 +3,16 @@ title: 'Optimize GitHub Actions for UI Builds and Tests with Cache'
 date: '2021-11-23T10:10:00.000Z'
 tags: ['tech', 'GitHub', 'CI', 'automation', 'GatsbyJs', 'devflow', 'npm']
 coverImage: './gh-action-runs.png'
+description: >-
+  How to significantly reduce your GitHub Actions run times with caching.
+  What to cache, how to use it and when to invalidate it - all with yaml code snippets.
+  We will use npm install and production build npm scripts as an example.
+summary: >-
+  GitHub Actions is an awesome and very powerful tool.
+  Let's explore workflow running time optimizations with caching
+  `node_modules` and production build artifacts.
+  We will be using _Dependency Cache_ GH Actions feature driven by `actions/cache`.
+  Hint: as always, cache invalidation is a `key`.
 ---
 
 This blog is very new and quite empty (less than 20 pages) and yet I was experiencing

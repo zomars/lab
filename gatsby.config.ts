@@ -27,7 +27,7 @@ if (prId) {
 const metadata = {
   title: 'Alex M Lab',
   author: 'Alex Malitsky',
-  description: 'We gonna figure what it is all about',
+  description: 'Unique and detailed posts on tech and auto topics',
   siteUrl: `${ protocol }://${ hostname }`,
   social: {
     twitter: 'amalitsky',

@@ -3,6 +3,15 @@ title: 'Efficient Code Review'
 date: '2021-07-02T10:00:00.000-07:00'
 tags: ['tech', 'devflow', 'workflow']
 coverImage: './cover.png'
+description: >-
+  What makes for a good code review. What to expect from it and how to organize the process
+  so that both: contributor and the reviewer benefit from it. Top-down reviewing approach.
+summary: >-
+  Reviewing code is complex and demanding.
+  When implemented correctly it can truly lift the project and the team up to the next level.
+  On the flip side, when done wrong, it causes more harm than good.
+  Let's dive deep into what makes for a good code review and how to approach it
+  in a scalable, respectful and mutually beneficial manner.
 ---
 
 During my days at VMware I was reviewing multiple UI code _Pull Requests_

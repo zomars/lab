@@ -135,6 +135,14 @@ export function Sources(props: PageRendererProps): ReactElement {
         </li>
       </ul>
 
+      <h2>Courses and Tutorials</h2>
+
+      <ul>
+        <li>
+          <a href = "https://javascript.info/">The Modern JS Tutorial</a>
+        </li>
+      </ul>
+
       <h2>Twitter lists</h2>
       <ul>
         <li>My compilation of prominent <a href = 'https://twitter.com/i/lists/1163692012383588352'>frontend folks</a> and devs in general</li>

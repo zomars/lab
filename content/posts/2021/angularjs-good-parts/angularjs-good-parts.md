@@ -1,7 +1,15 @@
 ---
 title: 'Good Parts of AngularJs Framework'
 date: '2021-05-07T23:59:59.000Z'
-tags: ['tech', 'angularjs']
+tags: ['tech', 'angularjs', 'framework']
+description: >-
+  List of software architecture patterns and coding approaches introduced and
+  popularized in front-end community by AngularJs 1.x framework.
+  Long life OOP!
+summary: >-
+  Reminiscing on coding approaches and application architecture patterns
+  introduced and popularized by AngularJs 1.x framework in the front-end community.
+  Framework itself is gone and dusted, but its legacy is very much alive.
 ---
 
 Everyone knows _AngularJs_ (version 1.x) is
