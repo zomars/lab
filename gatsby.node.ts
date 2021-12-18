@@ -2,11 +2,11 @@ import path from 'path';
 import { ProvidePlugin } from 'webpack';
 
 import {
-  Actions,
   CreateNodeArgs,
   CreatePageArgs,
   CreatePagesArgs,
   CreateSchemaCustomizationArgs,
+  CreateWebpackConfigArgs,
   Node,
 } from 'gatsby';
 
@@ -19,7 +19,9 @@ import { createIndexPage } from './src/gatsby-hooks/create-index-page';
 /**
  * Make preact Fragment globally available.
  */
-export function onCreateWebpackConfig({ actions }: { actions: Actions }): void {
+export function onCreateWebpackConfig(
+  { actions }: CreateWebpackConfigArgs,
+): void {
   const plugins: ProvidePlugin[] = [];
 
   plugins.push(

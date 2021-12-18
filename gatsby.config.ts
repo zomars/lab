@@ -116,6 +116,7 @@ const plugins = [
       ],
     },
   },
+  'gatsby-plugin-split-css',
 ];
 
 const config = {
