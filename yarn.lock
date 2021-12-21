@@ -8875,10 +8875,10 @@ gatsby-plugin-sitemap@^5.4.0:
     minimatch "^3.0.4"
     sitemap "^7.0.0"
 
-gatsby-plugin-split-css@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-split-css/-/gatsby-plugin-split-css-2.0.0.tgz#4edb082d73353e813b0cc82a19c9c4d8bd0de937"
-  integrity sha512-8icrK951WmDIjS5w9u0h2MQXHcEF9zzAhtWToxCb0Jv1tHkgCAKFjnUVjQGfxvkOO2GhfCEcbywbWjXiW0xyrQ==
+gatsby-plugin-split-css@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-split-css/-/gatsby-plugin-split-css-2.0.2.tgz#64cc353cbfb124e7952a67d0b8dd2a6a87d7f987"
+  integrity sha512-dgEC+LEkaC1VCE12KG9//KWe1XqwHoKA291j18/6STrkT8xC+O2QhEBrpxRl/3+Nbw5VVKT9iXAVFAU2+It/YQ==
 
 gatsby-plugin-typescript@^4.4.0:
   version "4.4.0"
