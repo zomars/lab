@@ -60,7 +60,7 @@
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jest": "^25.3.0",
     "eslint-plugin-jest-playwright": "^0.7.1",
-    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-rxjs": "^4.0.3",
     "expect-playwright": "^0.8.0",
