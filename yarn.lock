@@ -7495,10 +7495,10 @@ eslint-plugin-react@^7.27.1, eslint-plugin-react@^7.28.0:
     semver "^6.3.0"
     string.prototype.matchall "^4.0.6"
 
-eslint-plugin-rxjs@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-rxjs/-/eslint-plugin-rxjs-4.0.3.tgz#78e78e5e87413e0d753d80bfbda4b1dad3874e44"
-  integrity sha512-YMRBp7/P88nVYzeY8Gtqs+NQsZFiYb2RRaNTTN+b134pw3+/cG/qDMYnfOJRbVR/quy1j3tBGPd7X8ySkyCYTg==
+eslint-plugin-rxjs@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-rxjs/-/eslint-plugin-rxjs-4.0.4.tgz#b7570951d4c44d529e5f60819212387aee2a800e"
+  integrity sha512-7JopYQRqS5TYBNXioTLtS+W6+IKC1rsC7q8Dtou8E5gMuPxuEFqxU1x2161bwadaK3+h6sR+xiGjEhiE6JwjUA==
   dependencies:
     "@typescript-eslint/experimental-utils" "^5.0.0"
     common-tags "^1.8.0"
