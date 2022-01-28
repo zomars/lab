@@ -14109,11 +14109,11 @@ platform@^1.3.6:
   integrity sha512-fnWVljUchTro6RiCFvCXBbNhJc2NijN7oIQxbwsyL0buWJPG85v81ehlHI9fXrJsMNgTofEoWIQeClKpgxFLrg==
 
 playwright-chromium@1.18.x:
-  version "1.18.0"
-  resolved "https://registry.yarnpkg.com/playwright-chromium/-/playwright-chromium-1.18.0.tgz#abdd4711f7275c1e60f6de0c1c0f9b719ca428b1"
-  integrity sha512-GVmwsw47nyMxvnUcqswvJCFgdR3wEX4YUoz0Rrr9DRuh1zXvVac0QpJyrQp0kRvZlaV9BO95ru6Q1Hni+pz+xg==
+  version "1.18.1"
+  resolved "https://registry.yarnpkg.com/playwright-chromium/-/playwright-chromium-1.18.1.tgz#e9dbc0215f5bb9a22dab3ac436cd41f65ccc9f27"
+  integrity sha512-DHAOdzZhhu4pMe9yg2zL49JSGXLHTO+DL76duukoy807o+ccu1tEbqyUId46ogLYk7rOjblVK6o7YG/vyVCasQ==
   dependencies:
-    playwright-core "=1.18.0"
+    playwright-core "=1.18.1"
 
 playwright-core@1.18.x, playwright-core@=1.18.1, playwright-core@>=1.2.0:
   version "1.18.1"
