@@ -213,7 +213,7 @@ describe('basics', () => {
 
       expect(report.totalRequests).toBeLessThanOrEqual(30);
       expect(report.totalEncodedSize).toBeLessThanOrEqual(500);
-      expect(report.totalDecodedSize).toBeLessThanOrEqual(1100);
+      expect(report.totalDecodedSize).toBeLessThanOrEqual(1200);
       expect(report.totalLoadDuration).toBeLessThanOrEqual(1300);
 
       const { groups } = report;
@@ -293,7 +293,7 @@ describe('basics', () => {
       expect(report.totalRequests).toBeLessThanOrEqual(44);
 
       expect(report.totalEncodedSize).toBeLessThanOrEqual(500);
-      expect(report.totalDecodedSize).toBeLessThanOrEqual(1100);
+      expect(report.totalDecodedSize).toBeLessThanOrEqual(1200);
       expect(report.totalLoadDuration).toBeLessThanOrEqual(1300);
 
       const { groups } = report;
