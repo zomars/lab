@@ -24,7 +24,7 @@
     "gatsby-plugin-sharp": "^4.6.0",
     "gatsby-plugin-sitemap": "^5.7.0",
     "gatsby-plugin-split-css": "^2.0.2",
-    "gatsby-plugin-typescript": "^4.6.0",
+    "gatsby-plugin-typescript": "^4.7.0",
     "gatsby-remark-copy-linked-files": "^5.6.0",
     "gatsby-remark-images": "^6.7.0",
     "gatsby-remark-reading-time": "^1.1.0",
