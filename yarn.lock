@@ -8968,10 +8968,10 @@ gatsby-worker@^1.7.0:
     "@babel/core" "^7.15.5"
     "@babel/runtime" "^7.15.4"
 
-gatsby@^4.7.1:
-  version "4.7.1"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-4.7.1.tgz#0c59c74b5856c27c007490d14cdf07f79ea11b94"
-  integrity sha512-tcrS859gMlh1Ng53TezzkOkWQFs4dY/HeSXV70MnZtoxMOirsIKrIx46f+26eHYlCi2Fp8Fi1Et6jicunB6OkA==
+gatsby@^4.7.2:
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-4.7.2.tgz#3bc8f7fa762361e83308dfc3d67316a236ab168e"
+  integrity sha512-DY7qoFQ8y+14UsmEkzWigHWPkkJ79elu6A2nDjg19YV8K8k96PlexkYLDYOI5kSBiCmCV+ZURVfexuVU0U0HDA==
   dependencies:
     "@babel/code-frame" "^7.14.0"
     "@babel/core" "^7.15.5"
@@ -16381,12 +16381,7 @@ side-channel@^1.0.4:
     get-intrinsic "^1.0.2"
     object-inspect "^1.9.0"
 
-signal-exit@^3.0.0, signal-exit@^3.0.2, signal-exit@^3.0.3, signal-exit@^3.0.5, signal-exit@^3.0.6:
-  version "3.0.6"
-  resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.6.tgz#24e630c4b0f03fea446a2bd299e62b4a6ca8d0af"
-  integrity sha512-sDl4qMFpijcGw22U5w63KmD3cZJfBuFlVNbVMKje2keoKML7X2UzWbc4XrmEbDwg0NXJc3yv4/ox7b+JWb57kQ==
-
-signal-exit@^3.0.7:
+signal-exit@^3.0.0, signal-exit@^3.0.2, signal-exit@^3.0.3, signal-exit@^3.0.5, signal-exit@^3.0.6, signal-exit@^3.0.7:
   version "3.0.7"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.7.tgz#a9a1767f8af84155114eaabd73f99273c8f59ad9"
   integrity sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==
