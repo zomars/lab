@@ -11,6 +11,7 @@ import {
 } from 'gatsby';
 
 import { createFilePath } from 'gatsby-source-filesystem';
+import StatoscopeWebpackPlugin from '@statoscope/webpack-plugin';
 
 import { createPostPages } from './src/gatsby-hooks/create-post-pages';
 import { createPostIndexPages } from './src/gatsby-hooks/create-post-list-pages';
@@ -20,9 +21,9 @@ import { createIndexPage } from './src/gatsby-hooks/create-index-page';
  * Make preact Fragment globally available.
  */
 export function onCreateWebpackConfig(
-  { actions }: CreateWebpackConfigArgs,
+  { stage, actions }: CreateWebpackConfigArgs,
 ): void {
-  const plugins: ProvidePlugin[] = [];
+  const plugins: Array<ProvidePlugin | StatoscopeWebpackPlugin> = [];
 
   plugins.push(
     new ProvidePlugin({
@@ -31,6 +32,36 @@ export function onCreateWebpackConfig(
       Fragment: ['preact', 'Fragment'],
     }),
   );
+
+  if (stage === 'build-javascript') {
+    const report = {
+      id: 'highlights',
+      title: 'List of highlight modules',
+      view: [
+        {
+          data: `
+            #.stats.compilations.modules.sort(size desc)
+              .[name.match('highlight')]
+              .({ name, size: size/1024 })
+          `,
+          view: 'table',
+          item: 'module-item',
+        },
+      ],
+    };
+
+    plugins.push(
+      new StatoscopeWebpackPlugin({
+        name: 'amlab',
+        saveReportTo: './public/statoscope-report-[name].html',
+        saveStatsTo: './public/statoscope-stats-[name].json',
+        normalizeStats: true,
+        saveOnlyStats: false,
+        open: false,
+        reports: [report],
+      }),
+    );
+  }
 
   actions.setWebpackConfig({
     plugins,
