@@ -68,7 +68,7 @@
     "husky": "^7.0.4",
     "jest": "^27.5.1",
     "jest-playwright-preset": "^1.7.0",
-    "lint-staged": "^12.3.5",
+    "lint-staged": "^12.3.7",
     "netlify-cli": "^9.13.3",
     "playwright": "^1.20.0",
     "playwright-chromium": "^1.20.0",
