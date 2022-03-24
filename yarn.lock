@@ -738,19 +738,19 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.14.5"
 
-"@babel/plugin-syntax-typescript@^7.14.5", "@babel/plugin-syntax-typescript@^7.7.2":
-  version "7.14.5"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-typescript/-/plugin-syntax-typescript-7.14.5.tgz#b82c6ce471b165b5ce420cf92914d6fb46225716"
-  integrity sha512-u6OXzDaIXjEstBRRoBCQ/uKQKlbuaeE5in0RvWdA4pN6AhqxTIwUsnHPU1CFZA/amYObMsuWhYfRl3Ch90HD0Q==
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.14.5"
-
 "@babel/plugin-syntax-typescript@^7.16.7":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-typescript/-/plugin-syntax-typescript-7.16.7.tgz#39c9b55ee153151990fb038651d58d3fd03f98f8"
   integrity sha512-YhUIJHHGkqPgEcMYkPCKTyGUdoGKWtopIycQyjJH8OjvRgOYsXsaKehLVPScKJWAULPxMa4N1vCe6szREFlZ7A==
   dependencies:
     "@babel/helper-plugin-utils" "^7.16.7"
+
+"@babel/plugin-syntax-typescript@^7.7.2":
+  version "7.14.5"
+  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-typescript/-/plugin-syntax-typescript-7.14.5.tgz#b82c6ce471b165b5ce420cf92914d6fb46225716"
+  integrity sha512-u6OXzDaIXjEstBRRoBCQ/uKQKlbuaeE5in0RvWdA4pN6AhqxTIwUsnHPU1CFZA/amYObMsuWhYfRl3Ch90HD0Q==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.14.5"
 
 "@babel/plugin-transform-arrow-functions@^7.14.5":
   version "7.14.5"
@@ -1030,15 +1030,6 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.14.5"
 
-"@babel/plugin-transform-typescript@^7.15.0":
-  version "7.15.8"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-typescript/-/plugin-transform-typescript-7.15.8.tgz#ff0e6a47de9b2d58652123ab5a879b2ff20665d8"
-  integrity sha512-ZXIkJpbaf6/EsmjeTbiJN/yMxWPFWvlr7sEG1P95Xb4S4IBcrf2n7s/fItIhsAmOf8oSh3VJPDppO6ExfAfKRQ==
-  dependencies:
-    "@babel/helper-create-class-features-plugin" "^7.15.4"
-    "@babel/helper-plugin-utils" "^7.14.5"
-    "@babel/plugin-syntax-typescript" "^7.14.5"
-
 "@babel/plugin-transform-typescript@^7.16.7":
   version "7.16.8"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-typescript/-/plugin-transform-typescript-7.16.8.tgz#591ce9b6b83504903fa9dd3652c357c2ba7a1ee0"
@@ -1165,16 +1156,7 @@
     "@babel/plugin-transform-react-jsx-development" "^7.14.5"
     "@babel/plugin-transform-react-pure-annotations" "^7.14.5"
 
-"@babel/preset-typescript@^7.15.0":
-  version "7.15.0"
-  resolved "https://registry.yarnpkg.com/@babel/preset-typescript/-/preset-typescript-7.15.0.tgz#e8fca638a1a0f64f14e1119f7fe4500277840945"
-  integrity sha512-lt0Y/8V3y06Wq/8H/u0WakrqciZ7Fz7mwPDHWUJAXlABL5hiUG42BNlRXiELNjeWjO5rWmnNKlx+yzJvxezHow==
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.14.5"
-    "@babel/helper-validator-option" "^7.14.5"
-    "@babel/plugin-transform-typescript" "^7.15.0"
-
-"@babel/preset-typescript@^7.16.7":
+"@babel/preset-typescript@^7.15.0", "@babel/preset-typescript@^7.16.7":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/preset-typescript/-/preset-typescript-7.16.7.tgz#ab114d68bb2020afc069cd51b37ff98a046a70b9"
   integrity sha512-WbVEmgXdIyvzB77AQjGBEyYPZx+8tTsO50XtfozQrkW8QB2rLJpH2lgx0TRw5EJrBxOZQ+wCcyPVQvS8tjEHpQ==
@@ -9326,6 +9308,27 @@ gatsby-cli@^4.10.2:
     yurnalist "^2.1.0"
 
 gatsby-core-utils@^3.10.0, gatsby-core-utils@^3.10.1, gatsby-core-utils@^3.8.2:
+  version "3.10.1"
+  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-3.10.1.tgz#0f5e6aeda5ef4b86218b27480a9766fe30af4393"
+  integrity sha512-WqNMm0u1CAZm6Q+UQ4dDHwIAt3l32NeIaPuSXmDX7QcMGR3FUUk8cl2Ym6gx1hfILm1aCexqfaSCLUXtaWKkbQ==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
+    ci-info "2.0.0"
+    configstore "^5.0.1"
+    fastq "^1.13.0"
+    file-type "^16.5.3"
+    fs-extra "^10.0.0"
+    got "^11.8.3"
+    import-from "^4.0.0"
+    lmdb "^2.2.4"
+    lock "^1.1.0"
+    node-object-hash "^2.3.10"
+    proper-lockfile "^4.1.2"
+    resolve-from "^5.0.0"
+    tmp "^0.2.1"
+    xdg-basedir "^4.0.0"
+
+gatsby-core-utils@^3.10.1:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-3.10.1.tgz#0f5e6aeda5ef4b86218b27480a9766fe30af4393"
   integrity sha512-WqNMm0u1CAZm6Q+UQ4dDHwIAt3l32NeIaPuSXmDX7QcMGR3FUUk8cl2Ym6gx1hfILm1aCexqfaSCLUXtaWKkbQ==
