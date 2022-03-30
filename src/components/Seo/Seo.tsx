@@ -45,7 +45,7 @@ export function Seo(props: ISeoProps): ReactElement {
 
   const {
     description: propsDescription,
-    lang,
+    lang = 'en',
     meta,
     title: propsTitle,
     pathname,

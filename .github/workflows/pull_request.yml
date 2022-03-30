@@ -7,6 +7,7 @@ on:
 env:
   PR_ID: ${{ github.event.number }}
   node-version: 16
+  gh_action_name: pull_request
 
 concurrency:
   group: pr-update-${{ github.event.number }}
@@ -197,3 +198,43 @@ jobs:
 
       - name: Run tests
         run: yarn test-e2e
+
+  lhci:
+    name: Lighthouse report
+
+    runs-on: ubuntu-latest
+
+    needs: staging-deploy
+
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 20
+
+      - name: Fetch base_ref HEAD to use it as Ancestor hash in LHCI
+        run: git fetch --depth=1 origin +refs/heads/${{github.base_ref}}:refs/remotes/origin/${{github.base_ref}}
+
+      - uses: actions/setup-node@v2
+        name: Set nodeJs version
+        with:
+          node-version: ${{ env.node-version }}
+
+      - name: Restore node_modules from cache
+        uses: actions/cache@v2
+        env:
+          cache-name: node-modules-yarn
+          cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+
+      - name: LHCI
+        run: |
+          yarn run lhci collect
+          yarn run lhci upload
+        env:
+          LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
+          LHCI_TOKEN: ${{ secrets.LHCI_TOKEN }}
