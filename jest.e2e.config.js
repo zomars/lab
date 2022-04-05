@@ -81,7 +81,7 @@ if (env === 'development') {
   protocol = 'https';
 } else if (testPublic) {
   // test publicly deployed production version
-  hostname = 'labs.amalitsky.com';
+  hostname = 'lab.amalitsky.com';
   protocol = 'https';
 }
 

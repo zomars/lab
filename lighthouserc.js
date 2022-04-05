@@ -25,9 +25,11 @@ if (prId) {
   hostname = `pr${ prId }--amlab.netlify.app`;
 } else if (ghActionName === 'master_update') {
   // master update (merge) run
-  hostname = 'labs.amalitsky.com';
+  hostname = 'lab.amalitsky.com';
+  // since there is no GH PR page for master_merge run
+  delete uploadConfig.githubToken;
 } else if (testPublic) {
-  hostname = 'labs.amalitsky.com';
+  hostname = 'lab.amalitsky.com';
   uploadConfig = fileSystemUploadConfig;
 } else {
   staticDistDir = 'public';

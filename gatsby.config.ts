@@ -14,7 +14,7 @@ const {
 } = process.env;
 
 // production
-let hostname = 'labs.amalitsky.com';
+let hostname = 'lab.amalitsky.com';
 let protocol = 'https';
 
 if (prId) {
