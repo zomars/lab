@@ -5,14 +5,25 @@ const {
   LHCI_GITHUB_TOKEN: lhciGithubToken,
 } = process.env;
 
+
+// s{DELIMITER}{SEARCH_REGEX}{DELIMITER}{REPLACEMENT}{DELIMITER}{SEARCH_REGEX_FLAGS}
+const urlReplacementPatterns = [
+  's|:[0-9]{3,5}/|:PORT/|',
+  // let's treat PR build URLs the same way as public
+  's|^https://(lab\.amalitsky\.com|pr\\d+--amlab\.netlify\.app)/|lab.amalitsky.com/|',// eslint-disable-line
+];
+
+const lhciHostname = 'https://lab-lhci.herokuapp.com';
+
 let hostname = 'localhost';
 let protocol = 'https';
 let staticDistDir;
 
 let uploadConfig = {
   target: 'lhci',
-  serverBaseUrl: 'https://lab-lhci.herokuapp.com',
+  serverBaseUrl: lhciHostname,
   githubToken: lhciGithubToken,
+  urlReplacementPatterns,
 };
 
 const fileSystemUploadConfig = {
@@ -49,7 +60,7 @@ const config = {
   ci: {
     collect: {
       url: urls.map(url => `${ urlPrefix }${ url }`),
-      numberOfRuns: 2,
+      numberOfRuns: 3,
       staticDistDir,
       settings: {
         configPath: 'lighthouse.config.js',
