@@ -27,6 +27,7 @@ function headerFactory(type: number): (props: IMDXHeaderProps) => ReactElement {
       >
         <a
           className = { cnHeader('ChainLink') }
+          aria-label = { props.children }
           href = { `#${ anchorId }` }
         >
           <LinkIcon
@@ -36,7 +37,8 @@ function headerFactory(type: number): (props: IMDXHeaderProps) => ReactElement {
         </a>
         <a
           className = { cnHeader('Anchor') }
-          id = { anchorId }
+          // @ts-ignore
+          name = { anchorId }
           { ...props }
         />
       </Tag>
