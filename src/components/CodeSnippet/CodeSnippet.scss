@@ -1,0 +1,29 @@
+.CodeSnippet {
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    .CodeSnippet-CopyButton {
+      opacity: 1;
+    }
+  }
+
+  &-CopyButton {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    transition: opacity ease 200ms;
+    opacity: 0;
+  }
+
+  &-Summary {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border-width: 0 var(--aml-border-width-1) var(--aml-border-width-1);
+    border-style: solid;
+    border-radius: 0 0 var(--aml-radii-default) var(--aml-radii-default);
+    border-color: var(--aml-color-gray-500);
+    background-color: var(--aml-color-gray-200);
+    text-align: right;
+  }
+}

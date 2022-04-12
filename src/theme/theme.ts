@@ -186,7 +186,7 @@ export const colors: Record<string, TThemeColorSet> = {};
 
 Object.entries(sourceColors)
   .forEach(([colorName, colorsList]) => {
-    const hash = {};
+    const hash: Record<string, string> = {};
 
     colorsList.forEach((hex, index) => {
       hash[100 * (index + 1)] = hex;

@@ -54,7 +54,7 @@ CI checks are performed by the
 [original `pull_request` event workflow](https://github.com/amalitsky/lab/blob/master/.github/workflows/pull_request.yml)
 and we can simply add another job _to the end of the queue_:
 
-```yaml
+```yaml fileName=dependabot_pr_before.yml
 add_label:
   name: Add label
   runs-on: ubuntu-latest
@@ -77,7 +77,7 @@ add_label:
 Since open PR can be rebased or otherwise updated we better add one more
 job to remove potentially stale _Ready to merge_ label before running other jobs.
 
-```yaml
+```yaml fileName=dependabot_pr_after.yml
 # have this job run early in the workflow
 remove_label:
   name: Remove label

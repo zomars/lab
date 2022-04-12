@@ -15,7 +15,6 @@ import {
 import {
   bodyFontFamily,
   breakpoints,
-  colors,
   customSizes,
   fontSize,
   fontSizes,
@@ -67,7 +66,6 @@ export const theme = createTheme({
       primary: textColor,
       secondary: textColor,
     },
-    ...colors,
   },
   typography,
   breakpoints: {

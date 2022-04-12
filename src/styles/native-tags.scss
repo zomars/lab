@@ -50,7 +50,7 @@ blockquote {
 }
 
 // excluding code snippets
-code:not([class|='language-']) {
+code:not([class^='language-']) {
   padding: var(--aml-size-xs);
   border-radius: var(--aml-radii-default);
   background-color: var(--aml-color-muted);
