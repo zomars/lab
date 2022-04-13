@@ -24,7 +24,7 @@ export function Bio(
         className = { cnBio('Text') }
       >
         <p>
-          Hi, I&apos;m Alex Malitsky &mdash;
+          Hi! I&apos;m Alex Malitsky &mdash;
           frontend architect and engineer based in SF bay area.
         </p>
 

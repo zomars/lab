@@ -1,9 +1,9 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/prism-light';
 import okaidia from 'react-syntax-highlighter/dist/esm/styles/prism/okaidia';
 
 import { cn } from '@bem-react/classname';
-import { Button, Chip } from '@mui/material';
+import { Chip } from '@mui/material';
 
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx';
 import yaml from 'react-syntax-highlighter/dist/esm/languages/prism/yaml';
@@ -11,9 +11,9 @@ import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typesc
 import css from 'react-syntax-highlighter/dist/esm/languages/prism/css';
 
 import { IReactNodeProps } from '../../types/common.types';
-import { copyTextToBuffer } from '../../services/copy-to-buffer';
 
 import './CodeSnippet.scss';
+import { CodeSnippetCopyButton } from './CodeSnippetCopyButton/CodeSnippetCopyButton';
 
 // https://github.com/react-syntax-highlighter/react-syntax-highlighter/
 // blob/master/AVAILABLE_LANGUAGES_PRISM.MD
@@ -32,17 +32,8 @@ interface ICodeSnippetProps extends IReactNodeProps {
 const cnCodeSnippet = cn('CodeSnippet');
 
 export function CodeSnippet(props: ICodeSnippetProps): ReactElement {
-  const { className: prefixedLanguage, fileName } = props;
+  const { className: prefixedLanguage, fileName, children: codeText } = props;
   const [, language] = prefixedLanguage.split('-');
-
-  const [copyInProgress, setCopyInProgress] = useState(false);
-
-  function copyTextEventHandler(): void {
-    setCopyInProgress(true);
-
-    copyTextToBuffer(props.children)
-      .then(() => setCopyInProgress(false));
-  }
 
   const rootPreTagStyles = {
     margin: 0,
@@ -54,22 +45,17 @@ export function CodeSnippet(props: ICodeSnippetProps): ReactElement {
     <div
       className = { cnCodeSnippet()}
     >
-      <Button
+      <CodeSnippetCopyButton
+        codeText = { codeText }
         className = { cnCodeSnippet('CopyButton') }
-        disabled = { copyInProgress }
-        onClick = { copyTextEventHandler }
-        variant = 'contained'
-        size = 'small'
-      >
-        Copy
-      </Button>
+      />
 
       <SyntaxHighlighter
         style = { okaidia }
         language = { language }
         customStyle = { rootPreTagStyles }
       >
-        { props.children }
+        { codeText }
       </SyntaxHighlighter>
 
       <div
