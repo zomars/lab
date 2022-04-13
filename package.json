@@ -28,7 +28,7 @@
     "gatsby-remark-copy-linked-files": "^5.12.1",
     "gatsby-remark-images": "^6.11.1",
     "gatsby-remark-reading-time": "^1.1.0",
-    "gatsby-source-filesystem": "^4.11.1",
+    "gatsby-source-filesystem": "^4.12.1",
     "gatsby-transformer-sharp": "^4.11.0",
     "lodash": "^4.17.21",
     "preact": "^10.7.1",
