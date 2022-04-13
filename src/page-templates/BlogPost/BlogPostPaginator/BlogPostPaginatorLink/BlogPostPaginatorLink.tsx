@@ -48,15 +48,19 @@ export function BlogPostPaginatorLink(props: IBlogPostPaginatorLinkProps): React
   }
 
   return (
-    <Link
+    <li
       className = {
         cnBlogPostPaginatorLink({ next: type === AdjacentPostType.next })
       }
-      to = { slug }
-      state = { postLinkPayload }
-      rel = { type }
     >
-      { labels.join(' ') }
-    </Link>
+      <Link
+
+        to = { slug }
+        state = { postLinkPayload }
+        rel = { type }
+      >
+        { labels.join(' ') }
+      </Link>
+    </li>
   );
 }
