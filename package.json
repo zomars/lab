@@ -72,7 +72,7 @@
     "lighthouse": "^9.5.0",
     "lint-staged": "^12.3.8",
     "netlify-cli": "^9.16.6",
-    "playwright": "^1.21.0",
+    "playwright": "^1.21.1",
     "playwright-chromium": "^1.21.0",
     "playwright-core": "^1.20.2",
     "rxjs": "^7.5.5",
