@@ -23,3 +23,5 @@ src/styles/theme-custom-props.css
 
 # Local Netlify folder
 .netlify
+
+bundle-size-report.json

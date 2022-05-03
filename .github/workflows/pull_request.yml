@@ -6,8 +6,11 @@ on:
 
 env:
   PR_ID: ${{ github.event.number }}
-  node-version: 16
+  node-version: 16.13
   gh_action_name: pull_request
+  bsr-filename: bundle-size-report.json
+  bsr-filename-before: bundle-size-report-before.json
+  bsr-filename-txt: bundle-size-report.txt
 
 concurrency:
   group: pr-update-${{ github.event.number }}
@@ -21,7 +24,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - uses: actions/setup-node@v2
         name: Set nodeJs version
@@ -31,7 +34,7 @@ jobs:
       # node_module cache helps to avoid 1 minute copying from yarn cache on every job run
       - name: node_modules cache
         id: node-modules-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: node-modules-yarn
           cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
@@ -53,7 +56,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - uses: actions/setup-node@v2
         name: Set nodeJs version
@@ -61,7 +64,7 @@ jobs:
           node-version: ${{ env.node-version }}
 
       - name: Restore node_modules from cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: node-modules-yarn
           cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
@@ -75,15 +78,18 @@ jobs:
   build:
     name: Production build
 
-    timeout-minutes: 60
+    timeout-minutes: 30
 
     runs-on: ubuntu-latest
 
     needs: setup
 
+    env:
+      staleBuildFilesFindArgs: -maxdepth 1 -type f -regextype posix-egrep -regex ".*\.(json|js|css|map|txt)$"
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - uses: actions/setup-node@v2
         name: Set nodeJs version
@@ -92,11 +98,11 @@ jobs:
 
       - name: Cache production build
         id: prod-build-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: prod-build
-          key-1: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
-          key-2: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+          key-1: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+          key-2: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
         with:
           path: |
             public
@@ -106,16 +112,24 @@ jobs:
             ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-
             ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-
 
+      - name: Purge top level & obsolete JS, JSON, HTML and CSS files from build folder
+        if: steps.prod-build-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p public
+          find public ${{ env.staleBuildFilesFindArgs }}
+          find public ${{ env.staleBuildFilesFindArgs }} -delete
+
       # skipping build on exact cache hit
       - name: Restore node_modules from cache
         if: steps.prod-build-cache.outputs.cache-hit != 'true'
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: node-modules-yarn
           cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+
       - name: Gatsby production build
         if: steps.prod-build-cache.outputs.cache-hit != 'true'
         run: yarn build
@@ -129,7 +143,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - uses: actions/setup-node@v2
         name: Set nodeJs version
@@ -137,11 +151,11 @@ jobs:
           node-version: ${{ env.node-version }}
 
       - name: Restore exact production build from cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: prod-build
-          key-1: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
-          key-2: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+          key-1: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+          key-2: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
         with:
           path: |
             public
@@ -149,7 +163,7 @@ jobs:
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-${{ github.sha }}
 
       - name: Restore node_modules from cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: node-modules-yarn
           cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
@@ -176,7 +190,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - uses: actions/setup-node@v2
         name: Set nodeJs version
@@ -184,7 +198,7 @@ jobs:
           node-version: ${{ env.node-version }}
 
       - name: Restore node_modules from cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: node-modules-yarn
           cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
@@ -210,7 +224,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 20
 
@@ -223,7 +237,7 @@ jobs:
           node-version: ${{ env.node-version }}
 
       - name: Restore node_modules from cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: node-modules-yarn
           cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
@@ -238,3 +252,86 @@ jobs:
         env:
           LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
           LHCI_TOKEN: ${{ secrets.LHCI_TOKEN }}
+
+  bundle-size-report:
+    name: Bundle size report
+
+    runs-on: ubuntu-latest
+
+    needs: [build]
+
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 20
+
+      - run: git fetch --no-tags --prune --depth=20 origin master
+
+      - uses: actions/setup-node@v2
+        name: Set nodeJs version
+        with:
+          node-version: ${{ env.node-version }}
+
+      - name: Restore node_modules from cache
+        uses: actions/cache@v3
+        env:
+          cache-name: node-modules-yarn
+          cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+
+      - name: Restore exact production build from cache
+        uses: actions/cache@v3
+        env:
+          cache-name: prod-build
+          key-1: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+          key-2: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
+        with:
+          path: |
+            public
+            .cache
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-${{ github.sha }}
+
+      - name: Find the "merge-base" between target branch and last PR commit
+        env:
+          merge-base-cmd: git merge-base origin/${{ github.base_ref }} ${{ github.sha }}
+        run: echo "merge-base-sha=$(${{ env.merge-base-cmd }})" >> $GITHUB_ENV
+
+      - name: Restore the merge base bundle size report from cache
+        id: bsr-cache-merge-base
+        uses: actions/cache@v3
+        with:
+          path: bundle-size-report-${{ env.merge-base-sha }}.json
+          key: ${{ env.merge-base-sha }}
+
+      - name: Restore the current build bundle size report from cache
+        uses: actions/cache@v3
+        with:
+          path: bundle-size-report-${{ github.sha }}.json
+          key: ${{ github.sha }}
+
+      - name: Bundle Size Report w comparison
+        if: steps.bsr-cache-merge-base.outputs.cache-hit == 'true'
+        run: yarn bsr autorun -o bundle-size-report-${{ github.sha }}.json --compare-with bundle-size-report-${{ env.merge-base-sha }}.json
+
+      - name: Bundle Size Report wo comparison
+        if: steps.bsr-cache-merge-base.outputs.cache-hit != 'true'
+        run: yarn bsr autorun -o bundle-size-report-${{ github.sha }}.json
+
+      - id: read-bsr-txt-file-content
+        name: Read report into the environment variable
+        run: |
+          body=$(cat ${{ env.bsr-filename-txt }})
+          body="${body//'%'/'%25'}"
+          body="${body//$'\n'/'%0A'}"
+          body="${body//$'\r'/'%0D'}"
+          echo ::set-output name=body::$body
+
+      - name: Comment the report to PR
+        uses: peter-evans/commit-comment@v2
+        with:
+          body: "```\n${{ steps.read-bsr-txt-file-content.outputs.body }}\n```"

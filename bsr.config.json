@@ -1,0 +1,37 @@
+{
+  "analyze": {
+    "build": {
+      "location": "public"
+    },
+    "groups": [
+      {
+        "key": "html",
+        "globs": [
+          "index.html"
+        ],
+        "label": "HTML"
+      },
+      {
+        "key": "js",
+        "globs": [
+          "@(webpack-runtime|framework|app|commons|711)-*.js",
+          "component-*-post-list-*.js"
+        ],
+        "label": "JS"
+      },
+      {
+        "key": "json",
+        "globs": [
+          "page-data/app-data.json",
+          "page-data/sq/d/*.json",
+          "page-data/tags/tech/1/page-data.json"
+        ],
+        "label": "JSON"
+      }
+    ],
+    "output": "bundle-size-report.json"
+  },
+  "print": {
+    "output": "bundle-size-report.txt"
+  }
+}

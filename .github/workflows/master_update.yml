@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         name: Checkout
 
       - uses: actions/setup-node@v2
@@ -29,7 +29,7 @@ jobs:
       # node_module cache helps to avoid 1 minute copying from yarn cache on every job run
       - name: node_modules cache
         id: node-modules-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: node-modules-yarn
           cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
@@ -51,8 +51,11 @@ jobs:
 
     needs: setup
 
+    env:
+      staleBuildFilesFindArgs: -maxdepth 1 -type f -regextype posix-egrep -regex ".*\.(json|js|css|map|txt)$"
+
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         name: Checkout
 
       - uses: actions/setup-node@v2
@@ -61,7 +64,7 @@ jobs:
           node-version: ${{ env.node-version }}
 
       - name: Restore node_modules from cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: node-modules-yarn
           cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
@@ -71,7 +74,7 @@ jobs:
 
       - name: Cache production build
         id: prod-build-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: prod-build
           key-1: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
@@ -85,9 +88,30 @@ jobs:
             ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-
             ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-
 
+      - name: Purge top level & obsolete JS, JSON, HTML and CSS files from build folder
+        if: steps.prod-build-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p public
+          find public ${{ env.staleBuildFilesFindArgs }}
+          find public ${{ env.staleBuildFilesFindArgs }} -delete
+
+      # skipping build on exact cache hit
+      - name: Restore node_modules from cache
+        if: steps.prod-build-cache.outputs.cache-hit != 'true'
+        uses: actions/cache@v3
+        env:
+          cache-name: node-modules-yarn
+          cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+
       - name: Gatsby production build
         if: steps.prod-build-cache.outputs.cache-hit != 'true'
         run: yarn build
+
+      - name: Print list of top level JS, HTML and CSS files
+        run: find public ${{ env.staleBuildFilesFindArgs }}
 
   deploy:
     name: Deploy
@@ -100,7 +124,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - uses: actions/setup-node@v2
         name: Set nodeJs version
@@ -109,7 +133,7 @@ jobs:
 
       - name: Restore exact production build from cache
         id: prod-build-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: prod-build
           key-1: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
@@ -124,7 +148,7 @@ jobs:
             ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-
 
       - name: Restore node_modules from cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: node-modules-yarn
           cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
@@ -150,7 +174,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 20
 
@@ -160,7 +184,7 @@ jobs:
           node-version: ${{ env.node-version }}
 
       - name: Restore node_modules from cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: node-modules-yarn
           cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}

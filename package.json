@@ -66,6 +66,8 @@
     "eslint-plugin-react-hooks": "^4.5.0",
     "eslint-plugin-rxjs": "^5.0.2",
     "expect-playwright": "^0.8.0",
+    "glob": "^8.0.1",
+    "gzip-size": "6.x.x",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
     "jest-playwright-preset": "^1.7.0",
@@ -82,7 +84,8 @@
     "stylelint-order": "^5.0.0",
     "ts-jest": "^27.1.4",
     "ts-node": "^10.7.0",
-    "typescript": "^4.6.4"
+    "typescript": "^4.6.4",
+    "yargs": "^17.4.1"
   },
   "homepage": "https://github.com/amalitsky/lab",
   "keywords": [
@@ -118,7 +121,8 @@
     "serve": "gatsby serve",
     "stylelint-all": "stylelint 'src/**/*.scss'",
     "stylelint-fix": "yarn stylelint-all --fix",
-    "debug": "node $NODE_DEBUG_OPTION ./node_modules/.bin/gatsby build"
+    "debug": "node $NODE_DEBUG_OPTION ./node_modules/.bin/gatsby build",
+    "bsr": "ts-node tools/bundle-size-reporter"
   },
   "browserslist": [
     "last 2 years and > 1%",
