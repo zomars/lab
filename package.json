@@ -68,7 +68,7 @@
     "expect-playwright": "^0.8.0",
     "glob": "^8.0.1",
     "gzip-size": "6.x.x",
-    "husky": "^7.0.4",
+    "husky": "^8.0.1",
     "jest": "^27.5.1",
     "jest-playwright-preset": "^1.7.0",
     "lighthouse": "^9.5.0",
