@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  node-version: 16
+  node_version: 16
   gh_action_name: master_update
 
 concurrency: master_update
@@ -24,7 +24,7 @@ jobs:
       - uses: actions/setup-node@v2
         name: Set nodeJs version
         with:
-          node-version: ${{ env.node-version }}
+          node-version: ${{ env.node_version }}
 
       # node_module cache helps to avoid 1 minute copying from yarn cache on every job run
       - name: node_modules cache
@@ -32,7 +32,7 @@ jobs:
         uses: actions/cache@v3
         env:
           cache-name: node-modules-yarn
-          cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+          cache-fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
@@ -61,13 +61,13 @@ jobs:
       - uses: actions/setup-node@v2
         name: Set nodeJs version
         with:
-          node-version: ${{ env.node-version }}
+          node-version: ${{ env.node_version }}
 
       - name: Restore node_modules from cache
         uses: actions/cache@v3
         env:
           cache-name: node-modules-yarn
-          cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+          cache-fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
@@ -78,7 +78,7 @@ jobs:
         env:
           cache-name: prod-build
           key-1: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
-          key-2: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+          key-2: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: |
             public
@@ -101,7 +101,7 @@ jobs:
         uses: actions/cache@v3
         env:
           cache-name: node-modules-yarn
-          cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+          cache-fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
@@ -129,7 +129,7 @@ jobs:
       - uses: actions/setup-node@v2
         name: Set nodeJs version
         with:
-          node-version: ${{ env.node-version }}
+          node-version: ${{ env.node_version }}
 
       - name: Restore exact production build from cache
         id: prod-build-cache
@@ -137,7 +137,7 @@ jobs:
         env:
           cache-name: prod-build
           key-1: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
-          key-2: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+          key-2: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: |
             public
@@ -151,7 +151,7 @@ jobs:
         uses: actions/cache@v3
         env:
           cache-name: node-modules-yarn
-          cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+          cache-fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
@@ -181,13 +181,13 @@ jobs:
       - uses: actions/setup-node@v2
         name: Set nodeJs version
         with:
-          node-version: ${{ env.node-version }}
+          node-version: ${{ env.node_version }}
 
       - name: Restore node_modules from cache
         uses: actions/cache@v3
         env:
           cache-name: node-modules-yarn
-          cache-fingerprint: ${{ env.node-version }}-${{ hashFiles('yarn.lock') }}
+          cache-fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}

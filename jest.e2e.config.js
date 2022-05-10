@@ -64,7 +64,7 @@ const testPathIgnorePatterns = [
 
 const {
   NODE_ENV: env,
-  PR_ID: prId,
+  pr_id: prId,
   TEST_PUBLIC: testPublic,
 } = process.env;
 

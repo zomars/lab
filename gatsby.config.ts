@@ -10,7 +10,7 @@ import {
 
 const {
   NODE_ENV: env,
-  PR_ID: prId,
+  pr_id: prId,
 } = process.env;
 
 // production

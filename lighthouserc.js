@@ -1,5 +1,5 @@
 const {
-  PR_ID: prId,
+  pr_id: prId,
   gh_action_name: ghActionName,
   TEST_PUBLIC: testPublic,
   LHCI_GITHUB_TOKEN: lhciGithubToken,
