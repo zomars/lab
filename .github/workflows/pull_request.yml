@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 env:
-  node-version: 16.13.2
+  node_version: 16.13.2
   pr_id: ${{ github.event.number }}
   last_commit_sha: ${{ github.event.pull_request.head.sha }}
   gh_action_name: pull_request
