@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 env:
-  node-version: 16.13
+  node-version: 16.13.2
   pr_id: ${{ github.event.number }}
   last_commit_sha: ${{ github.event.pull_request.head.sha }}
   gh_action_name: pull_request
@@ -284,6 +284,13 @@ jobs:
           path: bundle-size-report-${{ env.merge_base_sha }}.json
           key: ${{ env.merge_base_sha }}
 
+      - name: Merge-base checkout
+        uses: actions/checkout@v3
+        if: steps.bsr-cache-merge-base.outputs.cache-hit != 'true'
+        with:
+          fetch-depth: 20
+          ref: ${{ env.merge_base_sha }}
+
       - name: Restore node_modules from cache
         id: node-modules-cache
         if: steps.bsr-cache-merge-base.outputs.cache-hit != 'true'
@@ -294,6 +301,7 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+          restore-keys: ${{ runner.os }}-${{ env.cache-name }}-
 
       - name: Yarn install
         if: steps.bsr-cache-merge-base.outputs.cache-hit != 'true' &&
@@ -331,7 +339,7 @@ jobs:
 
       - name: Bundle Size Report
         if: steps.bsr-cache-merge-base.outputs.cache-hit != 'true'
-        run: yarn bsr analyze -o bundle-size-report-${{ env.merge_base_sha }}.json
+        run: yarn bsr autorun -o bundle-size-report-${{ env.merge_base_sha }}.json
 
   bundle-size-report:
     name: Bundle size report
