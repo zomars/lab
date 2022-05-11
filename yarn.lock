@@ -6764,10 +6764,10 @@ core-js-pure@^3.16.0:
   resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.18.3.tgz#7eed77dcce1445ab68fd68715856633e2fb3b90c"
   integrity sha512-qfskyO/KjtbYn09bn1IPkuhHl5PlJ6IzJ9s9sraJ1EqcuGyLGKzhSM1cY0zgyL9hx42eulQLZ6WaeK5ycJCkqw==
 
-core-js@^3.17.2:
-  version "3.18.3"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.18.3.tgz#86a0bba2d8ec3df860fefcc07a8d119779f01509"
-  integrity sha512-tReEhtMReZaPFVw7dajMx0vlsz3oOb8ajgPoHVYGxr8ErnZ6PcYEvvmjGmXlfpnxpkYSdOQttjB+MvVbCGfvLw==
+core-js@^3.17.2, core-js@^3.22.3:
+  version "3.22.5"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.22.5.tgz#a5f5a58e663d5c0ebb4e680cd7be37536fb2a9cf"
+  integrity sha512-VP/xYuvJ0MJWRAobcmQ8F2H6Bsn+s7zqAAjFaHGBMc5AQm7zaelhD1LGduFn2EehEcQcU+br6t+fwbpQ5d1ZWA==
 
 core-util-is@~1.0.0:
   version "1.0.3"
@@ -9639,10 +9639,10 @@ gatsby-plugin-material-ui@^4.1.0:
     "@emotion/cache" "^11.4.0"
     "@emotion/server" "^11.4.0"
 
-gatsby-plugin-mdx@^3.13.0:
-  version "3.13.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-3.13.0.tgz#7a1d1b5eea77eb431d725a0557dac3a91b43676f"
-  integrity sha512-becJF14ChRlkQkeYOR7GzuDNCK0yqax5/BkDHo3pNorh5arxe2jMZm7Kvru8CQa+R9fSHZQY16IEivT9/08QOQ==
+gatsby-plugin-mdx@^3.14.0:
+  version "3.14.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-3.14.0.tgz#51cd490249479e6958d8a82b5bfff72e5fb846f0"
+  integrity sha512-H3tZTmky67ZS1ZWOOluWoZ2tdgP052rsKvjbEumJBA+v10aqlYWx0S5Q0RcoWKyTTx90h2OHsx4r+LbLvFPW/g==
   dependencies:
     "@babel/core" "^7.15.5"
     "@babel/generator" "^7.15.4"
@@ -9654,13 +9654,13 @@ gatsby-plugin-mdx@^3.13.0:
     "@babel/types" "^7.15.4"
     camelcase-css "^2.0.1"
     change-case "^3.1.0"
-    core-js "^3.17.2"
+    core-js "^3.22.3"
     dataloader "^1.4.0"
     debug "^4.3.1"
     escape-string-regexp "^1.0.5"
     eval "^0.1.4"
-    fs-extra "^10.0.0"
-    gatsby-core-utils "^3.13.0"
+    fs-extra "^10.1.0"
+    gatsby-core-utils "^3.14.0"
     gray-matter "^4.0.2"
     json5 "^2.1.3"
     loader-utils "^1.4.0"
