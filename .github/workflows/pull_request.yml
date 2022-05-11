@@ -37,12 +37,12 @@ jobs:
         id: node-modules-cache
         uses: actions/cache@v3
         env:
-          cache-name: node-modules-yarn
-          cache-fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+          cache_name: node-modules-yarn
+          cache_fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
-          restore-keys: ${{ runner.os }}-${{ env.cache-name }}-
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.cache_fingerprint }}
+          restore-keys: ${{ runner.os }}-${{ env.cache_name }}-
 
       - name: Yarn install
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
@@ -67,11 +67,11 @@ jobs:
       - name: Restore node_modules from cache
         uses: actions/cache@v3
         env:
-          cache-name: node-modules-yarn
-          cache-fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+          cache_name: node-modules-yarn
+          cache_fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.cache_fingerprint }}
 
       - name: lint the code
         run: yarn lint
@@ -98,17 +98,17 @@ jobs:
         id: prod-build-cache
         uses: actions/cache@v3
         env:
-          cache-name: prod-build
-          key-1: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
-          key-2: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
+          cache_name: prod-build
+          key_1: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+          key_2: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
         with:
           path: |
             public
             .cache
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-${{ env.last_commit_sha }}
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-${{ env.key_2 }}-${{ env.last_commit_sha }}
           restore-keys: |-
-            ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-
-            ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-
+            ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-${{ env.key_2 }}-
+            ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-
 
       - name: Purge top level & obsolete JS, JSON, HTML and CSS files from build folder
         if: steps.prod-build-cache.outputs.cache-hit != 'true'
@@ -122,11 +122,11 @@ jobs:
         if: steps.prod-build-cache.outputs.cache-hit != 'true'
         uses: actions/cache@v3
         env:
-          cache-name: node-modules-yarn
-          cache-fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+          cache_name: node-modules-yarn
+          cache_fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.cache_fingerprint }}
 
       - name: Gatsby production build
         if: steps.prod-build-cache.outputs.cache-hit != 'true'
@@ -151,23 +151,23 @@ jobs:
       - name: Restore exact production build from cache
         uses: actions/cache@v3
         env:
-          cache-name: prod-build
-          key-1: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
-          key-2: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
+          cache_name: prod-build
+          key_1: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+          key_2: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
         with:
           path: |
             public
             .cache
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-${{ env.last_commit_sha }}
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-${{ env.key_2 }}-${{ env.last_commit_sha }}
 
       - name: Restore node_modules from cache
         uses: actions/cache@v3
         env:
-          cache-name: node-modules-yarn
-          cache-fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+          cache_name: node-modules-yarn
+          cache_fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.cache_fingerprint }}
 
       - name: Staging deploy
         # no need to copy node_modules and I'm not sure why
@@ -198,11 +198,11 @@ jobs:
       - name: Restore node_modules from cache
         uses: actions/cache@v3
         env:
-          cache-name: node-modules-yarn
-          cache-fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+          cache_name: node-modules-yarn
+          cache_fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.cache_fingerprint }}
 
         # figure the better way supporting all the packages
       - name: Fake yarn postinstall
@@ -237,11 +237,11 @@ jobs:
       - name: Restore node_modules from cache
         uses: actions/cache@v3
         env:
-          cache-name: node-modules-yarn
-          cache-fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+          cache_name: node-modules-yarn
+          cache_fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.cache_fingerprint }}
 
       - name: LHCI
         run: |
@@ -296,12 +296,11 @@ jobs:
         if: steps.bsr-cache-merge-base.outputs.cache-hit != 'true'
         uses: actions/cache@v3
         env:
-          cache-name: node-modules-yarn
-          cache-fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+          cache_name: node-modules-yarn
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
-          restore-keys: ${{ runner.os }}-${{ env.cache-name }}-
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: ${{ runner.os }}-${{ env.cache_name }}-${{ env.node_version }}-
 
       - name: Yarn install
         if: steps.bsr-cache-merge-base.outputs.cache-hit != 'true' &&
@@ -313,17 +312,17 @@ jobs:
         if: steps.bsr-cache-merge-base.outputs.cache-hit != 'true'
         uses: actions/cache@v3
         env:
-          cache-name: prod-build
-          key-1: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
-          key-2: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
+          cache_name: prod-build
+          key_1: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+          key_2: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
         with:
           path: |
             public
             .cache
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-${{ env.last_commit_sha }}
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-${{ env.key_2 }}-${{ env.last_commit_sha }}
           restore-keys: |-
-            ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-
-            ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-
+            ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-${{ env.key_2 }}-
+            ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-
 
       - name: Purge top level & obsolete JS, JSON, HTML and CSS files from build folder
         if: steps.bsr-cache-merge-base.outputs.cache-hit != 'true'
@@ -369,23 +368,23 @@ jobs:
       - name: Restore node_modules from cache
         uses: actions/cache@v3
         env:
-          cache-name: node-modules-yarn
-          cache-fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+          cache_name: node-modules-yarn
+          cache_fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.cache_fingerprint }}
 
       - name: Restore exact production build from cache
         uses: actions/cache@v3
         env:
-          cache-name: prod-build
-          key-1: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
-          key-2: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
+          cache_name: prod-build
+          key_1: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+          key_2: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
         with:
           path: |
             public
             .cache
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-${{ env.last_commit_sha }}
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-${{ env.key_2 }}-${{ env.last_commit_sha }}
 
       - name: Find the "merge-base" between target branch and last PR commit
         run: echo "merge_base_sha=$(${{ env.merge_base_cmd }})" >> $GITHUB_ENV
