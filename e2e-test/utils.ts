@@ -1,5 +1,9 @@
-import { ElementHandle, Page } from 'playwright';
-import { BrowserContext } from 'playwright-core';
+import {
+  ElementHandle,
+  Page,
+  BrowserContext,
+} from 'playwright';
+
 import { STATE_CHANGE_EVENT } from '../src/constants';
 
 interface IResolvablePromise<T, U = unknown> extends Promise<T> {
