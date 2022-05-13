@@ -1,0 +1,169 @@
+---
+title: 'Invalidate or Clear Github Actions Cache'
+date: '2022-05-13T10:00:00.000-07:00'
+tags: ['tech', 'CI', 'github', 'github actions']
+description: >-
+  Review approaches to clearing (invalidating) GitHub actions cache by updating key and
+  restore-keys in an easy and predictable fashion (with env variables).
+summary: >-
+  Cache invalidation is one of the most complex computer science tasks.
+  Especially so for GitHub action workflows since there is no embedded mechanism to
+  clean or invalidate present caches.
+  However, what we can do is to update cache `keys` with a dedicated _environment variable_
+  of the workflow or repository _secret_.
+---
+
+The need to invalidate existent GitHub action caches can raise at any time but
+is especially useful when working on various build optimizations and tuning
+GitHub actions workflow itself.
+
+Since there is no _native_ way to do so we have to rely on updating
+[cache](https://github.com/actions/cache#readme) `key` **and** `restore-keys` fields.
+Fortunately, when defining keys we can use expressions referencing environment variables or
+even GitHub action secrets.
+
+Then by updating corresponding variables (with workflow file update or through GitHub UI) we
+in fact will invalidate all caches referring those variables.
+Now, all subsequent workflow runs will create new caches with updated cache key values.
+
+_**Pro tip:** Set the
+[`ACTIONS_RUNNER_DEBUG`](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/enabling-debug-logging)
+flag on when working on GitHub action workflows.
+It makes debugging quite a bit easier._
+
+### Workflow Environment Variable
+With this approach we are defining the workflow level environment variable `cache_version`
+which can be changed anytime later by updating the workflow file.
+
+Once its value changes, all cache keys are updated and cache generation starts from scratch.
+
+Old caches remain in the GH cloud storage and will be automatically removed by github based on
+their [eviction policy](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy).
+
+_Technically, once the eviction happened you could revert the `cache_version` value back to its
+original value but in practice this is not used. There is simply no need - we can keep incrementing
+the value when needed._
+
+```yaml
+name: PR Update
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  cache_version: 1.1
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: node_modules cache
+        id: node-modules-cache
+        uses: actions/cache@v3
+        env:
+          cache_name: node-modules-${{ env.cache_version }}
+          hash: ${{ hashFiles('package.lock') }}
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.hash }}
+          restore-keys: ${{ runner.os }}-${{ env.cache_name }}-
+```
+
+We could also piggyback on an existent env variable such as `node_version` and add (or change)
+its minor version in order to invalidate the cache.
+
+This is not the recommended approach however, because behavior of nodeJs might change even
+with a minor version update.
+You might also end up locking in a particular minor nodeJs version instead of using the
+latest minor for the defined major i.e. `node_version: 16.13` instead of `node_version: 16`.
+
+On the flip side you will invalidate all the cache automatically whenever a major node
+version change occurs.
+
+Now lets combine the best of both worlds:
+
+```yaml
+name: PR Update
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  cache_version: 1.1
+  node_version: 16
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: node_modules cache
+        id: node-modules-cache
+        uses: actions/cache@v3
+        env:
+          prefix: ${{ runner.os }}-${{ env.node_version }}
+          cache_name: node-modules-${{ env.cache_version }}
+          hash: ${{ hashFiles('package.lock') }}
+        with:
+          path: node_modules
+          key: ${{ env.prefix }}-${{ env.cache_name }}-${{ env.hash }}
+          restore-keys: ${{ env.prefix }}-${{ env.cache_name }}-
+```
+
+Now we can invalidate cache by updating `cache_version` variable whenever we need to do so.
+At the same time our cache gets invalidated automatically every time we bump nodeJs version.
+
+### Repository Secret
+If you prefer to invalidate GitHub action caches from the GitHub UI you can refer repository
+secrets in your cache key expressions.
+
+Please note however that these secrets might **not** be immediately available for
+[dependabot PRs](http://localhost:8000/posts/2021/dependabot-pull-request-github-actions/)
+or PRs coming from forks of your repository.
+
+```yaml
+name: PR Update
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+env:
+  node_version: 16
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: node_modules cache
+        id: node-modules-cache
+        uses: actions/cache@v3
+        env:
+          prefix: ${{ runner.os }}-${{ env.node_version }}
+          cache_name: node-modules-${{ secrets.CACHE_VERSION }}
+          hash: ${{ hashFiles('package.lock') }}
+        with:
+          path: node_modules
+          key: ${{ env.prefix }}-${{ env.cache_name }}-${{ env.hash }}
+          restore-keys: ${{ env.prefix }}-${{ env.cache_name }}-
+```
+
+Once this approach is implemented you can go to the repository settings UI and
+[update](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository)
+`CACHE_VERSION` secret value.
+All subsequent workflow runs will be creating relevant caches from scratch.
+
+### Conclusion
+Even though there is no embedded mechanism to clear the GitHub actions cache we can achieve
+that fairly easily with environment variables and updated workflow file.
+
+Which in a way tells us that GitHub actions team came up with a succinct yet sufficient `cache`
+action API.
+They avoided adding specialized functionality when in fact workflow syntax already provides
+us with generic (and likely familiar) means to achieve our goal.
+
+_Convenient? No! Efficient and reliable? Yes!_

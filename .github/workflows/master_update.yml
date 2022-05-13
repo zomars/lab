@@ -113,6 +113,19 @@ jobs:
       - name: Print list of top level JS, HTML and CSS files
         run: find public ${{ env.staleBuildFilesFindArgs }}
 
+      # let's build BSRs for the future comparison
+      # since now we have the real(merged) "sha" and can actually use it for report's caching
+      - name: Bundle size report cache
+        id: bsr-cache
+        uses: actions/cache@v3
+        with:
+          path: bundle-size-report-${{ github.sha }}.json
+          key: ${{ github.sha }}
+
+      - name: Bundle Size Report
+        if: steps.bsr-cache.outputs.cache-hit != 'true'
+        run: yarn bsr analyze -o bundle-size-report-${{ github.sha }}.json
+
   deploy:
     name: Deploy
 

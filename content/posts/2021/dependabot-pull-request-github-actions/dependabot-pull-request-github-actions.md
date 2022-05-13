@@ -1,7 +1,7 @@
 ---
 title: 'Github Actions for Dependabot PRs'
 date: '2021-12-07T10:10:00.000Z'
-tags: ['tech', 'GitHub', 'CI', 'automation', 'devflow']
+tags: ['tech', 'github', 'github actions', 'CI', 'automation', 'devflow']
 coverImage: './weekend.jpg'
 description: >-
   Learn how to extend Pull Request Update GitHub Actions workflow

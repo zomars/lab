@@ -5,9 +5,9 @@ on:
   workflow_dispatch:
 
 env:
-  node_version: 16.14.1
+  node_version: 16
   pr_id: ${{ github.event.number }}
-  last_commit_sha: ${{ github.event.pull_request.head.sha }}
+# last_commit_sha: ${{ github.event.pull_request.head.sha }}
   gh_action_name: pull_request
   bsr_filename_txt: bundle-size-report.txt
   stale_build_files_find_args: -maxdepth 1 -type f -regextype posix-egrep -regex ".*\.(json|js|css|map|txt)$"
@@ -105,7 +105,7 @@ jobs:
           path: |
             public
             .cache
-          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-${{ env.key_2 }}-${{ env.last_commit_sha }}
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-${{ env.key_2 }}-${{ github.sha }}
           restore-keys: |-
             ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-${{ env.key_2 }}-
             ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-
@@ -158,7 +158,7 @@ jobs:
           path: |
             public
             .cache
-          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-${{ env.key_2 }}-${{ env.last_commit_sha }}
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-${{ env.key_2 }}-${{ github.sha }}
 
       - name: Restore node_modules from cache
         uses: actions/cache@v3
@@ -175,7 +175,7 @@ jobs:
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          DEPLOY_MESSAGE: PR${{ github.event.number }}/${{ env.last_commit_sha }}
+          DEPLOY_MESSAGE: PR${{ github.event.number }}/${{ github.sha }}
 
       - name: Add PR status completed
         uses: teamniteo/pull_request_status_action@v1.0.0
@@ -289,6 +289,8 @@ jobs:
       - name: Find the "merge-base" between target branch and last PR commit
         run: echo "merge_base_sha=$(${{ env.merge_base_cmd }})" >> $GITHUB_ENV
 
+      # Since we assume here that "merge-base" commit is already merged in we can use it's sha
+      # for caching relevant BSR (unlike for the "after" report)
       - name: Restore the merge base bundle size report from cache
         id: bsr-cache-merge-base
         uses: actions/cache@v3
@@ -312,7 +314,9 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
-          restore-keys: ${{ runner.os }}-${{ env.cache_name }}-${{ env.node_version }}-
+          restore-keys: |
+            ${{ runner.os }}-${{ env.cache_name }}-${{ env.node_version }}-
+            ${{ runner.os }}-${{ env.cache_name }}-
 
       - name: Yarn install
         if: steps.bsr-cache-merge-base.outputs.cache-hit != 'true' &&
@@ -331,7 +335,7 @@ jobs:
           path: |
             public
             .cache
-          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-${{ env.key_2 }}-${{ env.last_commit_sha }}
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-${{ env.key_2 }}-${{ env.merge_base_sha }}
           restore-keys: |-
             ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-${{ env.key_2 }}-
             ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-
@@ -396,7 +400,7 @@ jobs:
           path: |
             public
             .cache
-          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-${{ env.key_2 }}-${{ env.last_commit_sha }}
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-${{ env.key_2 }}-${{ github.sha }}
 
       - name: Find the "merge-base" between target branch and last PR commit
         run: echo "merge_base_sha=$(${{ env.merge_base_cmd }})" >> $GITHUB_ENV
@@ -411,14 +415,8 @@ jobs:
           path: bundle-size-report-${{ env.merge_base_sha }}.json
           key: ${{ env.merge_base_sha }}
 
-      - name: Restore the current build bundle size report from cache
-        uses: actions/cache@v3
-        with:
-          path: bundle-size-report-${{ env.last_commit_sha }}.json
-          key: ${{ env.last_commit_sha }}
-
       - name: Bundle Size Report w comparison
-        run: yarn bsr autorun -o bundle-size-report-${{ env.last_commit_sha }}.json --compare-with bundle-size-report-${{ env.merge_base_sha }}.json
+        run: yarn bsr autorun -o bundle-size-report-${{ github.sha }}.json --compare-with bundle-size-report-${{ env.merge_base_sha }}.json
 
       - id: read-bsr-txt-file-content
         name: Read report into the environment variable

@@ -1,7 +1,7 @@
 ---
 title: 'Optimize GitHub Actions for UI Builds and Tests with Cache'
 date: '2021-11-23T10:10:00.000Z'
-tags: ['tech', 'GitHub', 'CI', 'automation', 'GatsbyJs', 'devflow', 'npm']
+tags: ['tech', 'github', 'github actions', 'CI', 'automation', 'GatsbyJs', 'devflow', 'npm']
 coverImage: './gh-action-runs.png'
 description: >-
   How to significantly reduce your GitHub Actions run times with caching.
@@ -120,14 +120,14 @@ _every_ step of the workflow.
 If your workflow has four _jobs_ and each of them requires _node_modules_ folder to operate,
 four minutes will be spent on copying npm dependencies from one local folder to another.
 
-Recommended [`actions/setup-node` action](https://github.com/actions/setup-node) is
+Recommended [`actions/setup-node`](https://github.com/actions/setup-node) action is
 using this approach and lock-file hash as an exact match `key`.
 
 ### Caching node_modules Folder
 
 I tried caching _node_modules_ folder itself.
-With that `yarn install` can be called only once per workflow run - by the initial
-_setup_ job and only when exact cache hit didn't happen.
+With that `yarn install` can be executed only once per workflow run - by the initial
+_setup_ job and only when _exact_ cache hit didn't happen.
 All subsequent jobs (and even workflow runs) will be restoring exact _node_modules_ folder
 from the dependency cache using the _exact_ key match.
 

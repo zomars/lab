@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`site header first preview has all expected elements 1`] = `"Github Actions for Dependabot PRs"`;
+exports[`site header first preview has all expected elements 1`] = `"Invalidate or Clear Github Actions Cache"`;
 
-exports[`site header first preview has all expected elements 2`] = `"Let's learn how to extend existent Pull Request Update GitHub Actions workflow with steps specific for Dependabot pull requests (i.e. labels). We will add two jobs to the existent pull_request workflow and experiment with separate before and after workflow_run event workflows. Fortunately, after the recent GitHub actions update we don't need to use a separate pull_request_target event workflow as a workaround."`;
+exports[`site header first preview has all expected elements 2`] = `"Cache invalidation is one of the most complex computer science tasks. Especially so for GitHub action workflows since there is no embedded mechanism to clean or invalidate present caches. However, what we can do is to update cache keys with a dedicated environment variable of the workflow or repository secret."`;
 
-exports[`site header first preview has all expected elements 3`] = `"Dec 07, 2021"`;
+exports[`site header first preview has all expected elements 3`] = `"May 13, 2022"`;
 
 exports[`site header first preview has all expected elements 4`] = `"4 min read"`;
 
