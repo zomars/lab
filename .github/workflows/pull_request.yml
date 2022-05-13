@@ -177,6 +177,18 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           DEPLOY_MESSAGE: PR${{ github.event.number }}/${{ env.last_commit_sha }}
 
+      - name: Add PR status completed
+        uses: teamniteo/pull_request_status_action@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          repository: ${{ github.repository }}
+          state: success
+          pr_number: ${{ env.pr_id }}
+          context: Staging Website
+          description: Deployed to Netlify
+          target_url: https://pr${{ env.pr_id }}--amlab.netlify.app
+
   e2e-test:
     name: E2E tests
 
