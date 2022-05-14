@@ -139,6 +139,9 @@ jobs:
 
     needs: [lint, build]
 
+    permissions:
+      statuses: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
