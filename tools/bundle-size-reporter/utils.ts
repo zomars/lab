@@ -54,10 +54,6 @@ function getFileName(path: string): string {
   return match[1];
 }
 
-export function toFixedNumber(value: number): number {
-  return +value.toFixed(2);
-}
-
 function getReportAsString(files: IFile[]): string {
   return JSON.stringify({ files }, null, 2);
 }
@@ -89,13 +85,13 @@ export function saveContentToFile(
 async function getFileSizeInKb(filePath: string): Promise<number> {
   const stats = await fsPromises.stat(filePath);
 
-  return toFixedNumber(stats.size / 1024);
+  return Math.round(stats.size / 1024);
 }
 
 async function getFileGzipSizeInKb(filePath: string): Promise<number> {
   const size = await gzipSizeFromFile(filePath);
 
-  return toFixedNumber(size / 1024);
+  return Math.round(size / 1024);
 }
 
 export async function getFilesMetadata(filePaths: string[]): Promise<Partial<IFile>[]> {
@@ -180,7 +176,7 @@ function getSizeInfoString(
   diff = 0,
   dimension = 'KB',
 ): string {
-  let result = `${ toFixedNumber(size) }${ dimension }`;
+  let result = `${ Math.round(size) }${ dimension }`;
 
   if (diff) {
     result += ' (';
@@ -189,7 +185,7 @@ function getSizeInfoString(
       result += '+';
     }
 
-    result += `${ toFixedNumber(diff) }${ dimension })`;
+    result += `${ Math.round(diff) }${ dimension })`;
   }
 
   return result;
@@ -302,9 +298,11 @@ export function printTextReport(
         withComparison ? groupGzipSizeDiff : 0,
       );
 
-      reportLines.push(
-        `Group total: ${ groupSizeInfoMsg } / ${ groupGzipSizeInfoMsg }\n`,
-      );
+      if (filesByGroup[groupId].length > 1) {
+        reportLines.push(
+          `\nGroup total: ${ groupSizeInfoMsg } / ${ groupGzipSizeInfoMsg }\n`,
+        );
+      }
     });
 
   const totalSizeMsg = getSizeInfoString(

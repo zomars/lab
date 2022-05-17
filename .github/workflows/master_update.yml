@@ -1,4 +1,4 @@
-name: master update
+name: Master Update
 
 on:
   push:
@@ -7,7 +7,6 @@ on:
 
 env:
   node_version: 16
-  gh_action_name: master_update
 
 concurrency: master_update
 
@@ -43,88 +42,16 @@ jobs:
         run: yarn install --prefer-offline --frozen-lockfile
 
   build:
-    name: Build
-
-    runs-on: ubuntu-latest
-
-    timeout-minutes: 30
+    name: Production build
 
     needs: setup
 
-    env:
-      staleBuildFilesFindArgs: -maxdepth 1 -type f -regextype posix-egrep -regex ".*\.(json|js|css|map|txt)$"
-
-    steps:
-      - uses: actions/checkout@v3
-        name: Checkout
-
-      - uses: actions/setup-node@v2
-        name: Set nodeJs version
-        with:
-          node-version: ${{ env.node_version }}
-
-      - name: Restore node_modules from cache
-        uses: actions/cache@v3
-        env:
-          cache-name: node-modules-yarn
-          cache-fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
-
-      - name: Cache production build
-        id: prod-build-cache
-        uses: actions/cache@v3
-        env:
-          cache-name: prod-build
-          key-1: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
-          key-2: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
-        with:
-          path: |
-            public
-            .cache
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-${{ github.sha }}
-          restore-keys: |-
-            ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-
-            ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-
-
-      - name: Purge top level & obsolete JS, JSON, HTML and CSS files from build folder
-        if: steps.prod-build-cache.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p public
-          find public ${{ env.staleBuildFilesFindArgs }}
-          find public ${{ env.staleBuildFilesFindArgs }} -delete
-
-      # skipping build on exact cache hit
-      - name: Restore node_modules from cache
-        if: steps.prod-build-cache.outputs.cache-hit != 'true'
-        uses: actions/cache@v3
-        env:
-          cache-name: node-modules-yarn
-          cache-fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
-
-      - name: Gatsby production build
-        if: steps.prod-build-cache.outputs.cache-hit != 'true'
-        run: yarn build
-
-      - name: Print list of top level JS, HTML and CSS files
-        run: find public ${{ env.staleBuildFilesFindArgs }}
-
-      # let's build BSRs for the future comparison
-      # since now we have the real(merged) "sha" and can actually use it for report's caching
-      - name: Bundle size report cache
-        id: bsr-cache
-        uses: actions/cache@v3
-        with:
-          path: bundle-size-report-${{ github.sha }}.json
-          key: ${{ github.sha }}
-
-      - name: Bundle Size Report
-        if: steps.bsr-cache.outputs.cache-hit != 'true'
-        run: yarn bsr autorun -o bundle-size-report-${{ github.sha }}.json
+    uses: ./.github/workflows/production_build.yml
+    with:
+      # since corresponding change is merged now we can create a BSR report cache record by sha
+      bsr_report: true
+    secrets:
+      node_version: ${{ secrets.NODE_VERSION }}
 
   deploy:
     name: Deploy
