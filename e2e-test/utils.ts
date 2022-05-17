@@ -5,6 +5,7 @@ import {
 } from 'playwright';
 
 import { STATE_CHANGE_EVENT } from '../src/constants';
+import { IStateChangeEventDetails } from '../src/types/common.types';
 
 interface IResolvablePromise<T, U = unknown> extends Promise<T> {
   resolve: (payload: T) => void;
@@ -67,9 +68,18 @@ export function bytesToRoundKiloBytes(value: number): number {
   return Math.round(value / 1000);
 }
 
-function waitForSpaNavigationPageFunction(STATE_CHANGE_EVENT: string): Promise<true> {
-  return new Promise((resolve) => {
-    const eventListener = (): void => resolve(true);
+function waitForSpaNavigationPageFunction(STATE_CHANGE_EVENT: string): Promise<string> {
+  let resolved = false;
+
+  return new Promise((resolve, reject) => {
+    const eventListener = (event: Event): void => {
+      if (event instanceof CustomEvent) {
+        resolved = true;
+
+        // eslint-disable-next-line no-extra-parens
+        resolve((event.detail as IStateChangeEventDetails).location.pathname);
+      }
+    };
 
     window.addEventListener(
       STATE_CHANGE_EVENT,
@@ -80,6 +90,10 @@ function waitForSpaNavigationPageFunction(STATE_CHANGE_EVENT: string): Promise<t
     // cleanup in case of timeout or non-event
     setTimeout(() => {
       window.removeEventListener(STATE_CHANGE_EVENT, eventListener);
+
+      if (!resolved) {
+        reject(Error('SPA navigation timeout'));
+      }
     }, 10000);
   });
 }
@@ -88,7 +102,7 @@ function waitForSpaNavigationPageFunction(STATE_CHANGE_EVENT: string): Promise<t
  * Proper wait for SPA application page change event.
  * Requires matching product code triggering event from router to work.
  */
-export function waitForSpaNavigation(page: Page): Promise<true> {
+export function waitForSpaNavigation(page: Page): Promise<string> {
   // can't pass string constant by reference cause function is executed in the browser context
   return page.evaluate(waitForSpaNavigationPageFunction, STATE_CHANGE_EVENT);
 }
@@ -97,5 +111,8 @@ export function waitForSpaNavigation(page: Page): Promise<true> {
  * Resolves the promise with Page object of the new page once SPA navigation happened.
  */
 export function waitForSpaNavigationInNewTab(context: BrowserContext): Promise<Page> {
-  return context.waitForEvent('page', waitForSpaNavigation);
+  return context.waitForEvent(
+    'page',
+    page => waitForSpaNavigation(page).then(() => true),
+  );
 }

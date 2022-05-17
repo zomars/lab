@@ -8,6 +8,7 @@
     "strictNullChecks": false,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "types": [
       "@types/jest",
       "jest-playwright-preset",

@@ -40,12 +40,8 @@ const localGlobal = global as IGlobal & typeof globalThis;
 
 const { url } = localGlobal;
 
-describe('basics', () => {
+describe('performance', () => {
   let cdpSession: CDPSession;
-
-  beforeAll(() => {
-    jest.retryTimes(3);
-  });
 
   beforeEach(async () => {
     await jestPlaywright.resetContext();
@@ -171,7 +167,7 @@ describe('basics', () => {
 
       expect(report.totalEncodedSize).toBeLessThanOrEqual(300);
       expect(report.totalDecodedSize).toBeLessThanOrEqual(750);
-      expect(report.totalLoadDuration).toBeLessThanOrEqual(1200);
+      expect(report.totalLoadDuration).toBeLessThanOrEqual(1500);
 
       const { groups: fileGroups } = report;
 
@@ -214,7 +210,7 @@ describe('basics', () => {
       expect(report.totalRequests).toBeLessThanOrEqual(30);
       expect(report.totalEncodedSize).toBeLessThanOrEqual(500);
       expect(report.totalDecodedSize).toBeLessThanOrEqual(1200);
-      expect(report.totalLoadDuration).toBeLessThanOrEqual(1300);
+      expect(report.totalLoadDuration).toBeLessThanOrEqual(1500);
 
       const { groups } = report;
 
@@ -294,7 +290,7 @@ describe('basics', () => {
 
       expect(report.totalEncodedSize).toBeLessThanOrEqual(500);
       expect(report.totalDecodedSize).toBeLessThanOrEqual(1200);
-      expect(report.totalLoadDuration).toBeLessThanOrEqual(1300);
+      expect(report.totalLoadDuration).toBeLessThanOrEqual(1800);
 
       const { groups } = report;
 

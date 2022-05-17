@@ -124,7 +124,7 @@ jobs:
 
       - name: Bundle Size Report
         if: steps.bsr-cache.outputs.cache-hit != 'true'
-        run: yarn bsr analyze -o bundle-size-report-${{ github.sha }}.json
+        run: yarn bsr autorun -o bundle-size-report-${{ github.sha }}.json
 
   deploy:
     name: Deploy

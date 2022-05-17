@@ -1,3 +1,4 @@
+import { WindowLocation } from '@reach/router';
 import { Node } from 'gatsby';
 import { ReactNode } from 'react';
 import { ImageDataLike } from 'gatsby-plugin-image';
@@ -63,4 +64,8 @@ export interface IPostTagsMappingQResponse {
   uniqueTags: {
     tags: IUniquePostTag[],
   },
+}
+
+export interface IStateChangeEventDetails {
+  location: WindowLocation,
 }

@@ -18,12 +18,9 @@ function useLocationChange(): void {
 
   useEffect(() => {
     if (window) {
-      const event = new CustomEvent(STATE_CHANGE_EVENT);
+      const event = new CustomEvent(STATE_CHANGE_EVENT, { detail: { location } });
 
-      // what we actually want is componentDidMount after all the children got rendered
-      setTimeout(() => {
-        window.dispatchEvent(event);
-      }, 0);
+      window.dispatchEvent(event);
     }
   }, [location]);
 }

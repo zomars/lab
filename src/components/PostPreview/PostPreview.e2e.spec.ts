@@ -1,4 +1,3 @@
-import { Page } from 'playwright';
 import { IGlobal } from '../../../e2e-test/e2e.types';
 import { waitForSpaNavigation } from '../../../e2e-test/utils';
 import { PostPreview } from './PostPreview.e2e';
@@ -13,7 +12,9 @@ describe('site header', () => {
 
     context.setDefaultTimeout(localGlobal.defaultTimeout);
 
-    await page.goto(`${ localGlobal.url }/tags/${ activeTag }/1`);
+    await page.goto(`${ localGlobal.url }/tags/${ activeTag }/1`, { waitUntil: 'commit' });
+
+    await waitForSpaNavigation(page);
   });
 
   it('first preview has all expected elements', async () => {
@@ -50,12 +51,10 @@ describe('site header', () => {
     it('works on image', async () => {
       const $image = await postPreview.getImage();
 
-      await Promise.all([
+      const [, urlPath] = await Promise.all([
         $image.click(),
-        waitForSpaNavigation(page as Page),
+        waitForSpaNavigation(page),
       ]);
-
-      const { pathname: urlPath } = new URL(page.url());
 
       await expect(urlPath).toMatchSnapshot();
     });
@@ -63,12 +62,10 @@ describe('site header', () => {
     it('works on title', async () => {
       const $title = await postPreview.getTitle();
 
-      await Promise.all([
+      const [, urlPath] = await Promise.all([
         $title.click(),
-        waitForSpaNavigation(page as Page),
+        waitForSpaNavigation(page),
       ]);
-
-      const { pathname: urlPath } = new URL(page.url());
 
       await expect(urlPath).toMatchSnapshot();
     });
@@ -78,7 +75,7 @@ describe('site header', () => {
 
       await Promise.all([
         $excerpt.click(),
-        waitForSpaNavigation(page as Page),
+        waitForSpaNavigation(page),
       ]);
 
       const { pathname: urlPath } = new URL(page.url());
