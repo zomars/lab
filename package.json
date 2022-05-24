@@ -76,7 +76,7 @@
     "netlify-cli": "^10.3.1",
     "playwright": "^1.22.0",
     "playwright-chromium": "^1.22.0",
-    "playwright-core": "^1.20.2",
+    "playwright-core": "^1.22.2",
     "rxjs": "^7.5.5",
     "sass": "^1.51.0",
     "stylelint": "^14.8.2",
