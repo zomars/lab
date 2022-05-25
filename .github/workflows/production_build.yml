@@ -3,7 +3,7 @@ name: Production Build
 on:
   workflow_call:
     inputs:
-      build_bsr:
+      with_bsr:
         required: false
         type: boolean
         default: false
@@ -78,7 +78,7 @@ jobs:
         run: find public ${{ env.staleBuildFilesFindArgs }}
 
       - name: Bundle size report cache
-        if: inputs.bsr_report == true
+        if: inputs.with_bsr == true
         id: bsr-cache
         uses: actions/cache@v3
         with:
@@ -86,5 +86,5 @@ jobs:
           key: ${{ secrets.node_version }}-${{ github.sha }}
 
       - name: Bundle Size Report
-        if: inputs.bsr_report == true && steps.bsr-cache.outputs.cache-hit != 'true'
+        if: inputs.with_bsr == true && steps.bsr-cache.outputs.cache-hit != 'true'
         run: yarn bsr autorun -o bundle-size-report-${{ github.sha }}.json

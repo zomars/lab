@@ -49,7 +49,7 @@ jobs:
     uses: ./.github/workflows/production_build.yml
     with:
       # since corresponding change is merged now we can create a BSR report cache record by sha
-      bsr_report: true
+      with_bsr: true
     secrets:
       node_version: ${{ secrets.NODE_VERSION }}
 
