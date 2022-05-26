@@ -3,3 +3,8 @@
   overflow: hidden;
   border-radius: var(--aml-radii-default);
 }
+
+// hide huge gatsby development refresh icon
+gatsby-qod {
+  display: none;
+}

@@ -1,4 +1,3 @@
-import path from 'path';
 import { ProvidePlugin } from 'webpack';
 
 import {
@@ -91,13 +90,13 @@ export async function createPages(hookArgs: CreatePagesArgs): Promise<void> {
 export function onCreateNode(
   { node, actions, getNode }: CreateNodeArgs
 ): void {
+  const { createNodeField } = actions;
+
   if (
     node.internal.type === 'Mdx' ||
     node.ext === '.md' ||
     node.ext === '.mdx'
   ) {
-    const { createNodeField } = actions;
-
     let path = createFilePath({
       node,
       getNode,
@@ -125,22 +124,41 @@ export function onCreateNode(
  * replace with the first page of tech posts list.
  */
 export function onCreatePage(args: CreatePageArgs): void {
+  const { deletePage, createPage } = args.actions;
+
   const { page } = args;
 
   if (page.path === '/') {
-    const { deletePage } = args.actions;
-
-    const indexPageComponentPath = path.resolve(
-      './src/pages/index.tsx',
-    );
-
     deletePage({
       path: '/',
-      component: indexPageComponentPath,
+      component: page.component,
     });
 
     createIndexPage(args);
+
+    return;
   }
+
+  let { path } = page;
+
+  const folders = path.split('/');
+  const { length } = folders;
+
+  // strip away duplicated component/folder names for static pages
+  if (length > 2 && folders[length - 2] === folders[length - 3]) {
+    path = `${ folders.slice(0, -2).join('/') }/`;
+  }
+
+  deletePage({
+    path: page.path,
+    component: page.component,
+  });
+
+  createPage({
+    path,
+    component: page.component,
+    context: {},
+  });
 }
 
 /**

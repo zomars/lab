@@ -13,7 +13,7 @@ import css from 'react-syntax-highlighter/dist/esm/languages/prism/css';
 import { IReactNodeProps } from '../../types/common.types';
 
 import './CodeSnippet.scss';
-import { CodeSnippetCopyButton } from './CodeSnippetCopyButton/CodeSnippetCopyButton';
+import { CopyToBufferButton } from '../CopyToBufferButton/CopyToBufferButton';
 
 // https://github.com/react-syntax-highlighter/react-syntax-highlighter/
 // blob/master/AVAILABLE_LANGUAGES_PRISM.MD
@@ -45,8 +45,10 @@ export function CodeSnippet(props: ICodeSnippetProps): ReactElement {
     <div
       className = { cnCodeSnippet()}
     >
-      <CodeSnippetCopyButton
-        codeText = { codeText }
+      <CopyToBufferButton
+        alertMessage = 'Code snippet copied'
+        textToCopy = { codeText }
+        size = 'small'
         className = { cnCodeSnippet('CopyButton') }
       />
 

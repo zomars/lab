@@ -1,0 +1,12 @@
+.NumberSpeller {
+  &-CopyBtn {
+    margin-top: var(--aml-font-size-2);
+  }
+
+  &-Input, &-Output {
+    .MuiInputBase-input {
+      font-size: var(--aml-font-size-6);
+      line-height: var(--aml-line-height-normal);
+    }
+  }
+}

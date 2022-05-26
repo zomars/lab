@@ -82,6 +82,7 @@ const tsEslintRules = {
   '@typescript-eslint/semi': ERROR,
   '@typescript-eslint/prefer-for-of': ERROR,
   '@typescript-eslint/comma-dangle': [ERROR, 'always-multiline'],
+  '@typescript-eslint/member-delimiter-style': WARN,
 };
 
 const e2eTestOverrides = {
