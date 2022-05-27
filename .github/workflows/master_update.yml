@@ -78,8 +78,8 @@ jobs:
         uses: actions/cache@v3
         env:
           cache-name: prod-build
-          key-1: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
-          key-2: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+          key-1: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+          key-2: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
         with:
           path: |
             public
