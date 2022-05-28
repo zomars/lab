@@ -31,7 +31,7 @@ function NumberSpellerPage(props: PageRendererProps): ReactElement {
         keywords = { keywords }
       />
 
-      <h2>Spell the Number</h2>
+      <h2>Spell a Number</h2>
 
       <p>
         Spells
