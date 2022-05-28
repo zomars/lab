@@ -9,3 +9,11 @@
 [[redirects]]
   from = "/tags/tech/"
   to = "/tags/tech/1/"
+
+[[redirects]]
+  from = "http://en.icode.ru/"
+  to = "/projects/number-speller/"
+
+[[redirects]]
+  from = "https://en.icode.ru/"
+  to = "/projects/number-speller/"
