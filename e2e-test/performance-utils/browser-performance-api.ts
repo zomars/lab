@@ -89,6 +89,7 @@ export function getPerfResourceTiming(): Promise<PerformanceResourceTiming[]> {
       resources.map(resource => resource.toJSON()),
     );
 
+    // eslint-disable-next-line no-use-before-define
     observer.disconnect();
   }
 

@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { graphql, PageRendererProps } from 'gatsby';
+import { graphql } from 'gatsby';
 import { Layout } from '../components/Layout';
 import { Seo } from '../components/Seo/Seo';
 
@@ -13,7 +13,7 @@ export const pageQuery = graphql`
   }
 `;
 
-function NotFoundPage(props: PageRendererProps): ReactElement {
+function NotFoundPage(): ReactElement {
   return (
     <Layout>
       <Seo title = '404: Not Found'/>

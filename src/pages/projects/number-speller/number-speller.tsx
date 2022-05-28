@@ -1,4 +1,3 @@
-import { PageRendererProps } from 'gatsby';
 import React, { ReactElement } from 'react';
 import { cn } from '@bem-react/classname';
 import { Tooltip } from '@mui/material';
@@ -20,7 +19,7 @@ const keywords = [
   'service',
 ];
 
-function NumberSpellerPage(props: PageRendererProps): ReactElement {
+function NumberSpellerPage(): ReactElement {
   return (
     <Layout
       data-testid = { cnNumberSpellerPage() }
@@ -35,9 +34,7 @@ function NumberSpellerPage(props: PageRendererProps): ReactElement {
 
       <p>
         Spells
-        out <Tooltip
-          title = "See details below"
-        >
+        out <Tooltip title = "See details below">
           <i>any</i>
         </Tooltip> number in plain English.
         Particularly useful for legal documents.
@@ -56,13 +53,13 @@ function NumberSpellerPage(props: PageRendererProps): ReactElement {
         <li>Spaces are ok</li>
         <li>
           Conversion algorithm is
-          hosted on <a href="https://github.com/amalitsky/number-speller">Github</a> and
+          hosted on <a href = "https://github.com/amalitsky/number-speller">Github</a> and
           is available
-          as <a href="https://www.npmjs.com/package/number-speller">number-speller</a> NPM package
+          as <a href = "https://www.npmjs.com/package/number-speller">number-speller</a> NPM package
         </li>
         <li>
-          Please let me know if you would prefer hyphens for numbers between
-          <i>twenty-one</i> and <i>ninety-nine</i>
+          Please let me know if you would prefer hyphens for numbers
+          between <i>twenty-one</i> and <i>ninety-nine</i>
         </li>
       </ul>
     </Layout>

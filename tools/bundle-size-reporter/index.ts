@@ -12,6 +12,7 @@ const commands: Array<(yargs: Argv) => Argv> = [
   (yargs): Argv => yargs.strictCommands().demandCommand(1),
 ];
 
+// eslint-disable-next-line no-unused-expressions
 commands.reduce(
   (all, current) => current(all), yargs(hideBin(process.argv))
 ).argv;

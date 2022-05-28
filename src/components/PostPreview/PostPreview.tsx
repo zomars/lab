@@ -88,8 +88,7 @@ export function PostPreview(props: {
       data-testid = {
         classnames(
           cnPostPreview({ withImage: !!coverImage }),
-          testId,
-        )
+          testId)
       }
     >
       <h3 className = { cnPostPreview('Header') }>

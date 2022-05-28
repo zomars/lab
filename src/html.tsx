@@ -20,7 +20,7 @@ const fontPaths = [
 ];
 
 const fontLinks =
-  <>
+  (<>
     <link
       rel = 'preconnect'
       href = { googleApiHostname }
@@ -29,7 +29,7 @@ const fontLinks =
     { fontPaths.map((fontPath) => {
       const fontUrl = `${ googleApiHostname }/${ fontPath }`;
 
-      return <>
+      return (<>
         <link
           rel = 'preload'
           as = 'style'
@@ -50,9 +50,9 @@ const fontLinks =
             href = { fontUrl }
           />
         </noscript>
-      </>;
+      </>);
     })}
-  </>;
+  </>);
 
 function HTML(props: IHTMLPageProps): ReactElement {
   return (
@@ -79,12 +79,12 @@ function HTML(props: IHTMLPageProps): ReactElement {
         { props.preBodyComponents }
 
         <div
-          style = { {
+          style = {{
             flexGrow: 1,
-          } }
+          }}
           key = 'body'
           id = '___gatsby'
-          dangerouslySetInnerHTML = { { __html: props.body } }
+          dangerouslySetInnerHTML = {{ __html: props.body }}
         />
 
         { props.postBodyComponents }

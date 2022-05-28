@@ -32,8 +32,13 @@ export function About(props: PageRendererProps): ReactElement {
       <p>
         <a href = "https://github.com/statoscope/statoscope">Statoscope</a> -
         amazing tool for analyzing application bundle.
-        With extensive linting abilities.&nbsp;
-        <a href = "https://github.com/statoscope/statoscope/pulls?q=is%3Apr+author%3Aamalitsky+">My contributions</a>.
+        With extensive linting abilities.
+        { ' ' }
+        <a
+          href = "https://github.com/statoscope/statoscope/pulls?q=is%3Apr+author%3Aamalitsky+"
+        >
+          My contributions
+        </a>.
       </p>
     </Layout>
   );

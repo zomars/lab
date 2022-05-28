@@ -54,7 +54,6 @@ export function BlogPostPaginatorLink(props: IBlogPostPaginatorLinkProps): React
       }
     >
       <Link
-
         to = { slug }
         state = { postLinkPayload }
         rel = { type }

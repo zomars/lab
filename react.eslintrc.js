@@ -1,4 +1,5 @@
 const OFF = 0;
+const WARN = 1;
 const ERROR = 2;
 
 const ALWAYS = 'always';
@@ -54,7 +55,7 @@ const reactRules = {
   ],
   'react/jsx-max-props-per-line': ERROR,
   'react/jsx-no-bind': [
-    ERROR, {
+    WARN, {
       allowArrowFunctions: true,
     },
   ],
@@ -81,5 +82,5 @@ const reactRules = {
 };
 
 module.exports = {
-  rule: reactRules,
+  rules: reactRules,
 };

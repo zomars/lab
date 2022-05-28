@@ -58,15 +58,6 @@ function getReportAsString(files: IFile[]): string {
   return JSON.stringify({ files }, null, 2);
 }
 
-export function saveReportToFile(
-  files: IFile[],
-  path: string,
-): Promise<void> {
-  const reportStr = getReportAsString(files);
-
-  return saveContentToFile(reportStr, path);
-}
-
 export function saveContentToFile(
   content: string,
   path: string,
@@ -80,6 +71,15 @@ export function saveContentToFile(
       resolve();
     });
   });
+}
+
+export function saveReportToFile(
+  files: IFile[],
+  path: string,
+): Promise<void> {
+  const reportStr = getReportAsString(files);
+
+  return saveContentToFile(reportStr, path);
 }
 
 async function getFileSizeInKb(filePath: string): Promise<number> {

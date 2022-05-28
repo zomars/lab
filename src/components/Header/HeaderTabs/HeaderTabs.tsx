@@ -136,6 +136,7 @@ function getSelectedTabPath(
       // first match will get highlighted in the header
       if (tag && postsPerTag.has(tag)) {
         const postPaths =
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           postsPerTag.get(tag)!
             .map(({ fields: { slug } }) => slug);
 

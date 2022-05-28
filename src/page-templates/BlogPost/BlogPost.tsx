@@ -159,7 +159,9 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
             <MDXProvider
               components = { mdxComponents }
             >
-              <MDXRenderer>{ post.body! }</MDXRenderer>
+              <MDXRenderer>{
+                post.body! // eslint-disable-line @typescript-eslint/no-non-null-assertion
+              }</MDXRenderer>
             </MDXProvider>
           </section>
         </article>

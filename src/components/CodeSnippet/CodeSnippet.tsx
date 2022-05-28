@@ -43,7 +43,7 @@ export function CodeSnippet(props: ICodeSnippetProps): ReactElement {
 
   return (
     <div
-      className = { cnCodeSnippet()}
+      className = { cnCodeSnippet() }
     >
       <CopyToBufferButton
         alertMessage = 'Code snippet copied'
@@ -61,7 +61,7 @@ export function CodeSnippet(props: ICodeSnippetProps): ReactElement {
       </SyntaxHighlighter>
 
       <div
-        className = { cnCodeSnippet('Summary')}
+        className = { cnCodeSnippet('Summary') }
       >
         <Chip
           label = { fileName || language }

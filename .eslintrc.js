@@ -24,7 +24,7 @@ const defaultsOverrides = {
   indent: OFF, // in favor of @typescript-eslint/indent
   camelcase: OFF, // in favor of @typescript-eslint/naming-convention
   'require-jsdoc': [
-    WARN,
+    OFF,
     {
       require: {
         FunctionDeclaration: true,
@@ -83,6 +83,7 @@ const tsEslintRules = {
   '@typescript-eslint/prefer-for-of': ERROR,
   '@typescript-eslint/comma-dangle': [ERROR, 'always-multiline'],
   '@typescript-eslint/member-delimiter-style': ERROR,
+  '@typescript-eslint/no-unused-vars': ERROR,
 };
 
 const e2eTestOverrides = {
