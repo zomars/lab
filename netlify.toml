@@ -11,6 +11,7 @@
   to = "/tags/tech/1/"
 
 [[redirects]]
+  force = true
   from = "http://en.icode.ru/"
   to = "https://lab.amalitsky.com/projects/number-speller/"
 
@@ -19,6 +20,7 @@
   to = "https://lab.amalitsky.com/projects/number-speller/"
 
 [[redirects]]
+  force = true
   from = "https://en.icode.ru/"
   to = "https://lab.amalitsky.com/projects/number-speller/"
 
