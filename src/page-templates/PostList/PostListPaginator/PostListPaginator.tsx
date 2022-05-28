@@ -15,10 +15,10 @@ import './PostListPaginator.scss';
 const cnPostListPaginator = cn('PostListPaginator');
 
 export function PostListPaginator(props: {
-  current: number,
-  length: number,
-  tag: string,
-  className?: string,
+  current: number;
+  length: number;
+  tag: string;
+  className?: string;
 }): ReactElement {
   const { current, length, tag } = props;
 

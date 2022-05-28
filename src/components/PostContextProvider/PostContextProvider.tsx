@@ -38,7 +38,7 @@ function computeContextValue(
  * Populate postsContext with data.
  */
 export function PostContextProvider(
-  { data, children }: { data: IPostTagsMappingQResponse, children: ReactElement },
+  { data, children }: { data: IPostTagsMappingQResponse; children: ReactElement },
 ): ReactElement {
   const { posts } = data.allPosts;
   const { tags } = data.uniqueTags;

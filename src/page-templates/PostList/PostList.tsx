@@ -53,14 +53,14 @@ export const postsQuery = graphql`
 
 interface IGqlResponse {
   onePagePosts: {
-    posts: IBlogPost[],
-    totalCount: number,
-  },
+    posts: IBlogPost[];
+    totalCount: number;
+  };
 }
 
 interface IPostListPageContext {
-  tag: string,
-  currentPage: number,
+  tag: string;
+  currentPage: number;
 }
 
 interface IPostListProps extends PageRendererProps {

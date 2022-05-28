@@ -7,9 +7,9 @@ import './Layout.scss';
 const cnLayout = cn('Layout');
 
 interface ILayoutProps {
-  className?: string,
-  testId?: string,
-  children: ReactNode,
+  className?: string;
+  testId?: string;
+  children: ReactNode;
 }
 
 export function Layout(props: ILayoutProps): ReactElement {

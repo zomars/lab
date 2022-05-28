@@ -46,8 +46,8 @@ export const postTagsQuery = /* GraphQL */ `
 
 interface IPostTagsQueryResponse {
   uniqueTags: {
-    tags: IUniquePostTag[],
-  }
+    tags: IUniquePostTag[];
+  };
 }
 
 function parseUniqueTagsResponse(

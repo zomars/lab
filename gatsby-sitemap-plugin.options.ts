@@ -27,25 +27,25 @@ const siteMapQuery = `{
 }`;
 
 interface ISitePage {
-  path: string,
+  path: string;
   context?: {
-    updated?: string, // for now used for post list pages only
-  }
+    updated?: string; // for now used for post list pages only
+  };
 }
 
 interface IPostPage {
   fields: {
-    path: string,
-  },
+    path: string;
+  };
   frontmatter: {
-    date: string,
-    updated?: string,
-  },
+    date: string;
+    updated?: string;
+  };
 }
 
 interface ISitePageMeta {
-  path: string,
-  updated?: string,
+  path: string;
+  updated?: string;
 }
 
 /**
@@ -57,8 +57,8 @@ function resolvePages({
   allPages: { nodes: allPages },
   allPosts: { nodes: allPosts },
 }: {
-  allPages: { nodes: ISitePage[] },
-  allPosts: { nodes: IPostPage[] },
+  allPages: { nodes: ISitePage[] };
+  allPosts: { nodes: IPostPage[] };
 }): ISitePageMeta[] {
   const slugMap = new Set<string>();
 

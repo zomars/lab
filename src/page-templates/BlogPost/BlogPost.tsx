@@ -73,11 +73,11 @@ const mdxComponents = {
 };
 
 interface IGqlResponse {
-  post: IBlogPost,
+  post: IBlogPost;
 }
 
 interface IBlogPostTemplateProps extends PageRendererProps {
-  data: IGqlResponse,
+  data: IGqlResponse;
 }
 
 export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {

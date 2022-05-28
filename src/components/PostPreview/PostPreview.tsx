@@ -38,10 +38,10 @@ function getDetailsString(post: IBlogPost): string {
 }
 
 export function PostPreview(props: {
-  className?: string,
-  testId?: string,
-  post: IBlogPost,
-  tag: string,
+  className?: string;
+  testId?: string;
+  post: IBlogPost;
+  tag: string;
 }): ReactElement {
   const {
     post,

@@ -4,12 +4,12 @@ import React, {
 } from 'react';
 
 interface IHTMLPageProps {
-  htmlAttributes: HTMLAttributes<any>,
-  headComponents: ReactElement[],
-  bodyAttributes: HTMLAttributes<any>,
-  preBodyComponents: ReactElement[],
-  body: string,
-  postBodyComponents: ReactElement[],
+  htmlAttributes: HTMLAttributes<any>;
+  headComponents: ReactElement[];
+  bodyAttributes: HTMLAttributes<any>;
+  preBodyComponents: ReactElement[];
+  body: string;
+  postBodyComponents: ReactElement[];
 }
 
 const googleApiHostname = 'https://fonts.googleapis.com';

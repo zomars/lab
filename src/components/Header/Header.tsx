@@ -28,7 +28,7 @@ import { HeaderTabs } from './HeaderTabs/HeaderTabs';
 const cnHeader = cn('Header');
 
 interface IHeaderProps extends PageRendererProps {
-  className?: string,
+  className?: string;
 }
 
 /**

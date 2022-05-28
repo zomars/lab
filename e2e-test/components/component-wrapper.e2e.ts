@@ -8,19 +8,19 @@ export interface IElementHandleWaitForSelectorOptions {
 }
 
 export interface IComponentWrapperArgs {
-  hostSelector: string,
-  nthOfType?: number, // to find the nth element within the 'scope'
-  hostElement?: ElementHandle<HTMLElement>, // can be passed as a ref
-  scopeElement?: ElementHandle<HTMLElement> | string,
-  waitForSelectorOptions?: IElementHandleWaitForSelectorOptions,
+  hostSelector: string;
+  nthOfType?: number; // to find the nth element within the 'scope'
+  hostElement?: ElementHandle<HTMLElement>; // can be passed as a ref
+  scopeElement?: ElementHandle<HTMLElement> | string;
+  waitForSelectorOptions?: IElementHandleWaitForSelectorOptions;
 }
 
 interface ISetHostElementArgs {
-  scopeElement: ElementHandle<HTMLElement>,
-  hostSelector?: string,
-  nthOfType?: number,
-  waitForSelectorOptions?: IElementHandleWaitForSelectorOptions,
-  hostElement?: ElementHandle<HTMLElement>,
+  scopeElement: ElementHandle<HTMLElement>;
+  hostSelector?: string;
+  nthOfType?: number;
+  waitForSelectorOptions?: IElementHandleWaitForSelectorOptions;
+  hostElement?: ElementHandle<HTMLElement>;
 }
 
 // @todo wrap child components automatically

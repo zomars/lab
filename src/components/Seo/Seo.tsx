@@ -31,13 +31,13 @@ interface IHelmetMetaTag {
 }
 
 interface ISeoProps {
-  title?: string,
-  description?: string,
-  meta?: IHelmetMetaTag[],
-  keywords?: string[],
-  pathname?: string,
-  image?: { src: string },
-  lang?: string,
+  title?: string;
+  description?: string;
+  meta?: IHelmetMetaTag[];
+  keywords?: string[];
+  pathname?: string;
+  image?: { src: string };
+  lang?: string;
 }
 
 export function Seo(props: ISeoProps): ReactElement {

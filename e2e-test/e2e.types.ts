@@ -19,10 +19,10 @@ export type TMimeTypeFileGroup =
   'html' | 'css' | 'js' | 'json' | 'image' | 'font' | 'other' | 'total';
 
 export interface IEmulateNetworkConditionsParameters {
-  downloadThroughput: number,
-  uploadThroughput: number,
-  latency: number,
-  offline: boolean,
+  downloadThroughput: number;
+  uploadThroughput: number;
+  latency: number;
+  offline: boolean;
 }
 
 type TGlobal = typeof global;
@@ -38,24 +38,24 @@ export interface IGlobal extends TGlobal {
 }
 
 export interface INetworkRequest {
-  dataLength: number, // dataReceived
-  encodedDataLength: number, // loadingFinished
-  mimeType: string,
-  requestStart: number,
-  responseFinish: number,
-  requestId: string,
-  wallTime: number,
-  url: string,
+  dataLength: number; // dataReceived
+  encodedDataLength: number; // loadingFinished
+  mimeType: string;
+  requestStart: number;
+  responseFinish: number;
+  requestId: string;
+  wallTime: number;
+  url: string;
 }
 
 export interface INetworkRequestEvent {
-  type: ECDPNetworkEvents,
-  payload: Partial<INetworkRequest>,
+  type: ECDPNetworkEvents;
+  payload: Partial<INetworkRequest>;
 }
 
 export interface ICDPNetworkEvent<T extends ECDPNetworkEventsKeys = ECDPNetworkEventsKeys> {
-  type: ECDPNetworkEvents,
-  payload: TCDPNetworkEvents[T],
+  type: ECDPNetworkEvents;
+  payload: TCDPNetworkEvents[T];
 }
 
 export function isNetworkRequestWillBeSentEvent(

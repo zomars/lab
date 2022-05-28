@@ -4,8 +4,8 @@ import { cn } from '@bem-react/classname';
 import './VideoPlayer.scss';
 
 interface IVideoPlayerProps {
-  src: string,
-  title?: string,
+  src: string;
+  title?: string;
 }
 
 const allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';

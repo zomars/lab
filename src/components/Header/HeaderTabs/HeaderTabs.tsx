@@ -150,10 +150,10 @@ function getSelectedTabPath(
 }
 
 interface IHeaderTabsProps {
-  activePath: string,
-  onTabSelection: (selectedPath: string) => void,
-  activeTabOnly?: boolean,
-  vertical?: boolean,
+  activePath: string;
+  onTabSelection: (selectedPath: string) => void;
+  activeTabOnly?: boolean;
+  vertical?: boolean;
 }
 
 /**

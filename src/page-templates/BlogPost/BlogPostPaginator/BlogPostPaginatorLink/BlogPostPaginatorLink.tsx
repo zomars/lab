@@ -10,10 +10,10 @@ export enum AdjacentPostType {
 }
 
 interface IBlogPostPaginatorLinkProps {
-  type: AdjacentPostType,
-  title: string,
-  tag: string,
-  slug: string,
+  type: AdjacentPostType;
+  title: string;
+  tag: string;
+  slug: string;
 }
 
 const arrows = {

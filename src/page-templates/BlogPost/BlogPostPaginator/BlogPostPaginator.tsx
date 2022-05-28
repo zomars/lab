@@ -13,8 +13,8 @@ import './BlogPostPaginator.scss';
 const cnBlogPostPaginator = cn('BlogPostPaginator');
 
 interface IBlogPostPaginatorProps {
-  post: IBlogPost,
-  tag: string,
+  post: IBlogPost;
+  tag: string;
 }
 
 /**

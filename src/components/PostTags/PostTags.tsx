@@ -10,9 +10,9 @@ import './PostTags.scss';
 const cnPostTags = cn('PostTags');
 
 interface IPostTagsProps {
-  tags: string[],
-  activeTag?: string,
-  noLinkForActiveTag?: boolean,
+  tags: string[];
+  activeTag?: string;
+  noLinkForActiveTag?: boolean;
 }
 
 function getTagElement(

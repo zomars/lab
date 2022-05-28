@@ -2,9 +2,9 @@ type TResourceTiming = Pick<PerformanceNavigationTiming,
 'transferSize' | 'encodedBodySize' | 'decodedBodySize'>;
 
 export interface IPerfNavTiming extends TResourceTiming {
-  jsSyncBootstrap: number,
-  domContentLoaded: number,
-  loaded: number,
+  jsSyncBootstrap: number;
+  domContentLoaded: number;
+  loaded: number;
 }
 
 /**

@@ -10,7 +10,7 @@ import './MDXHeader.scss';
 type THeaderTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 interface IMDXHeaderProps extends IReactNodeProps {
-  children: string, // text content of the header
+  children: string; // text content of the header
 }
 
 // have to use factory since MDX doesn't pass header level as prop

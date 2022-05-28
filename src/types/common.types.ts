@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 import { ImageDataLike } from 'gatsby-plugin-image';
 
 export interface INodeFields {
-  [key: string]: unknown,
+  [key: string]: unknown;
 }
 
 interface INode extends Node {
@@ -12,26 +12,26 @@ interface INode extends Node {
 }
 
 interface IBlogPostFrontmatter {
-  title: string,
-  date: string,
-  tags: string[],
+  title: string;
+  date: string;
+  tags: string[];
   coverImage?: {
-    childImageSharp: ImageDataLike,
-  },
-  published?: boolean,
-  updated?: string,
-  summary?: string & ReactNode,
-  description: string,
+    childImageSharp: ImageDataLike;
+  };
+  published?: boolean;
+  updated?: string;
+  summary?: string & ReactNode;
+  description: string;
 }
 
 interface IReadingTime {
-  text: string,
-  words: number,
+  text: string;
+  words: number;
 }
 
 interface IBlogPostFields extends INodeFields {
-  slug: string,
-  readingTime: IReadingTime,
+  slug: string;
+  readingTime: IReadingTime;
 }
 
 export interface IBlogPost extends INode {
@@ -59,13 +59,13 @@ export interface IReactNodeProps {
 
 export interface IPostTagsMappingQResponse {
   allPosts: {
-    posts: IBlogPost[],
-  },
+    posts: IBlogPost[];
+  };
   uniqueTags: {
-    tags: IUniquePostTag[],
-  },
+    tags: IUniquePostTag[];
+  };
 }
 
 export interface IStateChangeEventDetails {
-  location: WindowLocation,
+  location: WindowLocation;
 }
