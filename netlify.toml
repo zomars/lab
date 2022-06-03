@@ -16,12 +16,20 @@
   to = "https://lab.amalitsky.com/projects/number-speller/"
 
 [[redirects]]
+  from = "http://en.icode.ru/backdoor.html"
+  to = "https://lab.amalitsky.com/projects/number-speller/"
+
+[[redirects]]
   from = "http://en.icode.ru/backdoor/"
   to = "https://lab.amalitsky.com/projects/number-speller/"
 
 [[redirects]]
   force = true
   from = "https://en.icode.ru/"
+  to = "https://lab.amalitsky.com/projects/number-speller/"
+
+[[redirects]]
+  from = "https://en.icode.ru/backdoor.html"
   to = "https://lab.amalitsky.com/projects/number-speller/"
 
 [[redirects]]
