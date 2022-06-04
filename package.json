@@ -58,7 +58,7 @@
     "babel-preset-gatsby": "2.x.x",
     "cross-env": "^7.0.3",
     "css-property-sort-order-smacss": "^2.2.0",
-    "eslint": "^8.16.0",
+    "eslint": "^8.17.0",
     "eslint-config-google": "0.x.x",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^26.4.6",
