@@ -12,3 +12,6 @@ updates:
       - "dependencies"
       - "dependabot"
     open-pull-requests-limit: 7
+    ignore:
+      - dependency-name: "gzip-size"
+        update-types: [ "version-update:semver-major" ]
