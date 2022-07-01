@@ -75,7 +75,7 @@
     "jest-playwright-preset": "^1.7.2",
     "lighthouse": "^9.6.3",
     "lint-staged": "^13.0.3",
-    "netlify-cli": "^10.6.3",
+    "netlify-cli": "^10.7.0",
     "playwright": "^1.23.0",
     "playwright-chromium": "^1.23.0",
     "playwright-core": "^1.22.2",
