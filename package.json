@@ -59,6 +59,7 @@
     "cross-env": "^7.0.3",
     "css-property-sort-order-smacss": "^2.2.0",
     "eslint": "^8.18.0",
+    "eslint-config-amalitsky": "^1.0.2",
     "eslint-config-google": "0.x.x",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^26.5.3",

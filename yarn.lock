@@ -8723,6 +8723,11 @@ escodegen@^2.0.0:
   optionalDependencies:
     source-map "~0.6.1"
 
+eslint-config-amalitsky@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-amalitsky/-/eslint-config-amalitsky-1.0.2.tgz#bfc8097e28dcb6408c32399222bba170359d76f4"
+  integrity sha512-5nwIRBy2RNnGk5+2EHW2yPC0RbIVthdhW266/tBis8YwO/rZleLh3vo4TuZgbzeEJiXEHQD45vy77SE9xQeMwg==
+
 eslint-config-google@0.x.x:
   version "0.14.0"
   resolved "https://registry.npmjs.org/eslint-config-google/-/eslint-config-google-0.14.0.tgz"
