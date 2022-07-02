@@ -137,6 +137,7 @@ export function CopyToBufferButton(props: ICopyToBufferButton): ReactElement {
         variant = 'contained'
         onClick = { show }
         className = { classnames(copyToBufferButton(), className) }
+        data-testid = { copyToBufferButton() }
         disabled = { btnIsDisabled }
         size = { size || undefined }
         fullWidth = { fullWidth || false }

@@ -102,6 +102,10 @@ export abstract class ComponentWrapper {
       .catch(() => false);
   }
 
+  public async captureScreenshot(path: string): Promise<void> {
+    await this.$host.screenshot({ path });
+  }
+
   /**
    * Returns ElementHandler for the element within the host element by selector.
    */

@@ -113,6 +113,10 @@ export function NumberSpeller(): ReactElement {
           pattern: '[0-9]*',
           'data-testid': cnNumberSpeller('Input'),
         }}
+        FormHelperTextProps = {{
+          // @ts-ignore
+          'data-testid': cnNumberSpeller('InputValidationError'),
+        }}
       />
 
       <TextField
