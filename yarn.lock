@@ -16655,10 +16655,15 @@ playwright-chromium@^1.23.3:
   dependencies:
     playwright-core "1.23.3"
 
-playwright-core@1.23.3, playwright-core@>=1.2.0, playwright-core@^1.23.1:
+playwright-core@1.23.3:
   version "1.23.3"
   resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.23.3.tgz#f27ad80fbf0ba9b53d142d94f052b010eaa0527b"
   integrity sha512-x35yzsXDyo0BIXYimLnUFNyb42c//NadUNH6IPGOteZm96oTGA1kn4Hq6qJTI1/f9wEc1F9O1DsznXIgXMil7A==
+
+playwright-core@>=1.2.0, playwright-core@^1.24.0:
+  version "1.24.0"
+  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.24.0.tgz#ece821ceaf241bb7206329b1242b0cf6c1c60bdb"
+  integrity sha512-BkDWdVsoEEC8m2glQlfNu1EN2qvjBsLIg5bD0wjrfwv9zVHktIsp80yYFObAcWreLNYhfRP4PlXE04lr5R4DFQ==
 
 playwright@^1.23.3:
   version "1.23.3"
