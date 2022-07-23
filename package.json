@@ -77,7 +77,7 @@
     "lint-staged": "^13.0.3",
     "netlify-cli": "^10.10.0",
     "playwright": "^1.24.0",
-    "playwright-chromium": "^1.23.3",
+    "playwright-chromium": "^1.24.0",
     "playwright-core": "^1.24.0",
     "rxjs": "^7.5.6",
     "sass": "^1.53.0",
