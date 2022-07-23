@@ -10204,28 +10204,7 @@ gatsby-cli@^4.19.0:
     yoga-layout-prebuilt "^1.10.0"
     yurnalist "^2.1.0"
 
-gatsby-core-utils@^3.18.1:
-  version "3.18.1"
-  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-3.18.1.tgz#7a9451ad1802a6489d24d5b52176720345e1b967"
-  integrity sha512-sJTxRqizLxYy/tSFk0ydfqEZ3ek1So9HDVUa39F6Oi8XuPCBTFzaAooUvowKGneI5YUbdk5y4VO4ybwVUynntw==
-  dependencies:
-    "@babel/runtime" "^7.15.4"
-    ci-info "2.0.0"
-    configstore "^5.0.1"
-    fastq "^1.13.0"
-    file-type "^16.5.3"
-    fs-extra "^10.1.0"
-    got "^11.8.5"
-    import-from "^4.0.0"
-    lmdb "2.5.3"
-    lock "^1.1.0"
-    node-object-hash "^2.3.10"
-    proper-lockfile "^4.1.2"
-    resolve-from "^5.0.0"
-    tmp "^0.2.1"
-    xdg-basedir "^4.0.0"
-
-gatsby-core-utils@^3.19.0:
+gatsby-core-utils@^3.18.1, gatsby-core-utils@^3.19.0:
   version "3.19.0"
   resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-3.19.0.tgz#9de637574af1d1d283ffa9b38f058aa2dc6e3d12"
   integrity sha512-cjXs9DsXkPZt+UdiLHxtq+rGMGVrcnM0KwkawlruvPchI7lqGNv9CScqlvYPxx1dBhu3zSZS26EBALMlFhyOJA==
@@ -10351,10 +10330,10 @@ gatsby-plugin-material-ui@^4.1.0:
     "@emotion/cache" "^11.4.0"
     "@emotion/server" "^11.4.0"
 
-gatsby-plugin-mdx@^3.18.1:
-  version "3.18.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-3.18.1.tgz#3fd82b0473f51df90480a9b4e43c867bbd11069b"
-  integrity sha512-ytYOSM7umj6gRPmb5d8eHZvoPyPytN4OA7S2rD2wwPSxQNNf49Vnej1Z8pbVOMvTRjnEuYlsytsSIUfj2Ik/xA==
+gatsby-plugin-mdx@^3.19.0:
+  version "3.19.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-3.19.0.tgz#637a52f1b270271ff4f6668f236253b58d9068eb"
+  integrity sha512-uCn2w2GfW/CDeHEebXBa3ee2xnBbRVyn9gjqFxH3nUtFa4UsxQ13SWyd4Pur48A3VNpsQKQMXGo8JQFzXiqI5w==
   dependencies:
     "@babel/core" "^7.15.5"
     "@babel/generator" "^7.15.4"
@@ -10372,7 +10351,7 @@ gatsby-plugin-mdx@^3.18.1:
     escape-string-regexp "^1.0.5"
     eval "^0.1.4"
     fs-extra "^10.1.0"
-    gatsby-core-utils "^3.18.1"
+    gatsby-core-utils "^3.19.0"
     gray-matter "^4.0.2"
     json5 "^2.1.3"
     loader-utils "^1.4.0"
