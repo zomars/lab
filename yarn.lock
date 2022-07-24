@@ -15499,10 +15499,10 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha512-4jbtZXNAsfZbAHiiqjLPBiCl16dES1zI4Hpzzxw61Tk+loF+sBDBKx1ICKKKwIqQ7M0mFn1TmkN7euSncWgHiQ==
 
-number-speller@^1.0.0:
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/number-speller/-/number-speller-1.0.2.tgz"
-  integrity sha512-M3yNBjFaO3MrH7xI/Rp7JN8ez5lMGvRmtglr8tsylc6v9Ht/YdWZAofw7y444rY4195UF4gPtWpvcw/XY4sF6g==
+number-speller@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/number-speller/-/number-speller-1.0.3.tgz#5b1dd3e06f311adbbcf565e60dbe8f4f1450bde8"
+  integrity sha512-StTnnP5utKT1J8wkvn/cdsG3X32KC6MatBV1t4kej0BPsNQQp8bjx9MV6Qlj5DLkJmQ18/N04B83UtDh/fQvKA==
 
 nwsapi@^2.2.0:
   version "2.2.0"

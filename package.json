@@ -31,7 +31,7 @@
     "gatsby-source-filesystem": "^4.19.0",
     "gatsby-transformer-sharp": "^4.19.0",
     "lodash": "^4.17.21",
-    "number-speller": "^1.0.0",
+    "number-speller": "^1.0.3",
     "preact": "^10.10.0",
     "preact-compat": "^3.19.0",
     "preact-render-to-string": "^5.2.1",
