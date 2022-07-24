@@ -91,7 +91,7 @@ export function Sources(props: PageRendererProps): ReactElement {
         </li>
       </ul>
 
-      <h2>Outstanding Conversations</h2>
+      <h2>Insightful Conversations</h2>
 
       <ul>
         <li>
@@ -109,9 +109,15 @@ export function Sources(props: PageRendererProps): ReactElement {
             Navigating career changes
           </a> with <a href = 'https://twitter.com/wertandcompany'>Judy Wert</a>
         </li>
+        <li>
+          <a href = 'https://podcasts.apple.com/us/podcast/reconsidering/id1583614282'>
+            Coaching yourself into a better career
+          </a> with <a href = "https://twitter.com/edbatista">Ed Batista</a>. They talk about what
+          coaching is, how it is different from mentoring and what impact it might have on you life.
+        </li>
       </ul>
 
-      <h2>Books</h2>
+      <h2>Best Books I&apos;ve Ever Come Across</h2>
 
       <ul>
         <li>
@@ -144,9 +150,12 @@ export function Sources(props: PageRendererProps): ReactElement {
       </ul>
 
       <h2>Twitter lists</h2>
-      <ul>
-        <li>My compilation of prominent <a href = 'https://twitter.com/i/lists/1163692012383588352'>frontend folks</a> and devs in general</li>
-      </ul>
+
+      My compilation of prominent
+      <a href = 'https://twitter.com/i/lists/1163692012383588352'>
+        frontend folks
+      </a> and devs in general.
+      Explore the list to find and follow domain experts in their respective fields.
     </Layout>
   );
 }

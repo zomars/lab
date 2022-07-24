@@ -273,7 +273,8 @@ jobs:
             ${{ runner.os }}-${{ env.cache_name }}-${{ env.key_1 }}-
 
       - name: Purge top level & obsolete JS, JSON, HTML and CSS files from build folder
-        if: steps.bsr-cache-merge-base.outputs.cache-hit != 'true'
+        if: steps.bsr-cache-merge-base.outputs.cache-hit != 'true' &&
+          steps.prod-build-cache.outputs.cache-hit != 'true'
         run: |
           mkdir -p public
           find public ${{ env.stale_build_files_find_args }}

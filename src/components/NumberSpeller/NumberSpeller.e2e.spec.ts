@@ -54,7 +54,7 @@ describe('Number Speller form', () => {
     );
   });
 
-  it('renders button and textarea in disabled form by default', async () => {
+  it('renders button and textarea in disabled state by default', async () => {
     await expect(form.outputIsEnabled()).resolves.toBe(false);
     await expect(form.isCopyButtonEnabled()).resolves.toBe(false);
   });
