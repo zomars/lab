@@ -20,6 +20,7 @@ import {
   H5,
   H6,
 } from '../../components/MDXHeader/MDXHeader';
+import { Note } from '../../components/Note/Note';
 import { Seo } from '../../components/Seo/Seo';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
 import { IBlogPost } from '../../types/common.types';
@@ -69,6 +70,7 @@ const mdxComponents = {
   tbody: TableBody,
   td: TableCell,
   tr: TableRow,
+  Note,
   VideoPlayer,
 };
 

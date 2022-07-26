@@ -26,10 +26,14 @@ Then by updating corresponding variables (with workflow file update or through G
 in fact will invalidate all caches referring those variables.
 Now, all subsequent workflow runs will create new caches with updated cache key values.
 
-_**Pro tip:** Set the
-[`ACTIONS_RUNNER_DEBUG`](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/enabling-debug-logging)
-flag on when working on GitHub action workflows.
-It makes debugging quite a bit easier._
+<Note>
+
+  **Pro tip:** Set
+  [`ACTIONS_RUNNER_DEBUG`](https://docs.github.com/en/actions/monitoring-and-troubleshooting-workflows/enabling-debug-logging)
+  flag on when working on GitHub action workflows.
+  It makes debugging quite a bit easier.
+
+</Note>
 
 ### Workflow Environment Variable
 With this approach we are defining the workflow level environment variable `cache_version`
@@ -40,9 +44,13 @@ Once its value changes, all cache keys are updated and cache generation starts f
 Old caches remain in the GH cloud storage and will be automatically removed by github based on
 their [eviction policy](https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows#usage-limits-and-eviction-policy).
 
-_Technically, once the eviction happened you could revert the `cache_version` value back to its
+<Note>
+
+Technically, once the eviction happened you could revert the `cache_version` value back to its
 original value but in practice this is not used. There is simply no need - we can keep incrementing
-the value when needed._
+the value when needed.
+
+</Note>
 
 ```yaml
 name: PR Update

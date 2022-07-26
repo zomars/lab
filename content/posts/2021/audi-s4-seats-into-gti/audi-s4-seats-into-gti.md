@@ -118,10 +118,15 @@ _airbag control module_ under the dash to modulate driver's airbag deployment in
 an accident.
 
 ## Seats Installation
-**Disclaimer: Use at your own risk! Don't consider this information a guidance.
+<Note type = "warning">
+
+**Disclaimer:** Use at your own risk! **Don't** consider this information a guidance.
+
 Interfering with original car electronics and mechanics is risky, not recommended and
-can cause a serious injury or death. Author doesn't assume any responsibility or risk caused by
-your actions based on this post.**
+can cause a serious injury or death.
+Author doesn't assume any responsibility or risk caused by your actions based on this post.
+
+</Note>
 
 There are two main steps: physically bolting seats down and connecting them to the electronic
 system of the car. You might also need to disassemble the Audi seat bottom to retrofit PODS sensor

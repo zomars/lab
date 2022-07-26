@@ -1,5 +1,7 @@
 // MDX image wrappers
 .gatsby-resp-image-wrapper {
+  margin-top: var(--aml-global-layout-padding-sm);
+  margin-bottom: var(--aml-global-layout-padding-sm);
   overflow: hidden;
   border-radius: var(--aml-radii-default);
 }

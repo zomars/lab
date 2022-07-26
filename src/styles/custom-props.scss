@@ -8,7 +8,8 @@
   --aml-breakpoint-xl: #{vars.$breakpoint-xl};
 
   // completely custom and responsive
-  --aml-global-layout-padding-md: var(--aml-size-6);
+  --aml-global-layout-padding-sm: var(--aml-size-5); // 16px or 1rem
+  --aml-global-layout-padding-md: var(--aml-size-6); // 20px
   --aml-global-layout-padding-lg: var(--aml-size-8);
   --aml-global-layout-width-lg: var(--aml-breakpoint-md);
 }

@@ -1,0 +1,21 @@
+.MDXNote {
+  margin: var(--aml-global-layout-padding-sm) 0;
+  padding: var(--aml-global-layout-padding-sm);
+  border-width: var(--aml-border-width-1);
+  border-style: solid;
+  border-radius: var(--aml-radii-default);
+  border-color: var(--aml-color-grey-400);
+
+  &_type_note {
+    background-color: var(--aml-color-blue-100);
+  }
+
+  &_type_warning {
+    border-color: var(--aml-color-red-400);
+    background-color: var(--aml-color-red-100);
+  }
+
+  & > p {
+    margin-bottom: 0;
+  }
+}
