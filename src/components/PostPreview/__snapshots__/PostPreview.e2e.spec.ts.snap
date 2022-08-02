@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`site header first preview has all expected elements 1`] = `"Invalidate or Clear Github Actions Cache"`;
+exports[`site header first preview has all expected elements 1`] = `"How to Wait for Single Page Navigation and Re-hydration with Playwright and React Router"`;
 
-exports[`site header first preview has all expected elements 2`] = `"Cache invalidation is one of the most complex computer science tasks. Especially so for GitHub action workflows since there is no embedded mechanism to clean or invalidate present caches. However, what we can do is to update cache keys with a dedicated environment variable of the workflow or repository secret."`;
+exports[`site header first preview has all expected elements 2`] = `"We look into ways to write robust end-to-end tests involving navigation between pages in a single page application (pun intended). We will reevaluate the approach to writing page-specific element locators and come up with the custom UI is ready event in attempt to skip selectors altogether. Custom event approach also works for server rendered pages re-hydration."`;
 
-exports[`site header first preview has all expected elements 3`] = `"May 13, 2022"`;
+exports[`site header first preview has all expected elements 3`] = `"Jul 28, 2022"`;
 
-exports[`site header first preview has all expected elements 4`] = `"4 min read"`;
+exports[`site header first preview has all expected elements 4`] = `"12 min read"`;
 
 exports[`site header post link click works on excerpt 1`] = `"/posts/2021/dependabot-pull-request-github-actions/"`;
 

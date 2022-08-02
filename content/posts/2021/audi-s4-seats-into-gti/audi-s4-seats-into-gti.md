@@ -291,7 +291,7 @@ buttons and motors work:
 
 Last two thin black/green and brown wires coming out of the same red connector are responsible
 for rear passenger foot-well light and won't be used in GTI since we don't have anything to connect
-them too (unless you want them to work all the time when ignition is on).
+them to (unless you want them to work all the time when ignition is on).
 
 Since we are using Audi's internal wiring between motors and buttons we need to cut and isolate
 all VW seat motor power wires from the "internal" VW seat harness.
@@ -501,21 +501,21 @@ Generally speaking:
 - VW seat occupancy (PODS) sensor: _1K0 959 337 D_
 - Audi Sport seat occupancy sensor: _8T0 963 553 E_
 - driver audi sport seat airbag: _8K0 880 241E_
-- passenger Audi sport seat airbag: _8K0 880 242E_
+- passenger Audi sport seat airbag: _8K0 880 242 E_
 - passenger Audi seat adjustment button unit: _8K0 959 748 C_
 - passenger Audi S8 seat buckle switch: _4H0 857 756 A_
-
 
 ### References:
 - [VWVortex topic](https://www.vwvortex.com/threads/14-s5-seat-swap-into-07-gti.9017017)
   which helped me quite a bit and motivated me to post this guide here. Has very
   useful scheme of wire colors used by VW and Audi seat connectors.
 
-- [Golf MK6 Wiring Diagrams](https://vwts.ru/vw/g6/vw-golf-6-wiring-diagrams-eng.pdf). Don't worry
-  about russian language, just wait for a couple of seconds and click the filename
-  _vw-golf-6-wiring-diagrams-eng.pdf_ to download the pdf. File itself is in english.
+- [Golf MK6 Wiring Diagrams](https://vwts.ru/vw/g6/vw-golf-6-wiring-diagrams-eng.pdf).
+  Don't worry about russian language, just wait for a couple of seconds and click the filename
+  _vw-golf-6-wiring-diagrams-eng.pdf_ to download the pdf. File content is in english.
 
 - [Golf MK6 Component Locations](https://vwts.ru/vw/g6/vw-golf-6-component-locations-eng.pdf).
   Same as above - wait for a few seconds, then click the file name to download it.
 
-If any of the resources above go down please ping me to have them updated. Good luck!
+If any of resources above go down please [ping me](https://twitter.com/amalitsky)
+to have them updated. Good luck!

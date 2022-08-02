@@ -67,6 +67,7 @@ export abstract class ComponentWrapper {
 
   /**
    * Checks whether host element is 'connected'. Waits for mountPromise to get resolved.
+   * @todo remove
    */
   public get isConnected(): Promise<boolean> {
     return this.isMounted

@@ -209,7 +209,7 @@ Similar to driver's seat we have to connect just two wires to get seat adjustmen
 brown wire coming to T10b connector with brown wire cut out of the red Audi connector
 red&black wire coming to T10b connector with red&black wire cut out of the red Audi connector
 
-Last two thin black/green and brown wires coming out of the same red connector are responsible for rear passenger foot-well light and won't be used in GTI since we don't have anything to connect them too (unless you want them to work all the time when ignition is on).
+Last two thin black/green and brown wires coming out of the same red connector are responsible for rear passenger foot-well light and won't be used in GTI since we don't have anything to connect them to (unless you want them to work all the time when ignition is on).
 
 Since we are using Audi's internal wiring between motors and buttons we need to cut and isolate all VW seat motor power wires from the \\"internal\\" VW seat harness.
 
@@ -357,18 +357,18 @@ VW seats heating control module: 5K0 959 772
 VW seat occupancy (PODS) sensor: 1K0 959 337 D
 Audi Sport seat occupancy sensor: 8T0 963 553 E
 driver audi sport seat airbag: 8K0 880 241E
-passenger Audi sport seat airbag: 8K0 880 242E
+passenger Audi sport seat airbag: 8K0 880 242 E
 passenger Audi seat adjustment button unit: 8K0 959 748 C
 passenger Audi S8 seat buckle switch: 4H0 857 756 A
 References:
 
 VWVortex topic which helped me quite a bit and motivated me to post this guide here. Has very useful scheme of wire colors used by VW and Audi seat connectors.
 
-Golf MK6 Wiring Diagrams. Don't worry about russian language, just wait for a couple of seconds and click the filename vw-golf-6-wiring-diagrams-eng.pdf to download the pdf. File itself is in english.
+Golf MK6 Wiring Diagrams. Don't worry about russian language, just wait for a couple of seconds and click the filename vw-golf-6-wiring-diagrams-eng.pdf to download the pdf. File content is in english.
 
 Golf MK6 Component Locations. Same as above - wait for a few seconds, then click the file name to download it.
 
-If any of the resources above go down please ping me to have them updated. Good luck!"
+If any of resources above go down please ping me to have them updated. Good luck!"
 `;
 
 exports[`Post page renders the post with JS 4`] = `
@@ -607,7 +607,7 @@ Similar to driver's seat we have to connect just two wires to get seat adjustmen
 brown wire coming to T10b connector with brown wire cut out of the red Audi connector
 red&black wire coming to T10b connector with red&black wire cut out of the red Audi connector
 
-Last two thin black/green and brown wires coming out of the same red connector are responsible for rear passenger foot-well light and won't be used in GTI since we don't have anything to connect them too (unless you want them to work all the time when ignition is on).
+Last two thin black/green and brown wires coming out of the same red connector are responsible for rear passenger foot-well light and won't be used in GTI since we don't have anything to connect them to (unless you want them to work all the time when ignition is on).
 
 Since we are using Audi's internal wiring between motors and buttons we need to cut and isolate all VW seat motor power wires from the \\"internal\\" VW seat harness.
 
@@ -755,18 +755,18 @@ VW seats heating control module: 5K0 959 772
 VW seat occupancy (PODS) sensor: 1K0 959 337 D
 Audi Sport seat occupancy sensor: 8T0 963 553 E
 driver audi sport seat airbag: 8K0 880 241E
-passenger Audi sport seat airbag: 8K0 880 242E
+passenger Audi sport seat airbag: 8K0 880 242 E
 passenger Audi seat adjustment button unit: 8K0 959 748 C
 passenger Audi S8 seat buckle switch: 4H0 857 756 A
 References:
 
 VWVortex topic which helped me quite a bit and motivated me to post this guide here. Has very useful scheme of wire colors used by VW and Audi seat connectors.
 
-Golf MK6 Wiring Diagrams. Don't worry about russian language, just wait for a couple of seconds and click the filename vw-golf-6-wiring-diagrams-eng.pdf to download the pdf. File itself is in english.
+Golf MK6 Wiring Diagrams. Don't worry about russian language, just wait for a couple of seconds and click the filename vw-golf-6-wiring-diagrams-eng.pdf to download the pdf. File content is in english.
 
 Golf MK6 Component Locations. Same as above - wait for a few seconds, then click the file name to download it.
 
-If any of the resources above go down please ping me to have them updated. Good luck!"
+If any of resources above go down please ping me to have them updated. Good luck!"
 `;
 
 exports[`Post page renders the post wo JS 4`] = `

@@ -87,6 +87,8 @@ if (env === 'development') {
 
 globals.url = `${ protocol }://${ hostname }`;
 
+console.log(`Testing url: ${globals.url}`);
+
 const jestConfig = {
   testMatch: [
     '**/*.e2e.spec.ts',

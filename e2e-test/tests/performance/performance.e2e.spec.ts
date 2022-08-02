@@ -174,7 +174,7 @@ describe('performance', () => {
       expect(fileGroups.js.length).toBeLessThanOrEqual(10);
       expect(fileGroups.css.length).toBeLessThanOrEqual(3);
       expect(fileGroups.json.length).toBeLessThanOrEqual(5);
-      expect(fileGroups.font.length).toBeLessThanOrEqual(3);
+      expect(fileGroups.font.length).toBeLessThanOrEqual(4);
     });
 
     it('loads expected number of resources (ob$ervable)', async () => {

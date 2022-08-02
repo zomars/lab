@@ -67,7 +67,7 @@ describe('site header', () => {
         waitForSpaNavigation(page),
       ]);
 
-      await expect(urlPath).toMatchSnapshot();
+      expect(urlPath).toMatchSnapshot();
     });
 
     it('works on excerpt', async () => {

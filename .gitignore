@@ -25,3 +25,7 @@ src/styles/theme-custom-props.css
 .netlify
 
 bundle-size-report.json
+
+test-screenshots/
+lhci-reports/
+.lighthouseci/

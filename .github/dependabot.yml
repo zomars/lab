@@ -6,7 +6,7 @@ updates:
       interval: "daily"
       time: "17:00"
       timezone: "America/Los_Angeles"
-    assignees:
+    reviewers:
       - "amalitsky"
     labels:
       - "dependency"
