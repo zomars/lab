@@ -211,7 +211,7 @@ jobs:
         with:
           fetch-depth: 20
 
-      - run: git fetch --no-tags --prune --depth=20 origin master
+      - run: git fetch --no-tags --prune --depth=20 origin main
 
       - uses: actions/setup-node@v2
         name: Set nodeJs version
@@ -307,7 +307,7 @@ jobs:
         with:
           fetch-depth: 20
 
-      - run: git fetch --no-tags --prune --depth=20 origin master
+      - run: git fetch --no-tags --prune --depth=20 origin main
 
       - uses: actions/setup-node@v2
         name: Set nodeJs version

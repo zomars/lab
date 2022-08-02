@@ -6,10 +6,10 @@ updates:
       interval: "daily"
       time: "17:00"
       timezone: "America/Los_Angeles"
-    reviewers:
+    assignees:
       - "amalitsky"
     labels:
-      - "dependencies"
+      - "dependency"
       - "dependabot"
     open-pull-requests-limit: 7
     ignore:

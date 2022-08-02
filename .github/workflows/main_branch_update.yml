@@ -1,16 +1,16 @@
-name: Master Update
+name: Main Branch Update
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   workflow_dispatch:
 
 env:
   node_version: ${{ secrets.NODE_VERSION }}
   # used by LHCI script
-  gh_action_name: master_update
+  gh_action_name: main_branch_update
 
-concurrency: master_update
+concurrency: main_branch_update
 
 jobs:
   setup:
