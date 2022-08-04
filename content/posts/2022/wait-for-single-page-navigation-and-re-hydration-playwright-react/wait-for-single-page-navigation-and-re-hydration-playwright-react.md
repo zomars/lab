@@ -2,13 +2,16 @@
 title: 'How to Wait for Single Page Navigation and Re-hydration with Playwright and React Router'
 date: '2022-07-28T10:00:00.000-07:00'
 tags: ['tech', 'testing', 'react', 'playwright', 'frontend']
+description: >-
+  We evaluate page-specific element selectors approach and
+  come up with the custom "UI is ready" router navigation event
+  in attempt to skip element selectors altogether.
 summary: >-
-  We look into ways to write robust end-to-end tests involving navigation
-  between pages in a single page application (_pun intended_).
-  We will reevaluate the approach to writing page-specific element locators and
-  come up with the custom **UI is ready** event in attempt to skip selectors
-  altogether.
-  Custom event approach also works for server rendered pages re-hydration.
+  We look into ways to write robust end-to-end tests involving
+  navigation between pages in a single page application (_pun intended_).
+  We evaluate page-specific element selectors approach and
+  come up with the custom _UI is ready_ router navigation event
+  in attempt to skip element selectors altogether.
 ---
 
 While testing this blog with the awesome [Playwright](https://playwright.dev/) I faced

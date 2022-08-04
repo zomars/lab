@@ -2,7 +2,7 @@
 
 exports[`site header first preview has all expected elements 1`] = `"How to Wait for Single Page Navigation and Re-hydration with Playwright and React Router"`;
 
-exports[`site header first preview has all expected elements 2`] = `"We look into ways to write robust end-to-end tests involving navigation between pages in a single page application (pun intended). We will reevaluate the approach to writing page-specific element locators and come up with the custom UI is ready event in attempt to skip selectors altogether. Custom event approach also works for server rendered pages re-hydration."`;
+exports[`site header first preview has all expected elements 2`] = `"We look into ways to write robust end-to-end tests involving navigation between pages in a single page application (pun intended). We evaluate page-specific element selectors approach and come up with the custom UI is ready router navigation event in attempt to skip element selectors altogether."`;
 
 exports[`site header first preview has all expected elements 3`] = `"Jul 28, 2022"`;
 
