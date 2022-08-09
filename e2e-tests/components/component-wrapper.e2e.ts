@@ -1,4 +1,4 @@
-import { ElementHandle } from 'playwright';
+import { ElementHandle, Page } from 'playwright';
 import { isString } from 'lodash';
 
 export interface IElementHandleWaitForSelectorOptions {
@@ -8,7 +8,8 @@ export interface IElementHandleWaitForSelectorOptions {
 }
 
 export interface IComponentWrapperArgs {
-  hostSelector: string;
+  page: Page;
+  hostSelector?: string;
   nthOfType?: number; // to find the nth element within the 'scope'
   hostElement?: ElementHandle<HTMLElement>; // can be passed as a ref
   scopeElement?: ElementHandle<HTMLElement> | string;
@@ -28,6 +29,8 @@ export abstract class ComponentWrapper {
   /** ElementHandle of component's host element. */
   protected $host: ElementHandle<HTMLElement> | null = null;
 
+  protected readonly $page: Page;
+
   /**
    * Promise which get resolved once host element of the component wrapper gets found.
    * One time use.
@@ -41,7 +44,10 @@ export abstract class ComponentWrapper {
       hostElement,
       scopeElement,
       nthOfType,
+      page,
     } = args;
+
+    this.$page = page;
 
     let scopeElementPromise;
 

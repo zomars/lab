@@ -1,8 +1,8 @@
 import {
   ComponentWrapper,
   IComponentWrapperArgs,
-} from '../../../e2e-test/components/component-wrapper.e2e';
-import { getElementHandleAttributes, getElementHandleInnerTexts } from '../../../e2e-test/utils';
+} from '../../../e2e-tests/components/component-wrapper.e2e';
+import { getElementHandleAttributes, getElementHandleInnerTexts } from '../../../e2e-tests/utils';
 
 enum BlogPostSelector {
   host = '[data-testid~=BlogPost]',
@@ -13,7 +13,7 @@ enum BlogPostSelector {
 }
 
 export class BlogPost extends ComponentWrapper {
-  constructor(args: Partial<IComponentWrapperArgs> = {}) {
+  constructor(args: IComponentWrapperArgs) {
     super({
       hostSelector: BlogPostSelector.host,
       ...args,

@@ -1,35 +1,30 @@
-import { IGlobal } from '../../../e2e-test/e2e.types';
-import { waitForSpaNavigation } from '../../../e2e-test/utils';
+import { test, expect } from '@playwright/test';
+
+import { waitForSpaNavigation } from '../../../e2e-tests/utils';
 
 import {
   NumberSpeller,
 } from './NumberSpeller.e2e';
 
-const localGlobal = global as IGlobal & typeof globalThis;
-
-describe('Number Speller form', () => {
+test.describe('Number Speller form', () => {
   let form: NumberSpeller = null;
 
-  beforeEach(async () => {
-    await jestPlaywright.resetContext();
-
-    context.setDefaultTimeout(localGlobal.defaultTimeout);
-
+  test.beforeEach(async ({ context, page }) => {
     await context.grantPermissions([
       'clipboard-read',
       'clipboard-write',
     ]);
 
-    await page.goto(`${localGlobal.url}/projects/number-speller`, { waitUntil: 'commit' });
+    await page.goto('/projects/number-speller', { waitUntil: 'commit' });
 
     await waitForSpaNavigation(page);
 
-    form = new NumberSpeller();
+    form = new NumberSpeller({ page });
 
     await form.isConnected;
   });
 
-  it('spells out number as expected - "1073741824"', async () => {
+  test('spells out number as expected - "1073741824"', async () => {
     await form.provideInput('1073741824');
 
     await form.waitForEnabledCopyButton();
@@ -42,7 +37,7 @@ describe('Number Speller form', () => {
     );
   });
 
-  it('spells out number as expected - "0"', async () => {
+  test('spells out number as expected - "0"', async () => {
     await form.provideInput('0');
 
     await form.waitForEnabledCopyButton();
@@ -54,7 +49,7 @@ describe('Number Speller form', () => {
     );
   });
 
-  it('renders button and textarea in disabled state by default', async () => {
+  test('renders button and textarea in disabled state by default', async () => {
     await expect(form.outputIsEnabled()).resolves.toBe(false);
     await expect(form.isCopyButtonEnabled()).resolves.toBe(false);
   });
@@ -74,7 +69,7 @@ describe('Number Speller form', () => {
   ];
 
   invalidTests.forEach(({ input, error }) => {
-    it(`handles incorrect input accordingly - "${ input }"`, async () => {
+    test(`handles incorrect input accordingly - "${ input }"`, async () => {
       await form.provideInput(input);
 
       await expect(form.readOutput()).resolves.toBe('');
@@ -86,7 +81,7 @@ describe('Number Speller form', () => {
     });
   });
 
-  it('copy button copies result into the clipboard', async () => {
+  test('copy button copies result into the clipboard', async ({ page }) => {
     await form.provideInput('100');
 
     const output = await form.readOutput();
@@ -101,7 +96,7 @@ describe('Number Speller form', () => {
   });
 
   // this testing approach works in Chrome only
-  it('focus on textarea selects the result to be copied by the user', async () => {
+  test('focus on textarea selects the result to be copied by the user', async ({ page }) => {
     await form.provideInput('200');
 
     await form.waitForEnabledCopyButton();

@@ -33,7 +33,7 @@ const fileSystemUploadConfig = {
 
 if (prId) {
   // github action run
-  hostname = `pr${ prId }--amlab.netlify.app`;
+  hostname = `pr-${ prId }--amlab.netlify.app`;
 } else if (ghActionName === 'main_branch_update') {
   // master update (merge) run
   hostname = 'lab.amalitsky.com';

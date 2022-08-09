@@ -3,7 +3,7 @@ import { ElementHandle } from 'playwright';
 import {
   ComponentWrapper,
   IComponentWrapperArgs,
-} from '../../../e2e-test/components/component-wrapper.e2e';
+} from '../../../e2e-tests/components/component-wrapper.e2e';
 
 enum FooterSelector {
   host = 'data-testid=Footer',
@@ -13,7 +13,7 @@ enum FooterSelector {
 }
 
 export class Footer extends ComponentWrapper {
-  constructor(args: Partial<IComponentWrapperArgs> = {}) {
+  constructor(args: IComponentWrapperArgs) {
     super({
       hostSelector: FooterSelector.host,
       ...args,

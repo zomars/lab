@@ -3,8 +3,8 @@ import { ElementHandle } from 'playwright';
 import {
   ComponentWrapper,
   IComponentWrapperArgs,
-} from '../../../e2e-test/components/component-wrapper.e2e';
-import { waitForSpaNavigation } from '../../../e2e-test/utils';
+} from '../../../e2e-tests/components/component-wrapper.e2e';
+import { waitForSpaNavigation } from '../../../e2e-tests/utils';
 
 export enum MenuListItem {
   techPosts = 'techPosts',
@@ -14,10 +14,10 @@ export enum MenuListItem {
 }
 
 const labels = {
-  [MenuListItem.techPosts]: 'Tech',
-  [MenuListItem.carPosts]: 'Cars',
-  [MenuListItem.sources]: 'Sources',
-  [MenuListItem.about]: 'About',
+  [MenuListItem.techPosts]: 'TECH',
+  [MenuListItem.carPosts]: 'CARS',
+  [MenuListItem.sources]: 'SOURCES',
+  [MenuListItem.about]: 'ABOUT',
 };
 
 export const menuLabelsMap = new Map<MenuListItem, string>(
@@ -35,7 +35,7 @@ enum HeaderSelector {
 const selectedTabSelector = 'HeaderTabs-Tab_active';
 
 export class Header extends ComponentWrapper {
-  constructor(args: Partial<IComponentWrapperArgs> = {}) {
+  constructor(args: IComponentWrapperArgs) {
     super({
       hostSelector: HeaderSelector.host,
       ...args,
@@ -59,7 +59,7 @@ export class Header extends ComponentWrapper {
 
     await Promise.all([
       $elem.click(),
-      waitForSpaNavigation(page),
+      waitForSpaNavigation(this.$page),
     ]);
 
     return true;

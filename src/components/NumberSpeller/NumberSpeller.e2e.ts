@@ -1,7 +1,7 @@
 import {
   ComponentWrapper,
   IComponentWrapperArgs,
-} from '../../../e2e-test/components/component-wrapper.e2e';
+} from '../../../e2e-tests/components/component-wrapper.e2e';
 
 enum BlogPostSelector {
   host = '[data-testid=NumberSpeller]',
@@ -12,7 +12,7 @@ enum BlogPostSelector {
 }
 
 export class NumberSpeller extends ComponentWrapper {
-  constructor(args: Partial<IComponentWrapperArgs> = {}) {
+  constructor(args: IComponentWrapperArgs) {
     super({
       hostSelector: BlogPostSelector.host,
       ...args,

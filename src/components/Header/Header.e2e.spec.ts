@@ -1,4 +1,5 @@
-import { IGlobal } from '../../../e2e-test/e2e.types';
+import { expect, test } from '@playwright/test';
+
 import { PostList } from '../../page-templates/PostList/PostList.e2e';
 import {
   Header,
@@ -6,22 +7,16 @@ import {
   menuLabelsMap,
 } from './Header.e2e';
 
-const localGlobal = global as IGlobal & typeof globalThis;
-
-describe('site header', () => {
+test.describe('site header', () => {
   let header: Header = null;
 
-  beforeEach(async () => {
-    await jestPlaywright.resetContext();
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/');
 
-    context.setDefaultTimeout(localGlobal.defaultTimeout);
-
-    await page.goto(localGlobal.url);
-
-    header = new Header();
+    header = new Header({ page });
   });
 
-  it('is present on index page', async () => {
+  test('is present on index page', async () => {
     await expect(header.isConnected).resolves.toBe(true);
 
     const promises = Array.from(
@@ -30,63 +25,61 @@ describe('site header', () => {
       .map(async ([key, label]: [MenuListItem, string]) => {
         const $element = await header.getMenuItem(key);
 
-        return expect($element).toHaveText(label);
+        return expect($element.innerText()).resolves.toEqual(label);
       });
 
     await Promise.all(promises);
   });
 
-  it('click navigates user between pages', async () => {
+  test('click navigates user between pages', async ({ page }) => {
     await expect(header.isConnected).resolves.toBe(true);
 
     await expect(header.clickMenuItem(MenuListItem.sources)).resolves.toBe(true);
 
-    await expect(page).toHaveText(
-      'h2',
-      'Blogs',
-    );
+    const blogsHeader = page.locator('h2', { hasText: 'blogs' });
+
+    await expect(blogsHeader).toBeVisible();
 
     await expect(header.clickMenuItem(MenuListItem.techPosts)).resolves.toBe(true);
 
-    const techPostList = new PostList();
+    const techPostList = new PostList({ page });
 
     await expect(techPostList.isConnected).resolves.toBe(true);
 
     const techPosts = await techPostList.getAllPosts();
 
-    const techTitlePromises = Promise.all(
+    const techTitles = await Promise.all(
       techPosts.map(post => post.getTitleText()),
     );
 
-    await expect(techTitlePromises).resolves.toMatchSnapshot();
+    await expect(techTitles.join()).toMatchSnapshot();
 
     await expect(header.clickMenuItem(MenuListItem.carPosts)).resolves.toBe(true);
 
     await expect(techPostList.isConnected).resolves.toBe(false);
 
-    const autoPostList = new PostList();
+    const autoPostList = new PostList({ page });
 
     await expect(autoPostList.isConnected).resolves.toBe(true);
 
     const autoPosts = await autoPostList.getAllPosts();
 
-    const autoTitlePromises = Promise.all(
+    const autoTitles = await Promise.all(
       autoPosts.map(post => post.getTitleText()),
     );
 
-    await expect(autoTitlePromises).resolves.toMatchSnapshot();
+    await expect(autoTitles.join()).toMatchSnapshot();
 
     await expect(header.clickMenuItem(MenuListItem.about)).resolves.toBe(true);
 
     await expect(autoPostList.isConnected).resolves.toBe(false);
 
-    await expect(page).toHaveText(
-      'h1',
-      'About me',
-    );
+    const aboutHeader = page.locator('h1', { hasText: 'about' });
+
+    await expect(aboutHeader).toBeVisible();
   });
 
-  it('highlights selected tab only', async () => {
+  test('highlights selected tab only', async () => {
     await expect(header.isConnected).resolves.toBe(true);
 
     await expect(header.isSelected(MenuListItem.techPosts)).resolves.toBe(true);

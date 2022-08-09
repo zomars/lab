@@ -103,7 +103,7 @@ jobs:
 
       - name: Staging deploy
         # no need to copy node_modules and I'm not sure why
-        run: yarn deploy-netlify --alias pr$pr_id --message $DEPLOY_MESSAGE
+        run: yarn deploy-netlify --alias "pr-$pr_id" --message $DEPLOY_MESSAGE
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
@@ -119,7 +119,7 @@ jobs:
           pr_number: ${{ env.pr_id }}
           context: Staging Website
           description: Deployed to Netlify
-          target_url: https://pr${{ env.pr_id }}--amlab.netlify.app
+          target_url: https://pr-${{ env.pr_id }}--amlab.netlify.app
 
   e2e-test:
     name: E2E tests

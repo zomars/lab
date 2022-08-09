@@ -3,7 +3,7 @@ import { ElementHandle } from 'playwright';
 import {
   ComponentWrapper,
   IComponentWrapperArgs,
-} from '../../../e2e-test/components/component-wrapper.e2e';
+} from '../../../e2e-tests/components/component-wrapper.e2e';
 
 enum PostPreviewSelector {
   host = '[data-testid*=PostPreview]',
@@ -15,12 +15,12 @@ enum PostPreviewSelector {
   details = 'data-testid=PostPreview-Details',
 }
 
-interface IPostPreviewArgs extends Partial<IComponentWrapperArgs> {
+interface IPostPreviewArgs extends IComponentWrapperArgs {
   withPreview?: boolean;
 }
 
 export class PostPreview extends ComponentWrapper {
-  constructor(args: IPostPreviewArgs = {}) {
+  constructor(args: IPostPreviewArgs) {
     super({
       hostSelector: args.withPreview ? PostPreviewSelector.hostWithImage : PostPreviewSelector.host,
       ...args,

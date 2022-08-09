@@ -1,9 +1,6 @@
 # Dependency directories
 node_modules/
 
-# Typescript v1 declaration files
-typings/
-
 # Optional eslint cache
 .eslintcache
 
@@ -22,10 +19,15 @@ yarn-error.log
 src/styles/theme-custom-props.css
 
 # Local Netlify folder
-.netlify
+.netlify/
 
 bundle-size-report.json
 
-test-screenshots/
+# lighthouse
 lhci-reports/
 .lighthouseci/
+latest-run/
+
+# playwright
+pw-compiled-tests/
+pw-test-results/

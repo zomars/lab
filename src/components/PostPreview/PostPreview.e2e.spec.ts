@@ -1,24 +1,19 @@
-import { IGlobal } from '../../../e2e-test/e2e.types';
-import { waitForSpaNavigation } from '../../../e2e-test/utils';
-import { PostPreview } from './PostPreview.e2e';
+import { expect, test } from '@playwright/test';
 
-const localGlobal = global as IGlobal & typeof globalThis;
+import { waitForSpaNavigation } from '../../../e2e-tests/utils';
+import { PostPreview } from './PostPreview.e2e';
 
 const activeTag = 'tech';
 
-describe('site header', () => {
-  beforeEach(async () => {
-    await jestPlaywright.resetContext();
-
-    context.setDefaultTimeout(localGlobal.defaultTimeout);
-
-    await page.goto(`${ localGlobal.url }/tags/${ activeTag }/1`, { waitUntil: 'commit' });
+test.describe('site header', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(`/tags/${ activeTag }/1`, { waitUntil: 'commit' });
 
     await waitForSpaNavigation(page);
   });
 
-  it('first preview has all expected elements', async () => {
-    const postPreview = new PostPreview();
+  test('first preview has all expected elements', async ({ page }) => {
+    const postPreview = new PostPreview({ page });
 
     await expect(postPreview.isConnected).resolves.toBe(true);
 
@@ -31,24 +26,30 @@ describe('site header', () => {
     await expect(postPreview.getPostReadTime()).resolves.toMatchSnapshot();
   });
 
-  it('post with image is present and has an image', async () => {
-    const postPreview = new PostPreview({ withPreview: true });
+  test('post with image is present and has an image', async ({ page }) => {
+    const postPreview = new PostPreview({
+      page,
+      withPreview: true,
+    });
 
     await expect(postPreview.isConnected).resolves.toBe(true);
 
     await expect(postPreview.getImage()).resolves.toBeTruthy();
   });
 
-  describe('post link click', () => {
+  test.describe('post link click', () => {
     let postPreview: PostPreview;
 
-    beforeEach(async (): Promise<void> => {
-      postPreview = new PostPreview({ withPreview: true });
+    test.beforeEach(async ({ page }): Promise<void> => {
+      postPreview = new PostPreview({
+        page,
+        withPreview: true,
+      });
 
       await postPreview.isConnected;
     });
 
-    it('works on image', async () => {
+    test('works on image', async ({ page }) => {
       const $image = await postPreview.getImage();
 
       const [, urlPath] = await Promise.all([
@@ -59,7 +60,7 @@ describe('site header', () => {
       await expect(urlPath).toMatchSnapshot();
     });
 
-    it('works on title', async () => {
+    test('works on title', async ({ page }) => {
       const $title = await postPreview.getTitle();
 
       const [, urlPath] = await Promise.all([
@@ -70,7 +71,7 @@ describe('site header', () => {
       expect(urlPath).toMatchSnapshot();
     });
 
-    it('works on excerpt', async () => {
+    test('works on excerpt', async ({ page }) => {
       const $excerpt = await postPreview.getExcerpt();
 
       await Promise.all([

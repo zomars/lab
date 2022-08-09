@@ -116,3 +116,7 @@ export function waitForSpaNavigationInNewTab(context: BrowserContext): Promise<P
     page => waitForSpaNavigation(page).then(() => true),
   );
 }
+
+export function skipOnDevBuild(): boolean {
+  return process.env.NODE_ENV === 'development';
+}

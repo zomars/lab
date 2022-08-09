@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "esnext",
+    "target": "ESNext",
+    "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,
     "noImplicitAny": true,
@@ -9,21 +9,20 @@
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "skipLibCheck": true,
+    "sourceMap": true,
+    "outDir": "pw-compiled-tests",
     "types": [
-      "@types/jest",
-      "jest-playwright-preset",
-      "expect-playwright",
+      "node",
       "playwright-chromium"
     ],
     "lib": [
       "es2018",
       "dom"
     ],
-    "baseUrl": ".",
+    "baseUrl": "."
   },
   "include": [
-    "e2e-test/**/*.ts",
-    "src/**/*.e2e.ts",
+    "e2e-tests/**/*.spec.ts",
     "src/**/*.e2e.spec.ts"
   ]
 }

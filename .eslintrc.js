@@ -1,4 +1,4 @@
-const ERROR = 2;
+const OFF = 0;
 
 const config = {
   extends: [
@@ -26,7 +26,6 @@ config.env = {
 
 config.plugins = [
   'react',
-  'jest',
 ];
 
 config.globals = {
@@ -36,37 +35,29 @@ config.globals = {
 config.parserOptions = {
   sourceType: 'module',
   ecmaFeatures: {
-    ecmaVersion: 2018,
+    ecmaVersion: 2019,
     jsx: true,
   },
 };
 
 const e2eTestOverrides = {
   files: [
-    'e2e-test/**/*.ts',
+    'e2e-tests/**/*.ts',
     'src/**/*.e2e.ts',
     'src/**/*.e2e.spec.ts',
   ],
-  env: {
-    jest: true,
-  },
   extends: [
-    'plugin:jest-playwright/recommended',
-    'plugin:jest/recommended',
-    'plugin:jest/style',
     'plugin:rxjs/recommended',
+    'plugin:playwright/playwright-test',
   ],
   rules: {
-    'import/no-extraneous-dependencies': [
-      ERROR, {
-        devDependencies: true,
-      },
-    ],
+    'playwright/no-skipped-test': OFF,
+    'playwright/no-element-handle': OFF,
+    'playwright/no-conditional-in-test': OFF,
   },
   parserOptions: {
     ecmaVersion: 2019,
-    sourceType: 'module',
-    project: 'tsconfig.e2e.json',
+    project: 'tsconfig.pw.json',
   },
 };
 

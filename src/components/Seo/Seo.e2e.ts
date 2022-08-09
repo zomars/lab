@@ -4,7 +4,7 @@ import {
   ComponentWrapper,
   IComponentWrapperArgs,
   IElementHandleWaitForSelectorOptions,
-} from '../../../e2e-test/components/component-wrapper.e2e';
+} from '../../../e2e-tests/components/component-wrapper.e2e';
 
 enum HeadSelector {
   host = 'head',
@@ -18,7 +18,7 @@ const waitForSelectorOptions: IElementHandleWaitForSelectorOptions = {
 };
 
 export class Head extends ComponentWrapper {
-  constructor(args: Partial<IComponentWrapperArgs> = {}) {
+  constructor(args: IComponentWrapperArgs) {
     super({
       hostSelector: HeadSelector.host,
       scopeElement: 'html',

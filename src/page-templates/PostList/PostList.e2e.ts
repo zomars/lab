@@ -1,7 +1,7 @@
 import {
   ComponentWrapper,
   IComponentWrapperArgs,
-} from '../../../e2e-test/components/component-wrapper.e2e';
+} from '../../../e2e-tests/components/component-wrapper.e2e';
 import { PostPreview } from '../../components/PostPreview/PostPreview.e2e';
 
 enum PostListSelector {
@@ -10,7 +10,7 @@ enum PostListSelector {
 }
 
 export class PostList extends ComponentWrapper {
-  constructor(args: Partial<IComponentWrapperArgs> = {}) {
+  constructor(args: IComponentWrapperArgs) {
     super({
       hostSelector: PostListSelector.host,
       ...args,
@@ -24,6 +24,7 @@ export class PostList extends ComponentWrapper {
       return new PostPreview({
         scopeElement: this.$host,
         hostElement: $post,
+        page: this.$page,
       });
     });
   }

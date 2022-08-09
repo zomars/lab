@@ -1,3 +1,5 @@
+import { expect, test } from '@playwright/test';
+
 import { CDPSession } from 'playwright';
 import {
   takeWhile,
@@ -16,7 +18,6 @@ import {
 
 import {
   ICDPNetworkEvent,
-  IGlobal,
   INetworkRequest,
 } from '../../e2e.types';
 
@@ -36,18 +37,12 @@ import {
   analyzeRequests,
 } from '../../performance-utils';
 
-const localGlobal = global as IGlobal & typeof globalThis;
+import { networkThrottleOptions } from '../../constants';
 
-const { url } = localGlobal;
-
-describe('performance', () => {
+test.describe('performance', () => {
   let cdpSession: CDPSession;
 
-  beforeEach(async () => {
-    await jestPlaywright.resetContext();
-
-    context.setDefaultTimeout(localGlobal.defaultTimeout);
-
+  test.beforeEach(async ({ page }) => {
     // type casting due to types mismatch between jest preset and playwright 1.17
     cdpSession = await page.context().newCDPSession(page) as CDPSession;
 
@@ -56,17 +51,17 @@ describe('performance', () => {
     // throttle the network down
     await cdpSession.send(
       'Network.emulateNetworkConditions',
-      localGlobal.networkThrottleOptions,
+      networkThrottleOptions,
     );
   });
 
-  afterEach(async () => {
+  test.afterEach(async () => {
     await cdpSession.detach();
   });
 
-  describe('index page', () => {
-    it('loads and renders the page in a reasonable time', async () => {
-      await page.goto(url);
+  test.describe('index page', () => {
+    test('loads and renders the page in a reasonable time', async ({ page }) => {
+      await page.goto('/');
 
       const perfNavTiming = await page.evaluate(getPerfNavTiming);
 
@@ -87,53 +82,54 @@ describe('performance', () => {
       expect(jsSyncBootstrap).toBeLessThanOrEqual(30);
     });
 
-    it.skip('loads expected number of resources (performance API)', async () => {
-      await page.goto(url);
+    test.skip('loads expected number of resources (performance API)',
+      async ({ page }) => {
+        await page.goto('/');
 
-      const perfNavTiming = await page.evaluate(getPerfNavTiming);
-      const resourceTiming = await page.evaluate(getPerfResourceTiming);
+        const perfNavTiming = await page.evaluate(getPerfNavTiming);
+        const resourceTiming = await page.evaluate(getPerfResourceTiming);
 
-      const parsedResourceTiming = parseResourceTiming(resourceTiming);
+        const parsedResourceTiming = parseResourceTiming(resourceTiming);
 
-      const {
-        decodedBodySize,
-        encodedBodySize,
-      } = parsePerfTiming(perfNavTiming);
+        const {
+          decodedBodySize,
+          encodedBodySize,
+        } = parsePerfTiming(perfNavTiming);
 
-      const requestsNumber = parsedResourceTiming.length + 1;
+        const requestsNumber = parsedResourceTiming.length + 1;
 
-      expect(requestsNumber).toBeLessThanOrEqual(30);
-      expect(requestsNumber).toBeGreaterThanOrEqual(10);
+        expect(requestsNumber).toBeLessThanOrEqual(30);
+        expect(requestsNumber).toBeGreaterThanOrEqual(10);
 
-      const encodedTotal = parsedResourceTiming
-        .reduce((
-          acc: number,
-          entry: PerformanceResourceTiming,
-        ) => acc + entry.encodedBodySize, encodedBodySize);
+        const encodedTotal = parsedResourceTiming
+          .reduce((
+            acc: number,
+            entry: PerformanceResourceTiming,
+          ) => acc + entry.encodedBodySize, encodedBodySize);
 
-      const decodedTotal = parsedResourceTiming
-        .reduce((
-          acc: number,
-          entry: PerformanceResourceTiming,
-        ) => acc + entry.decodedBodySize, decodedBodySize);
+        const decodedTotal = parsedResourceTiming
+          .reduce((
+            acc: number,
+            entry: PerformanceResourceTiming,
+          ) => acc + entry.decodedBodySize, decodedBodySize);
 
-      const lastResource = parsedResourceTiming[parsedResourceTiming.length - 1];
-      const lastResourceLoadedTime = Math.ceil(lastResource.startTime + lastResource.duration);
+        const lastResource = parsedResourceTiming[parsedResourceTiming.length - 1];
+        const lastResourceLoadedTime = Math.ceil(lastResource.startTime + lastResource.duration);
 
-      console.log(
-        ` files loaded: ${requestsNumber}\n`,
-        `transferred: ${Math.ceil(encodedTotal/1000)}kB\n`,
-        `decoded: ${Math.ceil(decodedTotal/1000)}kB\n`,
-        `last resource loaded at: ${lastResourceLoadedTime}ms\n`,
-      );
-    });
+        console.log(
+          ` files loaded: ${requestsNumber}\n`,
+          `transferred: ${Math.ceil(encodedTotal/1000)}kB\n`,
+          `decoded: ${Math.ceil(decodedTotal/1000)}kB\n`,
+          `last resource loaded at: ${lastResourceLoadedTime}ms\n`,
+        );
+      });
 
-    it('loads expected number of resources', async () => {
+    test('loads expected number of resources', async ({ page }) => {
       const requestsSettledPromise = getResolvablePromise<Map<string, Partial<INetworkRequest>>>();
 
       const netReqInterceptor = new NetworkRequestCDPInterceptor(cdpSession);
 
-      let networkRequestsSettledTimeout: number;
+      let networkRequestsSettledTimeout: ReturnType<typeof setTimeout>;
 
       /**
        * Wait for 500ms since the last request being open or(!) fulfilled.
@@ -141,7 +137,6 @@ describe('performance', () => {
       function restartRequestsSettledTimeout(): void {
         clearTimeout(networkRequestsSettledTimeout);
 
-        // @ts-ignore
         networkRequestsSettledTimeout = setTimeout(() => {
           const { requests } = netReqInterceptor;
 
@@ -156,7 +151,7 @@ describe('performance', () => {
 
       restartRequestsSettledTimeout();
 
-      await page.goto(url);
+      await page.goto('/');
 
       const loadedFiles = await requestsSettledPromise;
       const loadedFilesList = Array.from(loadedFiles.values());
@@ -177,7 +172,7 @@ describe('performance', () => {
       expect(fileGroups.font.length).toBeLessThanOrEqual(4);
     });
 
-    it('loads expected number of resources (ob$ervable)', async () => {
+    test('loads expected number of resources (ob$ervable)', async ({ page }) => {
       const $observable = cdpNetworkEvents$(cdpSession);
 
       const requests: Partial<INetworkRequest>[] = [];
@@ -199,7 +194,7 @@ describe('performance', () => {
           requests.push(value);
         });
 
-      await page.goto(url);
+      await page.goto('/');
 
       await requestsPromise;
 
@@ -225,10 +220,10 @@ describe('performance', () => {
     });
   });
 
-  describe('post page', () => {
-    const url = `${localGlobal.url}/posts/2021/audi-s4-seats-into-gti/`;
+  test.describe('post page', () => {
+    const url = 'posts/2021/audi-s4-seats-into-gti/';
 
-    it('loads and renders the page in a reasonable time', async () => {
+    test('loads and renders the page in a reasonable time', async ({ page }) => {
       await page.goto(url);
 
       const perfNavTiming = await page.evaluate(getPerfNavTiming);
@@ -250,13 +245,13 @@ describe('performance', () => {
       expect(jsSyncBootstrap).toBeLessThanOrEqual(30);
     });
 
-    it('loads expected number of resources', async () => {
+    test('loads expected number of resources', async ({ page }) => {
       const requestsSettledPromise =
         getResolvablePromise<Map<string, Partial<INetworkRequest>>>();
 
       const netReqInterceptor = new NetworkRequestCDPInterceptor(cdpSession);
 
-      let networkRequestsSettledTimeout: number;
+      let networkRequestsSettledTimeout: ReturnType<typeof setTimeout>;
 
       /**
        * Wait for 500ms since the last request being open or(!) fulfilled.
@@ -264,7 +259,6 @@ describe('performance', () => {
       function restartRequestsSettledTimeout(): void {
         clearTimeout(networkRequestsSettledTimeout);
 
-        // @ts-ignore
         networkRequestsSettledTimeout = setTimeout(() => {
           const { requests } = netReqInterceptor;
 
@@ -286,7 +280,7 @@ describe('performance', () => {
 
       const report = analyzeRequests(loadedFilesList);
 
-      expect(report.totalRequests).toBeLessThanOrEqual(44);
+      expect(report.totalRequests).toBeLessThanOrEqual(45);
 
       expect(report.totalEncodedSize).toBeLessThanOrEqual(500);
       expect(report.totalDecodedSize).toBeLessThanOrEqual(1200);

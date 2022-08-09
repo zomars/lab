@@ -1,11 +1,10 @@
-import { IGlobal } from '../e2e.types';
+import { test, expect } from '@playwright/test';
+
 import { BlogPost } from '../../src/page-templates/BlogPost/BlogPost.e2e';
 import { Head } from '../../src/components/Seo/Seo.e2e';
-import { getElementHandleAttributes } from '../utils';
+import { getElementHandleAttributes, skipOnDevBuild } from '../utils';
 
-const localGlobal = global as IGlobal & typeof globalThis;
-
-const postUrl = `${localGlobal.url}/posts/2021/audi-s4-seats-into-gti/`;
+const postUrl = '/posts/2021/audi-s4-seats-into-gti/';
 
 const fbCardFields = [
   'type',
@@ -51,7 +50,7 @@ async function testBlogPostPage(
 
   const headers = await post.getHeaders();
 
-  await expect(headers).toMatchSnapshot();
+  await expect(headers.join()).toMatchSnapshot();
 
   const text = await post.getBodyAsText();
 
@@ -61,7 +60,7 @@ async function testBlogPostPage(
 
   expect(imgTitles.length).toBeGreaterThanOrEqual(22);
 
-  await expect(imgTitles).toMatchSnapshot();
+  await expect(imgTitles.join()).toMatchSnapshot();
 
   const pageTitle = await head.getTitle();
 
@@ -93,42 +92,34 @@ async function testBlogPostPage(
   }
 }
 
-describe('Post page', () => {
-  beforeEach(async () => {
-    await jestPlaywright.resetContext();
-
-    context.setDefaultTimeout(localGlobal.defaultTimeout);
-  });
-
-  // eslint-disable-next-line jest/expect-expect
-  it('renders the post with JS', async () => {
+test.describe('Post page', () => {
+  test('renders the post with JS', async ({ page }) => {
     await page.goto(postUrl);
 
-    const post = new BlogPost();
-    const head = new Head();
+    const post = new BlogPost({ page });
+    const head = new Head({ page });
 
     await testBlogPostPage(post, head);
   });
 
-  // eslint-disable-next-line jest/expect-expect
-  it('renders the post wo JS', async () => {
-    if (localGlobal.nodeEnv === 'development') {
-      return;
-    }
+  test.describe('no JS rendering', () => {
+    test.skip(skipOnDevBuild);
 
-    const cdpSession = await page.context().newCDPSession(page);
+    test('renders the post wo JS', async ({ page }) => {
+      const cdpSession = await page.context().newCDPSession(page);
 
-    // turn JS off
-    await cdpSession.send(
-      'Emulation.setScriptExecutionDisabled',
-      { value: true },
-    );
+      // turn JS off
+      await cdpSession.send(
+        'Emulation.setScriptExecutionDisabled',
+        { value: true },
+      );
 
-    await page.goto(postUrl);
+      await page.goto(postUrl);
 
-    const post = new BlogPost();
-    const head = new Head();
+      const post = new BlogPost({ page });
+      const head = new Head({ page });
 
-    await testBlogPostPage(post, head);
+      await testBlogPostPage(post, head);
+    });
   });
 });
