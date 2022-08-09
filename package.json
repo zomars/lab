@@ -54,7 +54,7 @@
     "@types/react-helmet": "^6.1.5",
     "@types/react-syntax-highlighter": "^15.5.4",
     "@typescript-eslint/eslint-plugin": "^5.33.0",
-    "@typescript-eslint/parser": "^5.32.0",
+    "@typescript-eslint/parser": "^5.33.0",
     "babel-preset-gatsby": "2.x.x",
     "cross-env": "^7.0.3",
     "css-property-sort-order-smacss": "^2.2.0",
