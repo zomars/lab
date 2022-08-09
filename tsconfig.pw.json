@@ -12,8 +12,7 @@
     "sourceMap": true,
     "outDir": "pw-compiled-tests",
     "types": [
-      "node",
-      "playwright-chromium"
+      "node"
     ],
     "lib": [
       "es2018",
