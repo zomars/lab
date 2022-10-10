@@ -8,7 +8,7 @@ interface IVideoPlayerProps {
   title?: string;
 }
 
-const allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+const allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen';
 const width = 800;
 const cnVideoPlayer = cn('VideoPlayer');
 
@@ -21,13 +21,12 @@ export function VideoPlayer(props: IVideoPlayerProps): ReactElement {
   return (
     <div className = { cnVideoPlayer() }>
       <iframe
+        className = { cnVideoPlayer('iframe') }
         src = { src }
         width = { width }
         height = { Math.ceil(width / 1.77) }
         title = { title }
         allow = { allow }
-        frameBorder = '0'
-        allowFullScreen
       />
     </div>
   );

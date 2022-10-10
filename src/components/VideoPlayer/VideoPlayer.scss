@@ -2,4 +2,8 @@
   display: flex;
   justify-content: center;
   margin: var(--aml-global-layout-padding-md) 0;
+
+  &_iframe {
+    border-width: 0;
+  }
 }
