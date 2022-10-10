@@ -117,7 +117,7 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
     let date = posted;
 
     if (updated) {
-      date = `Originally posted ${ date }. Last update - ${ updated }`;
+      date = `Originally published ${ date }. Last update ${ updated }.`;
     }
 
     let image = null;

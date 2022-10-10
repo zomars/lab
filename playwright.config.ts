@@ -17,7 +17,7 @@ let protocol = 'http';
 if (env === 'development') {
   hostname = 'localhost:8000';
 
-  testPathIgnorePatterns.push('/performance/');
+  testPathIgnorePatterns.push('**/performance/**');
 } else if (prId) {
   // github action run
   hostname = `pr-${ prId }--amlab.netlify.app`;
