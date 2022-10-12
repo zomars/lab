@@ -12,7 +12,7 @@ const siteMapQuery = `{
   }
   allPosts: allMdx(
     filter: { frontmatter: { published: { ne: false } } }
-    sort: { fields: [slug], order: DESC }
+    sort: { fields: [fields___slug], order: ASC }
   ) {
     nodes {
       fields {

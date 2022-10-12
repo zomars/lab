@@ -30,8 +30,7 @@ export const postsQuery = graphql`
         fields {
           slug,
           readingTime {
-            text,
-            words,
+            text
           }
         }
         frontmatter {

@@ -7,12 +7,12 @@ description: >-
   Learn how to extend Pull Request Update GitHub Actions workflow
   with steps (or additional workflows) specific for Dependabot pull requests (i.e. extra labels).
 summary: >-
-  Let's learn how to extend existent _Pull Request Update_ GitHub Actions workflow
+  Let's learn how to extend existent Pull Request Update GitHub Actions workflow
   with steps specific for Dependabot pull requests (i.e. labels).
-  We will add two jobs to the existent `pull_request` workflow and
-  experiment with separate _before_ and _after_ `workflow_run` event workflows.
+  We will add two jobs to the existent pull_request workflow and
+  experiment with separate "before" and "after" workflow_run event workflows.
   Fortunately, after the recent GitHub actions update we don't need to use a separate
-  `pull_request_target` event workflow as a workaround.
+  pull_request_target event workflow as a workaround.
 ---
 
 In this post I want to explore and walk through options we have to get Dependabot PRs

@@ -54,7 +54,7 @@ export interface ISiteMetadata {
 }
 
 export interface IReactNodeProps {
-  children: string | ReactNode;
+  children?: string | ReactNode;
 }
 
 export interface IPostTagsMappingQResponse {

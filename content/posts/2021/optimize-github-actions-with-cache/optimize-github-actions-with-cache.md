@@ -10,9 +10,9 @@ description: >-
 summary: >-
   GitHub Actions is an awesome and very powerful tool.
   Let's explore workflow running time optimizations with caching
-  `node_modules` and production build artifacts.
-  We will be using _Dependency Cache_ GH Actions feature driven by `actions/cache`.
-  Hint: as always, cache invalidation is a `key`.
+  node_modules and production build artifacts.
+  We will be using "Dependency Cache" GH Actions feature driven by "actions/cache".
+  Hint: as always, cache invalidation is a key.
 ---
 
 This blog is very new and quite empty (less than 20 pages) and yet I was experiencing

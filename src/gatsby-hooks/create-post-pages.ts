@@ -17,8 +17,8 @@ export const postsQuery = /* GraphQL */ `
         fields {
           slug
         }
-        frontmatter {
-          title
+        internal {
+          contentFilePath
         }
       }
     }
@@ -46,9 +46,11 @@ export async function createPostPages(
 
     createPage({
       path,
-      component: blogPostComponentPath,
+      component: `${ blogPostComponentPath }?__contentFilePath=${ post.internal.contentFilePath }`,
       context: {
         slug: path,
+        // workaround for https://github.com/gatsbyjs/gatsby/issues/36728
+        frontmatter: {},
       },
     });
   });

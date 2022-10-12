@@ -8,7 +8,6 @@ import {
 import React, { ReactElement } from 'react';
 import { graphql, PageRendererProps } from 'gatsby';
 import { cn } from '@bem-react/classname';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 
 import { Layout } from '../../components/Layout';
@@ -80,6 +79,7 @@ interface IGqlResponse {
 
 interface IBlogPostTemplateProps extends PageRendererProps {
   data: IGqlResponse;
+  children: ReactElement[];
 }
 
 export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
@@ -99,6 +99,7 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
     const {
       data,
       location,
+      children,
     } = this.props;
 
     const {
@@ -159,11 +160,9 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
             data-testid = { cnBlogPost('Body') }
           >
             <MDXProvider
-              components = { mdxComponents }
+              components = { mdxComponents as unknown as any }
             >
-              <MDXRenderer>{
-                post.body! // eslint-disable-line @typescript-eslint/no-non-null-assertion
-              }</MDXRenderer>
+              { children }
             </MDXProvider>
           </section>
         </article>

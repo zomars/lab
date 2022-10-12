@@ -10,7 +10,7 @@ const {
 const urlReplacementPatterns = [
   's|:[0-9]{3,5}/|:PORT/|',
   // let's treat PR build URLs the same way as public
-  's|^https://(lab\.amalitsky\.com|pr\\d+--amlab\.netlify\.app)/|lab.amalitsky.com/|',// eslint-disable-line
+  's|^https://(lab\.amalitsky\.com|pr-?\\d+--amlab\.netlify\.app)/|lab.amalitsky.com/|',// eslint-disable-line
 ];
 
 const lhciHostname = 'https://lab-lhci.herokuapp.com';

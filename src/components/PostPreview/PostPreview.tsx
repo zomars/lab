@@ -3,7 +3,6 @@ import {
   getImage,
   IGatsbyImageData,
 } from 'gatsby-plugin-image';
-import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React, { ReactElement } from 'react';
 import { Link } from 'gatsby';
 import { cn } from '@bem-react/classname';
@@ -115,7 +114,7 @@ export function PostPreview(props: {
           to = { slug }
           state = { blogPostLinkPayload }
         >
-          { summary ? <MDXRenderer>{ summary }</MDXRenderer> : <p> { post.excerpt! } </p>}
+          { summary || <p> { post.excerpt! } </p> }
         </Link>
 
         { CoverImage }

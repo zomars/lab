@@ -114,7 +114,7 @@ export async function createPostIndexPages(
 ): Promise<void> {
   const tagsReq = await args.graphql(postTagsQuery) as { data: IPostTagsQueryResponse };
   const uniqueTags = parseUniqueTagsResponse(tagsReq)
-    .filter(({ count }) => count > 1);
+    .filter(({ count, name }) => count > 1 || name === 'cars');
 
   await Promise.all(
     uniqueTags.map(

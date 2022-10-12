@@ -9,9 +9,9 @@ description: >-
   in attempt to skip element selectors altogether.
 summary: >-
   We look into ways to write robust end-to-end tests involving
-  navigation between pages in a single page application (_pun intended_).
+  navigation between pages in a single page application (pun intended).
   We evaluate page-specific element selectors approach and
-  come up with the custom _UI is ready_ router navigation event
+  come up with the custom "UI is ready" router navigation event
   in attempt to skip element selectors altogether.
 ---
 

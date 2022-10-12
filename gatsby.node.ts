@@ -1,4 +1,5 @@
 import { ProvidePlugin } from 'webpack';
+import readingTime from 'reading-time';
 
 import {
   CreateNodeArgs,
@@ -6,7 +7,6 @@ import {
   CreatePagesArgs,
   CreateSchemaCustomizationArgs,
   CreateWebpackConfigArgs,
-  Node,
 } from 'gatsby';
 
 import { createFilePath } from 'gatsby-source-filesystem';
@@ -92,11 +92,7 @@ export function onCreateNode(
 ): void {
   const { createNodeField } = actions;
 
-  if (
-    node.internal.type === 'Mdx' ||
-    node.ext === '.md' ||
-    node.ext === '.mdx'
-  ) {
+  if (node.internal.type === 'Mdx') {
     let path = createFilePath({
       node,
       getNode,
@@ -115,6 +111,12 @@ export function onCreateNode(
       name: 'slug',
       node,
       value: path,
+    });
+
+    createNodeField({
+      name: 'readingTime',
+      node,
+      value: readingTime(node.body as string),
     });
   }
 }
@@ -147,27 +149,27 @@ export function onCreatePage(args: CreatePageArgs): void {
   // strip away duplicated component/folder names for static pages
   if (length > 2 && folders[length - 2] === folders[length - 3]) {
     path = `${ folders.slice(0, -2).join('/') }/`;
+
+    deletePage({
+      path: page.path,
+      component: page.component,
+    });
+
+    createPage({
+      path,
+      component: page.component,
+      context: {},
+    });
   }
-
-  deletePage({
-    path: page.path,
-    component: page.component,
-  });
-
-  createPage({
-    path,
-    component: page.component,
-    context: {},
-  });
 }
 
 /**
  * Define frontmatter schema manually wo inferring.
  */
 export function createSchemaCustomization(
-  { actions, createContentDigest }: CreateSchemaCustomizationArgs,
+  { actions }: CreateSchemaCustomizationArgs,
 ): void {
-  const { createTypes, createFieldExtension } = actions;
+  const { createTypes } = actions;
 
   // should match IBlogPostFrontmatter interface
   const typeDefs = `
@@ -181,46 +183,10 @@ export function createSchemaCustomization(
       tags: [String!],
       coverImage: File @fileByRelativePath,
       published: Boolean,
-      summary: String @stringToMdx,
+      summary: String,
       description: String,
     }
   `;
-
-  createFieldExtension({
-    name: 'stringToMdx',
-    extend() {
-      return {
-        type: 'String',
-        resolve(
-          source: Node,
-          args: unknown,
-          context: unknown,
-          info: Record<string, any>,
-        ) {
-          const value = source[info.fieldName] as string;
-          const mdxType = info.schema.getType('Mdx');
-          const { resolve } = mdxType.getFields().body;
-
-          if (!value) {
-            return value;
-          }
-
-          return resolve(
-            {
-              rawBody: value,
-              internal: {
-                type: 'String',
-                contentDigest: createContentDigest(value),
-              },
-            },
-            args,
-            context,
-            info,
-          );
-        },
-      };
-    },
-  });
 
   createTypes(typeDefs);
 }

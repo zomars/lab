@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/esm/prism-light';
 import okaidia from 'react-syntax-highlighter/dist/esm/styles/prism/okaidia';
 
@@ -24,8 +24,8 @@ SyntaxHighlighter.registerLanguage('typescript', typescript);
 SyntaxHighlighter.registerLanguage('css', css);
 
 interface ICodeSnippetProps extends IReactNodeProps {
-  children: string;
-  className: string;
+  children?: ReactNode;
+  className?: string;
   fileName?: string;
 }
 
@@ -33,6 +33,12 @@ const cnCodeSnippet = cn('CodeSnippet');
 
 export function CodeSnippet(props: ICodeSnippetProps): ReactElement {
   const { className: prefixedLanguage, fileName, children: codeText } = props;
+
+  // single line case
+  if (!prefixedLanguage) {
+    return <code>{ codeText }</code>;
+  }
+
   const [, language] = prefixedLanguage.split('-');
 
   const rootPreTagStyles = {
@@ -47,7 +53,7 @@ export function CodeSnippet(props: ICodeSnippetProps): ReactElement {
     >
       <CopyToBufferButton
         alertMessage = 'Code snippet copied'
-        textToCopy = { codeText }
+        textToCopy = { codeText as string }
         size = 'small'
         className = { cnCodeSnippet('CopyButton') }
       />
@@ -57,7 +63,7 @@ export function CodeSnippet(props: ICodeSnippetProps): ReactElement {
         language = { language }
         customStyle = { rootPreTagStyles }
       >
-        { codeText }
+        { codeText as string }
       </SyntaxHighlighter>
 
       <div

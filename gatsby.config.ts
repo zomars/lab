@@ -1,3 +1,5 @@
+import remarkGfm from 'remark-gfm';
+
 import {
   options as sitemapPluginOptions,
 } from './gatsby-sitemap-plugin.options';
@@ -34,6 +36,33 @@ const metadata = {
   },
 };
 
+const mdxPluginConfig = {
+  resolve: 'gatsby-plugin-mdx',
+  options: {
+    extensions: [
+      '.md',
+      '.mdx',
+    ],
+    mdxOptions: {
+      remarkPlugins: [
+        remarkGfm,
+      ],
+    },
+    gatsbyRemarkPlugins: [
+      {
+        resolve: 'gatsby-remark-images',
+        options: {
+          withAvif: true,
+          withWebp: true,
+          maxWidth: 650,
+          quality: 80,
+          showCaptions: ['title'],
+        },
+      },
+    ],
+  },
+};
+
 const plugins = [
   {
     resolve: 'gatsby-source-filesystem',
@@ -57,32 +86,13 @@ const plugins = [
     },
   },
   'gatsby-plugin-image',
-  'gatsby-remark-images',
+  'gatsby-plugin-sharp',
   'gatsby-transformer-sharp',
   'gatsby-plugin-preact',
-  'gatsby-plugin-typescript',
   'gatsby-plugin-sass',
-  'gatsby-plugin-sharp',
-  'gatsby-remark-reading-time',
+  'gatsby-plugin-split-css',
+  mdxPluginConfig,
   {
-    resolve: 'gatsby-plugin-mdx',
-    options: {
-      extensions: ['.md', '.mdx'],
-      gatsbyRemarkPlugins: [
-        {
-          resolve: 'gatsby-remark-images',
-          options: {
-            withAvif: true,
-            withWebp: true,
-            maxWidth: 650,
-            quality: 80,
-            showCaptions: ['title'],
-          },
-        },
-        'gatsby-remark-reading-time',
-      ],
-    },
-  }, {
     resolve: 'gatsby-plugin-google-gtag',
     options: {
       trackingIds: [
@@ -116,7 +126,6 @@ const plugins = [
       ],
     },
   },
-  'gatsby-plugin-split-css',
 ];
 
 const config = {

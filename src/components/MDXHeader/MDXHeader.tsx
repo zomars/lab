@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 import { kebabCase } from 'lodash';
 import { cn } from '@bem-react/classname';
 import { Link as LinkIcon } from '@mui/icons-material';
@@ -10,7 +10,7 @@ import './MDXHeader.scss';
 type THeaderTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 interface IMDXHeaderProps extends IReactNodeProps {
-  children: string; // text content of the header
+  children?: ReactNode; // text content of the header
 }
 
 // have to use factory since MDX doesn't pass header level as prop
@@ -18,7 +18,7 @@ function headerFactory(type: number): (props: IMDXHeaderProps) => ReactElement {
   const cnHeader = cn('MDXHeader');
 
   return function MDXHeader(props: IMDXHeaderProps): ReactElement {
-    const anchorId = kebabCase(props.children);
+    const anchorId = kebabCase(props.children as unknown as string);
     const Tag = `h${type}` as THeaderTag; // so that TS doesn't throw TS2322
 
     return (
@@ -27,7 +27,7 @@ function headerFactory(type: number): (props: IMDXHeaderProps) => ReactElement {
       >
         <a
           className = { cnHeader('ChainLink') }
-          aria-label = { props.children }
+          aria-label = { props.children as unknown as string }
           href = { `#${ anchorId }` }
         >
           <LinkIcon
