@@ -35,7 +35,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         name: Set nodeJs version
         with:
           node-version: ${{ env.node_version }}
@@ -75,7 +75,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         name: Set nodeJs version
         with:
           node-version: ${{ env.node_version }}
@@ -134,7 +134,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         name: Set nodeJs version
         with:
           node-version: ${{ env.node_version }}
@@ -173,7 +173,7 @@ jobs:
       - name: Fetch base_ref HEAD to use it as Ancestor hash in LHCI
         run: git fetch --depth=1 origin +refs/heads/${{github.base_ref}}:refs/remotes/origin/${{github.base_ref}}
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         name: Set nodeJs version
         with:
           node-version: ${{ env.node_version }}
@@ -213,7 +213,7 @@ jobs:
 
       - run: git fetch --no-tags --prune --depth=20 origin main
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         name: Set nodeJs version
         with:
           node-version: ${{ env.node_version }}
@@ -309,7 +309,7 @@ jobs:
 
       - run: git fetch --no-tags --prune --depth=20 origin main
 
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         name: Set nodeJs version
         with:
           node-version: ${{ env.node_version }}
