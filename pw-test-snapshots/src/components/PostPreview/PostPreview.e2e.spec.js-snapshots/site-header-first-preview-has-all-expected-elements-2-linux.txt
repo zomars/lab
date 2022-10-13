@@ -1,1 +1,1 @@
-We look into ways to write robust end-to-end tests involving navigation between pages in a single page application (pun intended). We evaluate page-specific element selectors approach and come up with the custom "UI is ready" router navigation event in attempt to skip element selectors altogether.
+Let's leverage Low Power Mode, Apple Shortcuts and Automations to make our phones run almost two times longer on a single battery charge. Native Shortcuts app is totally a fun one to play with!

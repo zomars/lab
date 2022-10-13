@@ -54,7 +54,7 @@ const mdxPluginConfig = {
         options: {
           withAvif: true,
           withWebp: true,
-          maxWidth: 650,
+          maxWidth: 900,
           quality: 80,
           showCaptions: ['title'],
         },
