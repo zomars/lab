@@ -34,37 +34,45 @@ interface IHeaderProps extends PageRendererProps {
 
 const buttons = {
   rss: (
-    <IconButton
-      disabled
+    <div
       key = 'rss'
-      color = 'inherit'
-      aria-label = 'RSS Feed'
     >
-      <RssFeedIcon/>
-    </IconButton>
+      <IconButton
+        disabled
+        color = 'inherit'
+        aria-label = 'RSS Feed'
+      >
+        <RssFeedIcon/>
+      </IconButton>
+    </div>
   ),
   instagram: (
-    <IconButton
+    <div
       key = 'instagram'
-      href = 'https://www.instagram.com/anmalitsky/'
-      color = 'inherit'
-      aria-label = 'Instagram'
-      component = 'a'
     >
-      <InstagramIcon/>
-    </IconButton>
+      <IconButton
+        href = 'https://www.instagram.com/anmalitsky/'
+        color = 'inherit'
+        aria-label = 'Instagram'
+        component = 'a'
+      >
+        <InstagramIcon/>
+      </IconButton>
+    </div>
   ),
   twitter: (
-    <IconButton
+    <div
       key = 'twitter'
-      href = 'https://twitter.com/amalitsky'
-      color = 'inherit'
-      aria-label = 'Twitter'
-      component = 'a'
-      edge = 'end'
     >
-      <TwitterIcon/>
-    </IconButton>
+      <IconButton
+        href = 'https://twitter.com/amalitsky'
+        color = 'inherit'
+        aria-label = 'Twitter'
+        edge = 'end'
+      >
+        <TwitterIcon/>
+      </IconButton>
+    </div>
   ),
 };
 
@@ -168,7 +176,11 @@ export function Header(props: IHeaderProps): ReactElement {
         <div
           className = { cnHeader('IconWrapper') }
         >
-          { largeScreen ? Object.values(buttons) : buttons.twitter }
+          { largeScreen ? [
+            buttons.rss,
+            buttons.instagram,
+            buttons.twitter,
+          ] : buttons.twitter }
         </div>
       </Toolbar>
     </AppBar>
