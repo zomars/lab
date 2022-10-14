@@ -20,6 +20,7 @@ import {
   RssFeed as RssFeedIcon,
   Twitter as TwitterIcon,
   Menu as MenuIcon,
+  Instagram as InstagramIcon,
 } from '@mui/icons-material';
 
 import './Header.scss';
@@ -30,6 +31,42 @@ const cnHeader = cn('Header');
 interface IHeaderProps extends PageRendererProps {
   className?: string;
 }
+
+const buttons = {
+  rss: (
+    <IconButton
+      disabled
+      key = 'rss'
+      color = 'inherit'
+      aria-label = 'RSS Feed'
+    >
+      <RssFeedIcon/>
+    </IconButton>
+  ),
+  instagram: (
+    <IconButton
+      key = 'instagram'
+      href = 'https://www.instagram.com/anmalitsky/'
+      color = 'inherit'
+      aria-label = 'Instagram'
+      component = 'a'
+    >
+      <InstagramIcon/>
+    </IconButton>
+  ),
+  twitter: (
+    <IconButton
+      key = 'twitter'
+      href = 'https://twitter.com/amalitsky'
+      color = 'inherit'
+      aria-label = 'Twitter'
+      component = 'a'
+      edge = 'end'
+    >
+      <TwitterIcon/>
+    </IconButton>
+  ),
+};
 
 /**
  * Have two views based on the screen width:
@@ -70,27 +107,6 @@ export function Header(props: IHeaderProps): ReactElement {
 
     navigate(selectedPath);
   }
-
-  const buttons = [
-    <IconButton
-      disabled
-      key = 'rss'
-      color = 'inherit'
-      aria-label = 'RSS'
-    >
-      <RssFeedIcon/>
-    </IconButton>,
-    <IconButton
-      key = 'twitter'
-      href = 'https://twitter.com/amalitsky'
-      edge = 'end'
-      color = 'inherit'
-      aria-label = 'Twitter'
-      component = 'a'
-    >
-      <TwitterIcon/>
-    </IconButton>,
-  ];
 
   const menuPaperProps: PaperProps = {
     square: true,
@@ -149,11 +165,10 @@ export function Header(props: IHeaderProps): ReactElement {
           onTabSelection = { onTabSelection }
           activeTabOnly = { !largeScreen }
         />
-
         <div
           className = { cnHeader('IconWrapper') }
         >
-          { buttons }
+          { largeScreen ? Object.values(buttons) : buttons.twitter }
         </div>
       </Toolbar>
     </AppBar>
