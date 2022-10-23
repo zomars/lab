@@ -151,10 +151,10 @@ export function Sources(props: PageRendererProps): ReactElement {
 
       <h2>Twitter lists</h2>
 
-      My compilation of prominent
+      My compilation of prominent{' '}
       <a href = 'https://twitter.com/i/lists/1163692012383588352'>
         frontend folks
-      </a> and devs in general.
+      </a> and developers in general.
       Explore the list to find and follow domain experts in their respective fields.
     </Layout>
   );

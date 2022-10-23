@@ -9,32 +9,11 @@ import { cn } from '@bem-react/classname';
 import { classnames } from '@bem-react/classnames';
 
 import { IBlogPost } from '../../types/common.types';
+import { PostPreviewDetails } from './PostPreviewDetails/PostPreviewDetails';
 
 import './PostPreview.scss';
 
 const cnPostPreview = cn('PostPreview');
-
-/**
- * Return post date, reading time and list of tags.
- */
-function getDetailsString(post: IBlogPost): string {
-  const { date: posted, updated } = post.frontmatter;
-  const { text } = post.fields.readingTime;
-
-  let date = posted;
-
-  if (updated) {
-    date += ` (updated ${ updated })`;
-  }
-
-  const details = [
-    date,
-    text,
-    // `${words} words`,
-  ];
-
-  return details.join(' — ');
-}
 
 export function PostPreview(props: {
   className?: string;
@@ -48,8 +27,25 @@ export function PostPreview(props: {
     tag,
   } = props;
 
-  const { slug } = post.fields;
-  const { title, coverImage, summary } = post.frontmatter;
+  const {
+    slug,
+    readingTime: { text: readingTime },
+  } = post.fields;
+
+  const {
+    title,
+    coverImage,
+    summary,
+    date: published,
+    updated,
+    galleryImages: gridImageGroups,
+  } = post.frontmatter;
+
+  let gridImagesQuantity = 0;
+
+  if (gridImageGroups) {
+    gridImagesQuantity = gridImageGroups.flat(2).length;
+  }
 
   // so that we have active tag info in the runtime
   // for the PostPage prev/next links
@@ -105,7 +101,12 @@ export function PostPreview(props: {
           className = { cnPostPreview('Details') }
           data-testid = { cnPostPreview('Details') }
         >
-          { getDetailsString(post) }
+          <PostPreviewDetails
+            published = { published }
+            updated = { updated }
+            readingTime = { readingTime }
+            gridImages = { gridImagesQuantity }
+          />
         </p>
 
         <Link

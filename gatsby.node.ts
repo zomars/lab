@@ -176,6 +176,19 @@ export function createSchemaCustomization(
     type Mdx implements Node {
       frontmatter: MdxFrontmatter
     }
+
+    type GridImage @dontInfer {
+      path: File! @fileByRelativePath,
+      title: String,
+      caption: String,
+    }
+
+    type PostEventDetails @dontInfer {
+      date: Date! @dateformat,
+      locationName: String,
+      locationAddress: String,
+    }
+
     type MdxFrontmatter @dontInfer {
       title: String!,
       date: Date! @dateformat,
@@ -185,6 +198,8 @@ export function createSchemaCustomization(
       published: Boolean,
       summary: String,
       description: String,
+      galleryImages: [[[GridImage!]]],
+      event: PostEventDetails,
     }
   `;
 

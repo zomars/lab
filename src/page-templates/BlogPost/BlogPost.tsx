@@ -1,3 +1,5 @@
+import { cn } from '@bem-react/classname';
+import { MDXProvider } from '@mdx-js/react';
 import {
   Table,
   TableBody,
@@ -5,10 +7,10 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import React, { ReactElement } from 'react';
 import { graphql, PageRendererProps } from 'gatsby';
-import { cn } from '@bem-react/classname';
-import { MDXProvider } from '@mdx-js/react';
+import React, { ReactElement } from 'react';
+import { CodeSnippet } from '../../components/CodeSnippet/CodeSnippet';
+import { ImageGrid } from '../../components/ImageGrid/ImageGrid';
 
 import { Layout } from '../../components/Layout';
 import {
@@ -20,14 +22,15 @@ import {
   H6,
 } from '../../components/MDXHeader/MDXHeader';
 import { Note } from '../../components/Note/Note';
+import { PostDateDetails } from '../../components/PostDateDetails/PostDateDetails';
+import { PostEventDetails } from '../../components/PostEventDetails/PostEventDetails';
+import { PostTags } from '../../components/PostTags/PostTags';
 import { Seo } from '../../components/Seo/Seo';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
 import { IBlogPost } from '../../types/common.types';
-import { PostTags } from '../../components/PostTags/PostTags';
-import { CodeSnippet } from '../../components/CodeSnippet/CodeSnippet';
-import { BlogPostPaginator } from './BlogPostPaginator/BlogPostPaginator';
 
 import './BlogPost.scss';
+import { BlogPostPaginator } from './BlogPostPaginator/BlogPostPaginator';
 
 const cnBlogPost = cn('BlogPost');
 
@@ -40,11 +43,16 @@ export const pageQuery = graphql`
       }
       body
       frontmatter {
-        date(formatString: "MMM DD, YYYY")
-        updated(formatString: "MMM DD, YYYY")
+        date(formatString: "l")
+        updated(formatString: "l")
         tags
         title
         description
+        event {
+          date(formatString: "l")
+          locationAddress
+          locationName
+        }
         coverImage {
           childImageSharp {
             gatsbyImageData(height: 540)
@@ -71,6 +79,7 @@ const mdxComponents = {
   tr: TableRow,
   Note,
   VideoPlayer,
+  ImageGrid,
 };
 
 interface IGqlResponse {
@@ -113,13 +122,8 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
       updated,
       coverImage,
       description,
+      event,
     } = post.frontmatter;
-
-    let date = posted;
-
-    if (updated) {
-      date = `Originally published ${ date }. Last update ${ updated }.`;
-    }
 
     let image = null;
 
@@ -145,8 +149,17 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
             data-testid = { cnBlogPost('Title') }
           >{ title }</h1>
 
-          <p className = { cnBlogPost('Date') }>
-            { date }
+          <p className = { cnBlogPost('Details') }>
+            <PostDateDetails
+              publishedDate = { posted }
+              updatedDate = { updated }
+            />
+            { event ?
+              <PostEventDetails
+                date = { event.date }
+                locationName = { event.locationName }
+                locationAddress = { event.locationAddress }
+              /> : null }
           </p>
 
           <p>

@@ -11,6 +11,12 @@ interface INode extends Node {
   fields: INodeFields;
 }
 
+export interface IPostEventDetails {
+  date: string;
+  locationName: string;
+  locationAddress: string;
+}
+
 interface IBlogPostFrontmatter {
   title: string;
   date: string;
@@ -22,6 +28,8 @@ interface IBlogPostFrontmatter {
   updated?: string;
   summary?: string & ReactNode;
   description: string;
+  galleryImages: unknown[];
+  event: IPostEventDetails;
 }
 
 interface IReadingTime {

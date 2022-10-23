@@ -20,6 +20,18 @@ export const postsQuery = /* GraphQL */ `
         internal {
           contentFilePath
         }
+        frontmatter {
+          galleryImages {
+            title
+            caption
+            image: path {
+              childImageSharp {
+                full: gatsbyImageData(layout: FULL_WIDTH)
+              }
+              publicUrl: publicURL
+            }
+          }
+        }
       }
     }
   }
@@ -50,7 +62,8 @@ export async function createPostPages(
       context: {
         slug: path,
         // workaround for https://github.com/gatsbyjs/gatsby/issues/36728
-        frontmatter: {},
+        // MDX renderer needs some frontmatter stuff to be passed via pageContext
+        frontmatter: post.frontmatter,
       },
     });
   });

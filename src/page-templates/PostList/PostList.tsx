@@ -43,6 +43,9 @@ export const postsQuery = graphql`
               gatsbyImageData(height: 200)
             }
           }
+          galleryImages {
+            title
+          }
           summary
         }
       }

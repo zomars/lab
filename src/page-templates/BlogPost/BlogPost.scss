@@ -3,8 +3,9 @@
   justify-self: center;
   align-self: center;
 
-  &-Date {
+  &-Details {
     color: var(--aml-color-muted-text);
+    font-style: italic;
   }
 
   &-BottomLine {
@@ -14,5 +15,9 @@
   .MuiTable-root {
     margin-top: var(--aml-size-sm);
     margin-bottom: var(--aml-size-md);
+  }
+
+  .ImageGrid {
+    margin: var(--aml-global-layout-padding-sm) 0;
   }
 }

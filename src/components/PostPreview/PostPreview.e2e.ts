@@ -56,7 +56,7 @@ export class PostPreview extends ComponentWrapper {
   public async getPostedDateText(): Promise<string> {
     const details = await this.getDetailsString();
 
-    const parts = details.split('—');
+    const parts = details.split('.');
 
     return parts[0].trim();
   }
@@ -64,7 +64,7 @@ export class PostPreview extends ComponentWrapper {
   public async getPostReadTime(): Promise<string> {
     const details = await this.getDetailsString();
 
-    const parts = details.split('—');
+    const parts = details.split('.');
 
     return parts[1].trim();
   }
