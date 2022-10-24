@@ -20,7 +20,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "allowSyntheticDefaultImports": true,
     "noEmit": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
   "include": [
     "src/*.ts",

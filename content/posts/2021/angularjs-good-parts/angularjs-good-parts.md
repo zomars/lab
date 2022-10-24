@@ -1,7 +1,7 @@
 ---
-title: 'Good Parts of AngularJs Framework'
-date: '2021-05-07T23:59:59.000Z'
-tags: ['tech', 'angularjs', 'framework']
+title: Good Parts of AngularJs Framework
+date: 2021-05-07T23:59:59.000-07:00
+tags: [tech, angularjs, framework, UI]
 description: >-
   List of software architecture patterns and coding approaches introduced and
   popularized in front-end community by AngularJs 1.x framework.

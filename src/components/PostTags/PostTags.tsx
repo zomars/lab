@@ -4,7 +4,7 @@ import React, { ReactElement, useContext } from 'react';
 
 import { postsContext } from '../../react-contexts/posts.context';
 
-import { getPostListUrlByTag } from '../../services/urls.service';
+import { getPostListUrlByTag } from '../../services/urls';
 import './PostTags.scss';
 
 const cnPostTags = cn('PostTags');
@@ -52,7 +52,7 @@ function getTagElement(
     // eslint-disable-next-line react/jsx-key
     <Link
       { ...commonProps }
-      to = { getPostListUrlByTag(tag) }
+      to = { getPostListUrlByTag(tag, 1) }
     >
       { label }
     </Link>
