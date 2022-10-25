@@ -1,6 +1,6 @@
 ---
 title: 'Performance Budget on a Budget - Bundle Size Report'
-date: '2022-04-05T10:00:00.000-07:00'
+date: 2022-04-05T10:00:00-07:00
 tags: ['tech', 'devflow', 'workflow', 'performance', 'ci']
 summary: >-
   Let's get hold of files loaded during the initial rendering of our UI application or website.

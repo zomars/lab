@@ -1,6 +1,6 @@
 ---
 title: 'Optimize GitHub Actions for UI Builds and Tests with Cache'
-date: '2021-11-23T10:10:00.000Z'
+date: 2021-11-23T10:10:00-10:00
 tags: ['tech', 'github', 'github actions', 'CI', 'automation', 'GatsbyJs', 'devflow', 'npm']
 coverImage: './gh-action-runs.png'
 description: >-

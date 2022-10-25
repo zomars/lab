@@ -1,7 +1,7 @@
 ---
 title: 'How to Wait for Single Page Navigation and Re-hydration with Playwright and React Router'
-date: '2022-07-28T10:00:00.000-07:00'
-updated: '2022-10-10T10:00:00.000-07:00'
+date: 2022-07-28T10:00:00-07:00
+updated: 2022-10-10T10:00:00-07:00
 tags: ['tech', 'testing', 'react', 'playwright', 'frontend']
 coverImage: './playwright-logo.png'
 description: >-

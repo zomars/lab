@@ -1,6 +1,6 @@
 ---
 title: 'Github Actions for Dependabot PRs'
-date: '2021-12-07T10:10:00.000Z'
+date: 2021-12-07T10:10:00-07:00
 tags: ['tech', 'github', 'github actions', 'CI', 'automation', 'devflow']
 coverImage: './weekend.jpg'
 description: >-

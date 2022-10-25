@@ -1,6 +1,6 @@
 ---
 title: Good Parts of AngularJs Framework
-date: 2021-05-07T23:59:59.000-07:00
+date: 2021-05-07T23:59:59-07:00
 tags: [tech, angularjs, framework, UI]
 description: >-
   List of software architecture patterns and coding approaches introduced and

@@ -1,6 +1,6 @@
 ---
 title: Unglamorous end of AngularJs development
-date: 2021-05-06T23:59:59.000-07:00
+date: 2021-05-06T23:59:59-07:00
 tags: [tech, angularjs, framework, UI]
 ---
 

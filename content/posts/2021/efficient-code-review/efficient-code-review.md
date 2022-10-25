@@ -1,6 +1,6 @@
 ---
 title: 'Efficient Code Review'
-date: '2021-07-02T10:00:00.000-07:00'
+date: 2021-07-02T10:00:00-07:00
 tags: ['tech', 'devflow', 'workflow']
 coverImage: './cover.png'
 description: >-
