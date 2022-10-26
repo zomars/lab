@@ -3,6 +3,7 @@ import { cn } from '@bem-react/classname';
 import React, { ReactElement, useContext } from 'react';
 
 import { postsContext } from '../../react-contexts/posts.context';
+import { naturalSort } from '../../services/natural-sort';
 
 import { getPostListUrlByTag } from '../../services/urls';
 import './PostTags.scss';
@@ -68,7 +69,7 @@ export function PostTags(props: IPostTagsProps): ReactElement {
 
   const posts = useContext(postsContext);
 
-  const sortedTags = tags.sort();
+  const sortedTags = tags.sort(naturalSort);
 
   if (activeTag) {
     const activeTagPosition = tags.indexOf(activeTag);
