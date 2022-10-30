@@ -1,10 +1,11 @@
 import React, { ReactElement, useMemo } from 'react';
-import { IPostContext, postsContext } from '../../react-contexts/posts.context';
+import { IPostContext, postsListContext } from '../react-contexts/posts-list.context';
+
 import {
   IBlogPost,
   IPostTagsMappingQResponse,
   IUniquePostTag,
-} from '../../types/common.types';
+} from '../types/common.types';
 
 /**
  * Create context data structure from graphQL response.
@@ -49,10 +50,10 @@ export function PostContextProvider(
   );
 
   return (
-    <postsContext.Provider
+    <postsListContext.Provider
       value = { memoizedValue }
     >
       { children }
-    </postsContext.Provider>
+    </postsListContext.Provider>
   );
 }

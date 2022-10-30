@@ -12,6 +12,6 @@ const defaultValue: IPostContext = {
   postsPerTag: new Map<string, IBlogPost[]>(),
 };
 
-export const postsContext = React.createContext(defaultValue);
+export const postsListContext = React.createContext(defaultValue);
 
-postsContext.displayName = 'posts context';
+postsListContext.displayName = 'PostListPerTagContext';

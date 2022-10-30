@@ -1,8 +1,11 @@
+import { ElementHandle } from 'playwright';
 import {
   ComponentWrapper,
   IComponentWrapperArgs,
 } from '../../../e2e-tests/components/component-wrapper.e2e';
 import { getElementHandleAttributes, getElementHandleInnerTexts } from '../../../e2e-tests/utils';
+
+import { ImageGridSelector } from '../../components/ImageGrid/ImageGrid.e2e';
 
 enum BlogPostSelector {
   host = '[data-testid~=BlogPost]',
@@ -50,5 +53,9 @@ export class BlogPost extends ComponentWrapper {
     const $images = await this.getElements(BlogPostSelector.image);
 
     return getElementHandleAttributes($images, 'title');
+  }
+
+  public getImageGrids(): Promise<ElementHandle<HTMLElement>[]> {
+    return this.getElements(ImageGridSelector.host);
   }
 }

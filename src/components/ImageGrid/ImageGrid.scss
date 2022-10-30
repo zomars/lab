@@ -1,57 +1,9 @@
 @use '../../styles/variables' as vars;
 
-$component-name: 'ImageGrid';
-
-.#{$component-name} {
+.ImageGrid {
   display: grid;
   gap: var(--aml-global-layout-padding-md);
   grid-template-columns: repeat(6, 1fr);
-
-  &-Cell {
-    position: relative;
-    grid-column: span 2;
-
-    &:hover {
-      cursor: pointer;
-
-      .#{$component-name}-Thumb {
-        filter: brightness(0.65);
-      }
-
-      .#{$component-name}-Title {
-        display: initial;
-      }
-    }
-
-    &_size {
-      &_large {
-        grid-column: span 6;
-
-        .#{$component-name}-Title {
-          // font-size: var(--aml-font-size-6);
-        }
-      }
-
-      &_medium {
-        grid-column: span 3;
-
-        .#{$component-name}-Title {
-          // font-size: var(--aml-font-size-5);
-        }
-      }
-    }
-  }
-
-  &-Title {
-    display: none;
-    position: absolute;
-    right: var(--aml-global-layout-padding-sm);
-    bottom: var(--aml-global-layout-padding-sm);
-    left: var(--aml-global-layout-padding-sm);
-    color: white;
-    font-size: var(--aml-font-size-4);
-    text-align: center;
-  }
 
   .gatsby-resp-image-wrapper {
     margin: 0;
@@ -61,26 +13,5 @@ $component-name: 'ImageGrid';
 @media (max-width: vars.$breakpoint-sm) {
   .ImageGrid {
     grid-template-columns: 1fr;
-
-    &-Cell {
-      grid-column: span 1;
-
-      &_size {
-        &-large {
-          grid-column: span 1;
-        }
-
-        &-medium {
-          grid-column: span 1;
-        }
-      }
-    }
-  }
-}
-
-// no image darken filter on touch screens
-@media (hover: none) {
-  .#{$component-name}-Cell:hover .#{$component-name}-Thumb {
-    filter: none;
   }
 }

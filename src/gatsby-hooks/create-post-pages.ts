@@ -26,7 +26,8 @@ export const postsQuery = /* GraphQL */ `
             caption
             image: path {
               childImageSharp {
-                full: gatsbyImageData(layout: FULL_WIDTH)
+                preview: gatsbyImageData(layout: CONSTRAINED, width: 960)
+                full: gatsbyImageData(layout: CONSTRAINED, width: 1600)
               }
               publicUrl: publicURL
             }
@@ -61,7 +62,6 @@ export async function createPostPages(
       component: `${ blogPostComponentPath }?__contentFilePath=${ post.internal.contentFilePath }`,
       context: {
         slug: path,
-        // workaround for https://github.com/gatsbyjs/gatsby/issues/36728
         // MDX renderer needs some frontmatter stuff to be passed via pageContext
         frontmatter: post.frontmatter,
       },

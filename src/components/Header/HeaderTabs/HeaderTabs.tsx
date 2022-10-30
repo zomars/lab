@@ -9,7 +9,7 @@ import { cn } from '@bem-react/classname';
 import { Tab, Tabs } from '@mui/material';
 
 import { indexPageTag } from '../../../constants';
-import { IPostContext, postsContext } from '../../../react-contexts/posts.context';
+import { IPostContext, postsListContext } from '../../../react-contexts/posts-list.context';
 import { getPostListUrlByTag } from '../../../services/urls';
 
 import './HeaderTabs.scss';
@@ -169,7 +169,7 @@ export function HeaderTabs(props: IHeaderTabsProps): ReactElement {
     vertical,
   } = props;
 
-  const posts = useContext(postsContext);
+  const posts = useContext(postsListContext);
 
   const selectedTabPath = getSelectedTabPath(activePath, posts);
 

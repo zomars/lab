@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 import {
   graphql,
   StaticQuery,
@@ -8,8 +8,8 @@ import {
 import {
   ThemeProvider,
 } from '@mui/material/styles';
-
-import { PostContextProvider } from '../components/PostContextProvider/PostContextProvider';
+import { LightboxContextProvider } from '../context-providers/LightboxContextProvider';
+import { PostContextProvider } from '../context-providers/PostContextProvider';
 import { theme } from '../theme/theme.mui';
 
 export const postsQuery = graphql`
@@ -46,7 +46,7 @@ export const postsQuery = graphql`
  */
 export function wrapRootElement(
   { element }: WrapRootElementBrowserArgs,
-): ReactNode {
+): ReactElement {
   return (
     <ThemeProvider theme = { theme }>
       <StaticQuery
@@ -55,7 +55,9 @@ export function wrapRootElement(
           <PostContextProvider
             data = { data }
           >
-            { element as ReactElement }
+            <LightboxContextProvider>
+              { element }
+            </LightboxContextProvider>
           </PostContextProvider>
         ) }
       />

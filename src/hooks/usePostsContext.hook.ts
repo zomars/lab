@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { postsContext } from '../react-contexts/posts.context';
+import { postsListContext } from '../react-contexts/posts-list.context';
 import { IBlogPost } from '../types/common.types';
 
 /**
@@ -16,7 +16,7 @@ export function useAdjacentPosts(
 ] {
   const {
     postsPerTag: postsPerTagMap,
-  } = useContext(postsContext);
+  } = useContext(postsListContext);
 
   const postsPerTag: IBlogPost[] = postsPerTagMap.get(tag) as IBlogPost[];
 

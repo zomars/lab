@@ -28,6 +28,7 @@ import { PostTags } from '../../components/PostTags/PostTags';
 import { Seo } from '../../components/Seo/Seo';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
 import { IBlogPost } from '../../types/common.types';
+import { Lightbox } from '../../components/Lightbox/Lightbox';
 
 import './BlogPost.scss';
 import { BlogPostPaginator } from './BlogPostPaginator/BlogPostPaginator';
@@ -137,6 +138,8 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
         className = { cnBlogPost() }
         testId = { cnBlogPost() }
       >
+        <Lightbox/>
+
         <Seo
           title = { title }
           description = { description || post.excerpt }

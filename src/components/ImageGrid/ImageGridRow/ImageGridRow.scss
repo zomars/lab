@@ -1,0 +1,68 @@
+@use '../../../styles/variables' as vars;
+
+$component-name: 'ImageGridRow';
+
+.#{$component-name} {
+  &-Cell {
+    position: relative;
+    grid-column: span 2;
+
+    &:hover {
+      cursor: pointer;
+
+      .#{$component-name}-Cell-Thumb {
+        filter: brightness(0.65);
+      }
+
+      .#{$component-name}-Cell-Title {
+        display: initial;
+      }
+    }
+
+    &_size {
+      &_large {
+        grid-column: span 6;
+      }
+
+      &_medium {
+        grid-column: span 3;
+      }
+    }
+
+    &-Title {
+      display: none;
+      position: absolute;
+      right: var(--aml-global-layout-padding-sm);
+      bottom: var(--aml-global-layout-padding-sm);
+      left: var(--aml-global-layout-padding-sm);
+      color: white;
+      font-size: var(--aml-font-size-4);
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: vars.$breakpoint-sm) {
+  .#{$component-name} {
+    &-Cell {
+      grid-column: span 1;
+
+      &_size {
+        &-large {
+          grid-column: span 1;
+        }
+
+        &-medium {
+          grid-column: span 1;
+        }
+      }
+    }
+  }
+}
+
+// no image darken filter on touch screens
+@media (hover: none) {
+  .#{$component-name}-Cell:hover .#{$component-name}-Cell-Thumb {
+    filter: none;
+  }
+}
