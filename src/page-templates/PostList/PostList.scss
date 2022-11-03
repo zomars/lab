@@ -1,7 +1,10 @@
 .PostList {
+  margin-top: var(--aml-global-layout-padding-md);
+  margin-bottom: var(--aml-global-layout-padding-md);
+
   &-PostPreview {
-    &:first-child {
-      margin-top: var(--aml-global-layout-padding-md);
+    &:last-child {
+      border-bottom: none;
     }
   }
 

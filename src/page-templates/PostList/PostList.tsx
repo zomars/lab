@@ -40,7 +40,7 @@ export const postsQuery = graphql`
           title
           coverImage {
             childImageSharp {
-              gatsbyImageData(height: 200)
+              gatsbyImageData(layout: CONSTRAINED, height: 200)
             }
           }
           galleryImages {
@@ -109,6 +109,7 @@ export function PostList(props: IPostListProps): ReactElement {
   return (
     <Layout
       testId = { cnPostList() }
+      className = { cnPostList() }
     >
       <Seo
         title = { `All #${ pageContext.tag } posts, page ${ pageContext.currentPage }` }

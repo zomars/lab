@@ -86,17 +86,18 @@ export function PostPreview(props: {
           testId)
       }
     >
-      <h3 className = { cnPostPreview('Header') }>
-        <Link
-          data-testid = { cnPostPreview('Header') }
-          to = { slug }
-          state = { blogPostLinkPayload }
-        >
-          { title }
-        </Link>
-      </h3>
 
-      <div className = { cnPostPreview('PreviewWrapper') }>
+      <div className = { cnPostPreview('Wrapper') }>
+        <h3 className = { cnPostPreview('Header') }>
+          <Link
+            data-testid = { cnPostPreview('Header') }
+            to = { slug }
+            state = { blogPostLinkPayload }
+          >
+            { title }
+          </Link>
+        </h3>
+
         <p
           className = { cnPostPreview('Details') }
           data-testid = { cnPostPreview('Details') }
@@ -115,11 +116,11 @@ export function PostPreview(props: {
           to = { slug }
           state = { blogPostLinkPayload }
         >
-          { summary || <p> { post.excerpt! } </p> }
+          { summary || post.excerpt! }
         </Link>
-
-        { CoverImage }
       </div>
+
+      { CoverImage }
     </div>
   );
 }

@@ -4,7 +4,8 @@
   width: 100%;
   max-width: var(--aml-global-layout-width-lg);
   min-height: 100%;
-  margin: auto;
+  margin-right: auto;
+  margin-left: auto;
 
   &-View {
     flex: 1 1 100%;

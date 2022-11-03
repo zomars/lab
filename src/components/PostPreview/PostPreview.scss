@@ -2,70 +2,60 @@
 @use '../../styles/mixins' as mixins;
 
 .PostPreview {
+  display: flex;
   margin-bottom: var(--aml-global-layout-padding-md);
-  overflow: hidden;
+  padding-bottom: var(--aml-global-layout-padding-md);
+  gap: var(--aml-global-layout-padding-sm);
+  border-bottom: 1px solid var(--aml-color-grey-400);
 
   &-Header {
+    flex: 1 1 100%;
     margin-top: 0;
   }
 
+  &-ImageWrapper {
+    display: flex;
+    flex: 1 1 25%;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  &-Wrapper {
+    flex: 1 1.5 74%;
+  }
+
   &-Details {
-    flex-basis: 64%;
-    order: 1;
     color: var(--aml-color-muted-text);
     font-style: italic;
     line-height: var(--aml-line-height-none);
   }
 
-  &-PreviewWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    overflow: hidden;
-  }
-
-  &-ImageWrapper {
-    display: flex;
-    flex: 0 1 33%;
-    align-items: flex-start;
-    justify-content: center;
-    order: 3;
-    margin-left: var(--aml-global-layout-padding-md);
-    overflow: hidden;
-  }
-
   &-Excerpt {
-    flex-basis: 64%;
-    flex-grow: 1;
-    order: 2;
     color: var(--aml-color-text);
 
     @include mixins.noLinkDecoration;
   }
 
   &-Image {
-    border: var(--aml-border-width-2) solid var(--aml-color-gray-300);
     border-radius: var(--aml-radii-lg);
+    object-fit: contain !important; // rewrite gatsbyImage inline styles
   }
 }
 
-@media (max-width: vars.$breakpoint-md) {
+@media (max-width: vars.$breakpoint-sm) {
   .PostPreview {
+    flex-wrap: wrap;
+
     &-ImageWrapper {
       flex-basis: 100%;
-      justify-content: center;
+      align-items: initial;
+      order: 1;
+      max-height: 150px;
+    }
+
+    &-Wrapper {
       order: 2;
-      margin-top: 0;
-      margin-bottom: var(--aml-size-sm);
-      margin-left: 0;
-    }
-
-    &-Details {
-      flex-basis: 100%;
-    }
-
-    &-Excerpt {
-      flex-basis: 100%;
-      order: 3;
     }
   }
 }
