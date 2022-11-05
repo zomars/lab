@@ -71,8 +71,15 @@ const config = {
     'selector-type-no-unknown': OFF,
     'no-descending-specificity': OFF,
     'font-family-name-quotes': OFF,
+    'font-family-no-missing-generic-family-keyword': [
+      true, {
+        ignoreFontFamilies: [
+          'Material Icons',
+        ],
+      },
+    ],
     'function-url-quotes': never,
-    'declaration-colon-space-after': always,
+    'declaration-colon-space-after': alwaysSingleLine,
     'declaration-colon-space-before': never,
     // 'declaration-block-semicolon-newline-after': always, - buggy
     'block-closing-brace-newline-after': always,

@@ -167,7 +167,6 @@ test.describe('performance', () => {
       const { groups: fileGroups } = report;
 
       expect(fileGroups.js.length).toBeLessThanOrEqual(10);
-      expect(fileGroups.css.length).toBeLessThanOrEqual(3);
       expect(fileGroups.json.length).toBeLessThanOrEqual(5);
       expect(fileGroups.font.length).toBeLessThanOrEqual(4);
     });
@@ -212,7 +211,6 @@ test.describe('performance', () => {
       expect(groups).not.toBeNull();
 
       expect(groups.js.length).toBeLessThanOrEqual(10);
-      expect(groups.css.length).toBeLessThanOrEqual(3);
       expect(groups.json.length).toBeLessThanOrEqual(5);
       expect(groups.font.length).toBeLessThanOrEqual(4);
       expect(groups.image.length).toBeLessThanOrEqual(25);
@@ -289,7 +287,6 @@ test.describe('performance', () => {
       const { groups } = report;
 
       expect(groups.js.length).toBeLessThanOrEqual(10);
-      expect(groups.css.length).toBeLessThanOrEqual(3);
       expect(groups.json.length).toBeLessThanOrEqual(5);
       expect(groups.font.length).toBeLessThanOrEqual(4);
       expect(groups.image.length).toBeLessThanOrEqual(25);

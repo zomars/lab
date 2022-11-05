@@ -1,0 +1,80 @@
+$font-display: 'fallback';
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: $font-display;
+  src:
+    local('Source Sans Pro'),
+    url(../../static/fonts/source-sans-pro-v21-latin-regular.woff2) format('woff2'),
+    url(../../static/fonts/source-sans-pro-v21-latin-regular.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-display: $font-display;
+  src:
+    local('Source Sans Pro'),
+    url(../../static/fonts/source-sans-pro-v21-latin-600.woff2) format('woff2'),
+    url(../../static/fonts/source-sans-pro-v21-latin-600.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-display: $font-display;
+  src:
+    local('Source Sans Pro'),
+    url(../../static/fonts/source-sans-pro-v21-latin-700.woff2) format('woff2'),
+    url(../../static/fonts/source-sans-pro-v21-latin-700.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 400;
+  font-display: $font-display;
+  src:
+    local('Merriweather'),
+    url(../../static/fonts/merriweather-v30-latin-regular.woff2) format('woff2'),
+    url(../../static/fonts/merriweather-v30-latin-regular.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 700;
+  font-display: $font-display;
+  src:
+    local('Merriweather'),
+    url(../../static/fonts/merriweather-v30-latin-700.woff2) format('woff2'),
+    url(../../static/fonts/merriweather-v30-latin-700.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../../static/fonts/material-icons-v139-400.woff2) format('woff2');
+}
+
+.material-icons {
+  display: inline-block;
+  font-family: 'Material Icons';
+  font-size: 24px;
+  -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-height: 1;
+  text-transform: none;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  font-feature-settings: 'liga';
+}

@@ -12,48 +12,6 @@ interface IHTMLPageProps {
   postBodyComponents: ReactElement[];
 }
 
-const googleApiHostname = 'https://fonts.googleapis.com';
-
-const fontPaths = [
-  'css?family=Source+Sans+Pro:400,500,600,700|Merriweather:700&display=swap',
-  'icon?family=Material+Icons&display=swap',
-];
-
-const fontLinks =
-  (<>
-    <link
-      rel = 'preconnect'
-      href = { googleApiHostname }
-    />
-
-    { fontPaths.map((fontPath) => {
-      const fontUrl = `${ googleApiHostname }/${ fontPath }`;
-
-      return (<>
-        <link
-          rel = 'preload'
-          as = 'style'
-          href = { fontUrl }
-        />
-
-        <link
-          rel = 'stylesheet'
-          href = { fontUrl }
-          media = 'print'
-          // @ts-ignore
-          onLoad = 'this.media="all"'
-        />
-
-        <noscript>
-          <link
-            rel = 'stylesheet'
-            href = { fontUrl }
-          />
-        </noscript>
-      </>);
-    })}
-  </>);
-
 function HTML(props: IHTMLPageProps): ReactElement {
   return (
     <html { ...props.htmlAttributes }>
@@ -69,8 +27,6 @@ function HTML(props: IHTMLPageProps): ReactElement {
           name = 'viewport'
           content = 'width=device-width, initial-scale=1, shrink-to-fit=no'
         />
-
-        { fontLinks }
 
         { props.headComponents }
       </head>
