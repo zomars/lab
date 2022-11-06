@@ -26,10 +26,13 @@ export const postsQuery = /* GraphQL */ `
             caption
             image: path {
               childImageSharp {
-                preview: gatsbyImageData(layout: CONSTRAINED, width: 960)
-                full: gatsbyImageData(layout: CONSTRAINED, width: 1600)
+                preview: gatsbyImageData(
+                  layout: FULL_WIDTH,
+                  webpOptions: {
+                    quality: 90
+                  }
+                )
               }
-              publicUrl: publicURL
             }
           }
         }

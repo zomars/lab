@@ -8,6 +8,7 @@ import { cn } from '@bem-react/classname';
 import {
   GatsbyImage,
   getImage,
+  getSrc,
   IGatsbyImageData,
 } from 'gatsby-plugin-image';
 
@@ -30,16 +31,20 @@ export function ImageGridRow(props: IImageGridRow): ReactElement {
   // Add and remove images to context in runtime
   // props.images update is not supported
   useEffect(() => {
-    images.forEach(({ image: { publicUrl }, title }) => {
+    images.forEach(({ image, title }) => {
+      const src = getSrc(image.childImageSharp.preview) as string;
+
       context.addImage({
-        src: publicUrl,
+        src,
         title,
       });
     });
 
     return () => {
-      images.forEach(({ image: { publicUrl } }) => {
-        context.removeImage(publicUrl);
+      images.forEach(({ image }) => {
+        const src = getSrc(image.childImageSharp.preview) as string;
+
+        context.removeImage(src);
       });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -65,12 +70,14 @@ export function ImageGridRow(props: IImageGridRow): ReactElement {
             image,
             title,
           }, index) => {
+            const src = getSrc(image.childImageSharp.preview) as string;
+
             return (
               <div
                 key = { `${ index }` }
                 data-testid = { cnImageGridRow('Cell') }
                 className = { cnImageGridRow('Cell', sizeModifiers) }
-                onClick = { () => context.openAt(image.publicUrl) }
+                onClick = { () => context.openAt(src) }
               >
                 <GatsbyImage
                   className = { cnImageGridRow('Cell-Thumb') }

@@ -20,7 +20,7 @@ let hostname = 'lab.amalitsky.com';
 let protocol = 'https';
 
 if (prId) {
-  hostname = `pr${ prId }--amlab.netlify.app`;
+  hostname = `pr-${ prId }--amlab.netlify.app`;
 } else if (env === 'development') {
   hostname = 'localhost:8000';
   protocol = 'http';
@@ -76,12 +76,16 @@ const plugins = [
     resolve: 'gatsby-plugin-sharp',
     options: {
       defaults: {
+        quality: 80,
         breakpoints: [
-          600,
-          960,
-          1280,
-          1920,
+          300,
+          460,
+          920,
+          1600,
         ],
+        webpOptions: {
+          quality: 80,
+        },
       },
     },
   },

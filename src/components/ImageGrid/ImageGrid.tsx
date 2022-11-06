@@ -11,10 +11,8 @@ export interface IGridImage {
   title?: string;
   caption?: string;
   image: {
-    publicUrl: string;
     childImageSharp: {
       preview: IGatsbyImageData;
-      full: IGatsbyImageData;
     };
   };
 }

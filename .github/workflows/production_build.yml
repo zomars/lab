@@ -7,6 +7,9 @@ on:
         required: false
         type: boolean
         default: false
+      pr_id:
+        required: false
+        type: string
 
     secrets:
       node_version:
@@ -17,6 +20,7 @@ concurrency:
 
 env:
   staleBuildFilesFindArgs: -maxdepth 1 -type f -regextype posix-egrep -regex ".*\.(json|js|css|map|txt)$"
+  pr_id: ${{ inputs.pr_id }}
 
 jobs:
   build:
