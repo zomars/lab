@@ -13,7 +13,7 @@ import './PostList.scss';
 
 export const postsQuery = graphql`
   query blogListQuery($skip: Int!, $limit: Int!, $tag: String!) {
-    onePagePosts: allMdx(
+    onePageOfPosts: allMdx(
       filter: {
         frontmatter: {
           published: { ne: false }
@@ -57,7 +57,7 @@ export const postsQuery = graphql`
 `;
 
 interface IGqlResponse {
-  onePagePosts: {
+  onePageOfPosts: {
     posts: IBlogPost[];
     totalCount: number;
   };
@@ -84,7 +84,7 @@ const cnPostList = cn('PostList');
 
 export function PostList(props: IPostListProps): ReactElement {
   const { data, pageContext } = props;
-  const { posts, totalCount } = data.onePagePosts;
+  const { posts, totalCount } = data.onePageOfPosts;
 
   const postElements = posts.map(
     (post: IBlogPost) => (
@@ -109,6 +109,16 @@ export function PostList(props: IPostListProps): ReactElement {
     />
   ) : null;
 
+  let seoImage;
+
+  for (const post of posts) {
+    if (post.frontmatter.coverImage) {
+      seoImage = post.frontmatter.coverImage.childImageSharp;
+
+      break;
+    }
+  }
+
   return (
     <Layout
       testId = { cnPostList() }
@@ -118,6 +128,7 @@ export function PostList(props: IPostListProps): ReactElement {
         title = { `All #${ pageContext.tag } posts, page ${ pageContext.currentPage }` }
         keywords = { keywords }
         pathname = { props.location.pathname }
+        image = { seoImage }
       />
 
       { postElements }

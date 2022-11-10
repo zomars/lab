@@ -56,7 +56,7 @@ export const pageQuery = graphql`
         }
         coverImage {
           childImageSharp {
-            gatsbyImageData(height: 540)
+            gatsbyImageData(layout: FIXED, width: 920)
           }
         }
       }
@@ -126,13 +126,6 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
       event,
     } = post.frontmatter;
 
-    let image = null;
-
-    if (coverImage) {
-      // eslint-disable-next-line no-extra-parens
-      ({ fallback: image } = (coverImage as any).childImageSharp.gatsbyImageData.images);
-    }
-
     return (
       <Layout
         className = { cnBlogPost() }
@@ -144,7 +137,7 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
           title = { title }
           description = { description || post.excerpt }
           pathname = { location.pathname }
-          image = { image }
+          image = { coverImage?.childImageSharp }
         />
 
         <article>

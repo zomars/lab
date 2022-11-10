@@ -1,4 +1,9 @@
 import React, { ReactElement } from 'react';
+import {
+  getImage,
+  getSrc,
+  ImageDataLike,
+} from 'gatsby-plugin-image';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 import { each } from 'lodash';
@@ -36,7 +41,7 @@ interface ISeoProps {
   meta?: IHelmetMetaTag[];
   keywords?: string[];
   pathname?: string;
-  image?: { src: string };
+  image?: ImageDataLike;
   lang?: string;
 }
 
@@ -79,11 +84,18 @@ export function Seo(props: ISeoProps): ReactElement {
     url: pathname ? siteMetadata.siteUrl + pathname : '',
   };
 
-  if (image) {
-    const imgSrc = siteMetadata.siteUrl + image.src;
+  const gatsbyImage = getImage(image || null);
+
+  if (gatsbyImage) {
+    const imgSrc = siteMetadata.siteUrl + getSrc(gatsbyImage);
 
     twitterCard.image = imgSrc;
+    twitterCard['image:width'] = gatsbyImage.width;
+    twitterCard['image:height'] = gatsbyImage.width;
+
     fbCard.image = imgSrc;
+    fbCard['image:width'] = gatsbyImage.width;
+    fbCard['image:height'] = gatsbyImage.width;
   }
 
   const metaTags: IHelmetMetaTag[] = [
