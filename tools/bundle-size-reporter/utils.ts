@@ -24,6 +24,8 @@ export function readFileAsString(filePath: string): Promise<string> {
     fsReadFile(filePath, (err, content) => {
       if (err) {
         reject(err);
+
+        return;
       }
 
       resolve(content.toString());
@@ -66,6 +68,8 @@ export function saveContentToFile(
     fsWriteFile(path, content, (err: Error | null) => {
       if (err) {
         reject(err);
+
+        return;
       }
 
       resolve();

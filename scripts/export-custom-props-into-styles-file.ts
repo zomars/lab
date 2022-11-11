@@ -34,6 +34,8 @@ function writeCssFile(path: string, content: string): Promise<boolean> {
     fsWriteFile(path, content, (err: Error|null) => {
       if (err) {
         reject(err);
+
+        return;
       }
 
       resolve(true);

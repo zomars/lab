@@ -223,13 +223,21 @@ jobs:
       - name: Find the "merge-base" between target branch and last PR commit
         run: echo "merge_base_sha=$(${{ env.merge_base_cmd }})" >> $GITHUB_ENV
 
-      # Since we assume here that "merge-base" commit is already merged in we can use it's sha
+      - name: Log merge base commit message
+        run: |
+          echo "### _Before_ Commit" >> $GITHUB_STEP_SUMMARY
+          git show -s --format=%s ${{ env.merge_base_sha }} >> $GITHUB_STEP_SUMMARY
+          echo "hash: _${{ env.merge_base_sha }}_" >> $GITHUB_STEP_SUMMARY
+
+      # Since we assume here that "merge-base" commit is already merged in we can use its sha
       # for caching relevant BSR (unlike for the "after" report)
       - name: Restore the merge base bundle size report from cache
         id: bsr-cache-merge-base
         uses: actions/cache@v3
         with:
-          path: bundle-size-report-${{ env.merge_base_sha }}.json
+          path: |
+            bundle-size-report-${{ env.merge_base_sha }}.json
+            bundle-size-report-${{ env.merge_base_sha }}.txt
           key: ${{ env.node_version }}-${{ env.merge_base_sha }}
 
       - name: Merge-base checkout
@@ -289,7 +297,16 @@ jobs:
 
       - name: Bundle Size Report
         if: steps.bsr-cache-merge-base.outputs.cache-hit != 'true'
-        run: yarn bsr autorun -o bundle-size-report-${{ env.merge_base_sha }}.json
+        run: yarn bsr autorun -o bundle-size-report-${{ env.merge_base_sha }}.json -r bundle-size-report-${{ env.merge_base_sha }}.txt
+
+      # using merge-base node_modules so that we don't fetch node_modules in two parallel jobs
+      - name: Print before report into summary
+        run: |
+          echo "### _Before_ Bundle Size Report" >> $GITHUB_STEP_SUMMARY
+          echo "~~~" >> $GITHUB_STEP_SUMMARY
+          cat bundle-size-report-${{ env.merge_base_sha }}.txt >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "~~~" >> $GITHUB_STEP_SUMMARY
 
   bundle-size-report:
     name: Bundle size report
@@ -340,29 +357,26 @@ jobs:
       - name: Find the "merge-base" between target branch and last PR commit
         run: echo "merge_base_sha=$(${{ env.merge_base_cmd }})" >> $GITHUB_ENV
 
-      - name: Log merge base commit message
-        run: git log --format=%B -n 1 ${{ env.merge_base_sha }}
-
       - name: Restore the merge base bundle size report from cache
         id: bsr-cache-merge-base
         uses: actions/cache@v3
         with:
-          path: bundle-size-report-${{ env.merge_base_sha }}.json
+          path: |
+            bundle-size-report-${{ env.merge_base_sha }}.json
+            bundle-size-report-${{ env.merge_base_sha }}.txt
           key: ${{ env.node_version }}-${{ env.merge_base_sha }}
 
       - name: Bundle Size Report w comparison
         run: yarn bsr autorun -o bundle-size-report-${{ github.sha }}.json --compare-with bundle-size-report-${{ env.merge_base_sha }}.json
 
+      - name: Bundle Size Report wo comparison to get cached and printed
+        run: yarn bsr print bundle-size-report-${{ github.sha }}.json -o bundle-size-report-${{ github.sha }}.txt
+
       - id: read-bsr-txt-file-content
         name: Read report into the environment variable
         run: |
-          body=$(cat ${{ env.bsr_filename_txt }})
-          body="${body//'%'/'%25'}"
-          body="${body//$'\n'/'%0A'}"
-          body="${body//$'\r'/'%0D'}"
-          echo ::set-output name=body::$body
-
-      - name: Comment the report to PR
-        uses: peter-evans/commit-comment@v2
-        with:
-          body: "```\n${{ steps.read-bsr-txt-file-content.outputs.body }}\n```"
+          echo "### _After_ Commit Bundle Size Report" >> $GITHUB_STEP_SUMMARY
+          echo "~~~" >> $GITHUB_STEP_SUMMARY
+          cat bundle-size-report-${{ github.sha }}.txt >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "~~~" >> $GITHUB_STEP_SUMMARY

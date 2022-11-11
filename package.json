@@ -119,7 +119,7 @@
     "stylelint-all": "stylelint 'src/**/*.scss'",
     "stylelint-fix": "yarn stylelint-all --fix",
     "debug": "node $NODE_DEBUG_OPTION ./node_modules/.bin/gatsby build",
-    "bsr": "ts-node tools/bundle-size-reporter"
+    "bsr": "NODE_OPTIONS='--unhandled-rejections=strict' ts-node tools/bundle-size-reporter"
   },
   "browserslist": [
     "last 2 years and > 1%",

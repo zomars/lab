@@ -22,6 +22,10 @@ src/styles/theme-custom-props.css
 .netlify/
 
 bundle-size-report.json
+bundle-size-report-*.json
+
+bundle-size-report.txt
+bundle-size-report-*.txt
 
 # lighthouse
 lhci-reports/

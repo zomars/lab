@@ -81,14 +81,16 @@ jobs:
       - name: Print list of top level JS, HTML and CSS files
         run: find public ${{ env.staleBuildFilesFindArgs }}
 
-      - name: Bundle size report cache
+      - name: Bundle Size Report cache
         if: inputs.with_bsr == true
         id: bsr-cache
         uses: actions/cache@v3
         with:
-          path: bundle-size-report-${{ github.sha }}.json
+          path: |
+            bundle-size-report-${{ github.sha }}.json
+            bundle-size-report-${{ github.sha }}.txt
           key: ${{ secrets.node_version }}-${{ github.sha }}
 
       - name: Bundle Size Report
         if: inputs.with_bsr == true && steps.bsr-cache.outputs.cache-hit != 'true'
-        run: yarn bsr autorun -o bundle-size-report-${{ github.sha }}.json
+        run: yarn bsr autorun -o bundle-size-report-${{ github.sha }}.json -r bundle-size-report-${{ github.sha }}.txt
