@@ -1,8 +1,8 @@
 ---
-title: 'Efficient Code Review'
+title: Efficient Code Review
 date: 2021-07-02T10:00:00-07:00
-tags: ['tech', 'devflow', 'workflow']
-coverImage: './cover.png'
+tags: [tech, devflow, workflow]
+coverImage: ./cover.png
 description: >-
   What makes for a good code review. What to expect from it and how to organize the process
   so that both: contributor and the reviewer benefit from it. Top-down reviewing approach.

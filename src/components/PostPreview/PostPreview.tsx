@@ -70,6 +70,7 @@ export function PostPreview(props: {
           alt = { `Cover photo for ${ title } post` }
           loading = 'eager'
           image = { imageData }
+          objectFit = 'contain'
         />
       </Link>
     );

@@ -3,6 +3,9 @@
   margin-bottom: var(--aml-global-layout-padding-md);
 
   &-PostPreview {
+    margin-bottom: var(--aml-global-layout-padding-md);
+    border-bottom: 1px solid var(--aml-color-grey-400);
+
     &:last-child {
       border-bottom: none;
     }

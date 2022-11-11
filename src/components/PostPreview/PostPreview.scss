@@ -3,10 +3,8 @@
 
 .PostPreview {
   display: flex;
-  margin-bottom: var(--aml-global-layout-padding-md);
   padding-bottom: var(--aml-global-layout-padding-md);
   gap: var(--aml-global-layout-padding-sm);
-  border-bottom: 1px solid var(--aml-color-grey-400);
 
   &-Header {
     flex: 1 1 100%;
@@ -14,15 +12,23 @@
   }
 
   &-ImageWrapper {
+    --post-preview-image-max-width: 200px;
+    --post-preview-image-max-height: 200px;
     display: flex;
-    flex: 1 1 25%;
+    flex: 1 4 25%;
     align-items: center;
     justify-content: center;
     overflow: hidden;
+
+    & > .gatsby-image-wrapper {
+      flex: 0 1 auto;
+      max-width: var(--post-preview-image-max-width);
+      max-height: var(--post-preview-image-max-height);
+    }
   }
 
   &-Wrapper {
-    flex: 1 1.5 74%;
+    flex: 1 1 74%;
   }
 
   &-Details {
@@ -39,7 +45,6 @@
 
   &-Image {
     border-radius: var(--aml-radii-lg);
-    object-fit: contain !important; // rewrite gatsbyImage inline styles
   }
 }
 
@@ -48,10 +53,12 @@
     flex-wrap: wrap;
 
     &-ImageWrapper {
+      // have to define whole box to get border-radius to work
+      --post-preview-image-max-width: 300px;
+      --post-preview-image-max-height: 300px;
       flex-basis: 100%;
       align-items: initial;
       order: 1;
-      max-height: 150px;
     }
 
     &-Wrapper {
