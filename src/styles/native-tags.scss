@@ -12,11 +12,6 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--aml-color-primary);
   font-family: var(--aml-font-heading);
   font-weight: var(--aml-font-weight-heading);
-  line-height: var(--aml-line-height-heading);
-}
-
-h1, h2, h3 {
-  margin-top: var(--aml-size-lg);
 }
 
 h1 {
@@ -46,7 +41,7 @@ blockquote {
   border-left-style: solid;
   border-color: var(--aml-color-gray-400);
   color: var(--aml-color-muted-text);
-  font-size: 85%;
+  font-size: var(--aml-font-size-2);
 }
 
 // excluding code snippets

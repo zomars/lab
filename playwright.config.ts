@@ -49,6 +49,11 @@ const config: PlaywrightTestConfig = {
   workers: isCiEnv ? 2 : undefined,
   forbidOnly: !!isCiEnv,
   testIgnore: testPathIgnorePatterns,
+  expect: {
+    toMatchSnapshot: {
+      maxDiffPixelRatio: 0.06,
+    },
+  },
 };
 
 // eslint-disable-next-line import/no-default-export

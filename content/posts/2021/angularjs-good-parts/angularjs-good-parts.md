@@ -2,6 +2,7 @@
 title: Good Parts of AngularJs Framework
 date: 2021-05-07T23:59:59-07:00
 tags: [tech, angularjs, framework, UI]
+coverImage: ./angular-logo.png
 description: >-
   List of software architecture patterns and coding approaches introduced and
   popularized in front-end community by AngularJs 1.x framework.

@@ -46,7 +46,7 @@ test.describe('Lightbox', () => {
     await lightboxOverlay.getImage();
 
     // fixme: Figure out how to consistently pick the nth image on the page
-    // expect(await image.screenshot({ animations: 'disabled' })).toMatchSnapshot();
+    // expect(await image.screenshot()).toHaveScreenshot();
   });
 
   test.describe('overlay closing', () => {

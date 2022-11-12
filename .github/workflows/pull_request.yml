@@ -303,10 +303,10 @@ jobs:
       - name: Print before report into summary
         run: |
           echo "### _Before_ Bundle Size Report" >> $GITHUB_STEP_SUMMARY
-          echo "~~~" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           cat bundle-size-report-${{ env.merge_base_sha }}.txt >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "~~~" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
 
   bundle-size-report:
     name: Bundle size report
@@ -316,9 +316,6 @@ jobs:
     needs: [build, bundle-size-report-before]
 
     timeout-minutes: 30
-
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout
@@ -376,7 +373,7 @@ jobs:
         name: Read report into the environment variable
         run: |
           echo "### _After_ Commit Bundle Size Report" >> $GITHUB_STEP_SUMMARY
-          echo "~~~" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           cat ${{ env.bsr_filename_txt }} >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "~~~" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY

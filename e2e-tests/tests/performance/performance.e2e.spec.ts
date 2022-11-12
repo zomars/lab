@@ -201,7 +201,7 @@ test.describe('performance', () => {
 
       console.log(printAllRequestsReport(report));
 
-      expect(report.totalRequests).toBeLessThanOrEqual(30);
+      expect(report.totalRequests).toBeLessThanOrEqual(35);
       expect(report.totalEncodedSize).toBeLessThanOrEqual(750);
       expect(report.totalDecodedSize).toBeLessThanOrEqual(1500);
       expect(report.totalLoadDuration).toBeLessThanOrEqual(1800);

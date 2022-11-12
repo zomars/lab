@@ -1,1 +1,1 @@
-Let's leverage Low Power Mode, Apple Shortcuts and Automations to make our phones run almost two times longer on a single battery charge. Native Shortcuts app is totally a fun one to play with!
+Since set-output command is now deprecated, we will replace it with the new shiny $GITHUB_OUTPUT (and other Environment files) syntax. We will also see if, instead of posting comments on pull request pages, we can leverage the new Job Step Summary approach. Which makes adding custom markdown reports and log messages to our GitHub workflow runs super easy.

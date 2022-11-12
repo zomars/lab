@@ -1,7 +1,7 @@
 ---
-title: 'Optimize GitHub Actions for UI Builds and Tests with Cache'
+title: Optimize GitHub Actions for UI Builds and Tests with Cache
 date: 2021-11-23T10:10:00-10:00
-tags: ['tech', 'github', 'github actions', 'CI', 'automation', 'GatsbyJs', 'devflow', 'npm']
+tags: [tech, github actions, CI, automation, GatsbyJs, devflow, npm]
 coverImage: './gh-action-runs.png'
 description: >-
   How to significantly reduce your GitHub Actions run times with caching.
