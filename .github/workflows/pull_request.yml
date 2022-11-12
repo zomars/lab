@@ -377,6 +377,6 @@ jobs:
         run: |
           echo "### _After_ Commit Bundle Size Report" >> $GITHUB_STEP_SUMMARY
           echo "~~~" >> $GITHUB_STEP_SUMMARY
-          cat bundle-size-report-${{ github.sha }}.txt >> $GITHUB_STEP_SUMMARY
+          cat ${{ env.bsr_filename_txt }} >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "~~~" >> $GITHUB_STEP_SUMMARY
