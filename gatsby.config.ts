@@ -19,15 +19,20 @@ const {
 let hostname = 'lab.amalitsky.com';
 let protocol = 'https';
 
+const trackingIds = [];
+
 if (prId) {
   hostname = `pr-${ prId }--amlab.netlify.app`;
+  trackingIds.push('G-JX9EMWYYBW');
 } else if (env === 'development') {
   hostname = 'localhost:8000';
   protocol = 'http';
+} else { // production
+  trackingIds.push('G-6G7FL8W2JR');
 }
 
 const metadata = {
-  title: 'Alex M Lab',
+  title: 'amlab',
   author: 'Alex Malitsky',
   description: 'Unique and detailed posts on tech and auto topics',
   siteUrl: `${ protocol }://${ hostname }`,
@@ -99,9 +104,7 @@ const plugins = [
   {
     resolve: 'gatsby-plugin-google-gtag',
     options: {
-      trackingIds: [
-        'G-6G7FL8W2JR',
-      ],
+      trackingIds,
       // This object gets passed directly to the gtag config command
       gtagConfig: {
         optimize_id: 'OPT_CONTAINER_ID',
