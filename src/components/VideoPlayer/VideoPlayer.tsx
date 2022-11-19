@@ -18,6 +18,8 @@ export function VideoPlayer(props: IVideoPlayerProps): ReactElement {
     src,
   } = props;
 
+  // need to add ?enablejsapi=1 to turn GA tracking
+
   return (
     <div className = { cnVideoPlayer() }>
       <iframe

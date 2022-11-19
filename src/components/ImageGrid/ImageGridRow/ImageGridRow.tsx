@@ -1,9 +1,3 @@
-import React, {
-  ReactElement,
-  useContext,
-  useEffect,
-} from 'react';
-
 import { cn } from '@bem-react/classname';
 import {
   GatsbyImage,
@@ -11,8 +5,14 @@ import {
   getSrc,
   IGatsbyImageData,
 } from 'gatsby-plugin-image';
+import React, {
+  ReactElement,
+  useContext,
+  useEffect,
+} from 'react';
 
 import { lightboxActionsContext } from '../../../react-contexts/lightbox-actions.context';
+import { EGtmEventTypes, gtmEventEmitter } from '../../../services/gtm-event-emitter';
 import { IGridImage } from '../ImageGrid';
 
 import './ImageGridRow.scss';
@@ -72,12 +72,20 @@ export function ImageGridRow(props: IImageGridRow): ReactElement {
           }, index) => {
             const src = getSrc(image.childImageSharp.preview) as string;
 
+            function onImageClick(): void {
+              context.openAt(src);
+
+              gtmEventEmitter(EGtmEventTypes.image_grid_lightbox_open, {
+                lightbox_image_src: src,
+              });
+            }
+
             return (
               <div
                 key = { `${ index }` }
                 data-testid = { cnImageGridRow('Cell') }
                 className = { cnImageGridRow('Cell', sizeModifiers) }
-                onClick = { () => context.openAt(src) }
+                onClick = { () => onImageClick() }
               >
                 <GatsbyImage
                   className = { cnImageGridRow('Cell-Thumb') }

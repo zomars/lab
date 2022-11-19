@@ -1,28 +1,33 @@
-import React, {
-  ReactElement,
-  useEffect,
-} from 'react';
+import { useLocation } from '@reach/router';
 import { WrapPageElementBrowserArgs } from 'gatsby';
-import {
-  useLocation,
-} from '@reach/router';
+import React, { ReactElement, useEffect } from 'react';
 
 import { Header } from '../components/Header/Header';
 import { STATE_CHANGE_EVENT } from '../constants';
+import { usePrevious } from '../hooks/usePrevious.hook';
+import { EGtmEventTypes, gtmEventEmitter } from '../services/gtm-event-emitter';
 
 /**
  * Dispatch an event on app state render.
  */
 function useLocationChange(): void {
   const location = useLocation();
+  const previousLocation = usePrevious(location);
 
   useEffect(() => {
     if (window) {
       const event = new CustomEvent(STATE_CHANGE_EVENT, { detail: { location } });
 
+      gtmEventEmitter(EGtmEventTypes.spa_navigation, {
+        prev_spa_location: previousLocation,
+      });
+
       window.dispatchEvent(event);
     }
-  }, [location]);
+  }, [
+    location,
+    previousLocation,
+  ]);
 }
 
 /**

@@ -77,3 +77,13 @@ export interface IPostTagsMappingQResponse {
 export interface IStateChangeEventDetails {
   location: WindowLocation;
 }
+
+export interface IGTagManager {
+  dataLayer: [unknown];
+}
+
+export function isWindowWithGTagManager(
+  window: Window | Window & IGTagManager,
+): window is (Window & IGTagManager) {
+  return 'dataLayer' in window && Array.isArray(window.dataLayer);
+}

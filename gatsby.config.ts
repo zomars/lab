@@ -19,16 +19,11 @@ const {
 let hostname = 'lab.amalitsky.com';
 let protocol = 'https';
 
-const trackingIds = [];
-
 if (prId) {
   hostname = `pr-${ prId }--amlab.netlify.app`;
-  trackingIds.push('G-JX9EMWYYBW');
 } else if (env === 'development') {
   hostname = 'localhost:8000';
   protocol = 'http';
-} else { // production
-  trackingIds.push('G-6G7FL8W2JR');
 }
 
 const metadata = {
@@ -68,6 +63,19 @@ const mdxPluginConfig = {
   },
 };
 
+const googleTagManagerPlugin = {
+  resolve: 'gatsby-plugin-google-tagmanager',
+  options: {
+    id: 'GTM-KV3CGSG',
+    includeInDevelopment: true,
+    defaultDataLayer: {
+      platform: 'gatsby',
+    },
+    routeChangeEventName: 'gatsby-route-change', // not used in GTM
+    enableWebVitalsTracking: false,
+  },
+};
+
 const plugins = [
   {
     resolve: 'gatsby-source-filesystem',
@@ -101,25 +109,7 @@ const plugins = [
   'gatsby-plugin-sass',
   'gatsby-plugin-split-css',
   mdxPluginConfig,
-  {
-    resolve: 'gatsby-plugin-google-gtag',
-    options: {
-      trackingIds,
-      // This object gets passed directly to the gtag config command
-      gtagConfig: {
-        optimize_id: 'OPT_CONTAINER_ID',
-        anonymize_ip: true,
-        cookie_expires: 0,
-      },
-      // This object is used for configuration specific to this plugin
-      pluginConfig: {
-        // Puts tracking script in the head instead of the body
-        head: false,
-        // Setting this parameter is also optional
-        respectDNT: true,
-      },
-    },
-  }, {
+  googleTagManagerPlugin, {
     resolve: 'gatsby-plugin-sitemap',
     options: sitemapPluginOptions,
   }, {

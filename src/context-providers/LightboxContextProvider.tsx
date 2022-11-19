@@ -5,15 +5,13 @@ import React, {
 } from 'react';
 
 import {
-  ILightboxImage,
   ILightboxActions,
+  ILightboxImage,
   lightboxActionsContext,
 } from '../react-contexts/lightbox-actions.context';
 
-import {
-  ILightboxState,
-  lightboxStateContext,
-} from '../react-contexts/lightbox-state.context';
+import { ILightboxState, lightboxStateContext } from '../react-contexts/lightbox-state.context';
+import { EGtmEventTypes, gtmEventEmitter } from '../services/gtm-event-emitter';
 
 export function LightboxContextProvider(
   { children }: { children: ReactElement },
@@ -33,9 +31,9 @@ export function LightboxContextProvider(
 
       images.set(image.src, image);
 
-      setState({
-        ...state,
-      });
+      setState(prevState => ({
+        ...prevState,
+      }));
     },
     removeImage(imageSrc: string) {
       if (!images.has(imageSrc)) {
@@ -44,21 +42,31 @@ export function LightboxContextProvider(
 
       images.delete(imageSrc);
 
-      setState({
-        ...state,
-      });
+      setState(prevState => ({
+        ...prevState,
+      }));
     },
     close() {
-      setState({
-        ...state,
-        activeSrc: '',
+      setState((prevState) => {
+        gtmEventEmitter(EGtmEventTypes.image_grid_lightbox_close, {
+          lightbox_image_src: prevState.activeSrc,
+        });
+
+        return {
+          ...prevState,
+          activeSrc: '',
+        };
       });
     },
     openAt(imageSrc: string) {
-      setState({
-        ...state,
-        activeSrc: imageSrc,
+      gtmEventEmitter(EGtmEventTypes.image_grid_lightbox_view, {
+        lightbox_image_src: imageSrc,
       });
+
+      setState(prevState => ({
+        ...prevState,
+        activeSrc: imageSrc,
+      }));
     },
   };
 

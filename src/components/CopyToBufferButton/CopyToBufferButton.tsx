@@ -16,10 +16,14 @@ import { cn } from '@bem-react/classname';
 import { classnames } from '@bem-react/classnames';
 
 import { copyTextToBuffer } from '../../services/copy-to-buffer';
+import { gtmEventEmitter, EGtmEventTypes } from '../../services/gtm-event-emitter';
+
+import './CopyToBufferButton.scss';
 
 const copyToBufferButton = cn('CopyToBufferButton');
 
 const notificationDuration = 1000; // ms
+const gtmEventTextLimit = 256;
 
 interface ICopyToBufferButton {
   className?: string;
@@ -109,6 +113,10 @@ export function CopyToBufferButton(props: ICopyToBufferButton): ReactElement {
 
     copyTextToBuffer(textToCopy)
       .then(() => {
+        gtmEventEmitter(EGtmEventTypes.code_snippet_copy, {
+          code_snippet_copy_text: textToCopy.substring(0, gtmEventTextLimit),
+        });
+
         setCopyingStatus({
           state: CopyingState.SUCCESS,
         });
