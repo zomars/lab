@@ -6,9 +6,7 @@ import {
   TCDPNetworkEvents,
 } from '../e2e.types';
 
-type TEventListeners = {
-  [T in ECDPNetworkEvents]: (payload: TCDPNetworkEvents[T]) => void;
-};
+type TEventListeners = (payload: TCDPNetworkEvents[keyof TCDPNetworkEvents]) => void;
 
 /**
  * Proxy CDP Network events of ECDPNetworkEvents type through observable. Can be infinite.
@@ -17,7 +15,7 @@ export function cdpNetworkEvents$(
   session: CDPSession,
 ): Observable<ICDPNetworkEvent> {
   return new Observable((subscriber): TeardownLogic => {
-    const eventListeners: Partial<TEventListeners> = {};
+    const eventListeners = {} as Record<keyof TCDPNetworkEvents, TEventListeners>;
 
     function closeSession(): void {
       Object.values(ECDPNetworkEvents)
