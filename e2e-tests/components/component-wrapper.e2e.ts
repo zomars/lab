@@ -25,6 +25,8 @@ interface ISetHostElementArgs {
 }
 
 // @todo wrap child components automatically
+// @todo allow passing non-host specific selector to pick the right element in the within
+// scopeElement
 export abstract class ComponentWrapper {
   /** ElementHandle of component's host element. */
   protected $host: ElementHandle<HTMLElement> | null = null;

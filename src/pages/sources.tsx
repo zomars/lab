@@ -3,6 +3,7 @@ import React, { ReactElement } from 'react';
 
 import { Layout } from '../components/Layout';
 import { Seo } from '../components/Seo/Seo';
+import { OutboundLink } from '../components/OutboundLink/OutboundLink';
 
 const pageKeywords = [
   'frontend',
@@ -34,60 +35,67 @@ export function Sources(props: PageRendererProps): ReactElement {
       />
       <h1>Sources</h1>
       <p>
-        { description }
+        List of incredibly useful and insightful resources related to frontend development
+        and beyond.
+        <br/>
+        { ' ' } Most of these I&apos;ve read and listened to more than once.
+        <br/>
+        { ' ' } Hope you will find them useful too!
       </p>
 
-      <h2>Blogs</h2>
+      <h2>Blogs and Personal Websites</h2>
       <ul>
         <li>
-          <a href = 'https://blog.mgechev.com'>Minko Gechev</a>
-          {' '}&mdash; Angular and Typescript. Member of Angular team
+          <OutboundLink href = 'https://blog.mgechev.com'>Minko Gechev</OutboundLink>
+          { ' ' } &mdash; Angular and Typescript. Member of Angular team
         </li>
         <li>
-          <a href = 'https://coryrylan.com/'>Cory Rylan</a>
-          {' '}&mdash; modern Web Components. Member of VMware Clarity team
+          <OutboundLink href = 'https://coryrylan.com/'>Cory Rylan</OutboundLink>
+          { ' ' } &mdash; modern Web Components. Ex-member of VMware Clarity team
         </li>
         <li>
-          <a href = 'https://www.yegor256.com'>Yegor Bugayenko</a>
-          {' '}&mdash; software architecture and dev team management.
+          <OutboundLink href = 'https://www.yegor256.com'>Yegor Bugayenko</OutboundLink>
+          { ' ' } &mdash; software architecture and dev team management.
           Quite controversial fellow
         </li>
         <li>
-          <a href = 'https://www.jasonformat.com'>Jason Miller</a>
-          {' '}&mdash; author of Preact. JS and UI goodies
+          <OutboundLink href = 'https://www.jasonformat.com'>Jason Miller</OutboundLink>
+          { ' ' } &mdash; author of Preact JS and other UI goodies
         </li>
         <li>
-          <a href = 'https://www.mynameisjehad.com/author/jehad/'>
+          <OutboundLink href = 'https://www.mynameisjehad.com/author/jehad/'>
             Jehad Affoneh
-          </a>
-          {' '}&mdash; design for enterprise on management level
+          </OutboundLink>
+          { ' ' } &mdash; design management for enterprise businesses
         </li>
         <li>
-          <a href = 'https://svpg.com/articles/'>Marty Cagan</a>
-          {' '}&mdash; product management
+          <OutboundLink href = 'https://svpg.com/articles/'>Marty Cagan</OutboundLink>
+          { ' ' } &mdash; product management
         </li>
       </ul>
 
       <h2>Outstanding Articles</h2>
 
-      <p>Truly extraordinary stuff! Can&apos;t recommend these enough:</p>
+      <p>Extraordinary stuff! Can&apos;t recommend these enough:</p>
 
       <ul>
         <li>
-          <a
+          <OutboundLink
             href = 'http://dmitrysoshnikov.com/ecmascript/javascript-the-core-2nd-edition/'
           >
             JavaScript. The Core
-          </a>
-          {' '}by <a href = 'https://twitter.com/DmitrySoshnikov'>
+          </OutboundLink>
+          { ' ' } by { ' ' }
+          <OutboundLink href = 'https://twitter.com/DmitrySoshnikov'>
             Dmitry Soshnikov
-          </a> &mdash; fundamentals of JS OOP in depth
+          </OutboundLink>
+          { ' ' } &mdash; fundamentals of JS OOP in depth
         </li>
         <li>
-          <a href = 'https://hbr.org/2020/11/how-apple-is-organized-for-innovation'>
+          <OutboundLink href = 'https://hbr.org/2020/11/how-apple-is-organized-for-innovation'>
             Leadership/management approach at Apple
-          </a>
-          {' '}by Joel M. Podolny and Morten T. Hansen
+          </OutboundLink>
+          { ' ' } by Joel M. Podolny and Morten T. Hansen
         </li>
       </ul>
 
@@ -95,25 +103,37 @@ export function Sources(props: PageRendererProps): ReactElement {
 
       <ul>
         <li>
-          <a href = 'https://soundcloud.com/invisionapp/silicon-valley-product-groups'>
+          <OutboundLink href = 'https://soundcloud.com/invisionapp/silicon-valley-product-groups'>
             Why product management is misunderstood
-          </a> with <a href = 'https://twitter.com/cagan'>Marty Cagan</a>
+          </OutboundLink>
+          { ' ' } with { ' ' }
+          <OutboundLink href = 'https://twitter.com/cagan'>Marty Cagan</OutboundLink>
         </li>
         <li>
-          <a href = 'https://podcasts.apple.com/us/podcast/build-with-maggie-crowley/id1445050691'>
+          <OutboundLink
+            href = 'https://podcasts.apple.com/us/podcast/build-with-maggie-crowley/id1445050691'
+          >
             How to Negotiate a Job Offer
-          </a> with <a href = 'https://twitter.com/thelindazhang'>Linda Zhang</a>
+          </OutboundLink>
+          { ' ' } with { ' ' }
+          <OutboundLink href = 'https://twitter.com/thelindazhang'>Linda Zhang</OutboundLink>
         </li>
         <li>
-          <a href = 'https://podcasts.apple.com/us/podcast/design-better-podcast/id1266839739'>
+          <OutboundLink href = 'https://podcasts.apple.com/us/podcast/design-better-podcast/id1266839739'>
             Navigating career changes
-          </a> with <a href = 'https://twitter.com/wertandcompany'>Judy Wert</a>
+          </OutboundLink>
+          { ' ' } with { ' ' }
+          <OutboundLink href = 'https://twitter.com/wertandcompany'>Judy Wert</OutboundLink>
         </li>
         <li>
-          <a href = 'https://podcasts.apple.com/us/podcast/reconsidering/id1583614282'>
+          <OutboundLink href = 'https://podcasts.apple.com/us/podcast/reconsidering/id1583614282'>
             Coaching yourself into a better career
-          </a> with <a href = "https://twitter.com/edbatista">Ed Batista</a>. They talk about what
-          coaching is, how it is different from mentoring and what impact it might have on you life.
+          </OutboundLink>
+          { ' ' } with { ' ' }
+          <OutboundLink href = "https://twitter.com/edbatista">Ed Batista</OutboundLink>.
+          <br/>
+          { ' ' } They talk about concept of coaching, how it is different from mentoring
+          and what impact it might have on you life.
         </li>
       </ul>
 
@@ -121,23 +141,27 @@ export function Sources(props: PageRendererProps): ReactElement {
 
       <ul>
         <li>
-          <a href = 'https://en.wikipedia.org/wiki/The_Pragmatic_Programmer'>
+          <OutboundLink href = 'https://en.wikipedia.org/wiki/The_Pragmatic_Programmer'>
             The Pragmatic Programmer
-          </a>
-          {' '}by Andrew Hunt and David Thomas
+          </OutboundLink>
+          { ' ' } by Andrew Hunt and David Thomas
           &mdash; &quot;Philosophy&quot; of software development
         </li>
         <li>
-          <a href = 'https://en.wikipedia.org/wiki/The_Mythical_Man-Month'>
+          <OutboundLink href = 'https://en.wikipedia.org/wiki/The_Mythical_Man-Month'>
             The Mythical Man-Month
-          </a>
-          {' '}by Fred Brooks
-          &mdash; Management/lead perspective on software development
+          </OutboundLink>
+          { ' ' } by Fred Brooks &mdash; Management/lead perspective on software development
         </li>
         <li>
-          <a href = 'https://www.juliezhuo.com/book/manager.html'>The Making of a Manager</a>
-          {' '}by <a href = 'https://twitter.com/joulee'>Julie Zhuo</a>
-          {' '}&mdash; Management 101 course
+          <OutboundLink
+            href = 'https://www.juliezhuo.com/book/manager.html'
+          >
+            The Making of a Manager
+          </OutboundLink>
+          { ' ' } by { ' ' }
+          <OutboundLink href = 'https://twitter.com/joulee'>Julie Zhuo</OutboundLink>
+          { ' ' } &mdash; Management 101 course
         </li>
       </ul>
 
@@ -145,17 +169,25 @@ export function Sources(props: PageRendererProps): ReactElement {
 
       <ul>
         <li>
-          <a href = "https://javascript.info/">The Modern JS Tutorial</a>
+          <OutboundLink href = 'https://javascript.info/'>The Modern JS Tutorial</OutboundLink>
         </li>
       </ul>
 
       <h2>Twitter lists</h2>
 
-      My compilation of prominent{' '}
-      <a href = 'https://twitter.com/i/lists/1163692012383588352'>
-        frontend folks
-      </a> and developers in general.
-      Explore the list to find and follow domain experts in their respective fields.
+      My compilation of prominent { ' ' }
+      <OutboundLink
+        href = 'https://twitter.com/i/lists/1163692012383588352'
+      >
+        frontend folks and developers in general
+      </OutboundLink>.
+      Follow this list for unexpected enlightenment in various areas of tech.
+      Similar but much shorter (<i>oops&hellip;</i>) list of { ' ' }
+      <OutboundLink
+        href = 'https://twitter.com/i/lists/1260610528000356352'
+      >
+        designers on twitter
+      </OutboundLink>. Follow this one for an inspiration.
     </Layout>
   );
 }

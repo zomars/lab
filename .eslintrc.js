@@ -1,4 +1,5 @@
 const OFF = 0;
+const ERROR = 2;
 
 const config = {
   extends: [
@@ -38,6 +39,14 @@ config.parserOptions = {
     ecmaVersion: 2019,
     jsx: true,
   },
+};
+
+config.rules = {
+  'react/jsx-no-target-blank': [
+    ERROR, {
+      allowReferrer: true,
+    },
+  ],
 };
 
 const e2eTestOverrides = {

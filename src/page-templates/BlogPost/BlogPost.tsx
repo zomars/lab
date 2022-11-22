@@ -20,7 +20,8 @@ import {
   H4,
   H5,
   H6,
-} from '../../components/MDXHeader/MDXHeader';
+} from '../../components/MdxHeader/MdxHeader';
+import { MdxLink } from '../../components/MdxLink/MdxLink';
 import { Note } from '../../components/Note/Note';
 import { PostDateDetails } from '../../components/PostDateDetails/PostDateDetails';
 import { PostEventDetails } from '../../components/PostEventDetails/PostEventDetails';
@@ -81,6 +82,7 @@ const mdxComponents = {
   Note,
   VideoPlayer,
   ImageGrid,
+  a: MdxLink,
 };
 
 interface IGqlResponse {

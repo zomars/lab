@@ -18,9 +18,12 @@ function useLocationChange(): void {
     if (window) {
       const event = new CustomEvent(STATE_CHANGE_EVENT, { detail: { location } });
 
-      gtmEventEmitter(EGtmEventTypes.spa_navigation, {
-        prev_spa_location: previousLocation,
-      });
+      // ignore search param updates
+      if (location.pathname !== previousLocation?.pathname) {
+        gtmEventEmitter(EGtmEventTypes.spa_navigation, {
+          prev_spa_location: previousLocation,
+        });
+      }
 
       window.dispatchEvent(event);
     }

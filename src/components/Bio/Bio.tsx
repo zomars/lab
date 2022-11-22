@@ -4,6 +4,7 @@ import { cn } from '@bem-react/classname';
 import { classnames } from '@bem-react/classnames';
 
 import './Bio.scss';
+import { OutboundLink } from '../OutboundLink/OutboundLink';
 
 const cnBio = cn('Bio');
 
@@ -25,16 +26,23 @@ export function Bio(
       >
         <p>
           Hi! I&apos;m Alex Malitsky &mdash;
-          frontend architect and engineer based in SF bay area.
+          frontend architect and tech lead based in San Francisco Bay area.
         </p>
 
         <p>
           Until recently I worked for VMware as UI team lead and prior to that as a senior UI
-          engineer for the{' '}
-          <a href = "https://www.vmware.com/topics/glossary/content/software-load-balancing">
+          engineer for the {' '}
+          <OutboundLink
+            href = 'https://www.vmware.com/topics/glossary/content/software-load-balancing'
+          >
             software load-balancer
-          </a> UI since the early days
-          of <a href = "https://avinetworks.com/">AviNetworks</a>.
+          </OutboundLink>
+          { ' ' } UI since the early days of { ' ' }
+          <OutboundLink
+            href = 'https://avinetworks.com/'
+          >
+            AviNetworks
+          </OutboundLink>.
         </p>
 
         <p>
@@ -51,11 +59,11 @@ export function Bio(
 
         <p>
           Currently I&apos;m working on web projects of my own (including this blog) and
-          contributing to open source.
+          open source contributions.
         </p>
 
         <p>
-          I&apos;m a big fan of cars (esp car design and racing) and nuclear energy.
+          I&apos;m a big fan of cars (esp car design and sports cars racing) and nuclear energy.
           You can expect posts, projects and examples/illustrations related to those subjects.
         </p>
 
@@ -68,10 +76,10 @@ export function Bio(
 
         <p>
           You can find me on
-          {' '}<a href = 'https://twitter.com/amalitsky'>twitter</a>,
-          {' '}<a href = 'https://github.com/amalitsky/'>github</a>,
-          {' '}<a href = 'https://www.linkedin.com/in/amalitsky'>linkedin</a>
-          {' '}or via <strong>alex at amalitsky dot com</strong>.
+          {' '}<OutboundLink href = 'https://twitter.com/amalitsky'>twitter</OutboundLink>,
+          {' '}<OutboundLink href = 'https://github.com/amalitsky/'>github</OutboundLink>,
+          {' '}<OutboundLink href = 'https://www.linkedin.com/in/amalitsky'>linkedin</OutboundLink>
+          {' '}or at <strong>alex at amalitsky dot com</strong>.
         </p>
       </div>
     </div>

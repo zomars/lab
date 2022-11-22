@@ -18,8 +18,6 @@ import { classnames } from '@bem-react/classnames';
 import { copyTextToBuffer } from '../../services/copy-to-buffer';
 import { gtmEventEmitter, EGtmEventTypes } from '../../services/gtm-event-emitter';
 
-import './CopyToBufferButton.scss';
-
 const copyToBufferButton = cn('CopyToBufferButton');
 
 const notificationDuration = 1000; // ms

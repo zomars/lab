@@ -5,7 +5,7 @@ import React, { ReactElement, useContext } from 'react';
 import { postsListContext } from '../../react-contexts/posts-list.context';
 import { naturalSort } from '../../services/natural-sort';
 
-import { getPostListUrlByTag } from '../../services/urls';
+import { getPostListUrlByTag } from '../../services/get-post-list-url-by-tag';
 import './PostTags.scss';
 
 const cnPostTags = cn('PostTags');

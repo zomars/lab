@@ -5,6 +5,7 @@ import { Tooltip } from '@mui/material';
 import { Layout } from '../../../components/Layout';
 import { NumberSpeller } from '../../../components/NumberSpeller/NumberSpeller';
 import { Seo } from '../../../components/Seo/Seo';
+import { OutboundLink } from '../../../components/OutboundLink/OutboundLink';
 
 import './number-speller.scss';
 
@@ -53,9 +54,13 @@ function NumberSpellerPage(): ReactElement {
         <li>Spaces are ok</li>
         <li>
           Conversion algorithm is
-          hosted on <a href = "https://github.com/amalitsky/number-speller">Github</a> and
+          hosted on { ' ' }
+          <OutboundLink href = 'https://github.com/amalitsky/number-speller'>Github</OutboundLink>
+          { ' ' } and
           is available
-          as <a href = "https://www.npmjs.com/package/number-speller">number-speller</a> NPM package
+          as { ' ' }
+          <OutboundLink href = 'https://www.npmjs.com/package/number-speller'>number-speller</OutboundLink>
+          { ' ' } NPM package
         </li>
         <li>
           Please let me know if you would prefer hyphens for numbers

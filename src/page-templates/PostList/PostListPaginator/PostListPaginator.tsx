@@ -8,7 +8,7 @@ import React, { ReactElement } from 'react';
 import { cn } from '@bem-react/classname';
 import { navigate } from 'gatsby';
 
-import { getPostListUrlByTag } from '../../../services/urls';
+import { getPostListUrlByTag } from '../../../services/get-post-list-url-by-tag';
 
 import './PostListPaginator.scss';
 

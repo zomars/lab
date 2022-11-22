@@ -7,6 +7,8 @@ export enum EGtmEventTypes {
   image_grid_lightbox_close = 'image_grid_lightbox_close',
   image_grid_lightbox_view = 'image_grid_lightbox_view',
   code_snippet_copy = 'code_snippet_copy',
+  outbound_link_click = 'outbound_link_click',
+  header_anchor_link_click = 'header_anchor_link_click',
 }
 
 interface IGtmSpaNavigationEventPayload {
@@ -17,16 +19,29 @@ interface IGtmImageGridLightboxPayload {
   lightbox_image_src: string;
 }
 
-interface IGtmCodeSnippetCopy {
+interface IGtmCodeSnippetCopyPayload {
   code_snippet_copy_text: string;
 }
 
-interface IEGtmEventPayloads {
+interface IGtmOutboundLinkClickPayload {
+  outbound_link_label?: string;
+  outbound_link_url: string;
+  outbound_link_domain: string;
+}
+
+interface IGtmHeaderAnchorLinkClickPayload {
+  header_text: string;
+  header_anchor_id: string;
+}
+
+export interface IEGtmEventPayloads {
   [EGtmEventTypes.spa_navigation]: IGtmSpaNavigationEventPayload;
   [EGtmEventTypes.image_grid_lightbox_open]: IGtmImageGridLightboxPayload;
   [EGtmEventTypes.image_grid_lightbox_close]: IGtmImageGridLightboxPayload;
   [EGtmEventTypes.image_grid_lightbox_view]: IGtmImageGridLightboxPayload;
-  [EGtmEventTypes.code_snippet_copy]: IGtmCodeSnippetCopy;
+  [EGtmEventTypes.code_snippet_copy]: IGtmCodeSnippetCopyPayload;
+  [EGtmEventTypes.outbound_link_click]: IGtmOutboundLinkClickPayload;
+  [EGtmEventTypes.header_anchor_link_click]: IGtmHeaderAnchorLinkClickPayload;
 }
 
 export function gtmEventEmitter<T extends EGtmEventTypes>(

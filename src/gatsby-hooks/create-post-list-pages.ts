@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { CreatePagesArgs } from 'gatsby';
 
-import { getPostListUrlByTag } from '../services/urls';
+import { getPostListUrlByTag } from '../services/get-post-list-url-by-tag';
 import { IBlogPost, IUniquePostTag } from '../types/common.types';
 import { postsPerPage } from '../constants';
 

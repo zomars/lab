@@ -24,13 +24,13 @@ Recently this warning started to appear in GitHub workflow run summary view:
 
 ![GitHub Actions workflow set-output deprecation warning](./github-actions-set-output-deprecation-warning.png)
 
-> The `set-output` command is deprecated and will be disabled soon.
+> The `set-output` command is **deprecated** and will be disabled soon.
 > Please upgrade to using Environment Files.
 
 I went off to investigate it and not only successfully migrated `set-output`
 to the recommended `$GITHUB_OUTPUT` solution, but also was able to replace somewhat
 convoluted pull request commenting approach with a much simpler
-[_Job Summary_](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary)
+_[Job Summary](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary)_
 feature
 [recently introduced by GitHub Actions team](https://github.blog/2022-05-09-supercharging-github-actions-with-job-summaries/).
 
@@ -90,7 +90,7 @@ for deprecated `set-output` and `set-state` commands.
 
 New `echo "{name}={value}" >> $GITHUB_OUTPUT` syntax is quite simple and straightforward to use.
 It is consistent between all
-[_Environment files_](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#environment-files),
+_[Environment files](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#environment-files)_,
 meaning you can set _environment_, _state_ and _output_ variables using the same syntax.
 
 In fact it is very similar to the one used in bash/linux terminal for
@@ -139,7 +139,7 @@ and that pesky warning won't appear on our workflow run summary pages.
 ### Replacing Pull Request Comment with `$GITHUB_STEP_SUMMARY`
 
 While at it I also noticed a new
-[_Job Summary_](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary)
+_[Job Summary](https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary)_
 concept, which allows to render arbitrary workflow step _summaries_ (in markdown)
 on a workflow run page.
 

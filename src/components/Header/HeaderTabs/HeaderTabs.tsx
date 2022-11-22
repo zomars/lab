@@ -10,7 +10,7 @@ import { Tab, Tabs } from '@mui/material';
 
 import { indexPageTag } from '../../../constants';
 import { IPostContext, postsListContext } from '../../../react-contexts/posts-list.context';
-import { getPostListUrlByTag } from '../../../services/urls';
+import { getPostListUrlByTag } from '../../../services/get-post-list-url-by-tag';
 
 import './HeaderTabs.scss';
 

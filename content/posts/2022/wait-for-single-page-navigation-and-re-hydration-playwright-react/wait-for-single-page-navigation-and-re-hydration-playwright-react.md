@@ -176,7 +176,7 @@ This is intentional since `waitForSpaNavigation` is a _page function_ and is
 executed in the _browser_ environment where it won't have access to any variables
 defined in nodejs _testing_ environment.
 
-There is a special way to pass variables into page functions but that
+There is a special way to pass variables into page functions, but that
 would complicate our code even further without a merit.
 
 If you are curious about this subject I recommend reading this
@@ -201,7 +201,7 @@ expect(urlPath).toMatchSnapshot();
 ```
 
 Notice the `await Promise.all` wrapper for `click` _and_ navigation event subscription -
-We _don't_ want to `await` for the `click` _before_ we set up the
+we _don't_ want to `await` for the `click` _before_ we set up the
 `REACT_ROUTER_PAGE_CHANGE_EVENT` event listener.
 Otherwise, we open ourselves to the potential race condition when navigation
 event fires _before_ we get a chance to catch it.
