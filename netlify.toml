@@ -15,6 +15,10 @@
   to = "https://lab.amalitsky.com"
 
 [[redirects]]
+  from = "https://labs.amalitsky.com"
+  to = "https://lab.amalitsky.com"
+
+[[redirects]]
   force = true
   from = "http://en.icode.ru/"
   to = "https://lab.amalitsky.com/projects/number-speller/"
