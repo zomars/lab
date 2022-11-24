@@ -20,7 +20,9 @@ test.describe('MdxLink', () => {
   });
 
   test('internal link click works through the view render', async ({ page }) => {
-    await page.goto('/posts/2021/angularjs-good-parts/');
+    await page.goto('/posts/2021/angularjs-good-parts/', { waitUntil: 'commit' });
+
+    await waitForSpaNavigation(page);
 
     const linkLabel = 'LTS support';
     const innerLink = page.locator(`a:text("${ linkLabel }")`);
