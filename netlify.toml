@@ -11,8 +11,13 @@
   to = "/tags/tech/1/"
 
 [[redirects]]
-  from = "labs.amalitsky.com/*"
-  to = "lab.amalitsky.com/:splat"
+  from = "https://labs.amalitsky.com/*"
+  to = "https://lab.amalitsky.com/:splat"
+  force = true
+
+[[redirects]]
+  from = "http://labs.amalitsky.com/*"
+  to = "https://lab.amalitsky.com/:splat"
   force = true
 
 [[redirects]]
