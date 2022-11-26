@@ -1,8 +1,8 @@
 @use '../../styles/variables' as vars;
 
-.MDXHeader {
+.MdxHeader {
   &:hover {
-    .MDXHeader-ChainLink {
+    .MdxHeader-ChainLink {
       opacity: 1;
     }
   }
@@ -28,7 +28,7 @@
 }
 
 @media (max-width: vars.$breakpoint-md) {
-  .MDXHeader {
+  .MdxHeader {
     // remove indentation on mobile screens
     &-ChainLink {
       display: none;
