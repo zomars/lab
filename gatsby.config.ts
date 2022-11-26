@@ -19,22 +19,40 @@ const {
 let hostname = 'lab.amalitsky.com';
 let protocol = 'https';
 
+const robotsTxtPolicy: Record<string, string | string []> = {
+  userAgent: '*',
+  disallow: '/',
+};
+
+const robotsTxtOptions: Record<string, unknown> = {
+  // defaults for host and sitemap props are good enough
+  policy: [
+    robotsTxtPolicy,
+  ],
+};
+
 if (prId) {
   hostname = `pr-${ prId }--amlab.netlify.app`;
 } else if (env === 'development') {
   hostname = 'localhost:8000';
   protocol = 'http';
+} else { // production (including local)
+  delete robotsTxtPolicy.disallow;
+  robotsTxtPolicy.allow = '/';
 }
+
+const siteUrl = `${ protocol }://${ hostname }`;
 
 const metadata = {
   title: 'amlab',
   author: 'Alex Malitsky',
   description: 'Unique and detailed posts on tech and auto topics',
-  siteUrl: `${ protocol }://${ hostname }`,
+  siteUrl,
   social: {
     twitter: 'amalitsky',
   },
 };
+
 
 const mdxPluginConfig = {
   resolve: 'gatsby-plugin-mdx',
@@ -114,14 +132,7 @@ const plugins = [
     options: sitemapPluginOptions,
   }, {
     resolve: 'gatsby-plugin-robots-txt',
-    options: {
-      policy: [
-        {
-          userAgent: '*',
-          allow: '/',
-        },
-      ],
-    },
+    options: robotsTxtOptions,
   }, {
     resolve: 'gatsby-plugin-svgr-loader',
     options: {
@@ -136,6 +147,7 @@ const config = {
   polyfill: false,
   siteMetadata: metadata,
   plugins,
+  trailingSlash: 'always',
 };
 
 // eslint-disable-next-line import/no-default-export

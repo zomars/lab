@@ -43,6 +43,7 @@ interface ISeoProps {
   pathname?: string;
   image?: ImageDataLike;
   lang?: string;
+  withCanonical?: boolean;
 }
 
 export function Seo(props: ISeoProps): ReactElement {
@@ -56,10 +57,12 @@ export function Seo(props: ISeoProps): ReactElement {
     pathname,
     image,
     keywords,
+    withCanonical,
   } = props;
 
   const description = propsDescription || siteMetadata.description;
   const title = propsTitle || siteMetadata.title;
+  const { siteUrl } = siteMetadata;
 
   const attrs = { lang };
 
@@ -81,13 +84,13 @@ export function Seo(props: ISeoProps): ReactElement {
     title,
     description,
     image: '',
-    url: pathname ? siteMetadata.siteUrl + pathname : '',
+    url: pathname ? `${ siteUrl }${ pathname }` : '',
   };
 
   const gatsbyImage = getImage(image || null);
 
   if (gatsbyImage) {
-    const imgSrc = siteMetadata.siteUrl + getSrc(gatsbyImage);
+    const imgSrc = siteUrl + getSrc(gatsbyImage);
 
     twitterCard.image = imgSrc;
     twitterCard['image:width'] = gatsbyImage.width;
@@ -142,12 +145,22 @@ export function Seo(props: ISeoProps): ReactElement {
     });
   }
 
+  const links: Record<string, string>[] = [];
+
+  if (withCanonical && pathname) {
+    links.push({
+      rel: 'canonical',
+      href: `${ siteUrl }${ pathname }`,
+    });
+  }
+
   return (
     <Helmet
       title = { title }
       htmlAttributes = { attrs }
       titleTemplate = { `%s | ${ siteMetadata.title }` }
       meta = { metaTags }
+      link = { links }
     />
   );
 }

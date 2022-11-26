@@ -1,3 +1,4 @@
+import { PageRendererProps } from 'gatsby';
 import React, { ReactElement } from 'react';
 import { cn } from '@bem-react/classname';
 import { Tooltip } from '@mui/material';
@@ -20,7 +21,7 @@ const keywords = [
   'service',
 ];
 
-function NumberSpellerPage(): ReactElement {
+function NumberSpellerPage(props: PageRendererProps): ReactElement {
   return (
     <Layout
       data-testid = { cnNumberSpellerPage() }
@@ -29,6 +30,8 @@ function NumberSpellerPage(): ReactElement {
         title = 'Spell numbers into English words online'
         description = 'Online numbers speller'
         keywords = { keywords }
+        pathname = { props.location.pathname }
+        withCanonical = { true }
       />
 
       <h2>Spell a Number</h2>

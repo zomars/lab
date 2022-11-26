@@ -32,6 +32,7 @@ export function Sources(props: PageRendererProps): ReactElement {
         keywords = { pageKeywords }
         pathname = { props.location.pathname }
         description = { description }
+        withCanonical = { true }
       />
       <h1>Sources</h1>
       <p>

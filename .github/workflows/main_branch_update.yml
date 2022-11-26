@@ -32,12 +32,12 @@ jobs:
         id: node-modules-cache
         uses: actions/cache@v3
         env:
-          cache-name: node-modules-yarn
-          cache-fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+          cache_name: node-modules-yarn
+          cache_fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
-          restore-keys: ${{ runner.os }}-${{ env.cache-name }}-
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.cache_fingerprint }}
+          restore-keys: ${{ runner.os }}-${{ env.cache_name }}-
 
       - name: Yarn install
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
@@ -77,26 +77,26 @@ jobs:
         id: prod-build-cache
         uses: actions/cache@v3
         env:
-          cache-name: prod-build
+          cache_name: prod-build
           key-1: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
           key-2: ${{ hashFiles('gatsby.config.ts','gatsby.node.ts','gatsby-ssr.tsx','src/html.tsx','src/gatsby-hooks/*.*') }}
         with:
           path: |
             public
             .cache
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-${{ github.sha }}
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.key-1 }}-${{ env.key-2 }}-${{ github.sha }}
           restore-keys: |-
-            ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-${{ env.key-2 }}-
-            ${{ runner.os }}-${{ env.cache-name }}-${{ env.key-1 }}-
+            ${{ runner.os }}-${{ env.cache_name }}-${{ env.key-1 }}-${{ env.key-2 }}-
+            ${{ runner.os }}-${{ env.cache_name }}-${{ env.key-1 }}-
 
       - name: Restore node_modules from cache
         uses: actions/cache@v3
         env:
-          cache-name: node-modules-yarn
-          cache-fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+          cache_name: node-modules-yarn
+          cache_fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.cache_fingerprint }}
 
       - name: Production deploy
         run: yarn deploy-netlify --prod --message "$DEPLOY_MESSAGE"
@@ -128,11 +128,11 @@ jobs:
       - name: Restore node_modules from cache
         uses: actions/cache@v3
         env:
-          cache-name: node-modules-yarn
-          cache-fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+          cache_name: node-modules-yarn
+          cache_fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
         with:
           path: node_modules
-          key: ${{ runner.os }}-${{ env.cache-name }}-${{ env.cache-fingerprint }}
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.cache_fingerprint }}
 
       - name: LHCI
         run: |
@@ -141,3 +141,38 @@ jobs:
         env:
           LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
           LHCI_TOKEN: ${{ secrets.LHCI_TOKEN }}
+
+  # slightly different tests for public(!) production
+  e2e-test:
+    name: E2E Tests
+
+    runs-on: ubuntu-latest
+
+    needs: deploy
+
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        name: Set nodeJs version
+        with:
+          node-version: ${{ env.node_version }}
+
+      - name: Restore node_modules from cache
+        uses: actions/cache@v3
+        env:
+          cache_name: node-modules-yarn
+          cache_fingerprint: ${{ env.node_version }}-${{ hashFiles('yarn.lock') }}
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ env.cache_name }}-${{ env.cache_fingerprint }}
+
+        # figure the better way supporting all the packages
+      - name: Fake yarn postinstall
+        run: yarn playwright install
+
+      - name: Run tests
+        run: yarn test-e2e-public

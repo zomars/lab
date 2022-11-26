@@ -13,6 +13,7 @@ export function About(props: PageRendererProps): ReactElement {
         title = 'About the Author'
         description = 'Alex Malitsky bio'
         pathname = { props.location.pathname }
+        withCanonical = { true }
       />
 
       <h1>About me</h1>
@@ -22,7 +23,7 @@ export function About(props: PageRendererProps): ReactElement {
       <h2>Opensource Projects</h2>
 
       <p>
-        <Link to = '/projects/number-speller'>Spell a Number</Link>
+        <Link to = '/projects/number-speller/'>Spell a Number</Link>
         { ' ' } - spells number in
         plain English. Useful for legal documents.
         { ' ' }

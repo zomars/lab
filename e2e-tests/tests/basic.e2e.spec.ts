@@ -2,7 +2,11 @@ import { test, expect } from '@playwright/test';
 
 import { PostList } from '../../src/page-templates/PostList/PostList.e2e';
 
-import { skipOnDevBuild } from '../utils';
+import {
+  skipOnDevBuild,
+  skipOnNonPublicProduction,
+  skipOnPublicProduction,
+} from '../utils';
 
 test.describe('basics', () => {
   test.beforeEach(({ page }) => {
@@ -35,11 +39,51 @@ test.describe('basics', () => {
     test('serves robots txt file', async ({ page }) => {
       await page.goto('/robots.txt');
 
-      const contentRegexStr = '^Sitemap:.*sitemap-index\\.xml$';
+      const sitemapRegexStr = '^Sitemap:.*sitemap-index\\.xml$';
 
-      const element = await page.$(`text=/${contentRegexStr}/m`);
+      const sitemapLine = page.locator(`text=/${ sitemapRegexStr }/m`);
 
-      expect(element).not.toBeNull();
+      await expect(sitemapLine).not.toBeEmpty();
+    });
+
+    test.describe('non-public production env', () => {
+      test.skip(skipOnPublicProduction);
+
+      test('robots file disallows indexing', async ({ page }) => {
+        await page.goto('/robots.txt');
+
+        const disallowRegexStr = '^Disallow: /$';
+
+        const disallowLine = page.locator(`text=/${ disallowRegexStr }/m`);
+
+        await expect(disallowLine).not.toBeEmpty();
+
+        const allowRegexStr = '^Allow: /$';
+
+        const allowLine = page.locator(`text=/${ allowRegexStr }/m`);
+
+        await expect(allowLine).toHaveCount(0);
+      });
+    });
+
+    test.describe('public production env', () => {
+      test.skip(skipOnNonPublicProduction);
+
+      test('robots file allows indexing', async ({ page }) => {
+        await page.goto('/robots.txt');
+
+        const disallowRegexStr = '^Disallow: /$';
+
+        const disallowLine = page.locator(`text=/${ disallowRegexStr }/m`);
+
+        await expect(disallowLine).toHaveCount(0);
+
+        const allowRegexStr = '^Allow: /$';
+
+        const allowLine = page.locator(`text=/${ allowRegexStr }/m`);
+
+        await expect(allowLine).not.toBeEmpty();
+      });
     });
 
     test('serves sitemap-index.xml', async ({ page }) => {

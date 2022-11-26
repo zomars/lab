@@ -140,6 +140,7 @@ export class BlogPostTemplate extends React.Component<IBlogPostTemplateProps> {
           description = { description || post.excerpt }
           pathname = { location.pathname }
           image = { coverImage?.childImageSharp }
+          withCanonical = { true }
         />
 
         <article>

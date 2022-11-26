@@ -120,3 +120,11 @@ export function waitForSpaNavigationInNewTab(context: BrowserContext): Promise<P
 export function skipOnDevBuild(): boolean {
   return process.env.NODE_ENV === 'development';
 }
+
+export function skipOnNonPublicProduction(): boolean {
+  return process.env.NODE_ENV === 'development' || !!process.env.pr_id;
+}
+
+export function skipOnPublicProduction(): boolean {
+  return !skipOnNonPublicProduction();
+}
