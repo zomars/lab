@@ -122,6 +122,13 @@ const plugins = [
         },
       ],
     },
+  }, {
+    resolve: 'gatsby-plugin-svgr-loader',
+    options: {
+      rule: {
+        include: /\.import\.svg$/,
+      },
+    },
   },
 ];
 

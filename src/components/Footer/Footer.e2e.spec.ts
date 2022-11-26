@@ -22,7 +22,7 @@ test.describe('site header', () => {
 
       const icons = await footer.getIcons();
 
-      expect(icons).toHaveLength(3);
+      expect(icons).toHaveLength(4);
 
       await expect(footer.getCopyright()).resolves.toBeTruthy();
 

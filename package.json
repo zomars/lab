@@ -67,6 +67,7 @@
     "eslint-plugin-react": "^7.31.9",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-rxjs": "^5.0.2",
+    "gatsby-plugin-svgr-loader": "^0.1.0",
     "glob": "^8.0.3",
     "gzip-size": "6.x.x",
     "husky": "^8.0.1",

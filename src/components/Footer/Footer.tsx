@@ -1,11 +1,14 @@
+import React, { ReactElement } from 'react';
 import { IconButton } from '@mui/material';
+
 import {
   GitHub as GutHubIcon,
   LinkedIn as LinkedInIcon,
   Mail as MailIcon,
 } from '@mui/icons-material';
-import React, { ReactElement } from 'react';
+
 import { cn } from '@bem-react/classname';
+import { LighthouseIcon } from '../LighthouseIcon/LighthouseIcon';
 
 const cnFooter = cn('Footer');
 
@@ -30,6 +33,17 @@ export const Footer = (): ReactElement => {
             <GutHubIcon/>
           </IconButton>
           <IconButton
+            component = 'a'
+            target = '_blank'
+            aria-label = 'Lighthouse CI'
+            rel = 'nofollow'
+            href = 'https://lab-lhci.herokuapp.com/app/projects/amlab/dashboard?branch=main'
+            data-testid = { cnFooter('Icon') }
+          >
+            <LighthouseIcon/>
+          </IconButton>
+          <IconButton
+            target = '_blank'
             href = 'https://www.linkedin.com/in/amalitsky/'
             component = 'a'
             aria-label = 'LinkedIn'
