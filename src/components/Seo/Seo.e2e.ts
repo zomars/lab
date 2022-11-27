@@ -11,6 +11,7 @@ enum HeadSelector {
   title = 'title',
   twitterMetaTag = 'meta[name^="twitter:"]',
   fbMetaTag = 'meta[property^="og:"]',
+  canonicalLink = 'link[rel=canonical]',
 }
 
 const waitForSelectorOptions: IElementHandleWaitForSelectorOptions = {
@@ -39,5 +40,11 @@ export class Head extends ComponentWrapper {
 
   public getTwitterCardMetaTags(): Promise<ElementHandle<HTMLMetaElement>[]> {
     return this.getElements<HTMLMetaElement>(HeadSelector.twitterMetaTag, waitForSelectorOptions);
+  }
+
+  public getCanonicalLinkHref(): Promise<string> {
+    const link = this.$page.locator(HeadSelector.canonicalLink);
+
+    return link.getAttribute('href');
   }
 }

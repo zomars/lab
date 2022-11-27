@@ -90,6 +90,12 @@ async function testBlogPostPage(
     expect(value).not.toBe('');
     expect(value).toBeDefined();
   }
+
+  const canonicalLink = await head.getCanonicalLinkHref();
+
+  expect(canonicalLink.endsWith(postUrl)).toBeTruthy();
+
+  expect(canonicalLink.startsWith('http')).toBeTruthy();
 }
 
 test.describe('Post page', () => {
