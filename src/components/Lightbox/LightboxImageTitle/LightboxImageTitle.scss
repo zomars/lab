@@ -1,0 +1,8 @@
+.LightboxImageTitle {
+  display: flex;
+  gap: var(--aml-global-layout-padding-md);
+
+  &-IndexOf {
+    font-style: italic;
+  }
+}

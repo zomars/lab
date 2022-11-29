@@ -19,6 +19,10 @@ interface IGtmImageGridLightboxPayload {
   lightbox_image_src: string;
 }
 
+interface IGtmImageGridLightboxViewPayload extends IGtmImageGridLightboxPayload {
+  lightbox_image_weight: number; // when 1 of 25 pics then weight is 1/25
+}
+
 interface IGtmCodeSnippetCopyPayload {
   code_snippet_copy_text: string;
 }
@@ -38,7 +42,7 @@ export interface IEGtmEventPayloads {
   [EGtmEventTypes.spa_navigation]: IGtmSpaNavigationEventPayload;
   [EGtmEventTypes.image_grid_lightbox_open]: IGtmImageGridLightboxPayload;
   [EGtmEventTypes.image_grid_lightbox_close]: IGtmImageGridLightboxPayload;
-  [EGtmEventTypes.image_grid_lightbox_view]: IGtmImageGridLightboxPayload;
+  [EGtmEventTypes.image_grid_lightbox_view]: IGtmImageGridLightboxViewPayload;
   [EGtmEventTypes.code_snippet_copy]: IGtmCodeSnippetCopyPayload;
   [EGtmEventTypes.outbound_link_click]: IGtmOutboundLinkClickPayload;
   [EGtmEventTypes.header_anchor_link_click]: IGtmHeaderAnchorLinkClickPayload;

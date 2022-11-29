@@ -5,7 +5,7 @@ import {
 } from '../../../e2e-tests/components/component-wrapper.e2e';
 
 export enum ImageGridSelector {
-  host = 'data-testid=ImageGrid',
+  host = '[data-testid=ImageGrid]',
   image = 'picture img',
 }
 

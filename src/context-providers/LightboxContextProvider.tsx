@@ -12,6 +12,7 @@ import {
 
 import { ILightboxState, lightboxStateContext } from '../react-contexts/lightbox-state.context';
 import { EGtmEventTypes, gtmEventEmitter } from '../services/gtm-event-emitter';
+import { toFixedNumber } from '../services/to-fixed-number';
 
 export function LightboxContextProvider(
   { children }: { children: ReactElement },
@@ -61,6 +62,7 @@ export function LightboxContextProvider(
     openAt(imageSrc: string) {
       gtmEventEmitter(EGtmEventTypes.image_grid_lightbox_view, {
         lightbox_image_src: imageSrc,
+        lightbox_image_weight: toFixedNumber(1 / images.size, 4),
       });
 
       setState(prevState => ({

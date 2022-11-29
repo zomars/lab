@@ -36,8 +36,8 @@ const config: PlaywrightTestConfig = {
     browserName: 'chromium',
     headless: true,
     viewport: {
-      height: 800,
       width: 1280,
+      height: 800,
     },
     ignoreHTTPSErrors: true,
     video: 'on-first-retry',
@@ -51,6 +51,9 @@ const config: PlaywrightTestConfig = {
   testIgnore: testPathIgnorePatterns,
   expect: {
     toMatchSnapshot: {
+      maxDiffPixelRatio: 0.06,
+    },
+    toHaveScreenshot: {
       maxDiffPixelRatio: 0.06,
     },
   },

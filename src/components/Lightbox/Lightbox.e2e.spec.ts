@@ -1,86 +1,76 @@
 import { test, expect } from '@playwright/test';
-import { BlogPost } from '../../page-templates/BlogPost/BlogPost.e2e';
-import { ImageGrid } from '../ImageGrid/ImageGrid.e2e';
-import { LightboxOverlay } from './LightboxOverlay.e2e';
+import { Locator } from 'playwright';
+import { waitForSpaNavigation } from '../../../e2e-tests/utils';
+import { ImageGridSelector } from '../ImageGrid/ImageGrid.e2e';
+import { LightboxOverlaySelector } from './LightboxOverlay.e2e';
 
 const postUrl = 'posts/2022/034-motorsport-summerfest/';
 
 test.describe('Lightbox', () => {
-  test.beforeEach(({ page }) => {
-    return page.goto(postUrl);
+  test.beforeEach(async ({ page }) => {
+    await page.goto(postUrl, { waitUntil: 'commit' });
+    await waitForSpaNavigation(page);
   });
 
   test('initially there is no overlay on post page', async ({ page }) => {
-    const lightboxOverlay = new LightboxOverlay({
-      page,
-      waitForSelectorOptions: {
-        timeout: 5000, // default timeout is 10000
-      },
-    });
+    const lightboxOverlay = page.locator(LightboxOverlaySelector.host);
 
-    await expect(lightboxOverlay.isConnected).rejects.toThrow();
+    // no wait here
+    expect(await lightboxOverlay.isVisible()).toEqual(false);
   });
 
   test('opens overlay on imageGrid click', async ({ page }) => {
-    const blogPost = new BlogPost({ page });
+    const imageGrid = page.locator(`:nth-match(${ ImageGridSelector.host }, 2)`);
 
-    await blogPost.isConnected;
-
-    const [imageGridHandler] = await blogPost.getImageGrids();
-
-    const imageGrid = new ImageGrid({
-      page,
-      hostElement: imageGridHandler,
-    });
-
-    await imageGrid.isConnected;
-
-    const [imageThumb] = await imageGrid.getImages();
+    const imageThumb = imageGrid.locator(`:nth-match(${ ImageGridSelector.image }, 4)`);
 
     await imageThumb.click();
 
-    const lightboxOverlay = new LightboxOverlay({ page });
+    const lightboxOverlay = page.locator(LightboxOverlaySelector.host);
 
-    await lightboxOverlay.isConnected;
+    expect(await lightboxOverlay.isVisible()).toEqual(true);
 
-    await lightboxOverlay.getImage();
+    const fullSizeImage = lightboxOverlay.locator(LightboxOverlaySelector.image);
 
-    // fixme: Figure out how to consistently pick the nth image on the page
-    // expect(await image.screenshot()).toHaveScreenshot();
+    await fullSizeImage.waitFor();
+
+    // golden GTI
+    await expect(fullSizeImage).toHaveScreenshot('full-size-image-1.png', {
+      mask: [
+        lightboxOverlay.locator(LightboxOverlaySelector.toolbar),
+      ],
+    });
+
+    const imageTitle = lightboxOverlay.locator(LightboxOverlaySelector.title);
+
+    expect(await imageTitle.innerText()).toMatchSnapshot('inner-text');
+
+    const indexOf = lightboxOverlay.locator(LightboxOverlaySelector.indexOf);
+
+    expect(await indexOf.innerText()).toMatchSnapshot('index-of');
   });
 
   test.describe('overlay closing', () => {
-    let lightboxOverlay: LightboxOverlay;
+    let lightboxOverlay: Locator;
 
     test.beforeEach(async ({ page }) => {
-      const blogPost = new BlogPost({ page });
+      const imageGrid = page.locator(`:nth-match(${ ImageGridSelector.host }, 2)`);
 
-      await blogPost.isConnected;
-
-      const [imageGridHandler] = await blogPost.getImageGrids();
-
-      const imageGrid = new ImageGrid({
-        page,
-        hostElement: imageGridHandler,
-      });
-
-      await imageGrid.isConnected;
-
-      const [imageThumb] = await imageGrid.getImages();
+      const imageThumb = imageGrid.locator(`:nth-match(${ ImageGridSelector.image }, 4)`);
 
       await imageThumb.click();
 
-      lightboxOverlay = new LightboxOverlay({ page });
+      lightboxOverlay = page.locator(LightboxOverlaySelector.host);
 
-      await lightboxOverlay.isConnected;
+      expect(await lightboxOverlay.isVisible()).toEqual(true);
     });
 
     test.afterEach(async () => {
-      await expect(lightboxOverlay.waitForDisconnected(5000)).resolves.toEqual(true);
+      await lightboxOverlay.waitFor({ state: 'detached' });
     });
 
     test('closes the overlay on close button click', async () => {
-      const closeButton = await lightboxOverlay.getCloseButton();
+      const closeButton = await lightboxOverlay.locator(LightboxOverlaySelector.closeButton);
 
       await closeButton.click();
     });

@@ -9,10 +9,13 @@ import {
 } from '../../react-contexts/lightbox-actions.context';
 
 import { lightboxStateContext } from '../../react-contexts/lightbox-state.context';
+import { LightboxImageTitle } from './LightboxImageTitle/LightboxImageTitle';
+
+import './Lightbox.scss';
 
 interface ILightboxProps {
   mainSrc: string;
-  imageTitle?: string;
+  imageTitle?: ReactElement;
   prevSrc?: string;
   nextSrc?: string;
   prevLabel?: string;
@@ -33,10 +36,18 @@ export function getLightboxPropsByImageSrc(
   }
 
   const { title } = images.get(src) as ILightboxImage;
+  // not very efficient approach
+  const index = Array.from(images.keys()).indexOf(src) + 1;
 
   const props = {
     mainSrc: src,
-    imageTitle: title,
+    imageTitle: (
+      <LightboxImageTitle
+        title = { title! }
+        index = { index }
+        length = { images.size }
+      />
+    ),
   };
 
   const keys = Array.from(images.keys());
@@ -76,6 +87,7 @@ export function Lightbox(): ReactElement | null {
 
   const reactModalProps = {
     testId: cnLightbox('Portal-Content'),
+    htmlOpenClassName: cnLightbox('HTML', { open: true }),
   };
 
   const lightboxProps = getLightboxPropsByImageSrc(images, activeSrc);

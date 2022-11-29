@@ -1,0 +1,7 @@
+.Lightbox {
+  // no background scroll
+  &-HTML_open {
+    position: relative;
+    overflow: hidden;
+  }
+}
