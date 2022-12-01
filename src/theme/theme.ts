@@ -8,6 +8,7 @@ export const breakpoints = {
   xs: 0,
   sm: 600,
   md: 960,
+  blogPostMd: 1060, // three columns: 50 + 960 + 50
   lg: 1280,
   xl: 1920,
 };

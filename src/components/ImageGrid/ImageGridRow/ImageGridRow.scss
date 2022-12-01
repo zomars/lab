@@ -11,7 +11,7 @@ $component-name: 'ImageGridRow';
       cursor: pointer;
 
       .#{$component-name}-Cell-Thumb {
-        filter: brightness(0.65);
+        filter: brightness(0.85);
       }
 
       .#{$component-name}-Cell-Title {

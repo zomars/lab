@@ -4,6 +4,7 @@ import {
   Alert,
   AlertProps,
   ButtonProps,
+  Portal,
 } from '@mui/material';
 
 import React, {
@@ -14,13 +15,13 @@ import React, {
 
 import { cn } from '@bem-react/classname';
 import { classnames } from '@bem-react/classnames';
+import { alertNotificationDuration } from '../../constants';
 
 import { copyTextToBuffer } from '../../services/copy-to-buffer';
 import { gtmEventEmitter, EGtmEventTypes } from '../../services/gtm-event-emitter';
 
 const copyToBufferButton = cn('CopyToBufferButton');
 
-const notificationDuration = 1000; // ms
 const gtmEventTextLimit = 256;
 
 interface ICopyToBufferButton {
@@ -67,7 +68,7 @@ function useCopyingAlert(
 
       timeoutId = setTimeout(
         () => setShowAlert(false),
-        notificationDuration,
+        alertNotificationDuration,
       );
     }
 
@@ -151,16 +152,18 @@ export function CopyToBufferButton(props: ICopyToBufferButton): ReactElement {
         { btnLabel || 'Copy' }
       </Button>
 
-      <Snackbar
-        key = 'code-snippet-copied'
-        open = { alertIsVisible }
-      >
-        <Alert
-          color = { alertColor }
+      <Portal>
+        <Snackbar
+          key = 'code-snippet-copied'
+          open = { alertIsVisible }
         >
-          { alertMessage }
-        </Alert>
-      </Snackbar>
+          <Alert
+            color = { alertColor }
+          >
+            { alertMessage }
+          </Alert>
+        </Snackbar>
+      </Portal>
     </>
   );
 }

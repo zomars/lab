@@ -8,7 +8,7 @@ import {
   toArray,
 } from 'rxjs';
 
-import { BlogPost } from '../../page-templates/BlogPost/BlogPost.e2e';
+import { Post } from '../../page-templates/Post/Post.e2e';
 import { ImageGrid } from './ImageGrid.e2e';
 
 const postUrl = 'posts/2022/034-motorsport-summerfest/';
@@ -16,12 +16,12 @@ const expectedImageGridQ = 3;
 const expectedImageQ = 13;
 
 test.describe('ImageGrid', () => {
-  let blogPost: BlogPost;
+  let blogPost: Post;
 
   test.beforeEach(async ({ page }) => {
     await page.goto(postUrl);
 
-    blogPost = new BlogPost({ page });
+    blogPost = new Post({ page });
 
     await expect(blogPost.isConnected).resolves.toBeTruthy();
   });

@@ -9,6 +9,9 @@ export enum EGtmEventTypes {
   code_snippet_copy = 'code_snippet_copy',
   outbound_link_click = 'outbound_link_click',
   header_anchor_link_click = 'header_anchor_link_click',
+  post_like_button_click = 'post_like_button_click',
+  post_scroll_to_top_click = 'post_scroll_to_top_click',
+  post_share_click = 'post_share_click',
 }
 
 interface IGtmSpaNavigationEventPayload {
@@ -38,6 +41,15 @@ interface IGtmHeaderAnchorLinkClickPayload {
   header_anchor_id: string;
 }
 
+interface IGtmPostClickPayload {
+  post_id: string; // in addition to page URL which we have by design
+  post_header: string;
+}
+
+interface IGtmPostShareClickPayload extends IGtmPostClickPayload {
+  share_social_network: string;
+}
+
 export interface IEGtmEventPayloads {
   [EGtmEventTypes.spa_navigation]: IGtmSpaNavigationEventPayload;
   [EGtmEventTypes.image_grid_lightbox_open]: IGtmImageGridLightboxPayload;
@@ -46,6 +58,9 @@ export interface IEGtmEventPayloads {
   [EGtmEventTypes.code_snippet_copy]: IGtmCodeSnippetCopyPayload;
   [EGtmEventTypes.outbound_link_click]: IGtmOutboundLinkClickPayload;
   [EGtmEventTypes.header_anchor_link_click]: IGtmHeaderAnchorLinkClickPayload;
+  [EGtmEventTypes.post_like_button_click]: IGtmPostClickPayload;
+  [EGtmEventTypes.post_scroll_to_top_click]: IGtmPostClickPayload;
+  [EGtmEventTypes.post_share_click]: IGtmPostShareClickPayload;
 }
 
 export function gtmEventEmitter<T extends EGtmEventTypes>(

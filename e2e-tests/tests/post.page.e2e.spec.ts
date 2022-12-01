@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-import { BlogPost } from '../../src/page-templates/BlogPost/BlogPost.e2e';
+import { Post } from '../../src/page-templates/Post/Post.e2e';
 import { Head } from '../../src/components/Seo/Seo.e2e';
 import { getElementHandleAttributes, skipOnDevBuild } from '../utils';
 
@@ -33,7 +33,7 @@ const postTags = [
 ];
 
 async function testBlogPostPage(
-  post: BlogPost,
+  post: Post,
   head: Head,
 ): Promise<void> {
   await post.isConnected;
@@ -102,7 +102,7 @@ test.describe('Post page', () => {
   test('renders the post with JS', async ({ page }) => {
     await page.goto(postUrl);
 
-    const post = new BlogPost({ page });
+    const post = new Post({ page });
     const head = new Head({ page });
 
     await testBlogPostPage(post, head);
@@ -122,7 +122,7 @@ test.describe('Post page', () => {
 
       await page.goto(postUrl);
 
-      const post = new BlogPost({ page });
+      const post = new Post({ page });
       const head = new Head({ page });
 
       await testBlogPostPage(post, head);

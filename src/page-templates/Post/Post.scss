@@ -1,0 +1,72 @@
+@use '../../styles/variables' as vars;
+
+.Post {
+  &.Layout {
+    max-width: unset;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  & > .Layout-View {
+    display: flex;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  &-CenterColumn {
+    z-index: 1;
+    flex: 1 1 var(--aml-global-layout-width-lg);
+    min-width: 0;
+    padding-right: var(--aml-global-layout-padding-md);
+    padding-left: var(--aml-global-layout-padding-md);
+
+    // need bg color to hide menu shadow
+    background-color: var(--aml-color-page-background);
+  }
+
+  &-SideColumn {
+    position: relative;
+    z-index: 0;
+    flex-shrink: 100;
+    width: calc((100vw - var(--aml-global-layout-width-lg)) / 2);
+    will-change: transform;
+    min-width: 0;
+
+    // overflow: hidden or auto prevents menu's position: sticky from working
+  }
+
+  &-Details {
+    color: var(--aml-color-muted-text);
+    font-style: italic;
+  }
+
+  &-BottomLine {
+    margin-top: var(--aml-size-8);
+  }
+
+  &-BottomMenu {
+    display: flex;
+    margin: var(--aml-size-5) 0;
+  }
+
+  &-SideMenu_vertical {
+    display: inline-block;
+    position: sticky;
+    top: 120px;
+    right: 0;
+    margin: 0;
+  }
+
+  &-SideMenu_horizontal {
+    margin: 0 0 0 auto;
+  }
+
+  .MuiTable-root {
+    margin-top: var(--aml-size-sm);
+    margin-bottom: var(--aml-size-md);
+  }
+
+  .ImageGrid {
+    margin: var(--aml-global-layout-padding-sm) 0;
+  }
+}

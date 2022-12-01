@@ -1,0 +1,60 @@
+@use 'sass:math';
+@use 'sass:string';
+
+// Return x and y for the transform translate property
+@function circumference-translate(
+  $index,
+  $total,
+  $radius,
+  $start-deg: 270deg,
+) {
+  $step-deg: math.div(360deg, $total);
+  $y: math.sin($start-deg + $step-deg * $index) * $radius;
+  $x: math.cos($start-deg + $step-deg * $index) * $radius;
+
+  @return string.unquote($x + ' ' + $y);
+}
+
+@mixin children-on-circumference-via-translate($total, $radius) {
+  @for $i from 0 to $total {
+    &:nth-child(#{ $i + 1 }) {
+      translate: circumference-translate($i, $total, $radius);
+    }
+  }
+}
+
+.ShareButton {
+  $icon-size: 32px; // has to match JS code
+  $popover-size: 120px;
+
+  &-Popover {
+    .MuiPopover-paper {
+      position: relative;
+      width: $popover-size;
+      height: $popover-size;
+      overflow: hidden;
+      border: none;
+      border-radius: math.div($popover-size, 2);
+      background:
+        radial-gradient(
+          transparent,
+          var(--aml-color-gray-100) 40%
+      );
+    }
+  }
+
+  &-SocialButton {
+    display: block;
+    position: absolute;
+    top: calc(50% - #{ math.div($icon-size, 2) });
+    right: calc(50% - #{ math.div($icon-size, 2) });
+    margin: 0;
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+
+    // 4px for padding
+    @include children-on-circumference-via-translate(7, math.div($popover-size - $icon-size - 4px, 2));
+  }
+}

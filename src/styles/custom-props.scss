@@ -12,6 +12,7 @@
   --aml-global-layout-padding-md: var(--aml-size-6); // 20px
   --aml-global-layout-padding-lg: var(--aml-size-8);
   --aml-global-layout-width-lg: var(--aml-breakpoint-md);
+  --aml-color-page-background: #FFF;
 }
 
 @media (max-width: vars.$breakpoint-md) {

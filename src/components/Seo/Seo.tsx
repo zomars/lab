@@ -1,33 +1,13 @@
 import React, { ReactElement } from 'react';
+import { each } from 'lodash';
 import {
   getImage,
   getSrc,
   ImageDataLike,
 } from 'gatsby-plugin-image';
 import { Helmet } from 'react-helmet';
-import { useStaticQuery, graphql } from 'gatsby';
-import { each } from 'lodash';
 
-import { ISiteMetadata } from '../../types/common.types';
-
-const detailsQuery = graphql`
-  query DefaultSEOQuery {
-    site {
-      siteMetadata {
-        title
-        description
-        author
-        siteUrl
-      }
-    }
-  }
-`;
-
-const useSiteMetadata = (): ISiteMetadata => {
-  const { site } = useStaticQuery(detailsQuery);
-
-  return site.siteMetadata;
-};
+import { useSiteMetadata } from '../../hooks/useSiteMetadata.hook';
 
 interface IHelmetMetaTag {
   property?: string;

@@ -1,0 +1,30 @@
+.PostSideMenu {
+  padding: 0;
+  border-width: 1px 1px 1px 0;
+  border-style: solid;
+  border-radius: 0 var(--aml-size-7) var(--aml-size-7) 0;
+  border-color: var(--aml-color-gray-200);
+  background-color: var(--aml-color-gray-100);
+
+  &_vertical {
+    &:hover {
+      box-shadow:
+        4px 4px 5px 0 rgba(0 0 0 / 14%),
+        0 1px 10px 0 rgba(0 0 0 / 12%);
+    }
+  }
+
+  &_horizontal {
+    border-width: 1px 0 1px 1px;
+    border-radius: var(--aml-size-7) 0 0 var(--aml-size-7);
+
+    .PostSideMenu-ListElement {
+      display: inline-block;
+    }
+  }
+
+  &-ListElement {
+    list-style-position: inside;
+    list-style-type: none;
+  }
+}

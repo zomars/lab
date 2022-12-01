@@ -1,6 +1,8 @@
 .Header {
   // magic number so that tabs indicator is properly aligned
   $magic-max-height: 2.66rem; // 48px
+  position: relative !important;
+  z-index: 2;
 
   &-IconWrapper {
     display: flex;

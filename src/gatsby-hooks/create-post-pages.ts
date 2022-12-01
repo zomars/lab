@@ -41,8 +41,8 @@ export const postsQuery = /* GraphQL */ `
   }
 `;
 
-const blogPostComponentPath = path.resolve(
-  './src/page-templates/BlogPost/BlogPost.tsx',
+const postComponentPath = path.resolve(
+  './src/page-templates/Post/Post.tsx',
 );
 
 export async function createPostPages(
@@ -62,7 +62,7 @@ export async function createPostPages(
 
     createPage({
       path,
-      component: `${ blogPostComponentPath }?__contentFilePath=${ post.internal.contentFilePath }`,
+      component: `${ postComponentPath }?__contentFilePath=${ post.internal.contentFilePath }`,
       context: {
         slug: path,
         // MDX renderer needs some frontmatter stuff to be passed via pageContext

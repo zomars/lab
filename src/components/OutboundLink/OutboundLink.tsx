@@ -27,7 +27,7 @@ interface IOutboundLinkProps {
 // Loosely based on
 // https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-plugin-google-gtag/src/index.js
 
-const cnOutboundLinkComponent = cn('OutboundLinkComponent');
+const cnOutboundLink = cn('OutboundLink');
 
 function OutboundLinkComponent(
   {
@@ -100,8 +100,8 @@ function OutboundLinkComponent(
     <a
       ref = { ref }
       target = { target }
-      data-testid = { classnames(cnOutboundLinkComponent(), dataTestId) }
-      className = { classnames(cnOutboundLinkComponent(), className) }
+      data-testid = { classnames(cnOutboundLink(), dataTestId) }
+      className = { classnames(cnOutboundLink(), className) }
       onClick = { e => onClick(e) }
       { ...props }
     >

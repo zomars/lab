@@ -18,10 +18,15 @@ const fontsToPreload = [
  * Adds footer to all pages rendered.
  */
 export function onRenderBody(
-  { setPostBodyComponents, setHeadComponents }: RenderBodyArgs,
+  {
+    setPostBodyComponents,
+    setHeadComponents,
+  }: RenderBodyArgs,
 ): void {
   setPostBodyComponents([
-    <Footer key = 'footer'/>,
+    <Footer
+      key = 'footer'
+    />,
   ]);
 
   const fonts = fontsToPreload.map(

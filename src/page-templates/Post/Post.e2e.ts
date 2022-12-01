@@ -8,14 +8,14 @@ import { getElementHandleAttributes, getElementHandleInnerTexts } from '../../..
 import { ImageGridSelector } from '../../components/ImageGrid/ImageGrid.e2e';
 
 enum BlogPostSelector {
-  host = '[data-testid~=BlogPost]',
+  host = '[data-testid~=Post]',
   tag = '[data-testid~=PostTags-Tag]',
-  body = '[data-testid=BlogPost-Body]',
-  title = '[data-testid=BlogPost-Title]',
+  body = '[data-testid=Post-Body]',
+  title = '[data-testid=Post-Title]',
   image = 'img',
 }
 
-export class BlogPost extends ComponentWrapper {
+export class Post extends ComponentWrapper {
   constructor(args: IComponentWrapperArgs) {
     super({
       hostSelector: BlogPostSelector.host,

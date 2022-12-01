@@ -73,6 +73,16 @@ export function Sources(props: PageRendererProps): ReactElement {
           <OutboundLink href = 'https://svpg.com/articles/'>Marty Cagan</OutboundLink>
           { ' ' } &mdash; product management
         </li>
+        <li>
+          <OutboundLink href = 'https://codsen.com/os'>Roy Revelt (Codsen)</OutboundLink>
+          { ' ' } &mdash; <i>serial</i> opensource contributor with over <b>150</b>
+          { ' ' } NPM packages under his belt.
+          { ' ' } I&apos;m using the amazing
+          { ' ' } <OutboundLink href = 'https://codsen.com/os/remark-typography/'>
+            remark-typography
+          </OutboundLink>
+          { ' ' } on this website to fix up the typography of pages generated from markdown files.
+        </li>
       </ul>
 
       <h2>Outstanding Articles</h2>

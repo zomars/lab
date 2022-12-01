@@ -59,6 +59,10 @@ export interface ISiteMetadata {
   description: string;
   author: string;
   siteUrl: string;
+
+  social: {
+    twitter: string;
+  };
 }
 
 export interface IReactNodeProps {
