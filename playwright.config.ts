@@ -30,6 +30,8 @@ if (env === 'development') {
 
 const baseURL = `${ protocol }://${ hostname }`;
 
+console.log(`Playwright baseUrl: ${ baseURL }`);
+
 const config: PlaywrightTestConfig = {
   use: {
     baseURL,

@@ -1,4 +1,5 @@
 import remarkGfm from 'remark-gfm';
+import remarkTypography from 'remark-typography';
 
 import {
   options as sitemapPluginOptions,
@@ -64,6 +65,7 @@ const mdxPluginConfig = {
     mdxOptions: {
       remarkPlugins: [
         remarkGfm,
+        remarkTypography,
       ],
     },
     gatsbyRemarkPlugins: [
