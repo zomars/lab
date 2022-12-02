@@ -9,6 +9,7 @@ import { cn } from '@bem-react/classname';
 import { Tab, Tabs } from '@mui/material';
 
 import { indexPageTag } from '../../../constants';
+import { useSkipRenderBeforeRehydration } from '../../../hooks/useSkipRenderBeforeRehydration.hook';
 import { IPostContext, postsListContext } from '../../../react-contexts/posts-list.context';
 import { getPostListUrlByTag } from '../../../services/get-post-list-url-by-tag';
 
@@ -56,7 +57,7 @@ const cnHeaderTabs = cn('HeaderTabs');
  */
 function getMenuTabs(
   selectedTabPath: string | false,
-  activeTabOnly = false,
+  activeTabOnly: boolean,
   onChange: (event: SyntheticEvent, path: string) => void,
 ): ReactElement[] {
   const tabs = [];
@@ -170,6 +171,7 @@ export function HeaderTabs(props: IHeaderTabsProps): ReactElement {
   } = props;
 
   const posts = useContext(postsListContext);
+  const useMobileRender = useSkipRenderBeforeRehydration();
 
   const selectedTabPath = getSelectedTabPath(activePath, posts);
 
@@ -187,7 +189,14 @@ export function HeaderTabs(props: IHeaderTabsProps): ReactElement {
       indicatorColor = 'secondary'
       textColor = 'inherit'
     >
-      { getMenuTabs(selectedTabPath, activeTabOnly, onChange) }
+      {
+        getMenuTabs(
+          selectedTabPath,
+          // since SSR rendering is for mobile, render the same on rehydration
+          activeTabOnly || useMobileRender,
+          onChange,
+        )
+      }
     </Tabs>
   );
 }
