@@ -78,7 +78,7 @@ test.describe('performance', () => {
       );
 
       expect(domContentLoaded).toBeLessThanOrEqual(500);
-      expect(loaded).toBeLessThanOrEqual(1100);
+      expect(loaded).toBeLessThanOrEqual(1200);
       expect(jsSyncBootstrap).toBeLessThanOrEqual(30);
     });
 
@@ -204,7 +204,7 @@ test.describe('performance', () => {
       expect(report.totalRequests).toBeLessThanOrEqual(35);
       expect(report.totalEncodedSize).toBeLessThanOrEqual(750);
       expect(report.totalDecodedSize).toBeLessThanOrEqual(1600);
-      expect(report.totalLoadDuration).toBeLessThanOrEqual(1800);
+      expect(report.totalLoadDuration).toBeLessThanOrEqual(1900);
 
       const { groups } = report;
 
@@ -282,7 +282,7 @@ test.describe('performance', () => {
 
       expect(report.totalEncodedSize).toBeLessThanOrEqual(750);
       expect(report.totalDecodedSize).toBeLessThanOrEqual(1600);
-      expect(report.totalLoadDuration).toBeLessThanOrEqual(1800);
+      expect(report.totalLoadDuration).toBeLessThanOrEqual(1900);
 
       const { groups } = report;
 
