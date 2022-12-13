@@ -32,6 +32,19 @@ const baseURL = `${ protocol }://${ hostname }`;
 
 console.log(`Playwright baseUrl: ${ baseURL }`);
 
+const storageState = {
+  cookies: [],
+  origins: [{
+    origin: '*',
+    localStorage: [
+      {
+        name: 'ga_debug_mode',
+        value: 'true',
+      },
+    ],
+  }],
+};
+
 const config: PlaywrightTestConfig = {
   use: {
     baseURL,
@@ -43,6 +56,7 @@ const config: PlaywrightTestConfig = {
     },
     ignoreHTTPSErrors: true,
     video: 'on-first-retry',
+    storageState,
   },
   testDir: 'pw-compiled-tests',
   snapshotDir: 'pw-test-snapshots',

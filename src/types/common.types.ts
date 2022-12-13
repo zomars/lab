@@ -84,6 +84,7 @@ export interface IStateChangeEventDetails {
 
 export interface IGTagManager {
   dataLayer: [unknown];
+  ga_debug_mode: true | undefined; // read by GTM GA4 Config
 }
 
 export function isWindowWithGTagManager(
