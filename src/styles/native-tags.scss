@@ -53,7 +53,7 @@ code:not([class^='language-']) {
 }
 
 ol, ul {
-  margin: 0 0 var(--aml-global-layout-padding-md) var(--aml-size-6);
+  margin: 0 0 var(--aml-global-layout-padding-md) var(--aml-global-layout-padding-md);
   padding: 0;
 
   // nested lists

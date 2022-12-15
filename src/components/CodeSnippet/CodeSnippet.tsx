@@ -45,6 +45,7 @@ export function CodeSnippet(props: ICodeSnippetProps): ReactElement {
     margin: 0,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
+    minHeight: '4rem', // for single line snippet
   };
 
   return (

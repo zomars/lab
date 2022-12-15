@@ -1,1 +1,1 @@
-/posts/2022/github-actions-set-output-migration/
+/posts/2022/exclude-playwright-test-traffic-from-google-analytics/

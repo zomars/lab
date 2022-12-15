@@ -27,28 +27,43 @@ export function MdxLink(props: IMdxLinkProps): ReactElement {
     target,
   } = props;
 
+  const linkClassNames = classnames(cnMdxLink(), className);
+
+  // TBD: add tests for hash case
+  if (href.startsWith('#')) {
+    return (
+      <a
+        href = { href }
+        data-testid = { linkClassNames }
+        className = { linkClassNames }
+      >
+        { children }
+      </a>
+    );
+  }
+
   if (href.startsWith('/')) {
     return (
       <Link
         title = { title }
-        data-testid = { classnames(cnMdxLink(), className) }
-        className = { classnames(cnMdxLink(), className) }
+        data-testid = { linkClassNames }
+        className = { linkClassNames }
         to = { href }
       >
         { children }
       </Link>
     );
-  } else {
-    return (
-      <OutboundLink
-        data-testid = { classnames(cnMdxLink(), className) }
-        className = { classnames(cnMdxLink(), className) }
-        target = { target }
-        href = { href }
-        title = { title }
-      >
-        { children }
-      </OutboundLink>
-    );
   }
+
+  return (
+    <OutboundLink
+      data-testid = { linkClassNames }
+      className = { linkClassNames }
+      target = { target }
+      href = { href }
+      title = { title }
+    >
+      { children }
+    </OutboundLink>
+  );
 }

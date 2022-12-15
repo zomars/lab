@@ -18,4 +18,10 @@
   & > p {
     margin-bottom: 0;
   }
+
+  & > ul, ol {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
