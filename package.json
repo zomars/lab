@@ -43,6 +43,7 @@
     "remark-typography": "^0.5.0"
   },
   "devDependencies": {
+    "@graphql-eslint/eslint-plugin": "^3.13.1",
     "@lhci/cli": "^0.10.0",
     "@mdx-js/react": "^2.1.4",
     "@playwright/test": "^1.27.1",
@@ -64,6 +65,7 @@
     "eslint": "^8.26.0",
     "eslint-config-amalitsky": "^1.0.2",
     "eslint-config-google": "0.x.x",
+    "eslint-plugin-graphql": "^4.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-playwright": "^0.11.0",
     "eslint-plugin-react": "^7.31.9",
@@ -71,6 +73,7 @@
     "eslint-plugin-rxjs": "^5.0.2",
     "gatsby-plugin-svgr-loader": "^0.1.0",
     "glob": "^8.0.3",
+    "graphql": "^16.6.0",
     "gzip-size": "6.x.x",
     "husky": "^8.0.1",
     "lighthouse": "^9.6.8",

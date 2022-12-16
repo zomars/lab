@@ -27,6 +27,7 @@ config.env = {
 
 config.plugins = [
   'react',
+  'graphql',
 ];
 
 config.globals = {
@@ -72,6 +73,23 @@ const e2eTestOverrides = {
 
 config.overrides = [
   e2eTestOverrides,
+  {
+    files: [
+      '*.tsx',
+      '*.ts',
+    ],
+    processor: '@graphql-eslint/graphql',
+  },
+  {
+    files: [
+      '*.graphql',
+    ],
+    rules: {
+      '@graphql-eslint/known-type-names': ERROR,
+      'graphql/template-strings': ERROR,
+    },
+    extends: 'plugin:@graphql-eslint/schema-recommended',
+  },
 ];
 
 module.exports = config;
