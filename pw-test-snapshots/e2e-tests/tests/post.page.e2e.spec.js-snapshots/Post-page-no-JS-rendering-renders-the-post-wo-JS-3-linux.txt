@@ -263,14 +263,12 @@ T10a	seat adjustment and heating (master)
 T2q	seat buckle switch connector
 T3k	airbag connector
 T3br	seat position sensor
-
 Passenger side connectors
 Code	Description
 T10b	seat adjustment and heating (slave)
 T10e	PODS connector
 T2y	seat buckle switch connector
 T3l	airbag connector
-
 Internal VW GTI Seat Connector Codes
 Code	Location	Description
 T8z	driver seat	8-pin heating module connector
@@ -306,9 +304,7 @@ red plug has power supply and ground wires for seat adjustment motors and butto
 black plug has wires for Audi seat buckle switch and seat position sensor
 green plug has heating and temp sensor wires
 Driver Seat Connectors
-
 Passenger Seat Connectors
-
 Related Part Numbers
 driver VW seat wire harness: 5K0 971 391 R
 passenger VW seat wire harness: 5K0 971 392 BC

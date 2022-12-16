@@ -11,8 +11,8 @@ const siteMapQuery = `{
     }
   }
   allPosts: allMdx(
-    filter: { frontmatter: { published: { ne: false } } }
-    sort: { fields: [fields___slug], order: ASC }
+    filter: {frontmatter: {published: {ne: false}}}
+    sort: {fields: {slug: ASC}}
   ) {
     nodes {
       fields {
@@ -107,4 +107,5 @@ export const options = {
   entryLimit: 10000,
   resolvePages,
   serialize,
+  output: '/sitemap',
 };

@@ -1,7 +1,7 @@
 import { WindowLocation } from '@reach/router';
 import { Node } from 'gatsby';
-import { ReactNode } from 'react';
 import { ImageDataLike } from 'gatsby-plugin-image';
+import { ReactNode } from 'react';
 
 export interface INodeFields {
   [key: string]: unknown;
@@ -67,15 +67,6 @@ export interface ISiteMetadata {
 
 export interface IReactNodeProps {
   children?: string | ReactNode;
-}
-
-export interface IPostTagsMappingQResponse {
-  allPosts: {
-    posts: IBlogPost[];
-  };
-  uniqueTags: {
-    tags: IUniquePostTag[];
-  };
 }
 
 export interface IStateChangeEventDetails {

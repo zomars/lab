@@ -202,7 +202,7 @@ test.describe('performance', () => {
       console.log(printAllRequestsReport(report));
 
       expect(report.totalRequests).toBeLessThanOrEqual(35);
-      expect(report.totalEncodedSize).toBeLessThanOrEqual(750);
+      expect(report.totalEncodedSize).toBeLessThanOrEqual(800);
       expect(report.totalDecodedSize).toBeLessThanOrEqual(1600);
       expect(report.totalLoadDuration).toBeLessThanOrEqual(1900);
 
@@ -280,7 +280,7 @@ test.describe('performance', () => {
 
       expect(report.totalRequests).toBeLessThanOrEqual(50);
 
-      expect(report.totalEncodedSize).toBeLessThanOrEqual(750);
+      expect(report.totalEncodedSize).toBeLessThanOrEqual(800);
       expect(report.totalDecodedSize).toBeLessThanOrEqual(1600);
       expect(report.totalLoadDuration).toBeLessThanOrEqual(1900);
 

@@ -11,49 +11,40 @@ import { PostListPaginator } from './PostListPaginator/PostListPaginator';
 
 import './PostList.scss';
 
-export const postsQuery = graphql`
-  query blogListQuery($skip: Int!, $limit: Int!, $tag: String!) {
-    onePageOfPosts: allMdx(
-      filter: {
-        frontmatter: {
-          published: { ne: false }
-          tags: { in: [$tag] }
+export const postsQuery = graphql`query blogListQuery($skip: Int!, $limit: Int!, $tag: String!) {
+  onePageOfPosts: allMdx(
+    filter: {frontmatter: {published: {ne: false}, tags: {in: [$tag]}}}
+    sort: {frontmatter: {date: DESC}}
+    limit: $limit
+    skip: $skip
+  ) {
+    totalCount
+    posts: nodes {
+      excerpt(pruneLength: 400)
+      fields {
+        slug
+        readingTime {
+          text
         }
       }
-      sort: { fields: [frontmatter___date], order: DESC }
-      limit: $limit
-      skip: $skip
-    ) {
-      totalCount
-      posts: nodes {
-        excerpt(pruneLength: 400)
-        fields {
-          slug,
-          readingTime {
-            text
+      frontmatter {
+        date(formatString: "MMM DD, YYYY")
+        updated(formatString: "MMM DD, YYYY")
+        tags
+        title
+        coverImage {
+          childImageSharp {
+            gatsbyImageData(height: 300)
           }
         }
-        frontmatter {
-          date(formatString: "MMM DD, YYYY")
-          updated(formatString: "MMM DD, YYYY")
-          tags
+        galleryImages {
           title
-          coverImage {
-            childImageSharp {
-              gatsbyImageData(
-                height: 300,
-              )
-            }
-          }
-          galleryImages {
-            title
-          }
-          summary
         }
+        summary
       }
     }
   }
-`;
+}`;
 
 interface IGqlResponse {
   onePageOfPosts: {

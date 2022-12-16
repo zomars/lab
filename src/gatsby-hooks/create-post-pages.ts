@@ -3,43 +3,32 @@ import { CreatePagesArgs } from 'gatsby';
 
 import { IBlogPost } from '../types/common.types';
 
-export const postsQuery = /* GraphQL */ `
-  query GatsbyNode {
-    allPosts: allMdx(
-      filter: {
-        frontmatter: {
-          published: { ne: false }
-        }
+export const postsQuery = /* GraphQL */ `query GatsbyNode {
+  allPosts: allMdx(
+    filter: {frontmatter: {published: {ne: false}}}
+    sort: {frontmatter: {date: DESC}}
+  ) {
+    nodes {
+      fields {
+        slug
       }
-      sort: { fields: [frontmatter___date], order: DESC }
-    ) {
-      nodes {
-        fields {
-          slug
-        }
-        internal {
-          contentFilePath
-        }
-        frontmatter {
-          galleryImages {
-            title
-            caption
-            image: path {
-              childImageSharp {
-                preview: gatsbyImageData(
-                  layout: FULL_WIDTH,
-                  webpOptions: {
-                    quality: 90
-                  }
-                )
-              }
+      internal {
+        contentFilePath
+      }
+      frontmatter {
+        galleryImages {
+          title
+          caption
+          image: path {
+            childImageSharp {
+              preview: gatsbyImageData(layout: FULL_WIDTH, webpOptions: {quality: 90})
             }
           }
         }
       }
     }
   }
-`;
+}`;
 
 const postComponentPath = path.resolve(
   './src/page-templates/Post/Post.tsx',

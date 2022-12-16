@@ -9,40 +9,31 @@ const postListComponentPath = path.resolve(
   './src/page-templates/PostList/PostList.tsx',
 );
 
-const postsQuery = /* GraphQL */ `
-  query PostsListByTag($tag: String) {
-    allPostsByTag: allMdx(
-      filter: {
-        frontmatter: {
-          published: { ne: false }
-          tags: { in: [$tag] }
-        }
+const postsQuery = /* GraphQL */ `query PostsListByTag($tag: String) {
+  allPostsByTag: allMdx(
+    filter: {frontmatter: {published: {ne: false}, tags: {in: [$tag]}}}
+    sort: {frontmatter: {date: DESC}}
+  ) {
+    nodes {
+      fields {
+        slug
       }
-      sort: { fields: [frontmatter___date], order: DESC }
-    ) {
-      nodes {
-        fields {
-          slug
-        }
-        frontmatter {
-          title,
-          date(formatString: "YYYY-MM-DD")
-        }
+      frontmatter {
+        title
+        date(formatString: "YYYY-MM-DD")
       }
     }
   }
-`;
+}`;
 
-export const postTagsQuery = /* GraphQL */ `
-  query postTags {
-    uniqueTags: allMdx {
-      tags: group(field: frontmatter___tags) {
-        name: fieldValue
-        count: totalCount
-      }
+export const postTagsQuery = /* GraphQL */ `query postTags {
+  uniqueTags: allMdx {
+    tags: group(field: {frontmatter: {tags: SELECT}}) {
+      name: fieldValue
+      count: totalCount
     }
   }
-`;
+}`;
 
 interface IPostTagsQueryResponse {
   uniqueTags: {
