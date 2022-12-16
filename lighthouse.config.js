@@ -7,13 +7,14 @@ const DESKTOP_EMULATION_METRICS = {
   disabled: false,
 };
 
-// eslint-disable-next-line max-len
-const DESKTOP_USERAGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4695.0 Safari/537.36 Chrome-Lighthouse';
+const DESKTOP_USERAGENT =
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 ' +
+  '(KHTML, like Gecko) Chrome/98.0.4695.0 Safari/537.36 Chrome-Lighthouse';
 
 const config = {
   extends: 'lighthouse:default',
   settings: {
-    throttlingMethod: 'devtools',
+    throttlingMethod: 'simulate',
     throttling: {
       downloadThroughputKbps: 1000 * 1000, // 1Mb/s
       uploadThroughputKbps: 512 * 1000,

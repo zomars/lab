@@ -1,8 +1,8 @@
-import { PageRendererProps } from 'gatsby';
 import React, { ReactElement } from 'react';
+import { PageRendererProps } from 'gatsby';
 
+import { HtmlHead } from '../components/HtmlHead/HtmlHead';
 import { Layout } from '../components/Layout';
-import { Seo } from '../components/Seo/Seo';
 import { OutboundLink } from '../components/OutboundLink/OutboundLink';
 
 const pageKeywords = [
@@ -20,21 +20,27 @@ const pageKeywords = [
   'typescript',
 ];
 
-export function Sources(props: PageRendererProps): ReactElement {
+export function Head(props: PageRendererProps): ReactElement {
   const description =
     'List of incredibly useful and insightful resources related to frontend development ' +
     'and beyond. Most of these I\'ve read or listened to more than once.';
 
   return (
+    <HtmlHead
+      title = 'Frontend sources, references, conversations, books and courses'
+      keywords = { pageKeywords }
+      pathname = { props.location.pathname }
+      description = { description }
+      withCanonical = { true }
+    />
+  );
+}
+
+export function Sources(): ReactElement {
+  return (
     <Layout>
-      <Seo
-        title = 'Frontend sources, references, conversations, books and courses'
-        keywords = { pageKeywords }
-        pathname = { props.location.pathname }
-        description = { description }
-        withCanonical = { true }
-      />
       <h1>Sources</h1>
+
       <p>
         List of incredibly useful and insightful resources related to frontend development
         and beyond.

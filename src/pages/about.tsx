@@ -1,21 +1,25 @@
-import { PageRendererProps, Link } from 'gatsby';
 import React, { ReactElement } from 'react';
+import { PageRendererProps, Link } from 'gatsby';
+import { HtmlHead } from '../components/HtmlHead/HtmlHead';
 
 import { Layout } from '../components/Layout';
 import { Bio } from '../components/Bio/Bio';
 import { OutboundLink } from '../components/OutboundLink/OutboundLink';
-import { Seo } from '../components/Seo/Seo';
 
-export function About(props: PageRendererProps): ReactElement {
+export function Head(props: PageRendererProps): ReactElement {
+  return (
+    <HtmlHead
+      title = 'About Alex Malitsky'
+      description = 'Alex Malitsky bio'
+      pathname = { props.location.pathname }
+      withCanonical = { true }
+    />
+  );
+}
+
+export function About(): ReactElement {
   return (
     <Layout>
-      <Seo
-        title = 'About the Author'
-        description = 'Alex Malitsky bio'
-        pathname = { props.location.pathname }
-        withCanonical = { true }
-      />
-
       <h1>About me</h1>
 
       <Bio/>

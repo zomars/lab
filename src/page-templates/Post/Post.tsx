@@ -1,5 +1,5 @@
-import { cn } from '@bem-react/classname';
-import { MDXProvider } from '@mdx-js/react';
+import React, { ReactElement } from 'react';
+import { graphql, PageRendererProps } from 'gatsby';
 import {
   Table,
   TableBody,
@@ -10,10 +10,8 @@ import {
   useTheme,
 } from '@mui/material';
 
-import { graphql, PageRendererProps } from 'gatsby';
-import React, { ReactElement } from 'react';
-import { CodeSnippet } from '../../components/CodeSnippet/CodeSnippet';
-import { ImageGrid } from '../../components/ImageGrid/ImageGrid';
+import { MDXProvider } from '@mdx-js/react';
+import { cn } from '@bem-react/classname';
 
 import { Layout } from '../../components/Layout';
 import {
@@ -24,20 +22,21 @@ import {
   H5,
   H6,
 } from '../../components/MdxHeader/MdxHeader';
-
+import { CodeSnippet } from '../../components/CodeSnippet/CodeSnippet';
+import { HtmlHead } from '../../components/HtmlHead/HtmlHead';
+import { ImageGrid } from '../../components/ImageGrid/ImageGrid';
 import { MdxLink } from '../../components/MdxLink/MdxLink';
 import { Note } from '../../components/Note/Note';
 import { PostDateDetails } from '../../components/PostDateDetails/PostDateDetails';
 import { PostEventDetails } from '../../components/PostEventDetails/PostEventDetails';
 import { PostTags } from '../../components/PostTags/PostTags';
-import { Seo } from '../../components/Seo/Seo';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
 import { IBlogPost } from '../../types/common.types';
 import { Lightbox } from '../../components/Lightbox/Lightbox';
 import { PostSideMenu } from '../../components/PostSideMenu/PostSideMenu';
+import { BlogPostPaginator } from './BlogPostPaginator/BlogPostPaginator';
 
 import './Post.scss';
-import { BlogPostPaginator } from './BlogPostPaginator/BlogPostPaginator';
 
 const cnBlogPost = cn('Post');
 
@@ -96,13 +95,35 @@ interface IGqlResponse {
 
 interface IBlogPostTemplateProps extends PageRendererProps {
   data: IGqlResponse;
+  // eslint-disable-next-line react/no-unused-prop-types
   children: ReactElement[];
+}
+
+export function Head(
+  { data, location }: IBlogPostTemplateProps,
+): ReactElement {
+  const { post } = data;
+
+  const {
+    title,
+    coverImage,
+    description,
+  } = post.frontmatter;
+
+  return (
+    <HtmlHead
+      title = { title }
+      description = { description || post.excerpt }
+      pathname = { location.pathname }
+      image = { coverImage?.childImageSharp }
+      withCanonical = { true }
+    />
+  );
 }
 
 function Post(props: IBlogPostTemplateProps): ReactElement {
   const {
     data,
-    location,
     children,
   } = props;
 
@@ -119,7 +140,6 @@ function Post(props: IBlogPostTemplateProps): ReactElement {
     tags,
     date: posted,
     updated,
-    coverImage,
     description,
     event,
   } = post.frontmatter;
@@ -149,13 +169,6 @@ function Post(props: IBlogPostTemplateProps): ReactElement {
     >
       <Lightbox/>
 
-      <Seo
-        title = { title }
-        description = { description || post.excerpt }
-        pathname = { location.pathname }
-        image = { coverImage?.childImageSharp }
-        withCanonical = { true }
-      />
 
       <div className = { cnBlogPost('SideColumn') }></div>
 

@@ -2,8 +2,8 @@ import React, { ReactElement } from 'react';
 import { graphql, PageRendererProps } from 'gatsby';
 import { cn } from '@bem-react/classname';
 
+import { HtmlHead } from '../../components/HtmlHead/HtmlHead';
 import { Layout } from '../../components/Layout';
-import { Seo } from '../../components/Seo/Seo';
 import { PostPreview } from '../../components/PostPreview/PostPreview';
 import { IBlogPost } from '../../types/common.types';
 import { postsPerPage } from '../../constants';
@@ -72,6 +72,30 @@ const keywords = [
 
 const cnPostList = cn('PostList');
 
+export function Head(props: IPostListProps): ReactElement {
+  const { data, pageContext } = props;
+  const { posts } = data.onePageOfPosts;
+
+  let seoImage;
+
+  for (const post of posts) {
+    if (post.frontmatter.coverImage) {
+      seoImage = post.frontmatter.coverImage.childImageSharp;
+
+      break;
+    }
+  }
+
+  return (
+    <HtmlHead
+      title = { `All #${ pageContext.tag } posts, page ${ pageContext.currentPage }` }
+      keywords = { keywords }
+      pathname = { props.location.pathname }
+      image = { seoImage }
+    />
+  );
+}
+
 export function PostList(props: IPostListProps): ReactElement {
   const { data, pageContext } = props;
   const { posts, totalCount } = data.onePageOfPosts;
@@ -99,28 +123,11 @@ export function PostList(props: IPostListProps): ReactElement {
     />
   ) : null;
 
-  let seoImage;
-
-  for (const post of posts) {
-    if (post.frontmatter.coverImage) {
-      seoImage = post.frontmatter.coverImage.childImageSharp;
-
-      break;
-    }
-  }
-
   return (
     <Layout
       testId = { cnPostList() }
       className = { cnPostList() }
     >
-      <Seo
-        title = { `All #${ pageContext.tag } posts, page ${ pageContext.currentPage }` }
-        keywords = { keywords }
-        pathname = { props.location.pathname }
-        image = { seoImage }
-      />
-
       { postElements }
 
       { Paginator }

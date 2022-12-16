@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 import { Post } from '../../src/page-templates/Post/Post.e2e';
-import { Head } from '../../src/components/Seo/Seo.e2e';
+import { Head } from '../../src/components/HtmlHead/HtmlHead.e2e';
 import { getElementHandleAttributes, skipOnDevBuild } from '../utils';
 
 const postUrl = '/posts/2021/audi-s4-seats-into-gti/';

@@ -21,14 +21,9 @@ export function onRenderBody(
   {
     setPostBodyComponents,
     setHeadComponents,
+    setHtmlAttributes,
   }: RenderBodyArgs,
 ): void {
-  setPostBodyComponents([
-    <Footer
-      key = 'footer'
-    />,
-  ]);
-
   const fonts = fontsToPreload.map(
     (fontFileSrc, index) => {
       return (
@@ -44,9 +39,16 @@ export function onRenderBody(
     });
 
   setHeadComponents(fonts);
+
+  setHtmlAttributes({ lang: 'en' });
+
+  setPostBodyComponents([
+    <Footer
+      key = 'footer'
+    />,
+  ]);
 }
 
 export { onPreRenderHTML } from './src/gatsby-hooks/on-pre-render-html';
-export { replaceRenderer } from './src/gatsby-hooks/replace-renderer';
 export { wrapPageElement } from './src/gatsby-hooks/wrap-page-element';
 export { wrapRootElement } from './src/gatsby-hooks/wrap-root-element';

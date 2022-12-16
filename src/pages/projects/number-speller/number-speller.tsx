@@ -2,10 +2,10 @@ import { PageRendererProps } from 'gatsby';
 import React, { ReactElement } from 'react';
 import { cn } from '@bem-react/classname';
 import { Tooltip } from '@mui/material';
+import { HtmlHead } from '../../../components/HtmlHead/HtmlHead';
 
 import { Layout } from '../../../components/Layout';
 import { NumberSpeller } from '../../../components/NumberSpeller/NumberSpeller';
-import { Seo } from '../../../components/Seo/Seo';
 import { OutboundLink } from '../../../components/OutboundLink/OutboundLink';
 
 import './number-speller.scss';
@@ -21,19 +21,23 @@ const keywords = [
   'service',
 ];
 
-function NumberSpellerPage(props: PageRendererProps): ReactElement {
+export function Head(props: PageRendererProps): ReactElement {
+  return (
+    <HtmlHead
+      title = 'Spell numbers into English words online'
+      description = 'Online numbers speller'
+      keywords = { keywords }
+      pathname = { props.location.pathname }
+      withCanonical = { true }
+    />
+  );
+}
+
+function NumberSpellerPage(): ReactElement {
   return (
     <Layout
       data-testid = { cnNumberSpellerPage() }
     >
-      <Seo
-        title = 'Spell numbers into English words online'
-        description = 'Online numbers speller'
-        keywords = { keywords }
-        pathname = { props.location.pathname }
-        withCanonical = { true }
-      />
-
       <h2>Spell a Number</h2>
 
       <p>

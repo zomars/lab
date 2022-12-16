@@ -60,7 +60,7 @@ const config = {
   ci: {
     collect: {
       url: urls.map(url => `${ urlPrefix }${ url }`),
-      numberOfRuns: 3,
+      numberOfRuns: 5,
       staticDistDir,
       settings: {
         configPath: 'lighthouse.config.js',

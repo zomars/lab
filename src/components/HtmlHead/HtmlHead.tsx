@@ -5,33 +5,30 @@ import {
   getSrc,
   ImageDataLike,
 } from 'gatsby-plugin-image';
-import { Helmet } from 'react-helmet';
 
 import { useSiteMetadata } from '../../hooks/useSiteMetadata.hook';
 
-interface IHelmetMetaTag {
+interface IHeadMetaTag {
   property?: string;
   name?: string;
   content: string;
 }
 
-interface ISeoProps {
+interface IHeadProps {
   title?: string;
   description?: string;
-  meta?: IHelmetMetaTag[];
+  meta?: IHeadMetaTag[];
   keywords?: string[];
   pathname?: string;
   image?: ImageDataLike;
-  lang?: string;
   withCanonical?: boolean;
 }
 
-export function Seo(props: ISeoProps): ReactElement {
+export function HtmlHead(props: IHeadProps): ReactElement {
   const siteMetadata = useSiteMetadata();
 
   const {
     description: propsDescription,
-    lang = 'en',
     meta,
     title: propsTitle,
     pathname,
@@ -43,8 +40,6 @@ export function Seo(props: ISeoProps): ReactElement {
   const description = propsDescription || siteMetadata.description;
   const title = propsTitle || siteMetadata.title;
   const { siteUrl } = siteMetadata;
-
-  const attrs = { lang };
 
   // developer.twitter.com/en/docs/twitter-for-websites/cards/
   // overview/summary-card-with-large-image
@@ -81,7 +76,7 @@ export function Seo(props: ISeoProps): ReactElement {
     fbCard['image:height'] = gatsbyImage.width;
   }
 
-  const metaTags: IHelmetMetaTag[] = [
+  const metaTags: IHeadMetaTag[] = [
     {
       name: 'description',
       content: description,
@@ -134,13 +129,28 @@ export function Seo(props: ISeoProps): ReactElement {
     });
   }
 
-  return (
-    <Helmet
-      title = { title }
-      htmlAttributes = { attrs }
-      titleTemplate = { `%s | ${ siteMetadata.title }` }
-      meta = { metaTags }
-      link = { links }
+  const linkTags = links.map(({ rel, href }) => (
+    <link
+      key = { rel }
+      rel = { rel }
+      href = { href }
     />
+  ));
+
+  const htmlMetaTags = metaTags.map(({ name, content, property }) => (
+    <meta
+      key = { name }
+      name = { name }
+      property = { property }
+      content = { content }
+    />
+  ));
+
+  return (
+    <>
+      <title>{ `${ title } | ${ siteMetadata.title }` }</title>
+      { linkTags }
+      { htmlMetaTags }
+    </>
   );
 }
