@@ -17,7 +17,6 @@ $font-display: 'fallback';
   font-weight: 600;
   font-display: $font-display;
   src:
-    local('Source Sans Pro'),
     url(../../static/fonts/source-sans-pro-v21-latin-600.woff2) format('woff2'),
     url(../../static/fonts/source-sans-pro-v21-latin-600.woff) format('woff');
 }
@@ -28,7 +27,6 @@ $font-display: 'fallback';
   font-weight: 700;
   font-display: $font-display;
   src:
-    local('Source Sans Pro'),
     url(../../static/fonts/source-sans-pro-v21-latin-700.woff2) format('woff2'),
     url(../../static/fonts/source-sans-pro-v21-latin-700.woff) format('woff');
 }
@@ -50,7 +48,6 @@ $font-display: 'fallback';
   font-weight: 700;
   font-display: $font-display;
   src:
-    local('Merriweather'),
     url(../../static/fonts/merriweather-v30-latin-700.woff2) format('woff2'),
     url(../../static/fonts/merriweather-v30-latin-700.woff) format('woff');
 }

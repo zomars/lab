@@ -34,7 +34,7 @@ export const postsQuery = graphql`query blogListQuery($skip: Int!, $limit: Int!,
         title
         coverImage {
           childImageSharp {
-            gatsbyImageData(height: 300)
+            gatsbyImageData(height: 300, placeholder: BLURRED)
           }
         }
         galleryImages {
