@@ -11,14 +11,19 @@ const DESKTOP_USERAGENT =
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 ' +
   '(KHTML, like Gecko) Chrome/98.0.4695.0 Safari/537.36 Chrome-Lighthouse';
 
+/**
+ * @see https://github.com/GoogleChrome/lighthouse#cli-options
+ */
 const config = {
   extends: 'lighthouse:default',
   settings: {
-    throttlingMethod: 'simulate',
+    throttlingMethod: 'devtools',
     throttling: {
-      downloadThroughputKbps: 1000 * 1000, // 1Mb/s
-      uploadThroughputKbps: 512 * 1000,
-      requestLatencyMs: 150,
+      downloadThroughputKbps: 10 * 1000, // 10 Mbps
+      throughputKbps: 10 * 1000, // simulated only
+      uploadThroughputKbps: 2 * 1000, // 2 Mbps
+      requestLatencyMs: 550, // supposed to equal ~150mb in real env via DebugBear
+      rttMs: 550, // simulated only
     },
     disableStorageReset: true,
     skipAudits: ['uses-http2'],
