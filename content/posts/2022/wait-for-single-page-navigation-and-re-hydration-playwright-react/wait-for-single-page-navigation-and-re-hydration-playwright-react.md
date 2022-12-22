@@ -1,7 +1,7 @@
 ---
 title: 'How to Wait for Single Page Navigation and Re-hydration with Playwright and React Router'
 date: 2022-07-28T10:00:00-07:00
-updated: 2022-10-10T10:00:00-07:00
+updated: 2022-12-21T10:00:00-07:00
 tags: ['tech', 'testing', 'react', 'playwright', 'frontend']
 coverImage: './playwright-logo.png'
 description: >-
@@ -97,11 +97,17 @@ function useLocationChangeEvent(): void {
 ```
 
 <Note>
+  <p>
+    If there is more than one application navigation event provided by your router
+    (i.e. _before_ navigation, _during_ and _after_ it has completed)
+    pick the one which comes __after__ target page rendering has completed.
+  </p>
 
-If there is more than one application navigation event provided by your router
-(i.e. _before_ navigation, _during_ and _after_ it has completed)
-pick the one which comes __after__ target page rendering has completed.
-
+  <p>
+    For GatbyJs websites there is an
+    [`onRouteUpdate` browser API hook](https://www.gatsbyjs.com/docs/reference/config-files/gatsby-browser/#onRouteUpdate)
+    you can leverage instead of the custom `useLocationChangeEvent` implementation.
+  </p>
 </Note>
 
 Now we need to capture `REACT_ROUTER_PAGE_CHANGE_EVENT` event in the Playwright test.
