@@ -10,7 +10,7 @@ Audi SportSeat has an extendable knee pad (support) which I thought was nice but
 
 SuperSport seats come in a long list of Audi models: S4, S5, TTS, some TTs and probably RS models too. Even recent RS3 generation seats look very similar, hence (in theory) could be installed into MK5/MK6/MK7 GTI and R. You can find them on your local european pull-a-part salvage yard, craigslist, ebay and alike.
 
-I bought mine on ebay. Both seats came out of Audi S4 but were taken out of different cars - driver’s seat had 2013 production date while passenger’s was labeled as 2009. They look absolutely the same though, and down the line it didn’t cause any difficulties.
+I bought mine on ebay. Both seats came out of Audi S4 but were taken out of different cars — driver’s seat had 2013 production date while passenger’s was labeled as 2009. They look absolutely the same though, and down the line it didn’t cause any difficulties.
 
 Before we jump into the installation, let’s talk about electric modules of the seat. Surprisingly (at least for me) there is enough to talk about!
 
@@ -48,7 +48,7 @@ Heating control module is connected with climatronic and AC control modules whic
 
 PODS System
 
-Passenger occupant detection system (PODS) responsibility is to figure out if the front passenger airbags should deploy (and, probably, to which extent) when car gets into an accident. It’s control module is located under the passenger seat and uses two sensors to make the call - pressure sensor mat in the seat bottom and seatbelt tension sensor in the passenger seatbelt buckle.
+Passenger occupant detection system (PODS) responsibility is to figure out if the front passenger airbags should deploy (and, probably, to which extent) when car gets into an accident. It’s control module is located under the passenger seat and uses two sensors to make the call — pressure sensor mat in the seat bottom and seatbelt tension sensor in the passenger seatbelt buckle.
 
 PODS control unit is connected to the airbag control module with two CAN wires.
 

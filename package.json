@@ -38,7 +38,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "reading-time": "^1.5.0",
     "remark-gfm": "^1.x.x",
-    "remark-typography": "^0.5.0"
+    "remark-typography": "^0.6.1"
   },
   "devDependencies": {
     "@graphql-eslint/eslint-plugin": "^3.13.1",
