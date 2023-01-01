@@ -10,9 +10,9 @@ const headTagsOrder = {
   script: 1,
 };
 
-function isReactElement(pet: ReactNode | ReactElement): pet is ReactElement {
+function isReactElement(node: ReactNode | ReactElement): node is ReactElement {
   // eslint-disable-next-line no-extra-parens
-  return (pet as ReactElement).type !== undefined;
+  return (node as ReactElement).type !== undefined;
 }
 
 export function onPreRenderHTML({

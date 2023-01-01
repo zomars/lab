@@ -236,5 +236,6 @@ or custom implementation of `waitForSpaNavigation` page function.
 
 Thanks for reading this far!
 
-As always, please [let me know](https://twitter.com/amalitsky) what you think or ask any questions.
+As always, please [let me know](https://twitter.com/amalitsky) what you think or
+go ahead and ask any questions via DM.
 Cheers

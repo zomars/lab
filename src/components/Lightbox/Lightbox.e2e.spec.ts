@@ -1,5 +1,9 @@
-import { test, expect } from '@playwright/test';
-import { Locator } from 'playwright';
+import {
+  test,
+  expect,
+  Locator,
+} from '@playwright/test';
+
 import { waitForSpaNavigation } from '../../../e2e-tests/utils';
 import { ImageGridSelector } from '../ImageGrid/ImageGrid.e2e';
 import { LightboxOverlaySelector } from './LightboxOverlay.e2e';

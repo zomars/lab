@@ -2,9 +2,11 @@ import React, { ReactElement } from 'react';
 import { WrapRootElementBrowserArgs } from 'gatsby';
 import { ThemeProvider } from '@mui/material/styles';
 
+import { theme } from '../theme/theme.mui';
+
 import { LightboxContextProvider } from '../context-providers/LightboxContextProvider';
 import { PostContextProvider } from '../context-providers/PostContextProvider';
-import { theme } from '../theme/theme.mui';
+import { SnackbarAlertsContextProvider } from '../context-providers/SnackbarAlertsContextProvider';
 
 /**
  * Set up postsContext for all nested elements.
@@ -14,11 +16,13 @@ export function wrapRootElement(
 ): ReactElement {
   return (
     <ThemeProvider theme = { theme }>
-      <PostContextProvider>
-        <LightboxContextProvider>
-          { element }
-        </LightboxContextProvider>
-      </PostContextProvider>
+      <SnackbarAlertsContextProvider>
+        <PostContextProvider>
+          <LightboxContextProvider>
+            { element }
+          </LightboxContextProvider>
+        </PostContextProvider>
+      </SnackbarAlertsContextProvider>
     </ThemeProvider>
   );
 }

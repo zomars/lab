@@ -1,0 +1,17 @@
+@use '../ShareButton';
+
+.CopyUrlButton {
+  width: ShareButton.$icon-size - 1px;
+  height: ShareButton.$icon-size - 1px;
+  background-color: var(--aml-color-secondary);
+  color: white;
+
+  &:hover {
+    background-color: var(--aml-color-secondary);
+  }
+
+  & > .MuiSvgIcon-root {
+    margin: -1px 0 0 -1px;
+    transform: rotate(45deg);
+  }
+}

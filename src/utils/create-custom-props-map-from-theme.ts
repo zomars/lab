@@ -3,7 +3,8 @@ import {
   bodyFontFamily,
   borderWidths,
   colors,
-  customSizes, fontSize,
+  customSizes,
+  fontSize,
   fontSizes,
   fontWeights,
   headerFontFamily,
@@ -12,7 +13,9 @@ import {
   mutedTextColor,
   primaryColor,
   radii,
-  sizes, textColor,
+  secondaryColor,
+  sizes,
+  textColor,
 } from '../theme/theme';
 
 export type TCssPropValue = string|number;
@@ -24,6 +27,7 @@ customCssPropsMap.set('color-muted', mutedColor.toUpperCase());
 customCssPropsMap.set('color-text', textColor.toUpperCase());
 customCssPropsMap.set('color-muted-text', mutedTextColor.toUpperCase());
 customCssPropsMap.set('color-primary', primaryColor.toUpperCase());
+customCssPropsMap.set('color-secondary', secondaryColor.toUpperCase());
 customCssPropsMap.set('font-body', bodyFontFamily.join(', '));
 customCssPropsMap.set('font-heading', headerFontFamily.join(', '));
 customCssPropsMap.set('font-size-body', `${ fontSize }px`);

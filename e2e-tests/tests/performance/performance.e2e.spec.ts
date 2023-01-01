@@ -1,6 +1,9 @@
-import { expect, test } from '@playwright/test';
+import {
+  expect,
+  test,
+  CDPSession,
+} from '@playwright/test';
 
-import { CDPSession } from 'playwright';
 import {
   takeWhile,
   groupBy,

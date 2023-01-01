@@ -9,6 +9,7 @@ import { GetApp as ArrowUpwardIcon } from '@mui/icons-material';
 import { IconButton } from '@mui/material';
 
 import { throttle } from 'lodash';
+import { cn } from '@bem-react/classname';
 
 import { EGtmEventTypes, gtmEventEmitter } from '../../../services/gtm-event-emitter';
 
@@ -41,6 +42,8 @@ interface IScrollToTheTopButtonProps {
   title: string;
 }
 
+const cnScrollToTheTopButton = cn('ScrollToTheTopButton');
+
 export function ScrollToTheTopButton(props: IScrollToTheTopButtonProps): ReactElement {
   const disabled = useDisabledButton();
   const { path, title } = props;
@@ -66,6 +69,7 @@ export function ScrollToTheTopButton(props: IScrollToTheTopButtonProps): ReactEl
       title = 'Scroll to the Top'
       disabled = { disabled }
       onClick = { onClick }
+      data-testid = { cnScrollToTheTopButton() }
     >
       <ArrowUpwardIcon
         sx = {{

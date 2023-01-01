@@ -3,6 +3,7 @@ import { WrapPageElementBrowserArgs } from 'gatsby';
 import React, { ReactElement, useEffect } from 'react';
 
 import { Header } from '../components/Header/Header';
+import { SnackbarAlertsPortal } from '../components/SnackbarAlertsPortal/SnackbarAlertsPortal';
 import { STATE_CHANGE_EVENT } from '../constants';
 import { usePrevious } from '../hooks/usePrevious.hook';
 import { EGtmEventTypes, gtmEventEmitter } from '../services/gtm-event-emitter';
@@ -49,6 +50,8 @@ function WrapPageElement(
       />
 
       { element }
+
+      <SnackbarAlertsPortal/>
     </>
   );
 }

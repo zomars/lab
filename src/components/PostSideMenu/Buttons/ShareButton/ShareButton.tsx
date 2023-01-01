@@ -68,6 +68,7 @@ export function ShareButton(props: IShareButtonProps): ReactElement {
         title = 'Share'
         ref = { buttonRef }
         onClick = { openPopup }
+        data-testid = { cnShareButton() }
       >
         <ReplyIcon/>
       </IconButton>
@@ -83,6 +84,7 @@ export function ShareButton(props: IShareButtonProps): ReactElement {
         transformOrigin = { anchorOrigin }
         className = { cnShareButton('Popover') }
         disableRestoreFocus = { true }
+        data-testid = { cnShareButton('Popover') }
       >
         <SocialButtons
           url = { url }

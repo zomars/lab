@@ -63,6 +63,7 @@ export function PostSideMenu(props: IPostSideMenuProps): ReactElement {
           vertical: !horizontalLayout,
         }))
       }
+      data-testid = { cnPostSideMenu() }
     >
 
       {

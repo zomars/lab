@@ -2,7 +2,7 @@ import {
   ElementHandle,
   Page,
   BrowserContext,
-} from 'playwright';
+} from '@playwright/test';
 
 import { STATE_CHANGE_EVENT } from '../src/constants';
 import { IStateChangeEventDetails } from '../src/types/common.types';

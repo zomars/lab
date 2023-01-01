@@ -23,8 +23,9 @@
   }
 }
 
+$icon-size: 32px; // has to match JS code
+
 .ShareButton {
-  $icon-size: 32px; // has to match JS code
   $popover-size: 120px;
 
   &-Popover {
@@ -48,7 +49,7 @@
     position: absolute;
     top: calc(50% - #{ math.div($icon-size, 2) });
     right: calc(50% - #{ math.div($icon-size, 2) });
-    margin: 0;
+    margin: 0; // needed for Safari (mobile)
 
     &:hover {
       filter: brightness(0.9);

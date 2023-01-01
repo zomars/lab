@@ -1,4 +1,4 @@
-import { ElementHandle } from 'playwright';
+import { ElementHandle } from '@playwright/test';
 
 import {
   ComponentWrapper,

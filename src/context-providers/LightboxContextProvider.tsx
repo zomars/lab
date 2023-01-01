@@ -1,11 +1,11 @@
 import React, {
   ReactElement,
+  useMemo,
   useRef,
   useState,
 } from 'react';
 
 import {
-  ILightboxActions,
   ILightboxImage,
   lightboxActionsContext,
 } from '../react-contexts/lightbox-actions.context';
@@ -24,7 +24,7 @@ export function LightboxContextProvider(
 
   const { images } = state;
 
-  const imageActions = {
+  const imageActions = useMemo(() => ({
     addImage(image: ILightboxImage) {
       if (images.has(image.src)) {
         return;
@@ -70,9 +70,10 @@ export function LightboxContextProvider(
         activeSrc: imageSrc,
       }));
     },
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), []);
 
-  const imageActionsRef = useRef<ILightboxActions>(imageActions);
+  const imageActionsRef = useRef(imageActions);
 
   return (
     <lightboxActionsContext.Provider

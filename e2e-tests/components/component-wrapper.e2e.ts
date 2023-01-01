@@ -1,4 +1,4 @@
-import { ElementHandle, Page } from 'playwright';
+import { ElementHandle, Page } from '@playwright/test';
 import { isString } from 'lodash';
 
 export interface IElementHandleWaitForSelectorOptions {

@@ -4,24 +4,22 @@ import React, {
   useState,
 } from 'react';
 
-import {
-  Alert,
-  IconButton,
-  Portal,
-  Snackbar,
-} from '@mui/material';
+import { IconButton } from '@mui/material';
 
 import {
   ThumbUpAlt as ThumbUpIcon,
   ThumbUpAltOutlined as ThumbUpOutlinedIcon,
 } from '@mui/icons-material';
 
-import { alertNotificationDuration } from '../../../constants';
+import { cn } from '@bem-react/classname';
+
 import { useSkipRenderBeforeRehydration } from '../../../hooks/useSkipRenderBeforeRehydration.hook';
+import { useSnackbarAlertsActions } from '../../../hooks/useSnackbarAlerts';
 import { EGtmEventTypes, gtmEventEmitter } from '../../../services/gtm-event-emitter';
 import { getItem, setItem } from '../../../services/local-storage';
 
 const storageKeyPrefix = 'blog-post-like-state';
+const alertKey = 'post-like-button';
 
 interface ILikeButtonProps {
   path: string;
@@ -29,8 +27,6 @@ interface ILikeButtonProps {
 }
 
 type TUseLikeButtonReturn = [
-  boolean,
-  () => void,
   boolean,
   () => void,
 ];
@@ -42,12 +38,8 @@ function useLikeButton(
 ): TUseLikeButtonReturn {
   const fullStorageKey = `${ storageKeyPrefix }-${ postId }`;
 
-  const [showAlert, setShowAlert] = useState(false);
   const skipRender = useSkipRenderBeforeRehydration();
-
-  const onAlertClose = useCallback(() => {
-    setShowAlert(false);
-  }, []);
+  const alertActions = useSnackbarAlertsActions();
 
   // we start with disabled button and then flip it to enabled on client (when needed)
   const [liked, setLiked] = useState<boolean>(true);
@@ -60,32 +52,37 @@ function useLikeButton(
     // flip the value
     const value = !getItem(fullStorageKey);
 
-    if (value) {
-      setShowAlert(true);
-    }
-
     setLiked(value);
+
+    // convert it to string
+    setItem(fullStorageKey, value ? 'true' : '');
+
+    if (value) {
+      alertActions.add({
+        key: alertKey,
+        text: 'Thank you!',
+        autoHide: true,
+      });
+    }
 
     gtmEventEmitter(EGtmEventTypes.post_like_button_click, {
       post_header: postHeader,
       post_id: postId,
     });
-
-    // convert it to string
-    setItem(fullStorageKey, value ? 'true' : '');
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     fullStorageKey,
+    alertActions,
+    postHeader,
+    postId,
   ]);
 
   return [
     liked,
     onClick,
-    showAlert,
-    onAlertClose,
   ];
 }
+
+const cnLikeButton = cn('LikeButton');
 
 export function LikeButton(props: ILikeButtonProps): ReactElement {
   const { path, title } = props;
@@ -93,35 +90,17 @@ export function LikeButton(props: ILikeButtonProps): ReactElement {
   const [
     liked,
     onClick,
-    showAlert,
-    onAlertClose,
   ] = useLikeButton(path, title);
 
   return (
-    <>
-      <IconButton
-        color = 'primary'
-        title = 'Say Thanks' // not shown on disabled state
-        disabled = { liked }
-        onClick = { onClick }
-      >
-        { liked ? <ThumbUpIcon/> : <ThumbUpOutlinedIcon/> }
-      </IconButton>
-
-      <Portal>
-        <Snackbar
-          key = 'post-like-button'
-          open = { showAlert }
-          onClose = { onAlertClose }
-          autoHideDuration = { alertNotificationDuration }
-        >
-          <Alert
-            color = 'success'
-          >
-            Thank you!
-          </Alert>
-        </Snackbar>
-      </Portal>
-    </>
+    <IconButton
+      color = 'primary'
+      title = 'Say Thanks' // not shown on disabled state
+      disabled = { liked }
+      onClick = { onClick }
+      data-testid = { cnLikeButton() }
+    >
+      { liked ? <ThumbUpIcon/> : <ThumbUpOutlinedIcon/> }
+    </IconButton>
   );
 }

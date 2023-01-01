@@ -1,4 +1,4 @@
-import { CDPSession } from 'playwright';
+import { CDPSession } from '@playwright/test';
 
 import {
   ECDPNetworkEvents,

@@ -43,6 +43,7 @@ config.parserOptions = {
 };
 
 config.rules = {
+  'no-unused-vars': OFF, // in favour of @typescript-eslint/no-unused-vars
   'react/jsx-no-target-blank': [
     ERROR, {
       allowReferrer: true,

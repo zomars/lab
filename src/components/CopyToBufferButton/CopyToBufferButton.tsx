@@ -1,28 +1,26 @@
 import {
   Button,
-  Snackbar,
-  Alert,
-  AlertProps,
   ButtonProps,
-  Portal,
 } from '@mui/material';
 
 import React, {
   ReactElement,
-  useEffect,
+  useCallback,
   useState,
 } from 'react';
 
 import { cn } from '@bem-react/classname';
 import { classnames } from '@bem-react/classnames';
-import { alertNotificationDuration } from '../../constants';
 
+import { useSnackbarAlertsActions } from '../../hooks/useSnackbarAlerts';
 import { copyTextToBuffer } from '../../services/copy-to-buffer';
 import { gtmEventEmitter, EGtmEventTypes } from '../../services/gtm-event-emitter';
 
 const copyToBufferButton = cn('CopyToBufferButton');
 
 const gtmEventTextLimit = 256;
+
+const alertKey = 'code-snippet-copied';
 
 interface ICopyToBufferButton {
   className?: string;
@@ -46,50 +44,6 @@ interface IBufferCopyingStatus {
   errorMessage?: string;
 }
 
-interface IUseCopyingAlertHook {
-  isVisible: boolean;
-  color: AlertProps['color'];
-  message: string;
-}
-
-function useCopyingAlert(
-  copyingState: IBufferCopyingStatus,
-  successMessage = '',
-): IUseCopyingAlertHook {
-  const [showAlert, setShowAlert] = useState(false);
-
-  useEffect(() => {
-    const { state } = copyingState;
-
-    let timeoutId: ReturnType<typeof setTimeout>;
-
-    if (state === CopyingState.SUCCESS || state === CopyingState.FAILURE) {
-      setShowAlert(true);
-
-      timeoutId = setTimeout(
-        () => setShowAlert(false),
-        alertNotificationDuration,
-      );
-    }
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [copyingState]);
-
-  const { state, errorMessage = '' } = copyingState;
-
-  const color = state === CopyingState.FAILURE ? 'error' : 'success';
-  const message = state === CopyingState.FAILURE ?
-    errorMessage : successMessage || 'Copied';
-
-  return {
-    isVisible: showAlert,
-    color,
-    message,
-  };
-}
-
 export function CopyToBufferButton(props: ICopyToBufferButton): ReactElement {
   const {
     className,
@@ -105,19 +59,27 @@ export function CopyToBufferButton(props: ICopyToBufferButton): ReactElement {
     state: CopyingState.INITIAL,
   });
 
-  function show(): void {
+  const alertActions = useSnackbarAlertsActions();
+
+  const show = useCallback((): void => {
     setCopyingStatus({
       state: CopyingState.IN_PROGRESS,
     });
 
     copyTextToBuffer(textToCopy)
       .then(() => {
-        gtmEventEmitter(EGtmEventTypes.code_snippet_copy, {
-          code_snippet_copy_text: textToCopy.substring(0, gtmEventTextLimit),
-        });
-
         setCopyingStatus({
           state: CopyingState.SUCCESS,
+        });
+
+        alertActions.add({
+          key: alertKey,
+          text: alertMessageProp || 'Copied',
+          autoHide: true,
+        });
+
+        gtmEventEmitter(EGtmEventTypes.code_snippet_copy, {
+          code_snippet_copy_text: textToCopy.substring(0, gtmEventTextLimit),
         });
       })
       .catch((error: string) => {
@@ -125,45 +87,35 @@ export function CopyToBufferButton(props: ICopyToBufferButton): ReactElement {
           state: CopyingState.FAILURE,
           errorMessage: error,
         });
-      });
-  }
 
-  const {
-    color: alertColor,
-    message: alertMessage,
-    isVisible: alertIsVisible,
-  } = useCopyingAlert(copyingState, alertMessageProp);
+        alertActions.add({
+          key: alertKey,
+          color: 'error',
+          text: error || 'Couldn\'t copy',
+          autoHide: true,
+        });
+      });
+  }, [
+    alertActions,
+    alertMessageProp,
+    textToCopy,
+  ]);
 
   const { state } = copyingState;
 
   const btnIsDisabled = disabled || state === CopyingState.IN_PROGRESS;
 
   return (
-    <>
-      <Button
-        variant = 'contained'
-        onClick = { () => show() }
-        className = { classnames(copyToBufferButton(), className) }
-        data-testid = { copyToBufferButton() }
-        disabled = { btnIsDisabled }
-        size = { size || undefined }
-        fullWidth = { fullWidth || false }
-      >
-        { btnLabel || 'Copy' }
-      </Button>
-
-      <Portal>
-        <Snackbar
-          key = 'code-snippet-copied'
-          open = { alertIsVisible }
-        >
-          <Alert
-            color = { alertColor }
-          >
-            { alertMessage }
-          </Alert>
-        </Snackbar>
-      </Portal>
-    </>
+    <Button
+      variant = 'contained'
+      onClick = { () => show() }
+      className = { classnames(copyToBufferButton(), className) }
+      data-testid = { copyToBufferButton() }
+      disabled = { btnIsDisabled }
+      size = { size || undefined }
+      fullWidth = { fullWidth || false }
+    >
+      { btnLabel || 'Copy' }
+    </Button>
   );
 }

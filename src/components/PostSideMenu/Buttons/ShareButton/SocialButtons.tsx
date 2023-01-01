@@ -13,14 +13,14 @@ import {
   TelegramShareButton,
   TwitterIcon,
   TwitterShareButton,
-  WhatsappIcon,
-  WhatsappShareButton,
 } from 'react-share';
 
 import { cn } from '@bem-react/classname';
 import { classnames } from '@bem-react/classnames';
 
 import { useSiteMetadata } from '../../../../hooks/useSiteMetadata.hook';
+
+import { CopyUrlButton } from './CopyUrlButton/CopyUrlButton';
 
 interface ISocialButtons {
   url: string;
@@ -51,6 +51,7 @@ export function SocialButtons(props: ISocialButtons): ReactElement {
   } = useSiteMetadata();
 
   const className = classnames(cnSocialButtons('Button'), buttonClassName);
+  const testId = cnSocialButtons('Button');
 
   return (
     <>
@@ -59,6 +60,7 @@ export function SocialButtons(props: ISocialButtons): ReactElement {
         title = { title }
         via = { twitterHandle }
         className = { className }
+        data-testid = { testId }
         onClick = { () => onSocialShareClick('twitter') }
       >
         <TwitterIcon
@@ -66,10 +68,12 @@ export function SocialButtons(props: ISocialButtons): ReactElement {
           round = { true }
         />
       </TwitterShareButton>
+
       <TelegramShareButton
         title = { title }
         url = { url }
         className = { className }
+        data-testid = { testId }
         onClick = { () => onSocialShareClick('telegram') }
       >
         <TelegramIcon
@@ -77,12 +81,14 @@ export function SocialButtons(props: ISocialButtons): ReactElement {
           round = { true }
         />
       </TelegramShareButton>
+
       <LinkedinShareButton
         url = { url }
         title = { title }
         source = { siteTitle }
         summary = { summary }
         className = { className }
+        data-testid = { testId }
         onClick = { () => onSocialShareClick('linkedin') }
       >
         <LinkedinIcon
@@ -90,9 +96,12 @@ export function SocialButtons(props: ISocialButtons): ReactElement {
           round = { true }
         />
       </LinkedinShareButton>
+
       <FacebookShareButton
         url = { url }
+        title = { title }
         className = { className }
+        data-testid = { testId }
         onClick = { () => onSocialShareClick('facebook') }
       >
         <FacebookIcon
@@ -100,21 +109,12 @@ export function SocialButtons(props: ISocialButtons): ReactElement {
           round = { true }
         />
       </FacebookShareButton>
-      <EmailShareButton
-        url = { url }
-        subject = { title }
-        className = { className }
-        onClick = { () => onSocialShareClick('email') }
-      >
-        <EmailIcon
-          size = { iconSize }
-          round = { true }
-        />
-      </EmailShareButton>
+
       <RedditShareButton
         title = { title }
         url = { url }
         className = { className }
+        data-testid = { testId }
         onClick = { () => onSocialShareClick('reddit') }
       >
         <RedditIcon
@@ -122,17 +122,25 @@ export function SocialButtons(props: ISocialButtons): ReactElement {
           round = { true }
         />
       </RedditShareButton>
-      <WhatsappShareButton
-        url = { url }
-        title = { title }
+
+      <CopyUrlButton
         className = { className }
-        onClick = { () => onSocialShareClick('whatsapp') }
+        data-testid = { testId }
+        onClick = { () => onSocialShareClick('copy_url') }
+      />
+
+      <EmailShareButton
+        url = { url }
+        subject = { title }
+        className = { className }
+        data-testid = { testId }
+        onClick = { () => onSocialShareClick('email') }
       >
-        <WhatsappIcon
+        <EmailIcon
           size = { iconSize }
           round = { true }
         />
-      </WhatsappShareButton>
+      </EmailShareButton>
     </>
   );
 }
