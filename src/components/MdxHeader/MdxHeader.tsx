@@ -83,7 +83,8 @@ function headerFactory(type: number): (props: IMdxHeaderProps) => ReactElement {
 
     return (
       <Tag
-        className = { cnHeader() }
+        className = { cnHeader({ [Tag]: true }) }
+        data-testid = { cnHeader({ [Tag]: true }) }
       >
         <a
           className = { cnHeader('ChainLink') }

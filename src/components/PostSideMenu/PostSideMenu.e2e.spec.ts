@@ -3,6 +3,7 @@ import {
   test,
   Locator,
 } from '@playwright/test';
+
 import { waitForSpaNavigation } from '../../../e2e-tests/utils';
 
 const postUrl = '/posts/2022/wait-for-single-page-navigation-and-re-hydration-playwright-react/';

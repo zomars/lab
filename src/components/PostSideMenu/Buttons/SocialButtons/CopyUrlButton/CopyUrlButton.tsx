@@ -13,6 +13,7 @@ import './CopyUrlButton.scss';
 interface ICopyUrlButtonProps {
   className?: string;
   onClick: () => void;
+  'data-testid'?: string;
 }
 
 const cnCopyUrlButton = cn('CopyUrlButton');
@@ -23,14 +24,16 @@ export function CopyUrlButton(props: ICopyUrlButtonProps): ReactElement {
   const {
     className,
     onClick: onClickProp,
+    'data-testid': dataTestId,
   } = props;
 
   const alertActions = useSnackbarAlertsActions();
 
-  const onClick = useCallback(async () => {
+  const onClick = useCallback(() => {
     const { href: url } = window.location;
 
-    await copyTextToBuffer(url);
+    // todo handle async operation properly
+    copyTextToBuffer(url);
 
     alertActions.add({
       key: snackbarAlertKey,
@@ -52,6 +55,7 @@ export function CopyUrlButton(props: ICopyUrlButtonProps): ReactElement {
       }
       onClick = { onClick }
       title = 'Copy Link'
+      data-testid = { dataTestId || null }
     >
       <LinkIcon
         color = 'inherit'

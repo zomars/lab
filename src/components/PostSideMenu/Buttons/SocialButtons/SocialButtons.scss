@@ -1,0 +1,13 @@
+.SocialButtons {
+  &-Button {
+    // overriding MUI class with higher specificity
+    &.CopyUrlButton {
+      background-color: var(--aml-color-secondary);
+      color: white;
+
+      &:hover {
+        background-color: var(--aml-color-secondary);
+      }
+    }
+  }
+}

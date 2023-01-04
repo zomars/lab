@@ -44,7 +44,8 @@ $icon-size: 32px; // has to match JS code
     }
   }
 
-  &-SocialButton {
+  // increase specificity to fix copyUrl MUI IconButton
+  &-Popover &-SocialButton {
     display: block;
     position: absolute;
     top: calc(50% - #{ math.div($icon-size, 2) });

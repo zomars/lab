@@ -1,0 +1,1 @@
+https://twitter.com/share?url=https://example.com%2Fposts%2F2022%2Fwait-for-single-page-navigation-and-re-hydration-playwright-react%2F&text=How%20to%20Wait%20for%20Single%20Page%20Navigation%20and%20Re-hydration%20with%20Playwright%20and%20React%20Router&via=amalitsky

@@ -19,8 +19,9 @@ import { cn } from '@bem-react/classname';
 import { classnames } from '@bem-react/classnames';
 
 import { useSiteMetadata } from '../../../../hooks/useSiteMetadata.hook';
-
 import { CopyUrlButton } from './CopyUrlButton/CopyUrlButton';
+
+import './SocialButtons.scss';
 
 interface ISocialButtons {
   url: string;
@@ -59,7 +60,9 @@ export function SocialButtons(props: ISocialButtons): ReactElement {
         url = { url }
         title = { title }
         via = { twitterHandle }
-        className = { className }
+        className = {
+          classnames(className, cnSocialButtons('Button', { type: 'twitter' }))
+        }
         data-testid = { testId }
         onClick = { () => onSocialShareClick('twitter') }
       >
@@ -72,7 +75,9 @@ export function SocialButtons(props: ISocialButtons): ReactElement {
       <TelegramShareButton
         title = { title }
         url = { url }
-        className = { className }
+        className = {
+          classnames(className, cnSocialButtons('Button', { type: 'telegram' }))
+        }
         data-testid = { testId }
         onClick = { () => onSocialShareClick('telegram') }
       >
@@ -87,7 +92,9 @@ export function SocialButtons(props: ISocialButtons): ReactElement {
         title = { title }
         source = { siteTitle }
         summary = { summary }
-        className = { className }
+        className = {
+          classnames(className, cnSocialButtons('Button', { type: 'linkedin' }))
+        }
         data-testid = { testId }
         onClick = { () => onSocialShareClick('linkedin') }
       >
@@ -100,7 +107,9 @@ export function SocialButtons(props: ISocialButtons): ReactElement {
       <FacebookShareButton
         url = { url }
         title = { title }
-        className = { className }
+        className = {
+          classnames(className, cnSocialButtons('Button', { type: 'facebook' }))
+        }
         data-testid = { testId }
         onClick = { () => onSocialShareClick('facebook') }
       >
@@ -113,7 +122,9 @@ export function SocialButtons(props: ISocialButtons): ReactElement {
       <RedditShareButton
         title = { title }
         url = { url }
-        className = { className }
+        className = {
+          classnames(className, cnSocialButtons('Button', { type: 'reddit' }))
+        }
         data-testid = { testId }
         onClick = { () => onSocialShareClick('reddit') }
       >
@@ -124,7 +135,9 @@ export function SocialButtons(props: ISocialButtons): ReactElement {
       </RedditShareButton>
 
       <CopyUrlButton
-        className = { className }
+        className = {
+          classnames(className, cnSocialButtons('Button', { type: 'copy_url' }))
+        }
         data-testid = { testId }
         onClick = { () => onSocialShareClick('copy_url') }
       />
@@ -132,9 +145,16 @@ export function SocialButtons(props: ISocialButtons): ReactElement {
       <EmailShareButton
         url = { url }
         subject = { title }
-        className = { className }
+        className = {
+          classnames(className, cnSocialButtons('Button', { type: 'email' }))
+        }
         data-testid = { testId }
-        onClick = { () => onSocialShareClick('email') }
+        onClick = { (_, mailtoUrl) => {
+          // https://github.com/nygardk/react-share/issues/419
+          window.location.href = mailtoUrl;
+
+          onSocialShareClick('email');
+        } }
       >
         <EmailIcon
           size = { iconSize }

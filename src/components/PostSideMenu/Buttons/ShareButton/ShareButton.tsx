@@ -12,7 +12,7 @@ import { cn } from '@bem-react/classname';
 
 import { useSiteMetadata } from '../../../../hooks/useSiteMetadata.hook';
 import { EGtmEventTypes, gtmEventEmitter } from '../../../../services/gtm-event-emitter';
-import { SocialButtons } from './SocialButtons';
+import { SocialButtons } from '../SocialButtons/SocialButtons';
 
 import './ShareButton.scss';
 
