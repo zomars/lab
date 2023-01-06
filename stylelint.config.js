@@ -19,10 +19,20 @@ const never = 'never';
 const alwaysSingleLine = 'always-single-line';
 const OFF = null;
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+function getSassAtRuleDescriptor(atRuleName) {
+  return {
+    name: atRuleName,
+    type: 'at-rule',
+  };
+}
+
 const typeOrder = [
-  'at-variables',
+  getSassAtRuleDescriptor('use'),
   'dollar-variables',
   'custom-properties',
+  getSassAtRuleDescriptor('function'),
+  getSassAtRuleDescriptor('mixin'),
   'declarations',
   'rules',
   'at-rules',

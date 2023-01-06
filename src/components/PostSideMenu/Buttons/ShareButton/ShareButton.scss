@@ -1,6 +1,8 @@
 @use 'sass:math';
 @use 'sass:string';
 
+$icon-size: 32px; // has to match JS code
+
 // Return x and y for the transform translate property
 @function circumference-translate(
   $index,
@@ -22,8 +24,6 @@
     }
   }
 }
-
-$icon-size: 32px; // has to match JS code
 
 .ShareButton {
   $popover-size: 120px;
