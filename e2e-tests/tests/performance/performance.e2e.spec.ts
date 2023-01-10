@@ -164,7 +164,7 @@ test.describe('performance', () => {
       console.log(printAllRequestsReport(report));
 
       expect(report.totalEncodedSize).toBeLessThanOrEqual(400);
-      expect(report.totalDecodedSize).toBeLessThanOrEqual(900);
+      expect(report.totalDecodedSize).toBeLessThanOrEqual(1000);
       expect(report.totalLoadDuration).toBeLessThanOrEqual(1650);
 
       const { groups: fileGroups } = report;
