@@ -1,23 +1,5 @@
-import { ElementHandle } from '@playwright/test';
-import {
-  ComponentWrapper,
-  IComponentWrapperArgs,
-} from '../../../e2e-tests/components/component-wrapper.e2e';
-
 export enum ImageGridSelector {
   host = '[data-testid=ImageGrid]',
   image = 'picture img',
-}
-
-export class ImageGrid extends ComponentWrapper {
-  constructor(args: IComponentWrapperArgs) {
-    super({
-      hostSelector: ImageGridSelector.host,
-      ...args,
-    });
-  }
-
-  public getImages(): Promise<ElementHandle<HTMLPictureElement>[]> {
-    return this.getElements(ImageGridSelector.image);
-  }
+  imageTitle = '[data-testid=Cell-Title]',
 }

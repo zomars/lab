@@ -1,86 +1,85 @@
 import { test, expect } from '@playwright/test';
-import {
-  from,
-  count,
-  identity,
-  mergeMap,
-  firstValueFrom,
-  toArray,
-} from 'rxjs';
-
-import { Post } from '../../page-templates/Post/Post.e2e';
-import { ImageGrid } from './ImageGrid.e2e';
+import { waitForSpaNavigation } from '../../../e2e-tests/utils';
 
 const postUrl = 'posts/2022/034-motorsport-summerfest/';
-const expectedImageGridQ = 3;
-const expectedImageQ = 13;
 
 test.describe('ImageGrid', () => {
-  let blogPost: Post;
-
   test.beforeEach(async ({ page }) => {
-    await page.goto(postUrl);
+    await page.goto(postUrl, { waitUntil: 'commit' });
 
-    blogPost = new Post({ page });
-
-    await expect(blogPost.isConnected).resolves.toBeTruthy();
+    await waitForSpaNavigation(page);
   });
 
-  test('post has expected number of imageGrids', async () => {
-    const imageGrids = await blogPost.getImageGrids();
+  test('post has the expected number of ImageGrids', async ({ page }) => {
+    const imageGrids = page.getByTestId('ImageGrid');
 
-    expect(imageGrids.length).toEqual(expectedImageGridQ);
+    await expect(imageGrids).toHaveCount(3);
   });
 
-  test('post has expected images', async ({ page }) => {
-    const images$ = from(blogPost.getImageGrids())
-      .pipe(
-        mergeMap(identity),
-        mergeMap((imageGridElement) => {
-          const imageGrid = new ImageGrid({
-            hostElement: imageGridElement,
-            page,
-          });
+  test('second ImageGrid has the expected number of images', async ({ page }) => {
+    const imageGrid = page.getByTestId('ImageGrid').nth(1);
+    const images = imageGrid.locator('[data-testid=ImageGridRow-Cell] picture img');
 
-          return imageGrid.isConnected.then(() => imageGrid);
-        }),
-        mergeMap(imageGrid => imageGrid.getImages()),
-        mergeMap(identity), // wait for promises to get resolved
-      );
+    await expect(images).toHaveCount(6);
 
-    const imagesQ$ = images$
-      .pipe(
-        count(),
-      );
+    let index = 0;
 
-    const length = await firstValueFrom(imagesQ$);
+    for (const image of await images.all()) {
+      await expect(image).toHaveScreenshot(`grid-image-${ index }.png`, {
+        animations: 'disabled',
+      });
 
-    expect(length).toEqual(expectedImageQ);
-
-    const snapshots$ = images$.pipe(
-      mergeMap((imageHandle) => {
-        return imageHandle.screenshot({ animations: 'disabled' });
-      }),
-      toArray(),
-    );
-
-    const snapshots = await firstValueFrom(snapshots$);
-
-    snapshots.forEach(
-      (snapshot, index) => {
-        expect(snapshot).toMatchSnapshot(`grid-image-${ index }.png`);
-      },
-    );
+      index++;
+    }
   });
 
-  test('shows image title on hover and make the image darker',
-    async () => {
-      const [imageGrid] = await blogPost.getImageGrids();
+  test('4 images out of 6 have expected title', async ({ page }) => {
+    const imageGrid = page.getByTestId('ImageGrid').nth(1);
+    const images = imageGrid
+      .locator('[data-testid=ImageGridRow-Cell]:has([data-testid=ImageGridRow-Cell-Title])');
 
-      await imageGrid.hover();
+    await expect(images).toHaveCount(4);
 
-      const snapshot = await imageGrid.screenshot({ animations: 'disabled' });
+    let index = 0;
 
-      await expect(snapshot).toMatchSnapshot();
+    for (const image of await images.all()) {
+      await image.hover();
+
+      const title = await image.getByTestId('ImageGridRow-Cell-Title');
+
+      await expect(title.innerText()).resolves.toMatchSnapshot(`image-title-${ index}.txt`);
+
+      index++;
+    }
+  });
+
+  test('image click opens expected popup', async ({ page }) => {
+    const imageGrid = page.getByTestId('ImageGrid').nth(1);
+    const image = imageGrid.getByTestId('ImageGridRow-Cell').nth(3);
+
+    await image.click();
+
+    const popover = page.getByTestId('Lightbox-Portal-Content');
+
+    const imageTitle = popover.getByTestId('LightboxImageTitle-Title');
+
+    await expect(imageTitle.innerText()).resolves.toMatchSnapshot('image-overlay-title');
+
+    const indexOf = popover.getByTestId('LightboxImageTitle-IndexOf');
+
+    await expect(indexOf.innerText()).resolves.toMatchSnapshot('image-overlay-index-of');
+
+    const mainImage = popover.locator('.ril-image-current');
+
+    await expect(mainImage).toBeVisible();
+
+    const maskElements = popover.locator('.ril__toolbar, .ril__navButtons');
+
+    await expect(mainImage).toHaveScreenshot('image-overlay-image.png', {
+      animations: 'disabled',
+      mask: [
+        maskElements,
+      ],
     });
+  });
 });

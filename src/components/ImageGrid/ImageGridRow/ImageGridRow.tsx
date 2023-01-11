@@ -92,9 +92,13 @@ export function ImageGridRow(props: IImageGridRow): ReactElement {
                   image = { getImage(image.childImageSharp.preview) as IGatsbyImageData }
                   alt = { title || '' }
                 />
-                <div className = { cnImageGridRow('Cell-Title') }>
-                  { title }
-                </div>
+                { title ?
+                  <div
+                    className = { cnImageGridRow('Cell-Title') }
+                    data-testid = { cnImageGridRow('Cell-Title') }
+                  >
+                    { title }
+                  </div> : null }
               </div>
             );
           })

@@ -21,7 +21,10 @@ export function LightboxImageTitle(
   } = props;
 
   return (
-    <div className = { cnLightboxImageTitle() }>
+    <div
+      className = { cnLightboxImageTitle() }
+      data-testid = { cnLightboxImageTitle() }
+    >
       <div
         data-testid = { cnLightboxImageTitle('IndexOf') }
         className = { cnLightboxImageTitle('IndexOf') }

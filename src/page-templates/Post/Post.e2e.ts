@@ -52,7 +52,7 @@ export class Post extends ComponentWrapper {
   public async getImageTitles(): Promise<string[]> {
     const $images = await this.getElements(BlogPostSelector.image);
 
-    return getElementHandleAttributes($images, 'title');
+    return getElementHandleAttributes($images, 'alt');
   }
 
   public getImageGrids(): Promise<ElementHandle<HTMLElement>[]> {
