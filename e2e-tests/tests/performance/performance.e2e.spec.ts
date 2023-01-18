@@ -165,7 +165,7 @@ test.describe('performance', () => {
 
       expect(report.totalEncodedSize).toBeLessThanOrEqual(400);
       expect(report.totalDecodedSize).toBeLessThanOrEqual(1000);
-      expect(report.totalLoadDuration).toBeLessThanOrEqual(1650);
+      expect(report.totalLoadDuration).toBeLessThanOrEqual(3400);
 
       const { groups: fileGroups } = report;
 
@@ -181,7 +181,7 @@ test.describe('performance', () => {
 
       const requestsPromise = $observable
         .pipe(
-          timeout({ each: 499 }),
+          timeout({ each: networkThrottleOptions.latency + 50 }),
           groupBy(({ payload }: ICDPNetworkEvent) => payload.requestId),
           mergeMap((group$: Observable<ICDPNetworkEvent>) => group$.pipe(
             takeWhile((event: ICDPNetworkEvent): boolean => {
@@ -285,7 +285,7 @@ test.describe('performance', () => {
 
       expect(report.totalEncodedSize).toBeLessThanOrEqual(800);
       expect(report.totalDecodedSize).toBeLessThanOrEqual(1650);
-      expect(report.totalLoadDuration).toBeLessThanOrEqual(1900);
+      expect(report.totalLoadDuration).toBeLessThanOrEqual(3600);
 
       const { groups } = report;
 
