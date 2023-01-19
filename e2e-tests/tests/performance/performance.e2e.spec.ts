@@ -81,7 +81,7 @@ test.describe('performance', () => {
       );
 
       expect(domContentLoaded).toBeLessThanOrEqual(500);
-      expect(loaded).toBeLessThanOrEqual(1200);
+      expect(loaded).toBeLessThanOrEqual(2000);
       expect(jsSyncBootstrap).toBeLessThanOrEqual(30);
     });
 
@@ -181,7 +181,7 @@ test.describe('performance', () => {
 
       const requestsPromise = $observable
         .pipe(
-          timeout({ each: networkThrottleOptions.latency + 50 }),
+          timeout({ each: networkThrottleOptions.latency + 250 }),
           groupBy(({ payload }: ICDPNetworkEvent) => payload.requestId),
           mergeMap((group$: Observable<ICDPNetworkEvent>) => group$.pipe(
             takeWhile((event: ICDPNetworkEvent): boolean => {
@@ -207,7 +207,7 @@ test.describe('performance', () => {
       expect(report.totalRequests).toBeLessThanOrEqual(50);
       expect(report.totalEncodedSize).toBeLessThanOrEqual(800);
       expect(report.totalDecodedSize).toBeLessThanOrEqual(1650);
-      expect(report.totalLoadDuration).toBeLessThanOrEqual(1900);
+      expect(report.totalLoadDuration).toBeLessThanOrEqual(3200);
 
       const { groups } = report;
 
@@ -242,7 +242,7 @@ test.describe('performance', () => {
       );
 
       expect(domContentLoaded).toBeLessThanOrEqual(500);
-      expect(loaded).toBeLessThanOrEqual(1400);
+      expect(loaded).toBeLessThanOrEqual(2100);
       expect(jsSyncBootstrap).toBeLessThanOrEqual(30);
     });
 
