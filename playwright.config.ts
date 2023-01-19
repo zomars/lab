@@ -22,6 +22,9 @@ if (env === 'development') {
   // github action run
   hostname = `pr-${ prId }--amlab.netlify.app`;
   protocol = 'https';
+  // @todo remove once Netlify drops it's nasty collaboration drawer
+  // see answers.netlify.com/t/qa-and-collaborate-on-branch-deploys-using-the-netlify-drawer/83466
+  testPathIgnorePatterns.push('**/performance/**');
 } else if (env === 'production') {
   // test publicly deployed production version
   hostname = 'lab.amalitsky.com';
