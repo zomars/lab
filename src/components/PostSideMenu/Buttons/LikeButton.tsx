@@ -1,7 +1,6 @@
 import React, {
   ReactElement,
   useCallback,
-  useState,
 } from 'react';
 
 import { IconButton } from '@mui/material';
@@ -12,19 +11,14 @@ import {
 } from '@mui/icons-material';
 
 import { cn } from '@bem-react/classname';
+import { usePost, usePostDispatch } from '../../../hooks/usePost';
 
-import { useSkipRenderBeforeRehydration } from '../../../hooks/useSkipRenderBeforeRehydration.hook';
+import { useLocalStoragePostLike } from '../../../hooks/useLocalStoragePostLike.hook';
 import { useSnackbarAlertsActions } from '../../../hooks/useSnackbarAlerts';
 import { EGtmEventTypes, gtmEventEmitter } from '../../../services/gtm-event-emitter';
-import { getItem, setItem } from '../../../services/local-storage';
+import { useSkipRenderBeforeRehydration } from '../../../hooks/useSkipRenderBeforeRehydration.hook';
 
-const storageKeyPrefix = 'blog-post-like-state';
 const alertKey = 'post-like-button';
-
-interface ILikeButtonProps {
-  path: string;
-  title: string;
-}
 
 type TUseLikeButtonReturn = [
   boolean,
@@ -32,32 +26,30 @@ type TUseLikeButtonReturn = [
 ];
 
 // doesn't support background localStorage update
-function useLikeButton(
-  postId: string,
-  postHeader: string,
-): TUseLikeButtonReturn {
-  const fullStorageKey = `${ storageKeyPrefix }-${ postId }`;
-
-  const skipRender = useSkipRenderBeforeRehydration();
+function useLikeButton(): TUseLikeButtonReturn {
   const alertActions = useSnackbarAlertsActions();
+  const post = usePost();
+  const postContextDispatch = usePostDispatch();
+  const [, setPostLikeFromStorage] = useLocalStoragePostLike(post?.path || '');
 
-  // we start with disabled button and then flip it to enabled on client (when needed)
-  const [liked, setLiked] = useState<boolean>(true);
-
-  if (!skipRender) {
-    setLiked(!!getItem(fullStorageKey));
-  }
+  const liked = post?.liked || false;
 
   const onClick = useCallback(() => {
-    // flip the value
-    const value = !getItem(fullStorageKey);
+    // button is disabled when not available
+    if (!post) {
+      return;
+    }
 
-    setLiked(value);
+    const newValue = !liked;
 
-    // convert it to string
-    setItem(fullStorageKey, value ? 'true' : '');
+    postContextDispatch({
+      type: 'like',
+      value: newValue,
+    });
 
-    if (value) {
+    setPostLikeFromStorage(newValue);
+
+    if (newValue) {
       alertActions.add({
         key: alertKey,
         text: 'Thank you!',
@@ -66,14 +58,15 @@ function useLikeButton(
     }
 
     gtmEventEmitter(EGtmEventTypes.post_like_button_click, {
-      post_header: postHeader,
-      post_id: postId,
+      post_header: post.title,
+      post_id: post.path,
     });
   }, [
-    fullStorageKey,
     alertActions,
-    postHeader,
-    postId,
+    post,
+    liked,
+    setPostLikeFromStorage,
+    postContextDispatch,
   ]);
 
   return [
@@ -84,23 +77,24 @@ function useLikeButton(
 
 const cnLikeButton = cn('LikeButton');
 
-export function LikeButton(props: ILikeButtonProps): ReactElement {
-  const { path, title } = props;
+export function LikeButton(): ReactElement {
+  const isSsr = useSkipRenderBeforeRehydration();
+  const post = usePost();
 
   const [
-    liked,
+    isLiked,
     onClick,
-  ] = useLikeButton(path, title);
+  ] = useLikeButton();
 
   return (
     <IconButton
       color = 'primary'
       title = 'Say Thanks' // not shown on disabled state
-      disabled = { liked }
+      disabled = { isSsr || !post || post.liked }
       onClick = { onClick }
       data-testid = { cnLikeButton() }
     >
-      { liked ? <ThumbUpIcon/> : <ThumbUpOutlinedIcon/> }
+      { isLiked ? <ThumbUpIcon/> : <ThumbUpOutlinedIcon/> }
     </IconButton>
   );
 }

@@ -43,7 +43,6 @@ export async function createPostPages(
     throw postsReq.errors;
   }
 
-  // eslint-disable-next-line no-extra-parens
   const { nodes: posts }: { nodes: IBlogPost[] } = (postsReq.data as any).allPosts;
 
   posts.forEach((post) => {

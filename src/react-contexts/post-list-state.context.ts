@@ -2,16 +2,16 @@ import React from 'react';
 
 import { IBlogPost } from '../types/common.types';
 
-export interface IPostContext {
+export interface IPostListContext {
   posts: Map<string, IBlogPost>;
   postsPerTag: Map<string, IBlogPost[]>;
 }
 
-const defaultValue: IPostContext = {
+const defaultValue: IPostListContext = {
   posts: new Map<string, IBlogPost>(),
   postsPerTag: new Map<string, IBlogPost[]>(),
 };
 
-export const postsListContext = React.createContext(defaultValue);
+export const postListContext = React.createContext(defaultValue);
 
-postsListContext.displayName = 'PostListPerTagContext';
+postListContext.displayName = 'PostListContext';

@@ -2,7 +2,7 @@ import { Link } from 'gatsby';
 import { cn } from '@bem-react/classname';
 import React, { ReactElement, useContext } from 'react';
 
-import { postsListContext } from '../../react-contexts/posts-list.context';
+import { postListContext } from '../../react-contexts/post-list-state.context';
 import { naturalSort } from '../../services/natural-sort';
 
 import { getPostListUrlByTag } from '../../services/get-post-list-url-by-tag';
@@ -67,7 +67,7 @@ export function PostTags(props: IPostTagsProps): ReactElement {
     noLinkForActiveTag = false,
   } = props;
 
-  const posts = useContext(postsListContext);
+  const posts = useContext(postListContext);
 
   const sortedTags = tags.sort(naturalSort);
 

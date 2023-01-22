@@ -7,7 +7,6 @@ export function copyTextToBuffer(text: string): Promise<void> {
   try {
     return navigator.clipboard.writeText(text);
   } catch (e) {
-    // eslint-disable-next-line no-extra-parens
     return Promise.reject((e as Error).message);
   }
 }

@@ -11,7 +11,6 @@ const headTagsOrder = {
 };
 
 function isReactElement(node: ReactNode | ReactElement): node is ReactElement {
-  // eslint-disable-next-line no-extra-parens
   return (node as ReactElement).type !== undefined;
 }
 

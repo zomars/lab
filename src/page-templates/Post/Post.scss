@@ -35,6 +35,18 @@
     // overflow: hidden or auto prevents menu's position: sticky from working
   }
 
+  // meta and top menu on small screens
+  &-MetaWrapper {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: var(--aml-size-sm);
+    column-gap: var(--aml-global-layout-padding-md);
+  }
+
+  &-Meta {
+    flex-grow: 1;
+  }
+
   &-Details {
     color: var(--aml-color-muted-text);
     font-style: italic;
@@ -47,6 +59,11 @@
   &-BottomMenu {
     display: flex;
     margin: var(--aml-size-5) 0;
+  }
+
+  &-TopMenu {
+    display: flex;
+    flex-shrink: 0;
   }
 
   &-SideMenu_vertical {

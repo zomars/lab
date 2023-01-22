@@ -5,7 +5,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '../theme/theme.mui';
 
 import { LightboxContextProvider } from '../context-providers/LightboxContextProvider';
-import { PostContextProvider } from '../context-providers/PostContextProvider';
+import { PostListContextProvider } from '../context-providers/PostListContextProvider';
 import { SnackbarAlertsContextProvider } from '../context-providers/SnackbarAlertsContextProvider';
 
 /**
@@ -17,11 +17,11 @@ export function wrapRootElement(
   return (
     <ThemeProvider theme = { theme }>
       <SnackbarAlertsContextProvider>
-        <PostContextProvider>
+        <PostListContextProvider>
           <LightboxContextProvider>
             { element }
           </LightboxContextProvider>
-        </PostContextProvider>
+        </PostListContextProvider>
       </SnackbarAlertsContextProvider>
     </ThemeProvider>
   );

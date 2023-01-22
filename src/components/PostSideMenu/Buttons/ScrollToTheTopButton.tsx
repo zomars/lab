@@ -10,10 +10,13 @@ import { IconButton } from '@mui/material';
 
 import { throttle } from 'lodash';
 import { cn } from '@bem-react/classname';
+import { usePost } from '../../../hooks/usePost';
 
 import { EGtmEventTypes, gtmEventEmitter } from '../../../services/gtm-event-emitter';
 
-function useDisabledButton(): boolean {
+const cnScrollToTheTopButton = cn('ScrollToTheTopButton');
+
+function useDisabledScrollButton(): boolean {
   const [disabled, setDisabled] = useState<boolean>(true);
 
   useEffect(() => {
@@ -21,34 +24,37 @@ function useDisabledButton(): boolean {
       return;
     }
 
-    const scrollEventHandler = throttle(() => {
+    function scrollEventHandler(): void {
       // 100 is kinda arbitrary number
       setDisabled(window.scrollY <= 100);
-    }, 99);
+    }
 
-    window.addEventListener('scroll', scrollEventHandler);
+    const throttledScrollEventHandler = throttle(scrollEventHandler, 99);
+
+    window.addEventListener('scroll', throttledScrollEventHandler);
+
+    scrollEventHandler();
 
     return () => {
-      scrollEventHandler.cancel();
-      window.removeEventListener('scroll', scrollEventHandler);
+      throttledScrollEventHandler.cancel();
+      window.removeEventListener('scroll', throttledScrollEventHandler);
     };
   }, []);
 
   return disabled;
 }
 
-interface IScrollToTheTopButtonProps {
-  path: string;
-  title: string;
-}
-
-const cnScrollToTheTopButton = cn('ScrollToTheTopButton');
-
-export function ScrollToTheTopButton(props: IScrollToTheTopButtonProps): ReactElement {
-  const disabled = useDisabledButton();
-  const { path, title } = props;
+export function ScrollToTheTopButton(): ReactElement {
+  const disabled = useDisabledScrollButton();
+  const post = usePost();
 
   const onClick = useCallback(() => {
+    if (!post) {
+      return;
+    }
+
+    const { path, title } = post;
+
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
@@ -59,8 +65,7 @@ export function ScrollToTheTopButton(props: IScrollToTheTopButtonProps): ReactEl
       post_header: title,
     });
   }, [
-    path,
-    title,
+    post,
   ]);
 
   return (

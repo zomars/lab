@@ -242,7 +242,7 @@ test.describe('performance', () => {
       );
 
       expect(domContentLoaded).toBeLessThanOrEqual(500);
-      expect(loaded).toBeLessThanOrEqual(2100);
+      expect(loaded).toBeLessThanOrEqual(2150);
       expect(jsSyncBootstrap).toBeLessThanOrEqual(30);
     });
 

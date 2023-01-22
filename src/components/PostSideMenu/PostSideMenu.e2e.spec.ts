@@ -96,5 +96,17 @@ test.describe('post side menu', () => {
 
       await expect(alert).toBeHidden();
     });
+
+    test('preserves like state between page reloads (localStorage)', async ({ page }) => {
+      await likeButton.click();
+
+      await expect(likeButton).toBeDisabled();
+
+      await page.reload({ waitUntil: 'commit' });
+
+      await waitForSpaNavigation(page);
+
+      await expect(likeButton).toBeDisabled();
+    });
   });
 });

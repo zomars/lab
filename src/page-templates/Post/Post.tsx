@@ -1,5 +1,11 @@
-import React, { ReactElement } from 'react';
+import React, {
+  ReactElement,
+  useEffect,
+  useState,
+} from 'react';
+
 import { graphql, PageRendererProps } from 'gatsby';
+
 import {
   Table,
   TableBody,
@@ -11,6 +17,7 @@ import {
 } from '@mui/material';
 
 import { MDXProvider } from '@mdx-js/react';
+
 import { cn } from '@bem-react/classname';
 
 import { Layout } from '../../components/Layout';
@@ -31,6 +38,9 @@ import { PostDateDetails } from '../../components/PostDateDetails/PostDateDetail
 import { PostEventDetails } from '../../components/PostEventDetails/PostEventDetails';
 import { PostTags } from '../../components/PostTags/PostTags';
 import { VideoPlayer } from '../../components/VideoPlayer/VideoPlayer';
+import { PostContextProvider } from '../../context-providers/PostContextProvider';
+import { usePostDispatch } from '../../hooks/usePost';
+import { useLocalStoragePostLike } from '../../hooks/useLocalStoragePostLike.hook';
 import { IBlogPost } from '../../types/common.types';
 import { Lightbox } from '../../components/Lightbox/Lightbox';
 import { PostSideMenu } from '../../components/PostSideMenu/PostSideMenu';
@@ -129,10 +139,12 @@ function Post(props: IBlogPostTemplateProps): ReactElement {
 
   const theme = useTheme();
   // @ts-ignore
-  const isLargeScreen = useMediaQuery(theme.breakpoints.up('blogPostMd'));
+  const sidebarMenuLocation = useMediaQuery(theme.breakpoints.up('blogPostMd'));
+  // between small and `blogPostMd` we have `TopMenu` with share and like buttons
+  const withTopPostMenu = useMediaQuery(theme.breakpoints.up('sm')) && !sidebarMenuLocation;
+  const [firstRender, setFirstRender] = useState(true);
 
   const { state } = props.location;
-
   const { post } = data;
 
   const {
@@ -144,21 +156,47 @@ function Post(props: IBlogPostTemplateProps): ReactElement {
     event,
   } = post.frontmatter;
 
-  // eslint-disable-next-line no-extra-parens
+  const { slug: postId } = post.fields;
+
+  const dispatchPostContext = usePostDispatch();
+
+  const [getPostLikeFromStorage] = useLocalStoragePostLike(postId);
+
+  if (firstRender) {
+    setFirstRender(false);
+
+    const liked = getPostLikeFromStorage();
+
+    dispatchPostContext({
+      type: 'set',
+      post: {
+        path: postId,
+        title,
+        description,
+        liked,
+      },
+    });
+  }
+
+  // cleanup post context on node removal
+  useEffect(() => {
+    return () => {
+      dispatchPostContext({ type: 'unset' });
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const activeTag = (state as Record<string, string>)?.activeTag || tags[0];
 
   const SideMenu = (
     <PostSideMenu
-      layout = { isLargeScreen ? 'vertical' : 'horizontal' }
+      layout = { sidebarMenuLocation ? 'vertical' : 'horizontal' }
       className = {
         cnBlogPost('SideMenu', {
-          vertical: isLargeScreen,
-          horizontal: !isLargeScreen,
+          vertical: sidebarMenuLocation,
+          horizontal: !sidebarMenuLocation,
         })
       }
-      postPath = { post.fields.slug }
-      postHeader = { title }
-      postMetaDescription = { description || post.excerpt }
     />
   );
 
@@ -168,7 +206,6 @@ function Post(props: IBlogPostTemplateProps): ReactElement {
       testId = { cnBlogPost() }
     >
       <Lightbox/>
-
 
       <div className = { cnBlogPost('SideColumn') }></div>
 
@@ -180,26 +217,42 @@ function Post(props: IBlogPostTemplateProps): ReactElement {
             { title }
           </h1>
 
-          <p className = { cnBlogPost('Details') }>
-            <PostDateDetails
-              publishedDate = { posted }
-              updatedDate = { updated }
-            />
+          <div
+            className = { cnBlogPost('MetaWrapper') }
+          >
+            <div className = { cnBlogPost('Meta') }>
+              <p className = { cnBlogPost('Details') }>
+                <PostDateDetails
+                  publishedDate = { posted }
+                  updatedDate = { updated }
+                />
 
-            { event ?
-              <PostEventDetails
-                date = { event.date }
-                locationName = { event.locationName }
-                locationAddress = { event.locationAddress }
-              /> : null }
-          </p>
+                { event ?
+                  <PostEventDetails
+                    date = { event.date }
+                    locationName = { event.locationName }
+                    locationAddress = { event.locationAddress }
+                  /> : null }
+              </p>
 
-          <p>
-            <PostTags
-              tags = { tags }
-              activeTag = { activeTag }
-            />
-          </p>
+              <p className = { cnBlogPost('PostTags') }>
+                <PostTags
+                  tags = { tags }
+                  activeTag = { activeTag }
+                />
+              </p>
+            </div>
+
+            {
+              withTopPostMenu ?
+                <div className = { cnBlogPost('TopMenu') } >
+                  <PostSideMenu
+                    layout = 'horizontal'
+                    buttons = { ['share', 'like'] }
+                  />
+                </div> : null
+            }
+          </div>
 
           <section
             data-testid = { cnBlogPost('Body') }
@@ -213,7 +266,7 @@ function Post(props: IBlogPostTemplateProps): ReactElement {
         </article>
 
         {
-          !isLargeScreen ?
+          !sidebarMenuLocation ?
             <div className = { cnBlogPost('BottomMenu') } >
               { SideMenu }
             </div> : null
@@ -228,12 +281,19 @@ function Post(props: IBlogPostTemplateProps): ReactElement {
       </div>
 
       <div className = { cnBlogPost('SideColumn') }>
-        { isLargeScreen ? SideMenu : null }
+        { sidebarMenuLocation ? SideMenu : null }
       </div>
 
     </Layout>
   );
 }
 
-// eslint-disable-next-line import/no-default-export
-export default Post;
+export default function PostWrapper(props: IBlogPostTemplateProps): ReactElement {
+  return (
+    <PostContextProvider>
+      <Post { ...props }>
+        { props.children }
+      </Post>
+    </PostContextProvider>
+  );
+}

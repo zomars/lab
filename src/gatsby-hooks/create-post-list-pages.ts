@@ -60,7 +60,6 @@ async function createPostListPagesPerTag(
     throw postsReq.errors;
   }
 
-  // eslint-disable-next-line no-extra-parens
   const { nodes: posts }: { nodes: IBlogPost[] } = (postsReq.data as any).allPostsByTag;
 
   const numPages = Math.ceil(posts.length / postsPerPage);

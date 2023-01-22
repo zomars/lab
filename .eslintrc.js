@@ -49,6 +49,7 @@ config.rules = {
       allowReferrer: true,
     },
   ],
+  'no-extra-parens': OFF,
 };
 
 const e2eTestOverrides = {
@@ -72,8 +73,19 @@ const e2eTestOverrides = {
   },
 };
 
+const gatsbyPageComponentsOverrides = {
+  files: [
+    'src/pages/**/*.tsx',
+    'src/page-templates/*/*.tsx',
+  ],
+  rules: {
+    'import/no-default-export': OFF,
+  },
+};
+
 config.overrides = [
   e2eTestOverrides,
+  gatsbyPageComponentsOverrides,
   {
     files: [
       '*.tsx',

@@ -11,37 +11,21 @@ import './PostSideMenu.scss';
 
 const cnPostSideMenu = cn('PostSideMenu');
 
+type buttonType = 'like' | 'scroll' | 'share';
+
 interface IPostSideMenuProps {
   className?: string;
-  postPath: string;
-  postHeader: string;
   layout?: 'horizontal' | 'vertical';
-  postMetaDescription?: string;
+  buttons?: buttonType[];
 }
 
 export function PostSideMenu(props: IPostSideMenuProps): ReactElement {
-  const {
-    postHeader,
-    postPath,
-    layout,
-    postMetaDescription,
-  } = props;
+  const { layout } = props;
 
-  /* eslint-disable react/jsx-key */
-  const buttons = [
-    <ScrollToTheTopButton
-      path = { postPath }
-      title = { postHeader }
-    />,
-    <ShareButton
-      path = { postPath }
-      title = { postHeader }
-      summary = { postMetaDescription }
-    />,
-    <LikeButton
-      path = { postPath }
-      title = { postHeader }
-    />,
+  const buttonsHash = {
+    scroll: <ScrollToTheTopButton/>,
+    share: <ShareButton/>,
+    like: <LikeButton/>,
     /* <IconButton
       color = 'primary'
       title = 'Ask a Question or Send a Message'
@@ -50,8 +34,11 @@ export function PostSideMenu(props: IPostSideMenuProps): ReactElement {
         fontSize = 'inherit'
       />
     </IconButton>, */
-  ];
-  /* eslint-enable react/jsx-key */
+  };
+
+  const buttonTypes = props.buttons || Object.keys(buttonsHash);
+
+  const buttons = buttonTypes.map(type => buttonsHash[type]);
 
   const horizontalLayout = layout === 'horizontal';
 

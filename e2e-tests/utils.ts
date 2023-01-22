@@ -76,7 +76,6 @@ function waitForSpaNavigationPageFunction(STATE_CHANGE_EVENT: string): Promise<s
       if (event instanceof CustomEvent) {
         resolved = true;
 
-        // eslint-disable-next-line no-extra-parens
         resolve((event.detail as IStateChangeEventDetails).location.pathname);
       }
     };

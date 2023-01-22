@@ -10,7 +10,10 @@ import { Tab, Tabs } from '@mui/material';
 
 import { indexPageTag } from '../../../constants';
 import { useSkipRenderBeforeRehydration } from '../../../hooks/useSkipRenderBeforeRehydration.hook';
-import { IPostContext, postsListContext } from '../../../react-contexts/posts-list.context';
+import {
+  IPostListContext,
+  postListContext,
+} from '../../../react-contexts/post-list-state.context';
 import { getPostListUrlByTag } from '../../../services/get-post-list-url-by-tag';
 
 import './HeaderTabs.scss';
@@ -113,7 +116,7 @@ function getMenuTabs(
  */
 function getSelectedTabPath(
   activePath: string,
-  posts: IPostContext,
+  posts: IPostListContext,
 ): string | false {
   for (const section of topSections) {
     const { path } = section;
@@ -170,7 +173,7 @@ export function HeaderTabs(props: IHeaderTabsProps): ReactElement {
     vertical,
   } = props;
 
-  const posts = useContext(postsListContext);
+  const posts = useContext(postListContext);
   const useMobileRender = useSkipRenderBeforeRehydration();
 
   const selectedTabPath = getSelectedTabPath(activePath, posts);
