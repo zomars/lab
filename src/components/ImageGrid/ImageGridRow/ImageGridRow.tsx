@@ -1,17 +1,19 @@
-import { cn } from '@bem-react/classname';
 import {
   GatsbyImage,
   getImage,
   getSrc,
   IGatsbyImageData,
 } from 'gatsby-plugin-image';
+
 import React, {
   ReactElement,
-  useContext,
   useEffect,
+  useState,
 } from 'react';
 
-import { lightboxActionsContext } from '../../../react-contexts/lightbox-actions.context';
+import { cn } from '@bem-react/classname';
+
+import { useLightboxDispatch } from '../../../hooks/useLightbox';
 import { EGtmEventTypes, gtmEventEmitter } from '../../../services/gtm-event-emitter';
 import { IGridImage } from '../ImageGrid';
 
@@ -25,26 +27,36 @@ const cnImageGridRow = cn('ImageGridRow');
 
 export function ImageGridRow(props: IImageGridRow): ReactElement {
   const { images } = props;
+  const dispatchContext = useLightboxDispatch();
+  const [firstRender, setFirstRender] = useState(true);
 
-  const { current: context } = useContext(lightboxActionsContext);
+  if (firstRender) {
+    setFirstRender(false);
+
+    images.forEach(({ image, title }) => {
+      const src = getSrc(image.childImageSharp.preview) as string;
+
+      dispatchContext({
+        type: 'add',
+        image: {
+          src,
+          title,
+        },
+      });
+    });
+  }
 
   // Add and remove images to context in runtime
   // props.images update is not supported
   useEffect(() => {
-    images.forEach(({ image, title }) => {
-      const src = getSrc(image.childImageSharp.preview) as string;
-
-      context.addImage({
-        src,
-        title,
-      });
-    });
-
     return () => {
       images.forEach(({ image }) => {
         const src = getSrc(image.childImageSharp.preview) as string;
 
-        context.removeImage(src);
+        dispatchContext({
+          type: 'remove',
+          imageSrc: src,
+        });
       });
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -73,7 +85,10 @@ export function ImageGridRow(props: IImageGridRow): ReactElement {
             const src = getSrc(image.childImageSharp.preview) as string;
 
             function onImageClick(): void {
-              context.openAt(src);
+              dispatchContext({
+                type: 'open',
+                imageSrc: src,
+              });
 
               gtmEventEmitter(EGtmEventTypes.image_grid_lightbox_open, {
                 lightbox_image_src: src,

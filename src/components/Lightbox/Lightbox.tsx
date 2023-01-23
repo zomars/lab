@@ -1,16 +1,18 @@
-import React, { ReactElement, useContext } from 'react';
+import React, {
+  ReactElement,
+  useCallback,
+  useState,
+} from 'react';
+import { useLocation } from '@reach/router';
 import { default as LightboxReact } from 'react-image-lightbox';
-import 'react-image-lightbox/style.css';
+
 import { cn } from '@bem-react/classname';
 
-import {
-  ILightboxImage,
-  lightboxActionsContext,
-} from '../../react-contexts/lightbox-actions.context';
-
-import { lightboxStateContext } from '../../react-contexts/lightbox-state.context';
+import { useLightboxDispatch, useLightbox } from '../../hooks/useLightbox';
+import { ILightboxImage } from '../../react-contexts/lightbox.context';
 import { LightboxImageTitle } from './LightboxImageTitle/LightboxImageTitle';
 
+import 'react-image-lightbox/style.css';
 import './Lightbox.scss';
 
 interface ILightboxProps {
@@ -28,10 +30,10 @@ interface ILightboxProps {
  */
 export function getLightboxPropsByImageSrc(
   images: Map<string, ILightboxImage>,
-  src: string,
+  src?: string,
 ): ILightboxProps {
   // closed case
-  if (src === '') {
+  if (!src) {
     return { mainSrc: '' };
   }
 
@@ -77,20 +79,66 @@ export function getLightboxPropsByImageSrc(
 
 const cnLightbox = cn('Lightbox');
 
-export function Lightbox(): ReactElement | null {
-  const { images, activeSrc } = useContext(lightboxStateContext);
-  const { current: { close, openAt } } = useContext(lightboxActionsContext);
+const reactModalProps = {
+  testId: cnLightbox('Portal-Content'),
+  htmlOpenClassName: cnLightbox('HTML', { open: true }),
+};
 
-  if (!activeSrc) {
-    return null;
+export function Lightbox(): ReactElement | null {
+  const { images, activeSrc } = useLightbox();
+  const contextDispatch = useLightboxDispatch();
+  const [prevPathname, setPrevPathName] = useState('');
+  const { pathname } = useLocation();
+
+  // catching back/forward (or other) navigations
+  if (prevPathname !== pathname) {
+    setPrevPathName(pathname);
+    contextDispatch({
+      type: 'close',
+    });
   }
 
-  const reactModalProps = {
-    testId: cnLightbox('Portal-Content'),
-    htmlOpenClassName: cnLightbox('HTML', { open: true }),
-  };
-
   const lightboxProps = getLightboxPropsByImageSrc(images, activeSrc);
+
+  const onMovePrev = useCallback(() => {
+    const { prevSrc } = lightboxProps;
+
+    if (prevSrc) {
+      contextDispatch({
+        type: 'open',
+        imageSrc: prevSrc,
+      });
+    }
+  }, [
+    lightboxProps,
+    contextDispatch,
+  ]);
+
+  const onMoveNext = useCallback(() => {
+    const { nextSrc } = lightboxProps;
+
+    if (nextSrc) {
+      contextDispatch({
+        type: 'open',
+        imageSrc: nextSrc,
+      });
+    }
+  }, [
+    lightboxProps,
+    contextDispatch,
+  ]);
+
+  const close = useCallback(() => {
+    contextDispatch({
+      type: 'close',
+    });
+  }, [
+    contextDispatch,
+  ]);
+
+  if (!lightboxProps.mainSrc) {
+    return null;
+  }
 
   return (
     <LightboxReact
@@ -98,9 +146,9 @@ export function Lightbox(): ReactElement | null {
       enableZoom = { false }
       reactModalProps = { reactModalProps }
       closeLabel = 'Close Image Gallery'
-      onMovePrevRequest = { () => lightboxProps.prevSrc && openAt(lightboxProps.prevSrc) }
-      onMoveNextRequest = { () => lightboxProps.nextSrc && openAt(lightboxProps.nextSrc) }
-      onCloseRequest = { () => close() }
+      onMoveNextRequest = { onMoveNext }
+      onMovePrevRequest = { onMovePrev }
+      onCloseRequest = { close }
     />
   );
 }
