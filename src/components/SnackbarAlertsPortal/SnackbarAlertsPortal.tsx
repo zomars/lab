@@ -1,4 +1,8 @@
-import React, { ReactElement } from 'react';
+import React, {
+  ReactElement,
+  useCallback,
+} from 'react';
+
 import {
   Alert,
   Portal,
@@ -8,30 +12,35 @@ import {
 import { cn } from '@bem-react/classname';
 
 import { alertNotificationDuration } from '../../constants';
-import { useSnackbarAlertsActions, useSnackbarAlerts } from '../../hooks/useSnackbarAlerts';
+import { useSnackbarAlert, useSnackbarAlertDispatch } from '../../hooks/useSnackbarAlert';
 
 const cnSnackbarAlertsPortal = cn('SnackbarAlertsPortal');
 
 export function SnackbarAlertsPortal(): ReactElement {
-  const alerts = useSnackbarAlerts();
-  const alertActions = useSnackbarAlertsActions();
+  const alerts = useSnackbarAlert();
+  const alertDispatch = useSnackbarAlertDispatch();
 
-  function onAlertClose(key: string): void {
-    alertActions.remove(key);
-  }
+  const onAlertClose = useCallback((id: string) => {
+    alertDispatch({
+      type: 'remove',
+      alertId: id,
+    });
+  }, [
+    alertDispatch,
+  ]);
 
   const Snacks = Array.from(alerts.values())
     .map(({
-      key,
+      id,
       color,
       text,
       autoHide = false,
     }) => {
       return (
         <Snackbar
-          key = { key }
+          key = { id }
           open = { true }
-          onClose = { () => onAlertClose(key) }
+          onClose = { () => onAlertClose(id) }
           data-testid = { cnSnackbarAlertsPortal('Snackbar') }
           autoHideDuration = { autoHide ? alertNotificationDuration : undefined }
         >

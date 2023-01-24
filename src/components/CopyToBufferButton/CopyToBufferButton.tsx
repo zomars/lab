@@ -11,8 +11,8 @@ import React, {
 
 import { cn } from '@bem-react/classname';
 import { classnames } from '@bem-react/classnames';
+import { useSnackbarAlertDispatch } from '../../hooks/useSnackbarAlert';
 
-import { useSnackbarAlertsActions } from '../../hooks/useSnackbarAlerts';
 import { copyTextToBuffer } from '../../services/copy-to-buffer';
 import { gtmEventEmitter, EGtmEventTypes } from '../../services/gtm-event-emitter';
 
@@ -20,7 +20,7 @@ const copyToBufferButton = cn('CopyToBufferButton');
 
 const gtmEventTextLimit = 256;
 
-const alertKey = 'code-snippet-copied';
+const alertId = 'code-snippet-copied';
 
 interface ICopyToBufferButton {
   className?: string;
@@ -59,7 +59,7 @@ export function CopyToBufferButton(props: ICopyToBufferButton): ReactElement {
     state: CopyingState.INITIAL,
   });
 
-  const alertActions = useSnackbarAlertsActions();
+  const snackbarAlertDispatch = useSnackbarAlertDispatch();
 
   const show = useCallback((): void => {
     setCopyingStatus({
@@ -72,10 +72,13 @@ export function CopyToBufferButton(props: ICopyToBufferButton): ReactElement {
           state: CopyingState.SUCCESS,
         });
 
-        alertActions.add({
-          key: alertKey,
-          text: alertMessageProp || 'Copied',
-          autoHide: true,
+        snackbarAlertDispatch({
+          type: 'add',
+          alert: {
+            id: alertId,
+            text: alertMessageProp || 'Copied',
+            autoHide: true,
+          },
         });
 
         gtmEventEmitter(EGtmEventTypes.code_snippet_copy, {
@@ -88,15 +91,18 @@ export function CopyToBufferButton(props: ICopyToBufferButton): ReactElement {
           errorMessage: error,
         });
 
-        alertActions.add({
-          key: alertKey,
-          color: 'error',
-          text: error || 'Couldn\'t copy',
-          autoHide: true,
+        snackbarAlertDispatch({
+          type: 'add',
+          alert: {
+            id: alertId,
+            color: 'error',
+            text: error || 'Couldn\'t copy',
+            autoHide: true,
+          },
         });
       });
   }, [
-    alertActions,
+    snackbarAlertDispatch,
     alertMessageProp,
     textToCopy,
   ]);

@@ -14,11 +14,11 @@ import { cn } from '@bem-react/classname';
 import { usePost, usePostDispatch } from '../../../hooks/usePost';
 
 import { useLocalStoragePostLike } from '../../../hooks/useLocalStoragePostLike.hook';
-import { useSnackbarAlertsActions } from '../../../hooks/useSnackbarAlerts';
+import { useSnackbarAlertDispatch } from '../../../hooks/useSnackbarAlert';
 import { EGtmEventTypes, gtmEventEmitter } from '../../../services/gtm-event-emitter';
 import { useSkipRenderBeforeRehydration } from '../../../hooks/useSkipRenderBeforeRehydration.hook';
 
-const alertKey = 'post-like-button';
+const alertId = 'post-like-button';
 
 type TUseLikeButtonReturn = [
   boolean,
@@ -27,10 +27,10 @@ type TUseLikeButtonReturn = [
 
 // doesn't support background localStorage update
 function useLikeButton(): TUseLikeButtonReturn {
-  const alertActions = useSnackbarAlertsActions();
   const post = usePost();
   const postContextDispatch = usePostDispatch();
   const [, setPostLikeFromStorage] = useLocalStoragePostLike(post?.path || '');
+  const snackbarAlertDispatch = useSnackbarAlertDispatch();
 
   const liked = post?.liked || false;
 
@@ -50,10 +50,13 @@ function useLikeButton(): TUseLikeButtonReturn {
     setPostLikeFromStorage(newValue);
 
     if (newValue) {
-      alertActions.add({
-        key: alertKey,
-        text: 'Thank you!',
-        autoHide: true,
+      snackbarAlertDispatch({
+        type: 'add',
+        alert: {
+          id: alertId,
+          text: 'Thank you!',
+          autoHide: true,
+        },
       });
     }
 
@@ -62,11 +65,11 @@ function useLikeButton(): TUseLikeButtonReturn {
       post_id: post.path,
     });
   }, [
-    alertActions,
     post,
     liked,
     setPostLikeFromStorage,
     postContextDispatch,
+    snackbarAlertDispatch,
   ]);
 
   return [

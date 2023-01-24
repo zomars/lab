@@ -47,6 +47,8 @@ test.describe('share buttons', () => {
       const clipboardText = await page.evaluate(() => navigator.clipboard.readText());
 
       expect(clipboardText).toEqual(expect.stringContaining(postUrl));
+
+      await expect(alert).toBeHidden();
     });
   });
 

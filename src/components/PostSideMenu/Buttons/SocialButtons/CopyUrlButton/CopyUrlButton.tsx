@@ -4,8 +4,7 @@ import { IconButton } from '@mui/material';
 
 import { cn } from '@bem-react/classname';
 import { classnames } from '@bem-react/classnames';
-
-import { useSnackbarAlertsActions } from '../../../../../hooks/useSnackbarAlerts';
+import { useSnackbarAlertDispatch } from '../../../../../hooks/useSnackbarAlert';
 import { copyTextToBuffer } from '../../../../../services/copy-to-buffer';
 
 import './CopyUrlButton.scss';
@@ -18,7 +17,7 @@ interface ICopyUrlButtonProps {
 
 const cnCopyUrlButton = cn('CopyUrlButton');
 
-const snackbarAlertKey = 'copy-url-button-click';
+const snackbarAlertId = 'copy-url-button-click';
 
 export function CopyUrlButton(props: ICopyUrlButtonProps): ReactElement {
   const {
@@ -27,7 +26,7 @@ export function CopyUrlButton(props: ICopyUrlButtonProps): ReactElement {
     'data-testid': dataTestId,
   } = props;
 
-  const alertActions = useSnackbarAlertsActions();
+  const snackbarAlertDispatch = useSnackbarAlertDispatch();
 
   const onClick = useCallback(() => {
     const { href: url } = window.location;
@@ -35,16 +34,19 @@ export function CopyUrlButton(props: ICopyUrlButtonProps): ReactElement {
     // todo handle async operation properly
     copyTextToBuffer(url);
 
-    alertActions.add({
-      key: snackbarAlertKey,
-      text: 'Link copied',
-      autoHide: true,
+    snackbarAlertDispatch({
+      type: 'add',
+      alert: {
+        id: snackbarAlertId,
+        text: 'Link copied',
+        autoHide: true,
+      },
     });
 
     onClickProp();// GTM logging
   }, [
     onClickProp,
-    alertActions,
+    snackbarAlertDispatch,
   ]);
 
   return (
