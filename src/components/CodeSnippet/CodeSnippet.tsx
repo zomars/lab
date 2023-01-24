@@ -51,6 +51,7 @@ export function CodeSnippet(props: ICodeSnippetProps): ReactElement {
   return (
     <div
       className = { cnCodeSnippet() }
+      data-testid = { cnCodeSnippet() }
     >
       <CopyToBufferButton
         alertMessage = 'Code snippet copied'

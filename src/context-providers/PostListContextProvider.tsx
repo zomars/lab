@@ -1,7 +1,7 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import React, { ReactElement } from 'react';
-import { IPostListContext, postListContext } from '../react-contexts/post-list-state.context';
 
+import { IPostListContext, PostListContext } from '../react-contexts/post-list-state.context';
 import { IBlogPost, IUniquePostTag } from '../types/common.types';
 
 interface IPostTagsMappingQResponse {
@@ -79,10 +79,10 @@ export function PostListContextProvider(
   const context = useComputedContextValue();
 
   return (
-    <postListContext.Provider
+    <PostListContext.Provider
       value = { context }
     >
       { children }
-    </postListContext.Provider>
+    </PostListContext.Provider>
   );
 }

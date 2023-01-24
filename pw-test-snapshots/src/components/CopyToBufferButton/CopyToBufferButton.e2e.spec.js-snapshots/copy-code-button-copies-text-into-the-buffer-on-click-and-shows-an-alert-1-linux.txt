@@ -1,0 +1,14 @@
+- id: read-report-file-into-output
+  name: Read Report File into Output Variable
+  run: |
+    report=$(cat ${{ env.report_filename }})
+    report="${report//'%'/'%25'}"
+    report="${report//$'\n'/'%0A'}"
+    report="${report//$'\r'/'%0D'}"
+    echo ::set-output name=report::$report
+
+- id: post-report-as-pr-comment
+  name: Post Report as Pull Request Comment
+  uses: peter-evans/commit-comment@v2
+  with:
+    body: "```\n${{ steps.read-report-file-into-output.outputs.report }}\n```"

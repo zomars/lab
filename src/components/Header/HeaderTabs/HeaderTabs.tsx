@@ -12,7 +12,7 @@ import { indexPageTag } from '../../../constants';
 import { useSkipRenderBeforeRehydration } from '../../../hooks/useSkipRenderBeforeRehydration.hook';
 import {
   IPostListContext,
-  postListContext,
+  PostListContext,
 } from '../../../react-contexts/post-list-state.context';
 import { getPostListUrlByTag } from '../../../services/get-post-list-url-by-tag';
 
@@ -173,7 +173,7 @@ export function HeaderTabs(props: IHeaderTabsProps): ReactElement {
     vertical,
   } = props;
 
-  const posts = useContext(postListContext);
+  const posts = useContext(PostListContext);
   const useMobileRender = useSkipRenderBeforeRehydration();
 
   const selectedTabPath = getSelectedTabPath(activePath, posts);

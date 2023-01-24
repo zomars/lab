@@ -4,16 +4,15 @@
 
   &:hover {
     .CodeSnippet-CopyButton {
-      opacity: 1;
+      display: block;
     }
   }
 
   & &-CopyButton {
+    display: none;
     position: absolute;
     top: 1rem;
     right: 1rem;
-    transition: opacity ease 200ms;
-    opacity: 0;
   }
 
   &-Summary {
