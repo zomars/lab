@@ -9856,7 +9856,7 @@ gatsby-parcel-config@^1.5.0:
     "@parcel/transformer-js" "2.8.2"
     "@parcel/transformer-json" "2.8.2"
 
-gatsby-plugin-google-tagmanager@^5.3.1:
+gatsby-plugin-google-tagmanager@^5.x.x:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-google-tagmanager/-/gatsby-plugin-google-tagmanager-5.5.0.tgz#dff9e4e882765ae03834ca1ad0768f14009d3dea"
   integrity sha512-34RxktyDVv4+XCGXxsJXXOW3Q3AcoFDbK/tnHOPKYdJAPLTLZQccxy1/kVFH2oYEwEaweqD0ZyxHKqdD3Fl2/Q==
@@ -9864,7 +9864,7 @@ gatsby-plugin-google-tagmanager@^5.3.1:
     "@babel/runtime" "^7.20.7"
     web-vitals "^1.1.2"
 
-gatsby-plugin-image@^3.0.0:
+gatsby-plugin-image@^3.x.x:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-image/-/gatsby-plugin-image-3.5.0.tgz#ff25e4e169951503bace8ec4758d3cd2dedb6445"
   integrity sha512-zIOXPrWgcBFSQIyVIZjRpdpuA3dd02+qs43ysRYDVp2iYYZySHEpvw9ObhHuRnQ/blQ8C3PmQwdOs1j2s6wL1A==
@@ -9892,7 +9892,7 @@ gatsby-plugin-material-ui@^4.1.0:
     "@emotion/cache" "^11.4.0"
     "@emotion/server" "^11.4.0"
 
-gatsby-plugin-mdx@^5.0.0:
+gatsby-plugin-mdx@^5.x.x:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-5.5.0.tgz#3d83650c939ce165d8e710e9b64854076ef7ecdd"
   integrity sha512-LHqC7sIC+e7DA1UvA43ZoE/LYGLo4Xj4GT/4iW8PuXjhNtFaq6iDpcqxKH7Sbtgcvyr3k50Dxl2lrK4AU/DNIw==
@@ -9935,7 +9935,7 @@ gatsby-plugin-page-creator@^5.5.0:
     globby "^11.1.0"
     lodash "^4.17.21"
 
-gatsby-plugin-preact@^7.0.0:
+gatsby-plugin-preact@^7.x.x:
   version "7.5.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-preact/-/gatsby-plugin-preact-7.5.0.tgz#0ff5abf4f03937dccf82ed55cc6c0568f2f82851"
   integrity sha512-Scq/FjcSq7yH9uKZov6n4vb+rlLu9FUkXI0DKGqk77lMcDqHTZs4CL68uosOn39o+3BTmbQEgzXbTYuVChUSSQ==
