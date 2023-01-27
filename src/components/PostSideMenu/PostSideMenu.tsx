@@ -6,6 +6,7 @@ import { classnames } from '@bem-react/classnames';
 import { LikeButton } from './Buttons/LikeButton';
 import { ShareButton } from './Buttons/ShareButton/ShareButton';
 import { ScrollToTheTopButton } from './Buttons/ScrollToTheTopButton';
+import { MessageButton } from './Buttons/MessageButton/MessageButton';
 
 import './PostSideMenu.scss';
 
@@ -26,14 +27,7 @@ export function PostSideMenu(props: IPostSideMenuProps): ReactElement {
     scroll: <ScrollToTheTopButton/>,
     share: <ShareButton/>,
     like: <LikeButton/>,
-    /* <IconButton
-      color = 'primary'
-      title = 'Ask a Question or Send a Message'
-    >
-      <MessageIcon
-        fontSize = 'inherit'
-      />
-    </IconButton>, */
+    message: <MessageButton/>,
   };
 
   const buttonTypes = props.buttons || Object.keys(buttonsHash);

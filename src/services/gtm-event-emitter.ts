@@ -12,6 +12,8 @@ export enum EGtmEventTypes {
   post_like_button_click = 'post_like_button_click',
   post_scroll_to_top_click = 'post_scroll_to_top_click',
   post_share_click = 'post_share_click',
+  post_send_message_open = 'post_send_message_open',
+  post_send_message_close = 'post_send_message_close',
 }
 
 interface IGtmSpaNavigationEventPayload {
@@ -50,6 +52,10 @@ interface IGtmPostShareClickPayload extends IGtmPostClickPayload {
   share_social_network: string;
 }
 
+interface IGtmPostSendMessageClosePayload extends IGtmPostClickPayload {
+  post_send_message_sent: boolean;
+}
+
 export interface IEGtmEventPayloads {
   [EGtmEventTypes.spa_navigation]: IGtmSpaNavigationEventPayload;
   [EGtmEventTypes.image_grid_lightbox_open]: IGtmImageGridLightboxPayload;
@@ -61,6 +67,8 @@ export interface IEGtmEventPayloads {
   [EGtmEventTypes.post_like_button_click]: IGtmPostClickPayload;
   [EGtmEventTypes.post_scroll_to_top_click]: IGtmPostClickPayload;
   [EGtmEventTypes.post_share_click]: IGtmPostShareClickPayload;
+  [EGtmEventTypes.post_send_message_open]: IGtmPostClickPayload;
+  [EGtmEventTypes.post_send_message_close]: IGtmPostSendMessageClosePayload;
 }
 
 export function gtmEventEmitter<T extends EGtmEventTypes>(

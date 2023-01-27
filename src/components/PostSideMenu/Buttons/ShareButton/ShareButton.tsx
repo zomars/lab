@@ -58,7 +58,7 @@ export function ShareButton(): ReactElement {
     <>
       <IconButton
         color = 'primary'
-        title = 'Share'
+        title = 'Share the article'
         ref = { buttonRef }
         onClick = { openPopup }
         data-testid = { cnShareButton() }

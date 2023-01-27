@@ -2,6 +2,17 @@
   publish = "public"
   command = "yarn build"
 
+[dev]
+  autoLaunch = false
+  functionsPort = 7000
+
+[functions]
+  external_node_modules = [
+    "@netlify/functions",
+    "nodemailer",
+    "@types/nodemailer",
+  ]
+
 [[redirects]]
   from = "/tags/"
   to = "/tags/tech/1/"

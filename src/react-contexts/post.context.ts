@@ -5,6 +5,7 @@ export interface IPostContext {
   title: string;
   liked: boolean;
   description?: string; // meta tag
+  tags: string[];
 }
 
 interface IPostSetAction {

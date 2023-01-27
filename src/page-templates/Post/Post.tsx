@@ -174,6 +174,7 @@ function Post(props: IBlogPostTemplateProps): ReactElement {
         title,
         description,
         liked,
+        tags,
       },
     });
   }
